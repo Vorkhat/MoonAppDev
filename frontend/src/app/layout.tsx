@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./reset.css";
 import React from "react";
 import Root from "../components/Root";
 
