@@ -4,7 +4,7 @@ import "./globals.css";
 import "./reset.css";
 import React from "react";
 import styles from "./background.module.scss";
-import Root from "../components/Root";
+import Root from "../components/Root/Root";
 import {toggleTheme} from "@/utils/changeTheme";
 import Theme from "@/components/Theme/Theme";
 
