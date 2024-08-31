@@ -19,7 +19,6 @@ html[data-theme="light"] {
     --background-color: #FFFFFF;
 }
 
-
 @media only screen and (orientation: landscape) {
     body {
         transform: rotate(90deg);

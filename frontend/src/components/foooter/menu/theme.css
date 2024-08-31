@@ -1,0 +1,26 @@
+html {
+  --condition-menu-active: url(../../../../public/images/theme/menu/active.svg);
+  --background-menu-icon-quiz-active: url(../../../../public/images/theme/menu/dark/quiz.svg);
+  --background-menu-icon-tasks-active: url(../../../../public/images/theme/menu/dark/tasks.svg);
+  --background-menu-icon-home-active: url(../../../../public/images/theme/menu/dark/home.svg);
+  --background-menu-icon-rating-active: url(../../../../public/images/theme/menu/dark/rating.svg);
+  --background-menu-icon-profile-active: url(../../../../public/images/theme/menu/dark/profile.svg);
+}
+
+html[data-theme="dark"] {
+  --background-menu: url(../../../../public/images/theme/menu/dark/backgroundMenu.svg);
+  --background-menu-icon-quiz: url(../../../../public/images/theme/menu/dark/quiz.svg);
+  --background-menu-icon-tasks: url(../../../../public/images/theme/menu/dark/tasks.svg);
+  --background-menu-icon-home: url(../../../../public/images/theme/menu/dark/home.svg);
+  --background-menu-icon-rating: url(../../../../public/images/theme/menu/dark/rating.svg);
+  --background-menu-icon-profile: url(../../../../public/images/theme/menu/dark/profile.svg);
+}
+
+html[data-theme="light"] {
+  --background-menu: url(../../../../public/images/theme/menu/light/backgroundMenu.svg);
+  --background-menu-icon-quiz: url(../../../../public/images/theme/menu/light/quiz.svg);
+  --background-menu-icon-tasks: url(../../../../public/images/theme/menu/light/tasks.svg);
+  --background-menu-icon-home: url(../../../../public/images/theme/menu/light/home.svg);
+  --background-menu-icon-rating: url(../../../../public/images/theme/menu/light/rating.svg);
+  --background-menu-icon-profile: url(../../../../public/images/theme/menu/light/profile.svg);
+}

@@ -7,6 +7,7 @@ import styles from "./background.module.scss";
 import Root from "../components/Root/Root";
 import {toggleTheme} from "@/utils/changeTheme";
 import Theme from "@/components/Theme/Theme";
+import Footer from "@/components/foooter/footer";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -26,11 +27,11 @@ export default function RootLayout({
             <body>
             <Root>
                 <div className={styles.background}>
-                    <div className={styles.content}>
+                    <main className={styles.content}>
                         {children}
                         <div className={styles.menu}></div>
-                        <button onClick={toggleTheme}>Toggle Theme</button>
-                    </div>
+                    </main>
+                    <footer className={styles.footer}><Footer/></footer>
                     <div className={`${styles.background__gradient} ${styles.gradient__top_right}`}></div>
                     <div className={`${styles.background__gradient} ${styles.gradient__bottom_left}`}></div>
                 </div>

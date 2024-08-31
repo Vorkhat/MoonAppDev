@@ -1,0 +1,28 @@
+.footer__contrainer {
+    display: grid;
+    grid-template-areas: "menu"
+                         "text";
+    align-items: center;
+    justify-items: center;
+    row-gap: 1.5vh;
+
+    .footer__text {
+        display: flex;
+        color: #FFFFFF;
+        background: linear-gradient(90deg, #3A6ABB -120%, black);
+        width: 100%;
+        justify-content: center;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        font-size: 2vh;
+        column-gap: 1vw;
+    }
+
+    .footer__text:after {
+        content: " MOON";
+        font-weight: bold;
+        background: radial-gradient(at left top, rgba(134, 241, 173, 1), rgba(141, 190, 253, 1), rgba(224, 170, 238, 1) 50%) no-repeat;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+}
