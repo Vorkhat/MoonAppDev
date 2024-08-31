@@ -1,4 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+export default {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'api.telegram.org',
+                pathname: '/file/bot**/**',
+            },
+        ],
+    },
 
-export default nextConfig;
+};

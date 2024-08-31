@@ -13,5 +13,5 @@ export default function Root({ children }: PropsWithChildren) {
         <SDKProvider acceptCustomStyles debug>
                 {children}
         </SDKProvider>
-    ) : <div className="root__loading">undefined</div>;
+    ) : <div className="root__loading"></div>;
 }
