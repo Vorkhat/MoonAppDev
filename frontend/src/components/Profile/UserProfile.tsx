@@ -2,6 +2,7 @@
 
 import './common.css';
 import '../../app/globals.css'
+import Image from "next/image"
 import React, {useEffect, useState} from "react";
 import {initInitData, User} from "@telegram-apps/sdk-react";
 import styles from './styles.module.scss';
@@ -24,7 +25,7 @@ const UserProfile = () => {
         <div className={styles.user__profile}>
             <div className={styles.user__item}>
                 {user ? (
-                    <img
+                    <Image
                         className={styles.user__photo}
                         src={`/api/userPhoto/${user.id}`}
                         alt="User Photo"
