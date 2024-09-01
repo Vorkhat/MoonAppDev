@@ -4,6 +4,9 @@ import Link from "next/link";
 
 import "./theme.css"
 import styles from "./styles.module.scss";
+import {Inter} from "next/font/google";
+
+const inter = Inter({subsets: ['latin']})
 
 interface ItemProps {
     pathname: string;
@@ -18,7 +21,7 @@ function CreateItem({pathname, icon, iconCondition,text, href}: ItemProps) {
         <div className={styles.menu__item}>
             <Link className={`${styles.menu__container} ${pathname === href ? styles.active : null}`} href={href} prefetch={false}>
                 <div className={`${styles.item__icon} ${icon} ${pathname === href ? iconCondition : null}`}></div>
-                <div className={styles.item__text}>{text}</div>
+                <div className={`${styles.item__text} ${inter.className}`}>{text}</div>
             </Link>
             <div className={`${pathname === href ? styles.menu__condition : null}`}></div>
         </div>

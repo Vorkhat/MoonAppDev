@@ -2,18 +2,17 @@
     display: grid;
     grid-template-areas: "menu"
                          "text";
-    align-items: center;
+    grid-template-rows: 1fr auto;
     justify-items: center;
-    row-gap: 1.5vh;
 
     .footer__text {
         display: flex;
         color: #FFFFFF;
         background: linear-gradient(90deg, #3A6ABB -120%, black);
         width: 100%;
+        align-items: center;
         justify-content: center;
-        padding-top: 1vh;
-        padding-bottom: 1vh;
+        padding: 1% 0 1% 0;
         font-size: 2vh;
         column-gap: 1vw;
     }

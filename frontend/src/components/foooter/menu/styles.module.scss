@@ -1,35 +1,110 @@
 .menu__items {
-  display: grid;
-  grid-template-areas: "menu__item menu__item menu__item menu__item menu__item";
-  grid-template-columns: repeat(5, min-content);
-  background: var(--background-menu);
-  background-repeat: no-repeat;
-  background-position: center bottom;
+  display: flex;
+  width: 85%;
+  background: var(--background-menu) no-repeat center bottom;
   background-size: contain;
   justify-content: center;
-
+  margin-bottom: 1.5vh;
+  column-gap: 5%;
 
   .menu__item {
     display: grid;
     grid-template-areas: "button"
                        "condition";
     grid-template-columns: min-content;
+    grid-template-rows: 1fr auto;
     align-items: center;
     justify-items: center;
 
     .menu__container {
       display: grid;
-      grid-template-areas: "icon"
-                           "text";
-      align-items: center;
       justify-items: center;
-      gap: 1vw;
+      row-gap: 0.5vh;
 
+      .item__icon {
+        width: 7vw;
+        height: 3.5vh;
+      }
+
+      .item__text {
+        font-size: 1.8vh;
+        color: var(--color-text-menu);
+      }
+
+      .quiz__icon {
+        background: var(--background-menu-icon-quiz);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .tasks__icon {
+        background: var(--background-menu-icon-tasks);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .home__icon {
+        background: var(--background-menu-icon-home);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .rating__icon {
+        background: var(--background-menu-icon-rating);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .profile__icon {
+        background: var(--background-menu-icon-profile);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .active__home {
+        background: var(--background-menu-icon-home-active);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .active__quiz {
+        background: var(--background-menu-icon-quiz-active);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .active__tasks {
+        background: var(--background-menu-icon-tasks-active);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .active__rating {
+        background: var(--background-menu-icon-rating-active);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+
+      .active__profile {
+        background: var(--background-menu-icon-profile-active);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
     }
 
     .active {
       position: relative;
-      bottom: 3vw;
+      bottom: 1.5vh;
     }
 
     .menu__condition {
@@ -38,113 +113,7 @@
       background-position: center bottom;
       background-size: contain;
       width: 100%;
-      height: 100%;
+      height: 1vh;
     }
-
-    .quiz__icon {
-      background: var(--background-menu-icon-quiz);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .tasks__icon {
-      background: var(--background-menu-icon-tasks);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .home__icon {
-      background: var(--background-menu-icon-home);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .rating__icon {
-      background: var(--background-menu-icon-rating);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .profile__icon {
-      background: var(--background-menu-icon-profile);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .active__home {
-      background: var(--background-menu-icon-home-active);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .active__quiz {
-      background: var(--background-menu-icon-quiz-active);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .active__tasks {
-      background: var(--background-menu-icon-tasks-active);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .active__rating {
-      background: var(--background-menu-icon-rating-active);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-
-    .active__profile {
-      background: var(--background-menu-icon-profile-active);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: contain;
-    }
-  }
-}
-
-@media (min-width: 320px) and ( max-width: 992px) {
-  .menu__items {
-    height: 15vw;
-    width: 85vw;
-    gap: 6vw;
-  }
-
-  .item__icon {
-    width: 5vw;
-    height: 5vw;
-  }
-
-  .item__text {
-    font-size: 3vw;
-    color: var(--color-text-menu);
-  }
-}
-
-@media (min-width: 992px) {
-  .menu__items {
-    height: 10vw;
-    width: 65vw;
-    column-gap: 4vw;
-  }
-
-  .item__icon {
-    width: 3vw;
-    height: 3vw;
-  }
-
-  .item__text {
-    font-size: 2vh;
-    color: var(--color-text-menu);
   }
 }

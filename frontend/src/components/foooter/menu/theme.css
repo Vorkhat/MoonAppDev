@@ -8,6 +8,7 @@ html {
 }
 
 html[data-theme="dark"] {
+  --color-text-menu: #2FACFF;
   --background-menu: url(../../../../public/images/theme/menu/dark/backgroundMenu.svg);
   --background-menu-icon-quiz: url(../../../../public/images/theme/menu/dark/quiz.svg);
   --background-menu-icon-tasks: url(../../../../public/images/theme/menu/dark/tasks.svg);
@@ -17,6 +18,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
+  --color-text-menu: #0C0C0C;
   --background-menu: url(../../../../public/images/theme/menu/light/backgroundMenu.svg);
   --background-menu-icon-quiz: url(../../../../public/images/theme/menu/light/quiz.svg);
   --background-menu-icon-tasks: url(../../../../public/images/theme/menu/light/tasks.svg);
