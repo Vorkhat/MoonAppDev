@@ -8,6 +8,7 @@ import Root from "../components/Root/Root";
 import {toggleTheme} from "@/utils/changeTheme";
 import Theme from "@/components/Theme/Theme";
 import Footer from "@/components/foooter/footer";
+import '../mockEnv.ts';
 
 const inter = Inter({subsets: ["latin"]});
 
