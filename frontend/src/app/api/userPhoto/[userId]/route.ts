@@ -1,29 +1,26 @@
 import {NextRequest, NextResponse} from 'next/server';
-import UserPhoto from "@/components/UserPhoto/Photo";
+import {getUserAvatar} from "@/utils/UserPhoto/userPhoto.tsx";
 
-export async function GET(req: NextRequest) {
-
-    const { searchParams } = new URL(req.url);
-    const userId = searchParams.get('userId');
-
-    if (!userId || isNaN(Number(userId))) {
+export async function GET(req: NextRequest, { params }: { params: { userId: number } }) {
+    if (!params.userId || isNaN(params.userId)) {
         return NextResponse.json({ error: 'Invalid or missing userId' }, { status: 400 });
     }
 
     try {
-        const photoUrl = await UserPhoto(Number(userId));
-        const response = await fetch(photoUrl);
+        const {url, key} = await getUserAvatar(params.userId);
+        const response = await fetch(url);
 
         const imageBuffer = await response.arrayBuffer();
         return new NextResponse(imageBuffer, {
             headers: {
                 'Content-Type': response.headers.get('Content-Type') || 'image/jpeg',
-                'Cache-Control': 'public, max-age=31536000, immutable', // Cache image for 1 year
+                'Cache-Control': 'private, max-age=3600',
                 'Content-Length': imageBuffer.byteLength.toString(),
             },
         });
 
     } catch (error) {
+        console.error(error)
         return NextResponse.json({ error: 'Failed to fetch user photo' }, { status: 500 });
     }
 }
