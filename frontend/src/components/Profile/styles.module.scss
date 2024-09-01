@@ -10,19 +10,23 @@
 
   .user__item {
     grid-area: data;
-    display: grid;
-    grid-template-columns: repeat(2, min-content);
-    grid-template-rows: repeat(2, min-content);
+    display: flex;
+    column-gap: 1vh;
     grid-template-areas: "photo data";
 
     .user__photo {
       grid-area: photo;
+      border-radius: 10%;
+      width: 16vw;
+      height: 16vw;
     }
 
     .user__data {
       white-space: pre;
       grid-area: data;
-      margin-left: 4vw;
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.6vh;
 
       .user__name {
         color: var(--color-text);
@@ -30,7 +34,6 @@
       }
 
       .user__tag {
-        padding-top: 0.6vh;
         color: var(--color-text);
         opacity: 0.6;
         font-size: 2vh;
@@ -38,7 +41,6 @@
 
       .user__rating {
         display: inline-block;
-        margin-top: 2vh;
         padding: 0.8vh 1.5vw;
         border-radius: 1.5vh;
         color: var(--color-text);
