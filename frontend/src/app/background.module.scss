@@ -1,6 +1,5 @@
 .background {
   display: grid;
-  background: var(--background-color);
   grid-template-rows: 85vh 15vh;
 
   .content {
@@ -29,13 +28,13 @@
 
   .gradient__top_right {
     top: 0;
-    background: radial-gradient(at top, #3A6ABB -15%, var(--background-color) 40%) no-repeat;
+    background: radial-gradient(at top, #3A6ABB -15%, transparent 40%) no-repeat;
     background-size: 200% 180%;
   }
 
   .gradient__bottom_left {
     bottom: 0;
-    background: radial-gradient(at bottom left, #3A6ABB 25%, var(--background-color) 65%) no-repeat;
+    background: radial-gradient(at bottom left, #3A6ABB 25%, transparent 65%) no-repeat;
     background-size: 75% 200%
   }
 }

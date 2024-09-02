@@ -1,7 +1,6 @@
 'use client';
 
 import './common.css';
-import '../../app/globals.css'
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
 import {initInitData, User} from "@telegram-apps/sdk-react";

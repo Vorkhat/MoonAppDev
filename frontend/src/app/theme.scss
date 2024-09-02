@@ -1,0 +1,46 @@
+@property --background-home-content-gradient-color1 {
+    syntax: '<color>';
+    initial-value: white;
+    inherits: true;
+}
+
+@property --background-home-content-gradient-color2 {
+    syntax: '<color>';
+    initial-value: white;
+    inherits: true;
+}
+
+@property --background-invitation-gradient-color1 {
+    syntax: '<color>';
+    initial-value: #9ABFFF;
+    inherits: true;
+}
+
+@property --background-invitation-gradient-color2 {
+    syntax: '<color>';
+    initial-value: #133870;
+    inherits: true;
+}
+
+@property --background-invitation {
+    syntax: '<color>';
+    initial-value: #2FACFF;
+    inherits: true;
+}
+
+html[data-theme="dark"] {
+    --color-text-home: #FFFFFF;
+    --color-text-award: #8DFAFA;
+    --background-timer: rgba(0, 0, 0, 0.34);
+    --background-invitation: rgba(14, 12, 16, 1);
+    --color-text-invitation: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%) center center no-repeat;
+    --background-home-content-gradient-color1: rgba(14, 12, 16, 1);
+    --background-home-content-gradient-color2: rgba(8, 93, 233, 1);
+}
+
+html {
+    --color-text-home: #0C0C0C;
+    --color-text-award: #0057DB;
+    --color-text-invitation: #FFFFFF;
+    --background-timer: rgba(0, 0, 0, 0.06);
+}

@@ -3,9 +3,6 @@
 import './theme.css';
 import styles from './styles.module.scss'
 import {useEffect, useState} from "react";
-import {Inter} from "next/font/google";
-
-const inter = Inter({subsets: ['latin']})
 
 export default function ThemeSwitcher() {
     const [activeTheme, setActiveTheme] = useState('');
@@ -26,7 +23,7 @@ export default function ThemeSwitcher() {
 
     return (
         <div className={styles.switch} onClick={toggleTheme}>
-            <div className={`${styles.theme__text} ${inter.className}`}>THEME {activeTheme.toUpperCase()}</div>
+            <p className={styles.theme_text}>THEME {activeTheme.toUpperCase()}</p>
             <div className={styles.theme__icon}></div>
         </div>
     );

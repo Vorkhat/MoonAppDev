@@ -25,12 +25,7 @@
       }
 
       .header__text {
-        color: var(--color-text-home);
-        font-family: "logo font", serif;
-        font-size: 2.3vh;
-        font-weight: 250;
-        white-space: nowrap;
-        transform: scale(.8, 1);
+
       }
     }
   }
@@ -38,7 +33,8 @@
   .main__container {
     display: grid;
     grid-template-rows: auto;
-    background: var(--background-home-content);
+    background: linear-gradient(90deg, var(--background-home-content-gradient-color1) 45%, var(--background-home-content-gradient-color2) 120%);
+    transition: --background-home-content-gradient-color1 0.5s ease-in-out, --background-home-content-gradient-color2 0.5s ease-in-out;
     box-shadow: #0C0C0C 0 0 3vw;
     border-radius: 2vw;
     position: relative;
@@ -52,23 +48,6 @@
                            "text"
                            "text";
       row-gap: 1vh;
-
-      .content__header {
-        color: var(--color-text-home);
-        font-size: 2.1vh;
-        font-weight: bold;
-      }
-
-      .content__main {
-        color: var(--color-text-home);
-        font-size: 1.7vh;
-      }
-
-      .content__footer {
-        color: var(--color-text-award);
-        font-size: 2.1vh;
-        font-weight: bold;
-      }
     }
 
     .fox__image {
@@ -83,7 +62,8 @@
     }
 
     .invitation__container {
-      background: var(--background-invitation-gradient);
+      background: linear-gradient(180deg, var(--background-invitation-gradient-color1) 0, var(--background-invitation-gradient-color2) 100%) center center no-repeat;
+      transition: --background-invitation-gradient-color1 0.5s ease-in-out, --background-invitation-gradient-color2 0.5s ease-in-out;
       border-radius: 4vw;
       padding: 1.5px;
       margin-top: 2vh;
@@ -94,6 +74,7 @@
         align-items: center;
         justify-content: center;
         background: var(--background-invitation);
+        transition: --background-invitation 0.5s ease-in-out;
         padding: 2vh 0;
         column-gap: 2vw;
         border-radius: 4vw;
@@ -148,7 +129,6 @@
         .number {
           background: var(--background-timer);
           border: 1px solid rgba(255, 255, 255, 0.11);
-          color: var(--color-text-home-timer);
           font-weight: bold;
           border-radius: 2vw;
           padding: 1vw 2vw 1vw 2vw;

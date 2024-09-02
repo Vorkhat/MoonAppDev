@@ -1,6 +1,5 @@
 import UserProfile from "@/components/Profile/UserProfile";
 import styles from "@/app/profile/styles.module.scss";
-import '../globals.css'
 
 export default async function Profile() {
 

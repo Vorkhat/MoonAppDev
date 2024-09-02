@@ -1,16 +1,12 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
-import "./globals.css";
-import "./reset.css";
+import "./globals.scss";
+import "./reset.scss";
 import React from "react";
 import styles from "./background.module.scss";
 import Root from "../components/Root/Root";
-import {toggleTheme} from "@/utils/changeTheme";
 import Theme from "@/components/Theme/Theme";
 import Footer from "@/components/foooter/footer";
 import '../mockEnv.ts';
-
-const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
     title: "Create Next App",

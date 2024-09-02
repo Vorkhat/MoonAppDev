@@ -1,10 +1,7 @@
-import './theme.css'
 import styles from './styles.module.scss';
-import {Inter, Montserrat, Roboto} from "next/font/google";
+import {Inter} from "next/font/google";
 import ThemeSwitcher from "@/components/Home/Theme/ThemeSwitcher";
 
-const montserrat = Montserrat({subsets: ['latin'],})
-const roboto = Roboto({weight: '400', subsets: ['latin']})
 const inter = Inter({subsets: ['latin']})
 
 export default  function Home() {
@@ -14,22 +11,20 @@ export default  function Home() {
             <header className={styles.header__container}>
                 <div className={styles.header__content}>
                     <div className={styles.header__logo}></div>
-                    <div className={`${styles.header__text} ${montserrat.className}}`}>MOON APP</div>
+                    <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
             </header>
             <main className={styles.main__container}>
                 <div className={styles.main__content}>
-                    <div className={`${styles.content__header} ${roboto.className}`}>
+                    <h2>
                         Присоединяйся к нам<br/> зарабатывай баллы и меняй<br/> их на ценные призы! 🎉
-                    </div>
-                    <div className={`${styles.content__main} ${inter.className}`}>
+                    </h2>
+                    <p>
                         Каждый месяц мы подводим итоги и<br/> награждаем самых активных участников<br/> нашего
                         комьюнити🚀
-                    </div>
-                    <div className={`${styles.content__footer} ${inter.className}`}>
-                        Призовой фонд - 1000 USDT
-                    </div>
+                    </p>
+                    <span className="highlight">Призовой фонд - 1000 USDT</span>
                 </div>
                 <div className={styles.fox__image}></div>
                 <div className={styles.invitation__container}>
