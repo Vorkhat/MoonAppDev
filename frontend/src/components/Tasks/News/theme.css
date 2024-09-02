@@ -1,0 +1,15 @@
+html[data-theme='dark'] {
+    --text-gradient-tasks-news: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --background-tasks-news: #0C0C0C;
+    --background-tasks-news-gradient: rgba(255, 255, 255, 0.03);
+    --color-background-tasks-text: rgba(255, 255, 255, 0.08);
+    --color-tasks-text-award: #FFF881;
+}
+
+html[data-theme='light'] {
+    --text-gradient-tasks-news: #0C0C0C;
+    --background-tasks-news: #FFFFFF;
+    --background-tasks-news-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --color-background-tasks-text: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --color-tasks-text-award: #0C0C0C;
+}
