@@ -1,45 +1,46 @@
 "use client";
-import { usePathname } from 'next/navigation'
+import {usePathname} from 'next/navigation'
 import Link from "next/link";
 
 import "./theme.css"
 import styles from "./styles.module.scss";
-import {Inter} from "next/font/google";
-
-const inter = Inter({subsets: ['latin']})
+import React from "react";
+import {formatMenuIconPath, MenuIcon, MenuIconType} from "@/components/foooter/menu/menuIcons.ts";
 
 interface ItemProps {
-    pathname: string;
-    icon: string;
-    iconCondition: string;
-    text: string;
+    icon: MenuIcon;
     href: string;
 }
 
-function CreateItem({pathname, icon, iconCondition,text, href}: ItemProps) {
+function MenuItem({icon, href, children}: ItemProps & Readonly<{children: React.ReactNode}>) {
+    const pathname = usePathname()
+
+    const active = pathname === href;
+
     return (
-        <div className={styles.menu__item}>
-            <Link className={`${styles.menu__container} ${pathname === href ? styles.active : null}`} href={href} prefetch={false}>
-                <div className={`${styles.item__icon} ${icon} ${pathname === href ? iconCondition : null}`}></div>
-                <div className={`${styles.item__text} ${inter.className}`}>{text}</div>
+        <div className={styles.menu__item} style={active ? {borderBottom: '4px solid #2FACFF'} : {}}>
+            <Link className={`${styles.menu__container} ${active ? styles.active : null}`} href={href} prefetch={false}>
+                <i className={`${styles.item__icon}`}
+                   style={{
+                       backgroundColor: active ? '#2FACFF' : 'var(--color-text-home)',
+                       mask: `url(${formatMenuIconPath(icon, active ? MenuIconType.ACTIVE : MenuIconType.DEFAULT)}) no-repeat center`
+                   }}
+                />
+                {children}
             </Link>
-            <div className={`${pathname === href ? styles.menu__condition : null}`}></div>
         </div>
     )
 }
 
-
 export default function MenuComponent() {
-
-    const pathname = usePathname()
 
     return (
         <div className={styles.menu__items}>
-            <CreateItem pathname={pathname} icon={styles.quiz__icon} iconCondition={styles.active__quiz} text={'Quiz'} href={'/quiz'}/>
-            <CreateItem pathname={pathname} icon={styles.tasks__icon} iconCondition={styles.active__tasks} text={'Tasks'} href={'/tasks'}/>
-            <CreateItem pathname={pathname} icon={styles.home__icon} iconCondition={styles.active__home} text={'Home'} href={'/home'}/>
-            <CreateItem pathname={pathname} icon={styles.rating__icon} iconCondition={styles.active__rating} text={'Rating'} href={'/rating'}/>
-            <CreateItem pathname={pathname} icon={styles.profile__icon} iconCondition={styles.active__profile} text={'Profile'} href={'/profile'}/>
+            <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}>Quiz</MenuItem>
+            <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}>Tasks</MenuItem>
+            <MenuItem href={'/home'} icon={MenuIcon.HOME}>Home</MenuItem>
+            <MenuItem href={'/rating'} icon={MenuIcon.RATING}>Rating</MenuItem>
+            <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}>Profile</MenuItem>
         </div>
     );
 }

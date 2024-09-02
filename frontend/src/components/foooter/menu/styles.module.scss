@@ -24,81 +24,15 @@
       .item__icon {
         width: 7vw;
         height: 3.5vh;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        transition: background-color 0.5s ease-in-out;
       }
 
       .item__text {
         font-size: 1.8vh;
         color: var(--color-text-menu);
-      }
-
-      .quiz__icon {
-        background: var(--background-menu-icon-quiz);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .tasks__icon {
-        background: var(--background-menu-icon-tasks);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .home__icon {
-        background: var(--background-menu-icon-home);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .rating__icon {
-        background: var(--background-menu-icon-rating);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .profile__icon {
-        background: var(--background-menu-icon-profile);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .active__home {
-        background: var(--background-menu-icon-home-active);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .active__quiz {
-        background: var(--background-menu-icon-quiz-active);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .active__tasks {
-        background: var(--background-menu-icon-tasks-active);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .active__rating {
-        background: var(--background-menu-icon-rating-active);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-      }
-
-      .active__profile {
-        background: var(--background-menu-icon-profile-active);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
       }
     }
 
