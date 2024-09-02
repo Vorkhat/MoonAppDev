@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import {Inter, Montserrat, Roboto} from "next/font/google";
 import TasksNews from "@/components/Tasks/News/TasksNews.tsx";
 import TasksDaily from "@/components/Tasks/Daily/TasksDaily.tsx";
+import PartnersTasks from "@/components/Tasks/Partners/PartnersTasks.tsx";
 
 const montserrat = Montserrat({subsets: ['latin'],})
 const roboto = Roboto({weight: '400', subsets: ['latin']})
@@ -30,18 +31,10 @@ export default  function Tasks() {
                 </div>
                 <div className={styles.partners}>
                     <div className={`${styles.partners__header} ${inter.className}`}>Наши партнеры 💼</div>
+                    <PartnersTasks />
                 </div>
 
             </main>
-            <footer className={styles.footer__container}>
-                <div className={styles.subscription}>
-                    <div className={styles.subscription__content}>
-                        <div className={styles.subscription__image}></div>
-                        <div className={styles.subscription__text}>Перейти на сайт</div>
-                        <div className={styles.subscription__award}>+ 1000 points</div>
-                    </div>
-                </div>
-            </footer>
         </div>
     )
 };

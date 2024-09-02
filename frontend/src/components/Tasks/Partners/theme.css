@@ -1,0 +1,23 @@
+html {
+    --border-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%)
+}
+
+html[data-theme='dark'] {
+    --text-gradient-partners-news: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --text-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --color-background-partners-text: rgba(255, 255, 255, 0.08);
+    --background-partners-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --background-partners-container: #0E0C10;
+    --background-partners-item: #0E0C10;
+    --color-partners-text-award: #FFF881;
+}
+
+html[data-theme='light'] {
+    --text-gradient: #0C0C0C;
+    --text-gradient-partners-news: #0C0C0C;
+    --color-background-partners-text: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --background-partners-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --background-partners-container: #FFFFFF;
+    --background-partners-item: #FFFFFF;
+    --color-partners-text-award: #0C0C0C;
+}
