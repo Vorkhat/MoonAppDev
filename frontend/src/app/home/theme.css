@@ -1,0 +1,21 @@
+html[data-theme="dark"] {
+    --color-text-home: #FFFFFF;
+    --color-text-award: #8DFAFA;
+    --background-timer: rgba(0, 0, 0, 0.34);
+    --color-text-home-timer: rgba(255, 255, 255, 1);
+    --background-invitation: rgba(14, 12, 16, 1) 45%;
+    --color-text-invitation: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%) center center no-repeat;
+    --background-home-content: linear-gradient(90deg, rgba(14, 12, 16, 1) 45%, rgba(8, 93, 233, 1) 120%);
+    --background-invitation-gradient: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%) center center no-repeat
+}
+
+html[data-theme="light"] {
+    --color-text-home: #0C0C0C;
+    --color-text-award: #0057DB;
+    --color-text-invitation: #FFFFFF;
+    --background-invitation: #2FACFF;
+    --background-home-content: #FFFFFF;
+    --background-timer: rgba(0, 0, 0, 0.06);
+    --color-text-home-timer: rgba(12, 12, 12, 1);
+    --background-invitation-gradient: linear-gradient(180deg, #9ABFFF 0, #133870 100%) center center no-repeat
+}

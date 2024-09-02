@@ -1,0 +1,20 @@
+.switch {
+  display: grid;
+  grid-template-areas: "text"
+                       "icon";
+  align-items: center;
+  justify-items: center;
+
+  .theme__text {
+    color: var(--color-text);
+    white-space: nowrap;
+    font-size: 1.3vh;
+  }
+
+  .theme__icon {
+    background: var(--switcher-theme) no-repeat center center;
+    background-size: contain;
+    width: 8vw;
+    height: 4vh;
+  }
+}

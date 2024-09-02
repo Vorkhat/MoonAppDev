@@ -1,0 +1,7 @@
+html[data-theme="dark"] {
+    --switcher-theme: url(../../../../public/images/theme/switcherThemeDark.svg);
+}
+
+html[data-theme="light"] {
+    --switcher-theme: url(../../../../public/images/theme/switcherThemeLight.svg);
+}
