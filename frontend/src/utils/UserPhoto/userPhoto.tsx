@@ -1,4 +1,4 @@
-import "../../../envConfig.ts";
+import "../../envConfig.ts";
 
 export async function getUserPhoto(userId: number) {
 
