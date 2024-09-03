@@ -1,7 +1,0 @@
-html[data-theme='dark'] {
-    --color-text-award: #8DFAFA;
-}
-
-html[data-theme='light'] {
-    --color-text-award: #083D8D;
-}

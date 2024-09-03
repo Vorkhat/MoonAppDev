@@ -1,9 +1,9 @@
-import './theme.css'
 import styles from './styles.module.scss';
 import {Inter, Montserrat, Roboto} from "next/font/google";
 import TasksNews from "@/components/Tasks/News/TasksNews.tsx";
-import TasksDaily from "@/components/Tasks/Daily/TasksDaily.tsx";
+import TasksReferral from "@/components/Tasks/Referral/TasksReferral.tsx";
 import PartnersTasks from "@/components/Tasks/Partners/PartnersTasks.tsx";
+import TasksLinks from "@/components/Tasks/Links/TasksNews.tsx";
 
 const montserrat = Montserrat({subsets: ['latin'],})
 const roboto = Roboto({weight: '400', subsets: ['latin']})
@@ -27,13 +27,13 @@ export default  function Tasks() {
                 </div>
                 <div className={styles.tasks__daily}>
                     <div className={`${styles.daily__header} ${inter.className}`}>Ежедневные 🎯</div>
-                    <TasksDaily/>
+                    <TasksReferral/>
                 </div>
                 <div className={styles.partners}>
                     <div className={`${styles.partners__header} ${inter.className}`}>Наши партнеры 💼</div>
                     <PartnersTasks />
                 </div>
-
+                <TasksLinks />
             </main>
         </div>
     )

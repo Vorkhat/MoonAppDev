@@ -1,0 +1,23 @@
+@import "../mixins";
+
+.task__list_link {
+  display: grid;
+  margin-top: 2vh;
+  align-items: center;
+
+  .task__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .link__text {
+      font-size: 2.5vh;
+      margin-left: 2vw;
+      color: var(--tasks-text);
+    }
+
+    .link__award {
+      @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
+    }
+  }
+}

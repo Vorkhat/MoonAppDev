@@ -3,7 +3,7 @@
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: repeat(3, min-content);
   width: 90%;
   margin: 0 auto;
 

@@ -1,57 +1,53 @@
+@import "../mixins";
+
 .partners__list {
   display: grid;
   row-gap: 1vh;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
 
   .background__partners_item {
-    background: var(--background-partners-gradient);
-    padding: 1.5px;
-    border-radius: 2vw;
+    @include create-gradient(var(--tasks-background-partners-gradient));
 
     .partners__item {
       display: grid;
       grid-template-areas: "image text link"
                            "image award link";
-      background: var(--background-partners-item);
-      padding: 1vh 2vw;
+      @include create-container(var(--tasks-background-partners));
+      padding: 1vh 0;
       border-radius: 2vw;
       align-items: center;
       justify-items: start;
 
       .partners__image {
         grid-area: image;
+        margin: 0 auto;
       }
 
       .partners__text {
         grid-area: text;
+        @include text-theme(2vh, var(--tasks-text-gradient))
       }
 
       .partners__award {
         grid-area: award;
-        font-size: 1.5vh;
-        white-space: nowrap;
-        color: var(--color-partners-text-award);
-        background: var(--color-background-partners-text);
-        border-radius: 2vw;
-        padding: 0.7vw 2vw;
+        @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
       }
 
-      .partners__link_backround {
+      .partners__link_background_one {
         display: flex;
-        align-items: center;
-        background: var(--background-partners-gradient);
         grid-area: link;
-        padding: 1px;
-        border-radius: 2vw;
+        border-radius: 3vw;
+        margin: 0 auto;
+        @include create-gradient(var(--task-background-container-link-gradient));
 
-        .partners__link {
-          color: #0C0C0C;
-          background: var(--background-partners-gradient);
-          border-radius: 2vw;
-          padding: 1.2vh 2vw;
-          font-size: 1.7vh;
-          font-weight: bold;
+        .partners__link_background_two {
+          padding: 1vh 2vw;
+          border-radius: 3vw;
+          opacity: 0.97;
+          @include create-container(var(--tasks-background-partners));
+
+          .partners__link {
+            @include text-theme(2vh, var(--tasks-text-gradient))
+          }
         }
       }
     }

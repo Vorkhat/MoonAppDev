@@ -1,49 +1,39 @@
+@import "../mixins";
+
 .tasks__items {
   display: flex;
   margin-top: 1vh;
+  justify-content: start;
   column-gap: 3vw;
 
   .task__gradient {
-    background: var(--background-tasks-news-gradient);
-    border-radius: 2vw;
-    padding: 1px;
+    @include create-gradient(var(--tasks-background-news-gradient));
 
     .task__item {
       display: grid;
       grid-template-areas: "image text"
                            "image award";
+      grid-template-columns: repeat(2, min-content);
+      justify-items: start;
+      justify-content: center;
       min-width: 43vw;
       column-gap: 1.5vw;
       row-gap: 0.8vh;
-      border-radius: 2vw;
-      justify-items: start;
-      grid-template-columns: repeat(2, min-content);
-      padding: 1vh 2vw;
-      background: var(--background-tasks-news);
       align-items: center;
+      padding: 2vh 2vw;
       height: 100%;
+      @include create-container(var(--tasks-background-tasks-news));
 
       .task__image {
         grid-area: image;
       }
 
       .task__text {
-        grid-area: text;
-        background: var(--text-gradient-tasks-news);
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        font-size: 2vh;
-        font-weight: bold;
+        @include text-theme(2vh, var(--tasks-text-gradient))
       }
 
       .task__award {
-        grid-area: award;
-        color: var(--color-tasks-text-award);
-        background: var(--color-background-tasks-text);
-        border-radius: 2vw;
-        font-size: 1.2vh;
-        padding: 0.5vw 2vw;
-        white-space: nowrap;
+        @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
       }
     }
   }

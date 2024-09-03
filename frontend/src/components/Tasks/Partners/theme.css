@@ -1,23 +1,25 @@
-html {
-    --border-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%)
-}
+@import "../style/dark.css";
+@import "../style/light.css";
 
 html[data-theme='dark'] {
-    --text-gradient-partners-news: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-    --text-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-    --color-background-partners-text: rgba(255, 255, 255, 0.08);
-    --background-partners-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-    --background-partners-container: #0E0C10;
-    --background-partners-item: #0E0C10;
-    --color-partners-text-award: #FFF881;
+    --tasks-text: var(--color-text-tasks-dark);
+    --tasks-text-gradient: var(--tasks-text-gradient-dark);
+    --tasks-text-award: var(--tasks-text-award-dark);
+    --tasks-background-text-award: var(--tasks-background-text-award-dark);
+    --tasks-background-partners-gradient: var(--tasks-background-container-gradient-dark);
+    --tasks-background-partners: var(--tasks-background-container-dark);
+    --task-background-container-link-gradient: var(--task-background-container-link-gradient-dark);
+    --task-background-container-link: var(--task-background-container-link-dark);
+
 }
 
 html[data-theme='light'] {
-    --text-gradient: #0C0C0C;
-    --text-gradient-partners-news: #0C0C0C;
-    --color-background-partners-text: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-    --background-partners-gradient: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-    --background-partners-container: #FFFFFF;
-    --background-partners-item: #FFFFFF;
-    --color-partners-text-award: #0C0C0C;
+    --tasks-text: var(--color-text-tasks-light);
+    --tasks-text-gradient: var(--tasks-text-gradient-light);
+    --tasks-text-award: var(--tasks-text-award-light);
+    --tasks-background-text-award: var(--tasks-background-text-award-light);
+    --tasks-background-partners-gradient: var(--tasks-background-container-gradient-light);
+    --tasks-background-partners: var(--tasks-background-container-light);
+    --task-background-container-link-gradient: var(--task-background-container-link-gradient-light);
+    --task-background-container-link: var(--task-background-container-link-light);
 }

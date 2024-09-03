@@ -6,7 +6,7 @@ html[data-theme='dark'] {
     --tasks-text-award: var(--tasks-text-award-dark);
     --tasks-background-text-award: var(--tasks-background-text-award-dark);
     --tasks-background-news-gradient: var(--tasks-background-container-gradient-dark);
-    --tasks-background-tasks-news: var(--tasks-background-tasks-container-dark);
+    --tasks-background-tasks-news: var(--tasks-background-container-dark);
 }
 
 html[data-theme='light'] {
@@ -14,5 +14,5 @@ html[data-theme='light'] {
     --tasks-text-award: var(--tasks-text-award-light);
     --tasks-background-text-award: var(--tasks-background-text-award-light);
     --tasks-background-news-gradient: var(--tasks-background-container-gradient-light);
-    --tasks-background-tasks-news: var(--tasks-background-tasks-container-light);
+    --tasks-background-tasks-news: var(--tasks-background-container-light);
 }

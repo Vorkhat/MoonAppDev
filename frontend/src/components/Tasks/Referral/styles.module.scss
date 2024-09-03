@@ -1,0 +1,90 @@
+@import "../mixins";
+
+.friends__container {
+  height: 26vh;
+  margin-top: 2vh;
+  overflow-x: hidden;
+  @include create-gradient(var(--tasks-background-refferal-gradient));
+
+  .background__container {
+    display: grid;
+    @include create-container(var(--tasks-background-refferal));
+
+    .friends__invitations {
+      display: flex;
+      align-items: center;
+      column-gap: 1vw;
+      margin: 0 2vw;
+
+      .invitations__text {
+        font-size: 1.8vh;
+        font-weight: bold;
+        @include text-theme(1.8vh, var(--tasks-text-gradient));
+      }
+    }
+
+    .invitations__count {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 2vw;
+
+      .invitations__count_text {
+        font-size: 1.8vh;
+        color: var(--tasks-text);
+      }
+
+      .invitations__count_counter {
+        @include text-theme(1.8vh, var(--tasks-text-gradient));
+        opacity: 0.8;
+        font-weight: bold;
+        border: 1.3px solid #0C0C0C;
+        padding: 0 6vw;
+        border-radius: 4vw;
+      }
+    }
+
+    .friends__items {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      column-gap: 1.7vw;
+      margin: 2vh 2vw;
+
+      .items__background {
+        @include create-gradient(var(--tasks-background-refferal-gradient));
+
+        .friends__item {
+          display: grid;
+          grid-template-areas:
+            "count image"
+            "award award";
+          justify-items: center;
+          align-items: center;
+          padding: 1vh 2.5vw;
+          @include create-container(var(--tasks-background-refferal));
+
+          .friends__image {
+            grid-area: image;
+          }
+
+          .friends__count {
+            font-size: 2vh;
+            font-weight: bold;
+            white-space: nowrap;
+          }
+
+          .friends__count {
+            grid-area: count;
+            color: var(--tasks-text);
+          }
+
+          .friends__award {
+            grid-area: award;
+            @include text-award(var(--tasks-text-award), var(--tasks-background-text-award));
+          }
+        }
+      }
+    }
+  }
+}
