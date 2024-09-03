@@ -6,6 +6,9 @@ import "./theme.css"
 import styles from "./styles.module.scss";
 import React from "react";
 import {formatMenuIconPath, MenuIcon, MenuIconType} from "@/components/foooter/menu/menuIcons.ts";
+import {Inter} from "next/font/google";
+
+const inter = Inter({subsets: ['latin']})
 
 interface ItemProps {
     icon: MenuIcon;
@@ -36,11 +39,21 @@ export default function MenuComponent() {
 
     return (
         <div className={styles.menu__items}>
-            <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}><text className={styles.item__text}>Quiz</text></MenuItem>
-            <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}><text className={styles.item__text}>Tasks</text></MenuItem>
-            <MenuItem href={'/home'} icon={MenuIcon.HOME}><text className={styles.item__text}>Home</text></MenuItem>
-            <MenuItem href={'/rating'} icon={MenuIcon.RATING}><text className={styles.item__text}>Rating</text></MenuItem>
-            <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}><text className={styles.item__text}>Profile</text></MenuItem>
+            <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}>
+                <text className={`${styles.item__text} ${inter.className}`}>Quiz</text>
+            </MenuItem>
+            <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}>
+                <text className={`${styles.item__text} ${inter.className}`}>Tasks</text>
+            </MenuItem>
+            <MenuItem href={'/home'} icon={MenuIcon.HOME}>
+                <text className={`${styles.item__text} ${inter.className}`}>Home</text>
+            </MenuItem>
+            <MenuItem href={'/rating'} icon={MenuIcon.RATING}>
+                <text className={`${styles.item__text} ${inter.className}`}>Rating</text>
+            </MenuItem>
+            <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}>
+                <text className={`${styles.item__text} ${inter.className}`}>Profile</text>
+            </MenuItem>
         </div>
 );
 }
