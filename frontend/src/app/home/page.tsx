@@ -4,6 +4,18 @@ import ThemeSwitcher from "@/components/Home/Theme/ThemeSwitcher";
 
 const inter = Inter({subsets: ['latin']})
 
+
+const Timer = ({ number1, number2, title }: { number1: string, number2: string, title: string }) => (
+    <>
+        <div className={styles.timer__number}>
+            <div className={`${styles.number} ${inter.className}`}>{number1}</div>
+            <div className={`${styles.number} ${inter.className}`}>{number2}</div>
+        </div>
+        <div className={`${styles.timer__title} ${inter.className}`}>{title}</div>
+    </>
+);
+
+
 export default  function Home() {
 
     return (
@@ -17,14 +29,14 @@ export default  function Home() {
             </header>
             <main className={styles.main__container}>
                 <div className={styles.main__content}>
-                    <h2>
+                    <h2 className={inter.className}>
                         Присоединяйся к нам<br/> зарабатывай баллы и меняй<br/> их на ценные призы! 🎉
                     </h2>
-                    <p>
+                    <p className={inter.className}>
                         Каждый месяц мы подводим итоги и<br/> награждаем самых активных участников<br/> нашего
                         комьюнити🚀
                     </p>
-                    <span className="highlight">Призовой фонд - 1000 USDT</span>
+                    <span className={`highlight ${inter.className}`}>Призовой фонд - 1000 USDT</span>
                 </div>
                 <div className={styles.fox__image}></div>
                 <div className={styles.invitation__container}>
@@ -38,21 +50,9 @@ export default  function Home() {
                 <div className={styles.clock__icon}></div>
                 <div className={`${styles.footer__text} ${inter.className}`}>До следующего розыгрыша призов:</div>
                 <div className={styles.footer__timer}>
-                    <div className={styles.timer__number}>
-                        <div className={`${styles.number} ${inter.className}`}>1</div>
-                        <div className={`${styles.number} ${inter.className}`}>2</div>
-                    </div>
-                    <div className={`${styles.timer__title} ${inter.className}`}>д.</div>
-                    <div className={styles.timer__number}>
-                        <div className={`${styles.number} ${inter.className}`}>3</div>
-                        <div className={`${styles.number} ${inter.className}`}>4</div>
-                    </div>
-                    <div className={`${styles.timer__title} ${inter.className}`}>ч.</div>
-                    <div className={styles.timer__number}>
-                        <div className={`${styles.number} ${inter.className}`}>5</div>
-                        <div className={`${styles.number} ${inter.className}`}>6</div>
-                    </div>
-                    <div className={`${styles.timer__title} ${inter.className}`}>м.</div>
+                    <Timer number1="1" number2="2" title="д."/>
+                    <Timer number1="3" number2="4" title="ч."/>
+                    <Timer number1="5" number2="6" title="м."/>
                 </div>
             </footer>
         </div>
