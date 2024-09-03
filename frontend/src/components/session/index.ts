@@ -6,6 +6,9 @@ if (!process.env.SESSION_KEY) {
 
 export interface SessionData {
     userId: number
+    username: string | undefined
+    firstName: string
+    lastName: string | undefined
 }
 
 export const sessionTtl = 3600 * 12; // 12 hours
