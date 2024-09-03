@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import {NextRequest, NextResponse} from 'next/server';
 import {getUserAvatar} from "@/utils/UserPhoto/userPhoto.tsx";
 
@@ -11,26 +9,30 @@ export async function GET(req: NextRequest, { params }: { params: { userId: numb
     }
 
     try {
-        const { url } = await getUserAvatar(userId);
+        const { url, key } = await getUserAvatar(userId);
+        const etag = `\"${key}\"`;
+
+        if (req.headers.get('If-None-Match') === etag) {
+            return new NextResponse(null, { status: 304 }); // Not Modified
+        }
+
         const response = await fetch(url);
         const imageBuffer = await response.arrayBuffer();
 
         return new NextResponse(imageBuffer, {
             headers: {
                 'Content-Type': response.headers.get('Content-Type') || 'image/jpeg',
-                'Cache-Control': 'private, max-age=3600',
+                'Cache-Control': 'public',
+                'ETag': etag
             },
         });
 
-    } catch {
-        const failImagePath = path.join(process.cwd(), 'public/images', 'Avatar.png');
-        const failImageBuffer = fs.readFileSync(failImagePath);
+    } catch (error) {
+        console.error(error);
 
-        return new NextResponse(failImageBuffer, {
-            headers: {
-                'Content-Type': 'image/jpeg',
-                'Cache-Control': 'private, max-age=3600',
-            },
-        });
+        // https://nextjs.org/docs/messages/middleware-relative-urls
+        const url = req.nextUrl.clone();
+        url.pathname = 'images/Avatar.png';
+        return NextResponse.redirect(url);
     }
 }
