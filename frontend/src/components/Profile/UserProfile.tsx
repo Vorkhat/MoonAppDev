@@ -24,7 +24,7 @@ const UserProfile = () => {
         <div className={styles.user__profile}>
             <div className={styles.user__item}>
                 {user ? (
-                    <Image
+                    <img
                         className={styles.user__photo}
                         src={`/api/userPhoto/${user.id}`}
                         alt="User Photo"
