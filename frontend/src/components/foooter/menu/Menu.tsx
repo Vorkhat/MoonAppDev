@@ -22,7 +22,7 @@ function MenuItem({icon, href, children}: ItemProps & Readonly<{children: React.
             <Link className={`${styles.menu__container} ${active ? styles.active : null}`} href={href} prefetch={false}>
                 <i className={`${styles.item__icon}`}
                    style={{
-                       backgroundColor: active ? '#2FACFF' : 'var(--color-text-home)',
+                       backgroundColor: active ? '#2FACFF' : 'var(--color-text-menu)',
                        mask: `url(${formatMenuIconPath(icon, active ? MenuIconType.ACTIVE : MenuIconType.DEFAULT)}) no-repeat center`
                    }}
                 />
@@ -36,11 +36,11 @@ export default function MenuComponent() {
 
     return (
         <div className={styles.menu__items}>
-            <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}>Quiz</MenuItem>
-            <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}>Tasks</MenuItem>
-            <MenuItem href={'/home'} icon={MenuIcon.HOME}>Home</MenuItem>
-            <MenuItem href={'/rating'} icon={MenuIcon.RATING}>Rating</MenuItem>
-            <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}>Profile</MenuItem>
+            <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}><text className={styles.item__text}>Quiz</text></MenuItem>
+            <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}><text className={styles.item__text}>Tasks</text></MenuItem>
+            <MenuItem href={'/home'} icon={MenuIcon.HOME}><text className={styles.item__text}>Home</text></MenuItem>
+            <MenuItem href={'/rating'} icon={MenuIcon.RATING}><text className={styles.item__text}>Rating</text></MenuItem>
+            <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}><text className={styles.item__text}>Profile</text></MenuItem>
         </div>
-    );
+);
 }
