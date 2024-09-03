@@ -9,14 +9,21 @@ export async function GET(req: NextRequest, { params }: { params: { userId: numb
     }
 
     try {
-        const { url } = await getUserAvatar(userId);
+        const { url, key } = await getUserAvatar(userId);
+        const etag = `\"${key}\"`;
+
+        if (req.headers.get('If-None-Match') === etag) {
+            return new NextResponse(null, { status: 304 }); // Not Modified
+        }
+
         const response = await fetch(url);
         const imageBuffer = await response.arrayBuffer();
 
         return new NextResponse(imageBuffer, {
             headers: {
                 'Content-Type': response.headers.get('Content-Type') || 'image/jpeg',
-                'Cache-Control': 'private, max-age=3600',
+                'Cache-Control': 'public',
+                'ETag': etag
             },
         });
 
