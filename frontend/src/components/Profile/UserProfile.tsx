@@ -1,5 +1,6 @@
 import './common.css';
 import React from "react";
+import Image from "next/image";
 import styles from './styles.module.scss';
 import ProfileAward from "@/components/Profile/award/ProfileAward";
 import ProfileFriends from "@/components/Profile/friends/ProfileFriends";
@@ -28,7 +29,7 @@ const UserProfile = async () => {
     return (
         <div className={styles.user__profile}>
             <div className={styles.user__item}>
-                <img
+                <Image
                     className={styles.user__photo}
                     src={`/api/userPhoto/${session.userId}`}
                     alt=""
