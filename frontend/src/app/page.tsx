@@ -1,11 +1,12 @@
 'use client';
 
 import {useEffect} from "react";
-import {initInitData} from "@telegram-apps/sdk-react";
+import {retrieveLaunchParams} from "@telegram-apps/sdk-react";
 
 export default function Default() {
     useEffect(() => {
-        fetch('/api/init', { method: 'POST', body: JSON.stringify(initInitData()) })
+        const lp = retrieveLaunchParams();
+        fetch('/api/init', { method: 'POST', body: lp.initDataRaw })
             .then(res => {
                 if (res.status < 400) {
                     window.location.href = '/home';
