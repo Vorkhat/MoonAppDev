@@ -44,19 +44,19 @@ export default function MenuComponent() {
     return (
         <div className={styles.menu__items}>
             <MenuItem href={'/quiz'} icon={MenuIcon.QUIZ}>
-                <text className={`${styles.item__text} ${inter.className}`}>Quiz</text>
+                <span className={`${styles.item__text} ${inter.className}`}>Quiz</span>
             </MenuItem>
             <MenuItem href={'/tasks'} icon={MenuIcon.TASKS}>
-                <text className={`${styles.item__text} ${inter.className}`}>Tasks</text>
+                <span className={`${styles.item__text} ${inter.className}`}>Tasks</span>
             </MenuItem>
             <MenuItem href={'/home'} icon={MenuIcon.HOME}>
-                <text className={`${styles.item__text} ${inter.className}`}>Home</text>
+                <span className={`${styles.item__text} ${inter.className}`}>Home</span>
             </MenuItem>
             <MenuItem href={'/rating'} icon={MenuIcon.RATING}>
-                <text className={`${styles.item__text} ${inter.className}`}>Rating</text>
+                <span className={`${styles.item__text} ${inter.className}`}>Rating</span>
             </MenuItem>
             <MenuItem href={'/profile'} icon={MenuIcon.PROFILE}>
-                <text className={`${styles.item__text} ${inter.className}`}>Profile</text>
+                <span className={`${styles.item__text} ${inter.className}`}>Profile</span>
             </MenuItem>
         </div>
 );

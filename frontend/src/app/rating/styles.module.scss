@@ -1,0 +1,15 @@
+.rating__page {
+  display: grid;
+  grid-template-rows: min-content auto;
+  overflow: hidden;
+
+  .header__conrainer {
+    display: grid;
+    justify-items: center;
+    margin-top: 3vh;
+
+    .header__text {
+      font-size: 2vh;
+    }
+  }
+}

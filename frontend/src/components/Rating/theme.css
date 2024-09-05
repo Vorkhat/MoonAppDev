@@ -1,0 +1,15 @@
+html[data-theme='dark'] {
+    --rating-text-color: #FFFFFF;
+    --rating-border-color-user: rgba(255, 255, 255, 0.03);
+    --rating-background-color-user: #0E0C10;
+    --rating-background-color-award: rgba(255, 255, 255, 0.08);
+    --rating-text-color-award-theme: #FFF881;
+}
+
+html[data-theme='light'] {
+    --rating-text-color: #0C0C0C;
+    --rating-background-color-user: #FFFFFF;
+    --rating-border-color-user: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%) no-repeat;
+    --rating-background-color-award: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%) no-repeat;
+    --rating-text-color-award-theme: #0C0C0C;
+}
