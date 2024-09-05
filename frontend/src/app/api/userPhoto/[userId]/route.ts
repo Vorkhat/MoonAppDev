@@ -32,7 +32,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: numb
 
         // https://nextjs.org/docs/messages/middleware-relative-urls
         const url = req.nextUrl.clone();
-        url.pathname = 'images/Avatar.png';
+        url.pathname = 'images/avatar.png';
         return NextResponse.redirect(url);
     }
 }
