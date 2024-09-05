@@ -1,0 +1,7 @@
+html[data-theme='dark'] {
+    --quiz-text-color-header-theme: #8DFAFA;
+}
+
+html[data-theme='light'] {
+    --quiz-text-color-header-theme: #083D8D;
+}

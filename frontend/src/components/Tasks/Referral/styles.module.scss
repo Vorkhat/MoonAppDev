@@ -62,6 +62,7 @@
           justify-items: center;
           align-items: center;
           padding: 1vh 2.5vw;
+          column-gap: 1vw;
           @include create-container(var(--tasks-background-refferal));
 
           .friends__image {

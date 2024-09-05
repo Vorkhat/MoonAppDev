@@ -1,0 +1,94 @@
+.quiz {
+  display: flex;
+  height: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  column-gap: 2vw;
+  margin-left: 4vw;
+
+  .quiz__background {
+    background: var(--quiz-background-border-color);
+    padding: 1px;
+    border-radius: 2vw;
+
+    .quiz__item {
+      display: grid;
+      height: 100%;
+      min-width: 280px;
+      background: var(--quiz-background-color);
+      align-items: center;
+      border-radius: 2vw;
+      padding: 0 2vw 0 2vw;
+
+      .qiuz__icon {
+        display: flex;
+        background: #181818;
+        border-radius: 2vw;
+        justify-content: space-between;
+        align-items: end;
+        padding: 1.5vh 2vw;
+
+        .quiz__title {
+
+        }
+
+        .quiz__image {
+
+        }
+
+        .quiz__help {
+
+        }
+      }
+
+      .quiz__description {
+        display: flex;
+        font-size: 3vh;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        width: 90%;
+        margin: 0 auto;
+        align-items: end;
+        background: var(--quiz-background-description-color);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+
+      .quiz__award {
+        display: flex;
+        font-size: 1.7vh;
+        text-align: center;
+        margin: 0 auto;
+        white-space: nowrap;
+        color: var(--quiz-text-color-award);
+        background: var(--quiz-background-color-award);
+        border-radius: 3vw;
+        padding: 0.7vw 2vw;
+        width: fit-content;
+        height: fit-content;
+      }
+
+      .quiz__background_begin {
+        display: flex;
+        height: fit-content;
+        background: var(--quiz-background-border-color-begin);
+        border-radius: 3vw;
+        padding: 1px;
+
+        .quiz__begin {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          background: var(--quiz-background-color-begin);
+          border-radius: 3vw;
+          padding: 1.3vh 0;
+
+          .quiz__begin_text {
+            font-size: 2vh;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+html[data-theme='dark'] {
+    --quiz-background-border-color: rgba(255, 255, 255, 0.08);
+    --quiz-background-color: #0E0C10;
+    --quiz-background-color-begin: #0E0C10;
+    --quiz-background-description-color: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --quiz-background-border-color-begin: linear-gradient(90deg, #86F1AD 0, #8DBEFD 30%, #E0AAEE 100%);
+    --quiz-text-color-award: #FFF881;
+    --quiz-background-color-award: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='light'] {
+    --quiz-background-border-color: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
+    --quiz-background-color: #FFFFFF;
+    --quiz-background-color-begin: none;
+    --quiz-background-description-color: #0E0C10;
+    --quiz-background-border-color-begin: linear-gradient(90deg, #B0E7FF 0, #F5C4FF);
+    --quiz-text-color-award: #0C0C0C;
+    --quiz-background-color-award: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 50%);
+}

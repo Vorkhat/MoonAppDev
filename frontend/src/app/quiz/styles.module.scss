@@ -1,0 +1,27 @@
+
+.quiz_page {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  margin-top: 5vh;
+  overflow: hidden;
+
+  .header__conrainer {
+    display: grid;
+    height: fit-content;
+    justify-items: center;
+    margin: 0 3vw 0 3vw;
+    white-space: nowrap;
+
+    .header__text {
+      font-size: 2.6vh;
+    }
+  }
+
+  .quiz__list {
+    display: flex;
+    height: 80%;
+    align-items: center;
+    overflow: hidden;
+  }
+}
