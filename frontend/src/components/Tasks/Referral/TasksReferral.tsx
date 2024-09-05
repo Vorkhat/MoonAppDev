@@ -31,7 +31,7 @@ const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
         <div className={styles.friends__item}>
             <Image className={styles.friends__image} src={TasksIcon.FRIENDS} width={30} height={30} alt="/" />
             <div className={`${styles.friends__count} ${inter.className}`}>+ {count_friends}</div>
-            <div className={`${styles.friends__award} ${inter.className}`}>+ {award} {process.env.CURRENCY}</div>
+            <div className={`${styles.friends__award} ${inter.className}`}>+ {award} points</div>
         </div>
     </div>
 );

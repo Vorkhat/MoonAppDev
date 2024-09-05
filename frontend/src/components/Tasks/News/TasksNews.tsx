@@ -19,7 +19,7 @@ function CreateItem({images, text, award}: ItemProps) {
             <div className={styles.task__item}>
                 <Image className={styles.task__image} src={images} width={44} height={44} alt={'/'}/>
                 <div className={`${styles.task__text} ${inter.className}`}>{text}</div>
-                <div className={`${styles.task__award} ${inter.className}`}>+{award} {process.env.CURRENCY}</div>
+                <div className={`${styles.task__award} ${inter.className}`}>+{award} points</div>
             </div>
         </div>
     )
