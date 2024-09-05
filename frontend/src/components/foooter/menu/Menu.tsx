@@ -21,7 +21,11 @@ function MenuItem({icon, href, children}: ItemProps & Readonly<{children: React.
     const active = pathname === href;
 
     return (
-        <div className={styles.menu__item} style={active ? {borderBottom: '4px solid #2FACFF'} : {}}>
+        <div className={styles.menu__item} style={active ? {
+            borderBottom: '4px solid #2FACFF',
+            borderLeft: '4px solid transparent',
+            borderRight: '4px solid transparent',
+        } : {}}>
             <Link className={`${styles.menu__container} ${active ? styles.active : null}`} href={href} prefetch={false}>
                 <i className={`${styles.item__icon}`}
                    style={{
