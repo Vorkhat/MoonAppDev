@@ -1,9 +1,9 @@
 import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
-import TasksNews from '@/components/Tasks/News/TasksNews.tsx';
-import TasksReferral from '@/components/Tasks/Referral/TasksReferral.tsx';
-import PartnersTasks from '@/components/Tasks/Partners/PartnersTasks.tsx';
-import TasksLinks from '@/components/Tasks/Links/TasksNews.tsx';
+import TasksNews from '@/components/pages/Tasks/News/TasksNews.tsx';
+import TasksReferral from '@/components/pages/Tasks/Referral/TasksReferral.tsx';
+import PartnersTasks from '@/components/pages/Tasks/Partners/PartnersTasks.tsx';
+import TasksLinks from '@/components/pages/Tasks/Links/TasksNews.tsx';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
@@ -33,7 +33,7 @@ export async function getCuratedTasks() {
 export default async function Tasks() {
     const tasks = await getCuratedTasks();
 
-    const newTasks = tasks.filter(t => t.category === CuratedTaskCategory.New);
+    const newTasks = tasks.filter((t: { category: any; }) => t.category === CuratedTaskCategory.New);
 
     return (
         <div className={styles.tasks__page}>

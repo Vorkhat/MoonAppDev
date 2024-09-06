@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
-import ThemeSwitcher from '@/components/Home/Theme/ThemeSwitcher';
+import ThemeSwitcher from '@/components/pages/Home/ThemeSwitcher/ThemeSwitcher';
 import { useSession } from '@/components/session';
 import Link from 'next/link';
 

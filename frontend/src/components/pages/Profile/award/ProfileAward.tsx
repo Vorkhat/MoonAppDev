@@ -1,12 +1,12 @@
 'use server';
 
-import '../common.css';
+import '@/components/pages/Profile/data/common.css';
 import React from 'react';
 import styles from './styles.module.scss';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
-import { AwardItem } from '@/components/Profile/award/AwardItem.tsx';
-import { mapToIcon } from '@/components/Profile/award/iconMapper.tsx';
+import { AwardItem } from '@/components/pages/Profile/award/AwardItem.tsx';
+import { mapToIcon } from '@/components/pages/Profile/award/iconMapper.tsx';
 
 export async function getItems() {
     const session = await useSession();

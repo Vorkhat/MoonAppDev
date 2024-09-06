@@ -1,7 +1,7 @@
 import './theme.css'
 import styles from './styles.module.scss'
 import {Inter} from "next/font/google";
-import CreateQuizComponent from "@/components/Quiz/CreateQuizComponent";
+import CreateQuizComponent from "@/components/pages/Quiz/CreateQuizComponent";
 
 const inter = Inter({subsets: ['latin']})
 

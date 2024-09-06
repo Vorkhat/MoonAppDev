@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {Inter} from "next/font/google";
 import styles from './styles.module.scss'
-import {TasksIcon} from "@/components/Tasks/tasksIcon.ts";
+import {TasksIcon} from "../tasksIcon.ts";
 
 const inter = Inter({subsets: ['latin']})
 

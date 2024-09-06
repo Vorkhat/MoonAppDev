@@ -1,11 +1,11 @@
 'use client';
 
-import '../common.css';
+import '@/components/pages/Profile/data/common.css';
 import React from "react";
 import Image from "next/image";
 import styles from './styles.module.scss';
-import ImageInvitation from "../../../../public/images/profile/invitations.svg"
-import ImageCopyLink from "../../../../public/images/profile/copyLink.svg"
+import ImageInvitation from "../../../../../public/images/profile/invitations.svg"
+import ImageCopyLink from "../../../../../public/images/profile/copyLink.svg"
 import {Inter} from "next/font/google";
 
 

@@ -1,8 +1,8 @@
 import './common.css';
 import React from 'react';
 import styles from './styles.module.scss';
-import ProfileAward from '@/components/Profile/award/ProfileAward';
-import ProfileFriends from '@/components/Profile/friends/ProfileFriends';
+import ProfileAward from '@/components/pages/Profile/award/ProfileAward.tsx';
+import ProfileFriends from '@/components/pages/Profile/friends/ProfileFriends.tsx';
 import { Inter, Montserrat } from 'next/font/google';
 import { SessionData, useSession } from '@/components/session';
 import { prisma } from '@/prisma.ts';

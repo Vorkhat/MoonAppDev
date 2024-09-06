@@ -1,4 +1,4 @@
-import styles from "@/components/Profile/award/styles.module.scss";
+import styles from "@/components/pages/Profile/award/styles.module.scss";
 import Image from "next/image";
 import React from "react";
 import {Inter} from "next/font/google";

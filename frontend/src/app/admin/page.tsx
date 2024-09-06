@@ -3,7 +3,7 @@
 import styles from './page.module.scss';
 import { prisma } from '@/prisma.ts';
 import Image from 'next/image';
-import { mapToIcon } from '@/components/Profile/award/iconMapper.tsx';
+import { mapToIcon } from '@/components/pages/Profile/award/iconMapper.tsx';
 import Link from 'next/link';
 
 export async function getTasks() {

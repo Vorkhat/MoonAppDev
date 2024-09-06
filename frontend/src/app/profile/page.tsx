@@ -1,5 +1,5 @@
-import UserProfile from '@/components/Profile/UserProfile';
-import styles from '@/app/profile/styles.module.scss';
+import UserProfile from '@/components/pages/Profile/data/UserProfile';
+import styles from './styles.module.scss';
 
 export default async function Profile() {
 

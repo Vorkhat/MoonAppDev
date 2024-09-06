@@ -3,8 +3,8 @@ import './reset.scss';
 import './globals.scss';
 import React from 'react';
 import styles from './background.module.scss';
-import Root from '../components/Root/Root';
-import Theme from '@/components/Theme/Theme';
+import Root from '@/components/root/Root';
+import Theme from '@/components/theme/Theme';
 import Footer from '@/components/foooter/footer';
 import '../mockEnv.ts';
 

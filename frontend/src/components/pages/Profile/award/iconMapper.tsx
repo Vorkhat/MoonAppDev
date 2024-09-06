@@ -1,8 +1,8 @@
 import { TaskType } from '@prisma/client';
-import ImageComments from '../../../../public/images/profile/comments.svg';
-import ImageInvite from '../../../../public/images/profile/friends.svg';
-import ImageGame from '../../../../public/images/profile/active.svg';
-import ImageTask from '../../../../public/images/profile/tasks.svg';
+import ImageComments from '../../../../../public/images/profile/comments.svg';
+import ImageInvite from '../../../../../public/images/profile/friends.svg';
+import ImageGame from '../../../../../public/images/profile/active.svg';
+import ImageTask from '../../../../../public/images/profile/tasks.svg';
 
 export function mapToIcon(type: TaskType) {
     switch (type) {

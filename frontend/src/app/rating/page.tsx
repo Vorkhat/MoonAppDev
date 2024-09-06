@@ -1,7 +1,7 @@
 import './theme.css'
 import styles from './styles.module.scss'
 import {Inter} from "next/font/google";
-import RatingItem from "@/components/Rating/RatingItem.tsx";
+import RatingItem from "@/components/pages/Rating/RatingItem.tsx";
 
 const inter = Inter({subsets: ['latin']})
 
