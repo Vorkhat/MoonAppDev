@@ -1,6 +1,7 @@
 .profile__page {
   display: grid;
   grid-template-rows: auto 1fr;
+  gap: 16px;
 
   .header__text {
     display: inline-flex;

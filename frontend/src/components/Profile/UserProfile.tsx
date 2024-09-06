@@ -1,27 +1,25 @@
 import './common.css';
-import React from "react";
+import React from 'react';
 import styles from './styles.module.scss';
-import ProfileAward from "@/components/Profile/award/ProfileAward";
-import ProfileFriends from "@/components/Profile/friends/ProfileFriends";
-import {Inter, Montserrat} from "next/font/google";
-import {getIronSession} from "iron-session";
-import {SessionData, sessionOptions} from "@/components/session";
-import {cookies} from "next/headers";
-import {prisma} from "@/prisma.ts";
+import ProfileAward from '@/components/Profile/award/ProfileAward';
+import ProfileFriends from '@/components/Profile/friends/ProfileFriends';
+import { Inter, Montserrat } from 'next/font/google';
+import { SessionData, useSession } from '@/components/session';
+import { prisma } from '@/prisma.ts';
 
-const montserrat = Montserrat({subsets: ['latin'],})
-const inter = Inter({subsets: ['latin']})
+const montserrat = Montserrat({ subsets: [ 'latin' ] });
+const inter = Inter({ subsets: [ 'latin' ] });
 
-export async function getUser(id: number){
+export async function getUser(id: number) {
     return prisma.usersTop.findUniqueOrThrow({
-        where: {
-            id: id
-        }
-    })
+                                                 where: {
+                                                     id: id,
+                                                 },
+                                             });
 }
 
 const UserProfile = async () => {
-    const session: SessionData = await getIronSession<SessionData>(cookies(), sessionOptions);
+    const session: SessionData = await useSession();
 
     const user = await getUser(session.userId);
 
@@ -36,8 +34,10 @@ const UserProfile = async () => {
                     height={160}
                 />
                 <div className={styles.user__data}>
-                    <div className={`${styles.user__name} ${inter.className}`}>{session.firstName} {session.lastName}</div>
-                    {session.username ? <div className={`${styles.user__tag} ${inter.className}`}>@{session.username}</div> : <></>}
+                    <div
+                        className={`${styles.user__name} ${inter.className}`}>{session.firstName} {session.lastName}</div>
+                    {session.username ? <div
+                        className={`${styles.user__tag} ${inter.className}`}>@{session.username}</div> : <></>}
                     <div className={`${styles.user__rating} ${inter.className}`}>#{user.rank} в рейтинге</div>
                 </div>
             </div>
@@ -51,6 +51,6 @@ const UserProfile = async () => {
             <ProfileFriends/>
         </div>
     );
-}
+};
 
 export default UserProfile;

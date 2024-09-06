@@ -31,42 +31,23 @@
   }
 
   .main__container {
-    display: grid;
-    grid-template-rows: repeat(3, min-content);
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
 
     .tasks__news {
       display: grid;
       grid-template-rows: repeat(2, min-content);
-
-     .news__header {
-       color: var(--color-text);
-       font-size: 2.5vh;
-       font-weight: bold;
-     }
     }
 
     .tasks__daily {
       display: grid;
       grid-template-rows: min-content;
-      margin-top: 3vh;
-
-      .daily__header {
-        color: var(--color-text);
-        font-size: 2.5vh;
-        font-weight: bold;
-      }
     }
 
     .partners {
       display: grid;
       grid-template-rows: min-content;
-      margin-top: 3vh;
-
-      .partners__header {
-        color: var(--color-text);
-        font-size: 2.5vh;
-        font-weight: bold;
-      }
     }
   }
 }

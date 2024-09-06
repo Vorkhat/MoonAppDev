@@ -1,4 +1,6 @@
-import { loadEnvConfig } from '@next/env'
+import { loadEnvConfig } from '@next/env';
 
-const projectDir = process.cwd()
-loadEnvConfig(projectDir)
+if (process.env.NEXT_RUNTIME !== 'edge') {
+    const projectDir = process.env.ROOT_DIR || process.cwd();
+    loadEnvConfig(projectDir);
+}

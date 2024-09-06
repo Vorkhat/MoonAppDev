@@ -9,6 +9,8 @@
   .task__gradient {
     @include create-gradient(var(--tasks-background-news-gradient));
 
+    cursor: pointer;
+
     .task__item {
       display: grid;
       grid-template-areas: "image text"
@@ -16,7 +18,6 @@
       grid-template-columns: repeat(2, min-content);
       justify-items: start;
       justify-content: center;
-      min-width: 43vw;
       column-gap: 1.5vw;
       row-gap: 0.8vh;
       align-items: center;

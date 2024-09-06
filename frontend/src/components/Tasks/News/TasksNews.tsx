@@ -1,37 +1,47 @@
-import './theme.css'
-import React from "react";
-import Image from "next/image";
-import {Inter} from "next/font/google";
-import styles from './styles.module.scss'
-import {TasksIcon} from "@/components/Tasks/tasksIcon.ts";
+import './theme.css';
+import React from 'react';
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import styles from './styles.module.scss';
+import { TasksIcon } from '@/components/Tasks/tasksIcon.ts';
+import { TaskProps } from '@/app/tasks/page.tsx';
+import { Task } from '@prisma/client';
+import { currencyName } from '@/utils/constants.ts';
 
-const inter = Inter({subsets: ['latin']})
+const inter = Inter({ subsets: [ 'latin' ] });
 
-interface ItemProps {
-    images: string,
-    text: string,
-    award: number,
+export function mapTaskIcon(task: Task) {
+    return TasksIcon.REPOST; // todo task icons mapping
 }
 
-function CreateItem({images, text, award}: ItemProps) {
+export function TaskItem({ id, task, totalReward, disabled }: {
+    id: bigint,
+    task: Task,
+    totalReward: number,
+    disabled?: true
+}) {
     return (
-        <div className={styles.task__gradient}>
+        <a className={styles.task__gradient} href={disabled ? undefined : `/api/task/${id}`}
+           target={disabled ? undefined : '_blank'}>
             <div className={styles.task__item}>
-                <Image className={styles.task__image} src={images} width={44} height={44} alt={'/'}/>
-                <div className={`${styles.task__text} ${inter.className}`}>{text}</div>
-                <div className={`${styles.task__award} ${inter.className}`}>+{award} points</div>
+                <Image className={styles.task__image} src={mapTaskIcon(task)} width={44} height={44} alt={'/'}/>
+                <div className={`${styles.task__text} ${inter.className}`} style={{}}>{task.type}</div>
+                <div className={`${styles.task__award} ${inter.className}`}>+{totalReward} {currencyName}</div>
             </div>
-        </div>
-    )
+        </a>
+    );
 }
 
-const TasksNews = () => {
+export function TasksNews({ tasks }: TaskProps) {
     return (
-        <div className={styles.tasks__items}>
-            <CreateItem text={'Выложить сторис'} images={TasksIcon.PHONE} award={100}/>
-            <CreateItem text={'Отдать голос'} images={TasksIcon.REPOST} award={100}/>
-        </div>
-    )
+        <>
+            <div className={styles.tasks__items}>
+                {tasks.map(task => (
+                    <TaskItem key={task.id} id={task.id} task={task.task} totalReward={task.totalReward}/>
+                ))}
+            </div>
+        </>
+    );
 }
 
 export default TasksNews;

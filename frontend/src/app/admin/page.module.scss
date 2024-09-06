@@ -1,0 +1,10 @@
+.admin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.admin:first-child {
+  margin-bottom: 8px;
+}
