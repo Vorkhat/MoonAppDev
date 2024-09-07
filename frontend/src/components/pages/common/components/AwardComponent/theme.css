@@ -1,0 +1,9 @@
+html[data-theme="dark"] {
+    --background-color-award: rgba(255, 255, 255, 0.08);
+    --color-text-currency: #FFF881;
+}
+
+html[data-theme="light"] {
+    --background-color-award: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%) no-repeat;
+    --color-text-currency: #0C0C0C;
+}

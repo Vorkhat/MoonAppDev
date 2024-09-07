@@ -1,4 +1,4 @@
-.menu__items {
+.menu-items {
   display: flex;
   width: 90%;
   background: var(--background-menu) no-repeat center bottom;
@@ -7,7 +7,7 @@
   margin-bottom: 1.5vh;
   column-gap: 4%;
 
-  .menu__item {
+  .menu-item {
     display: grid;
     grid-template-areas: "button"
                        "condition";
@@ -16,12 +16,12 @@
     align-items: center;
     justify-items: center;
 
-    .menu__container {
+    .menu-container {
       display: grid;
       justify-items: center;
       row-gap: 0.5vh;
 
-      .item__icon {
+      .item-icon {
         width: 7vw;
         height: 3.5vh;
         background-repeat: no-repeat;
@@ -30,7 +30,7 @@
         transition: background-color 0.5s ease-in-out;
       }
 
-      .item__text {
+      .item-text {
         color: var(--color-text-menu);
       }
     }
@@ -40,7 +40,7 @@
       bottom: 1.5vh;
     }
 
-    .menu__condition {
+    .menu-condition {
       background: var(--condition-menu-active) no-repeat center bottom;
       background-size: contain;
       width: 100%;

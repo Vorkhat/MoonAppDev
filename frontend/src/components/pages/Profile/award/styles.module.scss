@@ -1,62 +1,32 @@
-.award__items {
+@import "@/components/pages/common/components/styles/mixins.scss";
+
+.award-items {
   display: grid;
-  row-gap: 1vh;
+  row-gap: 1.3vh;
 
-  .award__background_gradient {
-    background: var(--award-border-gradient);
-    border-radius: 3vw;
+  .award-container {
+    display: flex;
+    align-items: center;
+    padding: 1.5vh 2.5vw;
 
-    .award__item {
+    .award-content {
       display: flex;
+      width: 100%;
       align-items: center;
-      background: var(--background-award-item);
-      border-radius: 3vw;
-      padding: 1.5vh 0 1.5vh 4vw;
-      margin: 1px;
+      justify-content: start;
+      column-gap: 5vw;
 
-      .award__text {
-        margin-left: 4vw;
+      .award-text {
+        font-size: 2.5vh;
         font-weight: bold;
-        background: var(--background-award-text);
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
+        @include text-color(var(--text-color-award));
       }
 
-      .award__friends {
-        display: flex;
-        color: #FFFFFF;
-        justify-content: center;
-        margin-left: 13vw;
+      .award-friends {
         background: #5E6065;
-        padding: 0.7vh 1.8vw;
+        color: #ffffff;
         border-radius: 2vw;
-      }
-
-      .award__count {
-        display: flex;
-        width: 100%;
-        justify-content: end;
-
-        .award__count_background {
-          width: max-content;
-          display: flex;
-          align-items: center;
-          justify-content: end;
-          margin-right: 3vw;
-          background: var(--background-curruncy-text) no-repeat;
-          font-size: 1.7vh;
-          padding: 0.5vh 1.5vw;
-          border-radius: 1.5vh;
-          column-gap: 0.6vw;
-
-          .award__value {
-            color: var(--color-text-currency);
-          }
-
-          .award__currency {
-            color: var(--color-text-currency);
-          }
-        }
+        padding: 0.6vh 3vw;
       }
     }
   }

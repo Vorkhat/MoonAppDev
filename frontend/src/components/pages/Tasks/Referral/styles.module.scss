@@ -1,40 +1,40 @@
 @import "../mixins";
 
-.friends__container {
+.friends-container {
   height: 26vh;
   margin-top: 2vh;
   overflow-x: hidden;
   @include create-gradient(var(--tasks-background-refferal-gradient));
 
-  .background__container {
+  .background-container {
     display: grid;
     @include create-container(var(--tasks-background-refferal));
 
-    .friends__invitations {
+    .friends-invitations {
       display: flex;
       align-items: center;
       column-gap: 1vw;
       margin: 0 2vw;
 
-      .invitations__text {
+      .invitations-text {
         font-size: 1.8vh;
         font-weight: bold;
         @include text-theme(1.8vh, var(--tasks-text-gradient));
       }
     }
 
-    .invitations__count {
+    .invitations-count {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin: 0 2vw;
 
-      .invitations__count_text {
+      .invitations-count_text {
         font-size: 1.8vh;
         color: var(--tasks-text);
       }
 
-      .invitations__count_counter {
+      .invitations-count_counter {
         @include text-theme(1.8vh, var(--tasks-text-gradient));
         opacity: 0.8;
         font-weight: bold;
@@ -44,17 +44,17 @@
       }
     }
 
-    .friends__items {
+    .friends-items {
       display: flex;
       overflow-x: auto;
       scrollbar-width: none;
       column-gap: 1.7vw;
       margin: 2vh 2vw;
 
-      .items__background {
+      .items-background {
         @include create-gradient(var(--tasks-background-refferal-gradient));
 
-        .friends__item {
+        .friends-item {
           display: grid;
           grid-template-areas:
             "count image"
@@ -65,22 +65,22 @@
           column-gap: 1vw;
           @include create-container(var(--tasks-background-refferal));
 
-          .friends__image {
+          .friends-image {
             grid-area: image;
           }
 
-          .friends__count {
+          .friends-count {
             font-size: 2vh;
             font-weight: bold;
             white-space: nowrap;
           }
 
-          .friends__count {
+          .friends-count {
             grid-area: count;
             color: var(--tasks-text);
           }
 
-          .friends__award {
+          .friends-award {
             grid-area: award;
             @include text-award(var(--tasks-text-award), var(--tasks-background-text-award));
           }

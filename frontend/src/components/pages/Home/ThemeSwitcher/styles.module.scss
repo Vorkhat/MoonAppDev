@@ -5,7 +5,7 @@
   align-items: center;
   justify-items: center;
 
-  .theme__icon {
+  .theme-icon {
     background: var(--switcher-theme) no-repeat center center;
     background-size: contain;
     width: 8vw;
@@ -13,7 +13,7 @@
   }
 }
 
-p.theme_text {
+p.theme-text {
   white-space: nowrap;
   font-size: 1.3vh;
 }

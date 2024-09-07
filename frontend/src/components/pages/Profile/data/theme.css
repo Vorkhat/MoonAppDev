@@ -1,0 +1,15 @@
+html {
+    --background-balance-border-color: linear-gradient(140deg, #86F1AD 0%, #B0E7FF 30%, #F5C4FF 100%);
+}
+
+html[data-theme="dark"] {
+    --background-balance-color: #0C0C0C;
+    --text-color-amount: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --text-color-currency: #FFFFFF;
+}
+
+html[data-theme="light"] {
+    --background-balance-color: linear-gradient(140deg, #86F1AD 0%, #B0E7FF 30%, #F5C4FF 100%);
+    --text-color-amount: #0C0C0C;
+    --text-color-currency: #0C0C0C;
+}

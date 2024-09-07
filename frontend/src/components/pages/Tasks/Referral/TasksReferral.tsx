@@ -27,36 +27,36 @@ interface FriendItemProps {
 }
 
 const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
-    <div className={styles.items__background}>
-        <div className={styles.friends__item}>
-            <Image className={styles.friends__image} src={TasksIcon.FRIENDS} width={30} height={30} alt="/" />
-            <div className={`${styles.friends__count} ${inter.className}`}>+ {count_friends}</div>
-            <div className={`${styles.friends__award} ${inter.className}`}>+ {award} points</div>
+    <div className={styles.itemsBackground}>
+        <div className={styles.friendsItem}>
+            <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} width={30} height={30} alt="/" />
+            <div className={`${styles.friendsCount} ${inter.className}`}>+ {count_friends}</div>
+            <div className={`${styles.friendsAward} ${inter.className}`}>+ {award} points</div>
         </div>
     </div>
 );
 
 const InvitationsCount = () => (
-    <div className={styles.invitations__count}>
-        <div className={`${styles.invitations__count_text} ${inter.className}`}>Всего приглашено</div>
-        <div className={styles.invitations__counter_background}>
-            <div className={`${styles.invitations__count_counter} ${inter.className}`}>7</div>
+    <div className={styles.invitationsCount}>
+        <div className={`${styles.invitationsCountText} ${inter.className}`}>Всего приглашено</div>
+        <div className={styles.invitationsCounterBackground}>
+            <div className={`${styles.invitationsCountCounter} ${inter.className}`}>7</div>
         </div>
     </div>
 );
 
 const TasksReferral = () => {
     return (
-        <div className={styles.friends__container}>
-            <div className={styles.background__container}>
-                <div className={styles.friends__invitations}>
-                    <Image className={styles.friends__image} src={TasksIcon.FRIENDS} alt="/" width={30} height={30} />
-                    <div className={`${styles.invitations__text} ${inter.className}`}>
+        <div className={styles.friendsContainer}>
+            <div className={styles.backgroundContainer}>
+                <div className={styles.friendsInvitations}>
+                    <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} alt="/" width={30} height={30} />
+                    <div className={`${styles.invitationsText} ${inter.className}`}>
                         Пригласить друзей
                     </div>
                 </div>
                 <InvitationsCount />
-                <div className={styles.friends__items}>
+                <div className={styles.friendsItems}>
                     {data.map((item, index) => (
                         <FriendsItem
                             key={index}

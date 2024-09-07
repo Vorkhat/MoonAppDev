@@ -23,8 +23,8 @@ export default function ThemeSwitcher() {
 
     return (
         <div className={styles.switch} onClick={toggleTheme}>
-            <p className={styles.theme_text}>THEME {activeTheme.toUpperCase()}</p>
-            <div className={styles.theme__icon}></div>
+            <p className={styles.themeText}>THEME {activeTheme.toUpperCase()}</p>
+            <div className={styles.themeIcon}></div>
         </div>
     );
 }

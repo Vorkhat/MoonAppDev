@@ -16,7 +16,7 @@ interface ItemProps {
 
 const CreateItem = ({award, link, icon}: ItemProps) => {
     return (
-        <Link className={`${styles.task__link} ${inter.className}`} href={link}>
+        <Link className={`${styles.taskLink} ${inter.className}`} href={link}>
             <div style={{
                 display: "flex",
                 alignItems: "center"
@@ -24,16 +24,16 @@ const CreateItem = ({award, link, icon}: ItemProps) => {
                 <Image src={icon} alt={'/'} width={20} height={20} style={{
                     marginLeft: "1.5vw"
                 }}/>
-                <text className={styles.link__text}>Перейти на сайт</text>
+                <text className={styles.linkText}>Перейти на сайт</text>
             </div>
-            <text className={styles.link__award}>+ {award} points</text>
+            <text className={styles.linkAward}>+ {award} points</text>
         </Link>
     )
 }
 
 const TasksLinks = () => {
     return (
-        <div className={styles.task__list_link}>
+        <div className={styles.taskListLink}>
             <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.WEB}/>
             <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.INSTAGRAM}/>
             <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.DOWNLAND}/>

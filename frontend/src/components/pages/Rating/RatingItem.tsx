@@ -4,6 +4,7 @@ import './theme.css';
 import Image from 'next/image';
 import {Inter} from 'next/font/google';
 import styles from './styles.module.scss';
+import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -23,9 +24,9 @@ const RatingItem = () => {
     }));
 
     return (
-        <div className={styles.rating__item}>
-            <div className={styles.rating__header}>
-                <span className={`${styles.rating__text} ${inter.className}`}>Итоговый снепшот - 20.09.2024</span>
+        <div className={styles.ratingItem}>
+            <div className={styles.ratingHeader}>
+                <span className={`${styles.ratingtext} ${inter.className}`}>Итоговый снепшот - 20.09.2024</span>
                 <button>
                     <Image src={'images/rating/update.svg'} width={22} height={22} alt={''} style={{
                         display: 'flex',
@@ -34,24 +35,19 @@ const RatingItem = () => {
                     }}/>
                 </button>
             </div>
-            <div id={'rating__list'} className={styles.rating__list}>
+            <div className={styles.ratingList}>
                 {users.map((user, index) => (
-                    <div className={styles.user_rating_border}>
-                        <div key={index} className={`${styles.rating__user} ${inter.className}`}>
-                            <div className={styles.user__item}>
+                    <div className={styles.userRatingBorder}>
+                        <div key={index} className={`${styles.ratingUser} ${inter.className}`}>
+                            <div className={styles.userItem}>
                                 <Image src={'/images/avatar.png'} alt="Avatar" width={43} height={43}/>
-                                <div style={{
-                                    margin: '0 2vw',
-                                    padding: '0.8vh 3vw',
-                                    background: '#5E6065',
-                                    borderRadius: '2vw',
-                                }}>{index}</div>
+                                <div className={styles.userIndex}>{index}</div>
                                 <div style={{
                                     color: 'var(--rating-text-color)',
                                     fontSize: '1.8vh',
                                 }}>{user.name}</div>
                             </div>
-                            <div className={styles.user__award}> {user.points} points</div>
+                            <AwardComponent>{user.points} points</AwardComponent>
                         </div>
                     </div>
                 ))}

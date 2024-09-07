@@ -8,18 +8,18 @@ const inter = Inter({subsets: ['latin']})
 export default async function Rating() {
 
     return (
-        <div className={styles.rating__page}>
-            <header className={`${styles.header__conrainer} ${inter.className}`}>
-                <p className={styles.header__title} style={{
+        <div className={styles.ratingPage}>
+            <header className={`${styles.headerConrainer} ${inter.className}`}>
+                <p className={styles.headerTitle} style={{
                     fontSize: '3.3vh',
                     fontWeight: 'bold'
                 }}>ТОП 200 пользователей</p>
-                <p className={styles.header__text}> в рейтинге разделят
-                    <span className={styles.header__text} style={{
+                <p className={styles.headerText}> в рейтинге разделят
+                    <span className={styles.headerText} style={{
                         color: 'var(--rating-text-color-header-theme)'
                     }}> призовой фонд </span>
                 </p>
-                <p className={styles.header__text} style={{
+                <p className={styles.headerText} style={{
                     color: 'var(--rating-text-color-header-theme)'}}>1000$ 🤑</p>
             </header>
             <RatingItem />

@@ -1,9 +1,10 @@
 'use server';
 
-import '@/components/pages/Profile/data/common.css';
+import './theme.css'
 import React from 'react';
 import styles from './styles.module.scss';
 import { prisma } from '@/prisma.ts';
+import '@/components/pages/Profile/data/theme.css';
 import { useSession } from '@/components/session';
 import { AwardItem } from '@/components/pages/Profile/award/AwardItem.tsx';
 import { mapToIcon } from '@/components/pages/Profile/award/iconMapper.tsx';
@@ -22,7 +23,7 @@ export default async function ProfileAward() {
     const completedTaskTypes = await getItems();
 
     return (
-        <div className={styles.award__items}>
+        <div className={styles.awardItems}>
             {
                 completedTaskTypes.map(value => (
                     <AwardItem image={mapToIcon(value.type)} key={value.type} type={value.type} count={value.count}

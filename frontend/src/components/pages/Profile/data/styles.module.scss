@@ -1,17 +1,19 @@
+@import "@/components/pages/common/components/styles/mixins.scss";
+
 .user__profile {
   display: grid;
-  grid-template-areas: "data"
-                      "balance";
   grid-template-rows: repeat(3, min-content);
-  position: relative;
   width: 90%;
-  height: 100%;
   margin: 0 auto;
+  row-gap: 2vh;
 
   .user__item {
-    grid-area: data;
-    display: flex;
-    column-gap: 2vh;
+    display: grid;
+    grid-template-areas: "photo data";
+    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: repeat(2, min-content);
+    column-gap: 3vw;
+    justify-content: start;
 
     .user__photo {
       grid-area: photo;
@@ -21,15 +23,16 @@
     }
 
     .user__data {
-      white-space: pre;
       grid-area: data;
-      display: flex;
-      flex-direction: column;
-      row-gap: 0.6vh;
+      display: grid;
+      grid-template-rows: repeat(2, min-content);
+      row-gap: 1vh;
 
       .user__name {
         color: var(--color-text);
         font-size: 2.5vh;
+        font-weight: bold;
+        white-space: nowrap;
       }
 
       .user__tag {
@@ -39,50 +42,40 @@
       }
 
       .user__rating {
-        display: inline-block;
-        padding: 0.8vh 1.5vw;
+        font-size: 1.7vh;
+        height: fit-content;
+        width: fit-content;
+        white-space: nowrap;
+        padding: 0.5vh 1.5vw;
         border-radius: 1.5vh;
         color: var(--color-text);
-        font-size: 1.7vh;
         background: linear-gradient(90deg, rgba(114, 200, 200, 1) 20%, rgba(0, 122, 255, 1) 150%) center center;
-        width: fit-content;
       }
     }
   }
 
-  .user__balance {
-    display: flex;
-    align-content: center;
-    padding: 1px;
-    grid-area: balance;
-    position: relative;
-    border-radius: 4vw;
-    background: linear-gradient(140deg, #86F1AD 0%, #B0E7FF 30%, #F5C4FF 100%);
-    margin: 2vh 0 2vh 0;
+  .user__balance_border {
+    @include container-content(var(--background-balance-border-color), 4vw, 1px);
+    width: 100%;
+    margin: 0 auto;
 
-    .gradient {
+    .user__balance {
       display: flex;
-      background: var(--backgroun-gradient-user-balance);
-      align-items: center;
+      @include container-content(var(--background-balance-color), 4vw);
       justify-content: space-evenly;
-      width: 99.8%;
-      border-radius: 4vw;
-      padding: 2vh 4vw 2vh 4vw;
+      align-items: center;
+      padding: 2vh 4vw;
 
       .user__balance_value {
         font-size: 4.5vh;
         font-weight: bold;
-        background: var(--background-user-balance-text);
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
+        @include text-color(var(--text-color-amount))
       }
 
       .user__balance_currency {
-        font-size: 1.5vh;
-        letter-spacing: 1vw;
-        background: var(--background-user-balance-text);
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
+        font-size: 2vh;
+        color: var(--text-color-currency);
+        opacity: 0.7;
       }
     }
   }

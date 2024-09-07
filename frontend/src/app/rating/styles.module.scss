@@ -1,14 +1,15 @@
-.rating__page {
+.rating-page {
   display: grid;
   grid-template-rows: min-content auto;
   overflow: hidden;
+  row-gap: 3vh;
 
-  .header__conrainer {
+  .header-conrainer {
     display: grid;
     justify-items: center;
     margin-top: 3vh;
 
-    .header__text {
+    .header-text {
       font-size: 2vh;
     }
   }

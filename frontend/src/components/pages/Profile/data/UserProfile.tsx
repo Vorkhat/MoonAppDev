@@ -1,4 +1,4 @@
-import './common.css';
+import './theme.css';
 import React from 'react';
 import styles from './styles.module.scss';
 import ProfileAward from '@/components/pages/Profile/award/ProfileAward.tsx';
@@ -6,6 +6,7 @@ import ProfileFriends from '@/components/pages/Profile/friends/ProfileFriends.ts
 import { Inter, Montserrat } from 'next/font/google';
 import { SessionData, useSession } from '@/components/session';
 import { prisma } from '@/prisma.ts';
+import ContainerContent from "@/components/pages/common/components/ContainerContent/ContainerContent.tsx";
 
 const montserrat = Montserrat({ subsets: [ 'latin' ] });
 const inter = Inter({ subsets: [ 'latin' ] });
@@ -41,10 +42,10 @@ const UserProfile = async () => {
                     <div className={`${styles.user__rating} ${inter.className}`}>#{user.rank} в рейтинге</div>
                 </div>
             </div>
-            <div className={styles.user__balance}>
-                <div className={styles.gradient}>
-                    <div className={`${styles.user__balance_value} ${montserrat.className}`}>{user.points}</div>
-                    <div className={`${styles.user__balance_currency} ${montserrat.className}`}>points</div>
+            <div className={styles.user__balance_border}>
+                <div className={`${styles.user__balance} ${montserrat.className}`}>
+                    <div className={styles.user__balance_value}>{user.points}</div>
+                    <div className={styles.user__balance_currency}>points</div>
                 </div>
             </div>
             <ProfileAward/>

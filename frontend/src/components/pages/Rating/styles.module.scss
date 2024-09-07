@@ -1,55 +1,51 @@
-.rating__item {
-  overflow: hidden;
-  height: 85%;
-  width: 90%;
-  margin: 5vh auto 0 auto;
+@import "@/components/pages/common/components/styles/mixins.scss";
 
-  .rating__header {
+.rating-item {
+  display: grid;
+  height: 85%;
+  overflow: hidden;
+  margin: 0 auto;
+  row-gap: 1vh;
+
+  .rating-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .rating__list {
+  .rating-list {
     display: grid;
-    grid-template-columns: 1fr;
-    height: calc(100vh - 20vh);
+    height: 80vh;
     overflow-y: auto;
     scrollbar-width: none;
-    margin-top: 2vh;
     row-gap: 1.2vh;
 
-    .user_rating_border {
-      background: var(--rating-border-color-user);
-      border-radius: 2vw;
-      padding: 1px;
+    .user-rating-border {
+      @include container-color(var(--rating-border-color-user), 3vw, 1px);
 
-      .rating__user {
+      .rating-user {
         display: flex;
-        background: var(--rating-background-color-user);
+        @include container-color(var(--rating-background-color-user), 3vw, 1vh 2vw);
         align-items: center;
-        justify-content: space-between;
-        border-radius: 2vw;
-        padding: 1vh 1vh;
         column-gap: 1vw;
 
-        .user__item {
+        .user-item {
           display: flex;
           align-items: center;
           color: #FFFFFF;
-          width: fit-content;
+          width: 100%;
           white-space: nowrap;
-        }
 
-        .user__award {
-          display: flex;
-          justify-content: center;
-          font-size: 1.5vh;
-          color: var(--rating-text-color-award-theme);
-          background: var(--rating-background-color-award);
-          border-radius: 2vw;
-          white-space: nowrap;
-          padding: 0.3vh 1.5vw;
+          .user-index {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 2vw;
+            height: 4vh;
+            width: 7.5vw;
+            background: #5E6065;
+            border-radius: 2vw;
+          }
         }
       }
     }

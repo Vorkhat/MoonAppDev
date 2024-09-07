@@ -1,0 +1,10 @@
+@import "theme.css";
+@import "../styles/mixins.scss";
+
+.container-border {
+  @include container-content(var(--background-border-color-container), 2vw, 1px);
+
+  .container-background {
+    @include container-content(var(--background-color-container), 2vw);
+  }
+}

@@ -1,17 +1,17 @@
 @import "../mixins";
 
-.tasks__items {
+.tasks-items {
   display: flex;
   margin-top: 1vh;
   justify-content: start;
   column-gap: 3vw;
 
-  .task__gradient {
+  .task-gradient {
     @include create-gradient(var(--tasks-background-news-gradient));
 
     cursor: pointer;
 
-    .task__item {
+    .task-item {
       display: grid;
       grid-template-areas: "image text"
                            "image award";
@@ -25,16 +25,12 @@
       height: 100%;
       @include create-container(var(--tasks-background-tasks-news));
 
-      .task__image {
+      .task-image {
         grid-area: image;
       }
 
-      .task__text {
+      .task-text {
         @include text-theme(2vh, var(--tasks-text-gradient))
-      }
-
-      .task__award {
-        @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
       }
     }
   }

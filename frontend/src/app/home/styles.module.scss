@@ -3,34 +3,34 @@
   src: url("../../../public/fonts/LogoRegular.ttf") format("truetype");
 }
 
-.home__page {
+.home-page {
   display: grid;
   grid-template-rows: repeat(3, min-content);
 
-  .header__container {
+  .header-container {
     display: flex;
     justify-content: space-between;
     margin: 8vh 4vw 8vh 6vw;
 
-    .header__content {
+    .header-content {
       display: flex;
       align-items: center;
       width: min-content;
 
-      .header__logo {
+      .header-logo {
         background: url(../../../public/images/home/header_image.png) no-repeat center center;
         background-size: contain;
         width: 8vw;
         height: 4vh;
       }
 
-      .header__text {
+      .header-text {
 
       }
     }
   }
 
-  .main__container {
+  .main-container {
     display: grid;
     grid-template-rows: auto;
     background: linear-gradient(90deg, var(--background-home-content-gradient-color1) 45%, var(--background-home-content-gradient-color2) 120%);
@@ -42,7 +42,7 @@
     margin: 1vh auto;
     padding: 1vh 1vh;
 
-    .main__content {
+    .main-content {
       display: grid;
       grid-template-areas: "text"
                            "text"
@@ -50,7 +50,7 @@
       row-gap: 1vh;
     }
 
-    .fox__image {
+    .fox-image {
       position: absolute;
       background: url(../../../public/images/home/fox.png) no-repeat;
       background-size: contain;
@@ -61,7 +61,7 @@
       top: 0;
     }
 
-    .invitation__container {
+    .invitation-container {
       background: linear-gradient(180deg, var(--background-invitation-gradient-color1) 0, var(--background-invitation-gradient-color2) 100%) center center no-repeat;
       transition: --background-invitation-gradient-color1 0.5s ease-in-out, --background-invitation-gradient-color2 0.5s ease-in-out;
       border-radius: 4vw;
@@ -69,7 +69,7 @@
       margin-top: 2vh;
       margin-bottom: 1vh;
 
-      .invitation__telegram {
+      .invitation-telegram {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -79,14 +79,14 @@
         column-gap: 2vw;
         border-radius: 4vw;
 
-        .telegram__logo {
+        .telegram-logo {
           background: url(../../../public/images/home/telegram_logo.svg) no-repeat center center;
           background-size: contain;
           width: 6vw;
           height: 6vw;
         }
 
-        .invitation__text {
+        .invitation-text {
           font-size: 2.3vh;
           background: var(--color-text-invitation);
           -webkit-text-fill-color: transparent;
@@ -96,7 +96,7 @@
     }
   }
 
-  .footer__container {
+  .footer-container {
     display: grid;
     grid-template-areas: "clock"
                          "text"
@@ -104,18 +104,18 @@
     justify-items: center;
     grid-template-rows: auto;
 
-    .clock__icon {
+    .clock-icon {
       background: url(../../../public/images/home/clock.png) no-repeat center center;
       background-size: contain;
       width: 20vw;
       height: 12vh;
     }
 
-    .footer__text {
+    .footer-text {
       color: var(--color-text)
     }
 
-    .footer__timer {
+    .footer-timer {
       display: flex;
       column-gap: 2%;
       justify-content: center;
@@ -123,7 +123,7 @@
       height: 7vh;
       width: 70vw;
 
-      .timer__number {
+      .timer-number {
         display: flex;
 
         .number {
@@ -135,7 +135,7 @@
         }
       }
 
-      .timer__title {
+      .timer-title {
         font-size: 80%;
         color: var(--color-text-home-timer);
       }

@@ -7,6 +7,7 @@ import { TasksIcon } from '../tasksIcon.ts';
 import { TaskProps } from '@/app/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
+import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -21,12 +22,12 @@ export function TaskItem({ id, task, totalReward, disabled }: {
     disabled?: true
 }) {
     return (
-        <a className={styles.task__gradient} href={disabled ? undefined : `/api/task/${id}`}
+        <a className={styles.taskGradient} href={disabled ? undefined : `/api/task/${id}`}
            target={disabled ? undefined : '_blank'}>
-            <div className={styles.task__item}>
-                <Image className={styles.task__image} src={mapTaskIcon(task)} width={44} height={44} alt={'/'}/>
-                <div className={`${styles.task__text} ${inter.className}`} style={{}}>{task.type}</div>
-                <div className={`${styles.task__award} ${inter.className}`}>+{totalReward} {currencyName}</div>
+            <div className={styles.taskItem}>
+                <Image className={styles.taskImage} src={mapTaskIcon(task)} width={44} height={44} alt={'/'}/>
+                <div className={`${styles.taskText} ${inter.className}`} style={{}}>{task.type}</div>
+                <AwardComponent>+{totalReward} {currencyName}</AwardComponent>
             </div>
         </a>
     );
@@ -35,7 +36,7 @@ export function TaskItem({ id, task, totalReward, disabled }: {
 export function TasksNews({ tasks }: TaskProps) {
     return (
         <>
-            <div className={styles.tasks__items}>
+            <div className={styles.tasksItems}>
                 {tasks.map(task => (
                     <TaskItem key={task.id} id={task.id} task={task.task} totalReward={task.totalReward}/>
                 ))}

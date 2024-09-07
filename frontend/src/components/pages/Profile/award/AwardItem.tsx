@@ -1,8 +1,10 @@
-import styles from "@/components/pages/Profile/award/styles.module.scss";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import {Inter} from "next/font/google";
 import {TaskType} from "@prisma/client";
+import styles from "@/components/pages/Profile/award/styles.module.scss";
+import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
+import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
 
 const inter = Inter({subsets: ['latin']})
 
@@ -16,18 +18,15 @@ interface ItemProps {
 
 export function AwardItem({image, type, number, currency, count}: ItemProps) {
     return (
-        <div className={styles.award__background_gradient}>
-            <div className={styles.award__item}>
-                <Image src={image} alt={'/'} style={{width: '13vw', height: '5.7vh'}}/>
-                <div className={`${styles.award__text} ${inter.className}`}>{type}</div>
-                {type === TaskType.Invite ? <div className={`${styles.award__friends} ${inter.className}`}>{count}</div> : null}
-                <div className={styles.award__count}>
-                    <div className={styles.award__count_background}>
-                        <div className={styles.award__value}>{number}</div>
-                        <div className={styles.award__currency}>{currency}</div>
-                    </div>
+        <ContainerContent>
+            <div className={styles.awardContainer}>
+                <div className={`${styles.awardContent} ${inter.className}`}>
+                    <Image src={image} alt={'/'} style={{width: '13vw', height: '5.7vh'}}/>
+                    <div className={styles.awardText}>{type}</div>
+                    {type === TaskType.Invite ? <div className={styles.awardFriends}>{count}</div> : null}
                 </div>
+                <AwardComponent>{number} {currency}</AwardComponent>
             </div>
-        </div>
+        </ContainerContent>
     )
 }
