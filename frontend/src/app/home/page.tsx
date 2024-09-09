@@ -2,7 +2,6 @@ import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
 import ThemeSwitcher from '@/components/pages/Home/ThemeSwitcher/ThemeSwitcher';
 import { useSession } from '@/components/session';
-import Link from 'next/link';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -58,12 +57,9 @@ export default async function Home() {
                     <Timer number1="5" number2="6" title="м."/>
                 </div>
                 {
-                    session?.privileged
-                    ? <Link href={'/admin'} className={'card'} style={{
-                        margin: '8px',
-                        color: '#FFFFFF',
-                        }}>Админ панель</Link>
-                    : <></>
+                    /*session?.privileged
+                    ? <Link href={'/admin'} className={'card'}>Админ панель</Link>
+                    : <></>*/
                 }
             </footer>
         </div>
