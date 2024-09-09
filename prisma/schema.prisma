@@ -11,9 +11,11 @@ datasource db {
 model User {
   id             BigInt           @id
   points         Float            @default(0)
+  privileged     Boolean          @default(false)
   invitations    Invitation[]
   completedTasks TaskCompletion[]
   curatedTasks   CuratedTask[]
+  completedForms FormCompletion[]
 }
 
 model Invitation {
@@ -39,8 +41,6 @@ model Task {
   scaling     Float            @default(1)
   completions TaskCompletion[]
   curations   CuratedTask[]
-
-  @@unique([trackerId])
 }
 
 enum TaskType {
@@ -91,4 +91,53 @@ enum CuratedTaskCategory {
   Daily
   Sponsored
   Internal
+}
+
+enum Language {
+  En
+  Ru
+}
+
+model LocalizationItem {
+  id         BigInt              @id @default(autoincrement())
+  values     LocalizationValue[]
+  formTitles Form[]              @relation(name: "formTitle")
+}
+
+model LocalizationValue {
+  id               BigInt
+  language         Language
+  value            String
+  localizationItem LocalizationItem @relation(fields: [id], references: [id])
+
+  @@id([id, language])
+}
+
+model Form {
+  id      BigInt           @id @default(autoincrement())
+  title   LocalizationItem @relation(fields: [titleId], references: [id], name: "formTitle")
+  titleId BigInt
+
+  steps       FormStep[]
+  completions FormCompletion[]
+}
+
+model FormStep {
+  id          BigInt           @id @default(autoincrement())
+  form        Form             @relation(fields: [formId], references: [id])
+  formId      BigInt
+  content     Json             @default("{}") @db.JsonB
+  completions FormCompletion[]
+}
+
+model FormCompletion {
+  id            BigInt    @id @default(autoincrement())
+  form          Form      @relation(fields: [formId], references: [id])
+  formId        BigInt
+  user          User      @relation(fields: [userId], references: [id])
+  userId        BigInt
+  completedAt   DateTime?
+  startedAt     DateTime? @default(now())
+  currentStep   FormStep? @relation(fields: [currentStepId], references: [id])
+  currentStepId BigInt?
 }
