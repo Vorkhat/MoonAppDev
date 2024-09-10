@@ -31,6 +31,4 @@ export default async function ReferalSystem(referalId: number) {
             },
         });
     }
-
-    return new NextResponse(null, { status: 200 });
 }
