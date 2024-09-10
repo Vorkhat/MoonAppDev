@@ -4,6 +4,7 @@ import { sessionTtl, useSession } from '@/components/session';
 import { prisma } from '@/prisma.ts';
 import '@/envConfig.ts';
 import { parseInitData } from '@telegram-apps/sdk';
+import ReferalSystem from '@/utils/referal';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const initDataRaw = await req.text();
@@ -19,8 +20,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         if (process.env.NODE_ENV === 'production') {
             return new NextResponse(null, { status: 400, statusText: validationError });
         }
-
-        console.warn(validationError);
     }
 
     const session = await useSession();
@@ -30,15 +29,25 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     session.firstName = initData.user!.firstName;
     session.lastName = initData.user!.lastName;
     session.privileged = process.env.NODE_ENV === 'development';
+    const referal: string | undefined = initData.startParam;
+
 
     await session.save();
 
     if (!await prisma.user.findUnique({ where: { id: session.userId } })) {
         await prisma.user.create({
-                                     data: {
-                                         id: session.userId,
-                                     },
-                                 });
+            data: {
+                id: session.userId,
+            },
+        });
+
+        if (referal) {
+            const referalId = Number(/^invitedBy(\d+)$/.exec(referal)?.[1]);
+
+            if (referalId !== session.userId) {
+                await ReferalSystem(referalId);
+            }
+        }
     }
 
     return new NextResponse(null, { status: 204 });
