@@ -1,0 +1,7 @@
+{
+  "name": "proto",
+  "version": "1.0.0",
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.0.0"
+  }
+}

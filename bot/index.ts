@@ -4,9 +4,15 @@ import { BotContext } from '@/types';
 import { taskCreateScene } from '@/scenes';
 import keyboardMenu, { GetterDel } from '@/utils/keyboardMenu';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
+import { TrackerClient } from '@proto/tracker';
+import { ChannelCredentials } from '@grpc/grpc-js';
 
 if (!process.env.BOT_TOKEN) {
     throw new Error('Missing BOT_TOKEN environment variable');
+}
+
+if (!process.env.GATEWAY_ADDRESS) {
+    throw new Error('Missing GATEWAY_ADDRESS environment variable');
 }
 
 const bot = new Telegraf<BotContext>(process.env.BOT_TOKEN);
@@ -22,6 +28,12 @@ const stage = new Scenes.Stage<BotContext>([ taskCreateScene ], {
 });
 
 const prisma = new PrismaClient();
+const trackerService = new TrackerClient(process.env.GATEWAY_ADDRESS, ChannelCredentials.createInsecure());
+
+bot.use(async (ctx, next) => {
+    ctx.tracker = trackerService;
+    return await next();
+});
 
 bot.use(async (ctx, next) => {
     return prisma.$transaction(async tx => {
@@ -67,7 +79,11 @@ bot.command('start', async ctx => {
     ], { columns: 1 }));
 });
 
-bot.action('taskCreate', ctx => ctx.scene.enter('task-create'));
+bot.action('taskCreate', async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    return ctx.scene.enter('task-create');
+});
 bot.action(/task\/(\d+)/, async ctx => {
     const task = await ctx.db.task.findUnique({
         where: { id: parseInt(ctx.match[1]) },
