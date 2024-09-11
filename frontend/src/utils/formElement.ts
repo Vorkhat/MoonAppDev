@@ -13,7 +13,9 @@ export type FormElementTextInput = {
     defaultValue?: number;
 }
 
+export type FormElementContent = FormElementCaption | FormElementTextInput;
+
 export type FormElement = {
                               type: FormElementType;
                               id: string;
-                          } & (FormElementCaption | FormElementTextInput);
+                          } & FormElementContent;

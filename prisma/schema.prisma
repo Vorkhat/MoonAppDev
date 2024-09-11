@@ -108,37 +108,53 @@ model LocalizationItem {
 model LocalizationValue {
   id               BigInt
   language         Language
-  value            String
+  value            String?
   localizationItem LocalizationItem @relation(fields: [id], references: [id])
 
   @@id([id, language])
 }
 
 model Form {
-  id      BigInt           @id @default(autoincrement())
-  title   LocalizationItem @relation(fields: [titleId], references: [id], name: "formTitle")
-  titleId BigInt
-
-  steps       FormStep[]
+  id          BigInt           @id @default(autoincrement())
+  title       LocalizationItem @relation(fields: [titleId], references: [id], name: "formTitle")
+  titleId     BigInt
+  defaultStep FormStep?        @relation(name: "defaultStep")
+  steps       FormStep[]       @relation(name: "stepOwnerForm")
   completions FormCompletion[]
+  reward      Float?
 }
 
 model FormStep {
-  id          BigInt           @id @default(autoincrement())
-  form        Form             @relation(fields: [formId], references: [id])
-  formId      BigInt
-  content     Json             @default("{}") @db.JsonB
-  completions FormCompletion[]
+  id                BigInt              @id @default(autoincrement())
+  form              Form                @relation(fields: [formId], references: [id], name: "stepOwnerForm")
+  formId            BigInt
+  content           Json                @default("[]") @db.JsonB
+  completions       FormCompletion[]
+  defaultStepForm   Form?               @relation(fields: [defaultStepFormId], references: [id], name: "defaultStep")
+  defaultStepFormId BigInt?             @unique
+  completedSteps    FormCompletedStep[]
 }
 
 model FormCompletion {
-  id            BigInt    @id @default(autoincrement())
-  form          Form      @relation(fields: [formId], references: [id])
-  formId        BigInt
-  user          User      @relation(fields: [userId], references: [id])
-  userId        BigInt
-  completedAt   DateTime?
-  startedAt     DateTime? @default(now())
-  currentStep   FormStep? @relation(fields: [currentStepId], references: [id])
-  currentStepId BigInt?
+  id             BigInt              @id @default(autoincrement())
+  form           Form                @relation(fields: [formId], references: [id])
+  formId         BigInt
+  user           User                @relation(fields: [userId], references: [id])
+  userId         BigInt
+  completedAt    DateTime?
+  startedAt      DateTime            @default(now())
+  currentStep    FormStep            @relation(fields: [currentStepId], references: [id])
+  currentStepId  BigInt
+  completedSteps FormCompletedStep[]
+}
+
+model FormCompletedStep {
+  completionId BigInt
+  stepId       BigInt
+  completion   FormCompletion @relation(fields: [completionId], references: [id])
+  step         FormStep       @relation(fields: [stepId], references: [id])
+  completedAt  DateTime       @default(now())
+  data         Json           @default("{}") @db.JsonB
+
+  @@id([completionId, stepId])
 }

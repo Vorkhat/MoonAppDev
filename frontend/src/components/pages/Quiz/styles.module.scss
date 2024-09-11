@@ -10,7 +10,7 @@
 
   .quiz {
     display: grid;
-    grid-template-rows: repeat(3, min-content) 1fr;
+    grid-template-rows: min-content min-content min-content 1fr min-content;
     height: 100%;
     min-width: 75vw;
     background: var(--quiz-background);
@@ -43,6 +43,7 @@
       font-weight: bold;
       font-size: 3vh;
       text-align: center;
+      justify-content: center;
       vertical-align: middle;
       width: 80%;
       margin: 0 auto;
@@ -53,6 +54,7 @@
       @include container-color(var(--quiz-border-color-begin), 3vw, 1px);
       width: 90%;
       margin: 0 auto;
+      min-height: 5vh;
 
       .quiz-begin {
         display: flex;
