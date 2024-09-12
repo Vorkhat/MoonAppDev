@@ -29,11 +29,14 @@ export default function (type: string, getter: GetterDel): Middleware<BotContext
         .middleware();
 }
 
-export async function renderMarkup(ctx: BotContext, type: string, getter: GetterDel, offset: number) {
+export async function renderMarkup(
+    ctx: BotContext, type: string, getter: GetterDel, offset: number,
+    options: { addCreateButton: boolean } | undefined = undefined,
+) {
     const [ items, total ] = await getter(ctx, offset);
 
     return Markup.inlineKeyboard([
-        [ Markup.button.callback('Create', `${type}Create`) ],
+        options?.addCreateButton ?? true ? [ Markup.button.callback('Create', `${type}Create`) ] : [],
         ...items.map(({ name, id }) => [
             Markup.button.callback(name, `${type}/${id}`),
         ]),

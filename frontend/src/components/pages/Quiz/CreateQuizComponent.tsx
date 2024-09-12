@@ -5,10 +5,14 @@ import { Inter } from 'next/font/google';
 import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 import React from 'react';
 import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
+import { Form, Language, LocalizationItem, LocalizationValue } from '@prisma/client';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
-const CreateQuizItem = () => {
+declare type QuizForm = Form & { title: LocalizationItem & { values: LocalizationValue[] } };
+
+const CreateQuizItem = ({ form }: { form: QuizForm }) => {
     return (
         <ContainerContent>
             <div className={`${styles.quiz} ${inter.className}`}>
@@ -19,24 +23,31 @@ const CreateQuizItem = () => {
                     <Image className={styles.quizContentImage} src={'/images/quiz/help.svg'} alt={''} width={12}
                            height={24}></Image>
                 </div>
-                <div className={styles.quizDescription}>Совершите покупку в нашем интернет-магазине</div>
-                <AwardComponent>+ 1000 points</AwardComponent>
-                <div className={styles.quizBorderBegin}>
+                <div className={styles.quizDescription}>
+                    {form.title.values.find(b => b.language === Language.Ru)?.value}
+                </div>
+                {
+                    form.reward ?
+                    <AwardComponent>+ {form.reward} points</AwardComponent> :
+                    <></>
+                }
+                <div></div>
+                <Link className={styles.quizBorderBegin} href={`/quiz/${form.id}`}>
                     <div className={styles.quizBegin}>
                         <span className={styles.quizBeginText}>Начать</span>
                     </div>
-                </div>
+                </Link>
             </div>
         </ContainerContent>
     );
 };
 
-export async function CreateQuizComponent() {
+export async function CreateQuizComponent({ forms }: { forms: QuizForm[] }) {
     return (
         <div className={styles.quizList}>
-            <CreateQuizItem/>
-            <CreateQuizItem/>
-            <CreateQuizItem/>
+            {forms.map((form) => (
+                <CreateQuizItem key={form.id} form={form}/>
+            ))}
         </div>
     );
 }

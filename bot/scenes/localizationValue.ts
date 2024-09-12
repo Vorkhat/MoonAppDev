@@ -3,7 +3,7 @@ import { BotContext } from '@/types';
 import { LocalizationValue } from '@prisma/client';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
 
-type StateType = { value: LocalizationValue, changed?: boolean };
+type StateType = { value: LocalizationValue, changed?: boolean, back?: string };
 
 export default new Scenes.BaseScene<BotContext>('localization-value-editor')
     .enter(async ctx => {
@@ -32,7 +32,10 @@ export default new Scenes.BaseScene<BotContext>('localization-value-editor')
             data: { value: state.value.value },
         });
 
-        return ctx.reply('Saved');
+        return ctx.reply('Saved', Markup.inlineKeyboard([
+            Markup.button.callback('Continue',
+                `localizationItem/${state.value.id}${state.back ? `/${state.back}` : ''}`),
+        ]));
     })
     .action('cancel', async ctx => {
         await answerCbRemoveKeyboard(ctx);

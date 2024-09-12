@@ -6,7 +6,6 @@ import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
 import { TrackerClient } from '@proto/tracker';
 import { ChannelCredentials } from '@grpc/grpc-js';
-import { JsonObject } from '@prisma/client/runtime/library';
 import {
     FormElement,
     FormElementCaption,
@@ -131,7 +130,13 @@ const formStepElementsGetter: GetterDel = async (ctx) => {
 };
 
 bot.command('start', async ctx => {
-    await ctx.reply('hello', Markup.inlineKeyboard([
+    return ctx.reply('hello', Markup.keyboard([
+        Markup.button.text('Menu'),
+    ]).resize(true));
+});
+
+bot.hears('Menu', async ctx => {
+    return ctx.reply('menu', Markup.inlineKeyboard([
         Markup.button.callback('Tasks', 'taskView'),
         Markup.button.callback('Forms', 'formView'),
     ], { columns: 1 }));
@@ -197,15 +202,51 @@ bot.action(/form\/(\d+)/, async ctx => {
         `Form\nId: ${form.id}\nTitle: ${form.title.values.find(
             b => b.language === Language.En)?.value ?? 'noname'}\nReward: ${form.reward}`,
         Markup.inlineKeyboard([
-            ...(await renderMarkup(ctx, 'formStep', formStepsGetter(form.id), 0)).inline_keyboard,
+            [
+                Markup.button.callback('Create Step', `formStepCreate/${form.id}`),
+            ],
+            ...(await renderMarkup(ctx, 'formStep', formStepsGetter(form.id), 0,
+                { addCreateButton: false })).inline_keyboard,
             [
                 Markup.button.callback('Edit Title', `localizationItem/${form.title.id}`),
                 Markup.button.callback('Edit Reward', `formRewardEditor/${form.id}`),
             ],
             [
                 Markup.button.callback('Delete', `formDelete/${form.id}`),
+                Markup.button.callback('Back', 'formView'),
             ],
         ]));
+});
+
+bot.action(/formStepCreate\/(\d+)/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const formId = parseInt(ctx.match[1]);
+
+    const { id } = await ctx.db.formStep.create({
+        data: {
+            form: {
+                connect: { id: formId },
+            },
+            order: await ctx.db.formStep.count({ where: { formId: formId } }),
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    if (await ctx.db.formStep.count({ where: { formId: formId } }) === 1) {
+        await ctx.db.form.update({
+            where: { id: formId },
+            data: {
+                defaultStep: { connect: { id } },
+            },
+        });
+    }
+
+    return ctx.reply(`Created step with id ${id}`, Markup.inlineKeyboard([
+        Markup.button.callback('View', `formStep/${id}`),
+    ]));
 });
 
 bot.action(/formRewardEditor\/(\d+)/, async ctx => {
@@ -225,7 +266,7 @@ bot.action(/formDelete\/(\d+)/, async ctx => {
     return ctx.db.form.delete({ where: { id: parseInt(ctx.match[1]) } });
 });
 
-bot.action(/localizationItem\/(\d+)/, async ctx => {
+bot.action(/localizationItem\/(\d+)\/?(.+)?$/, async ctx => {
     await answerCbRemoveKeyboard(ctx);
 
     const item = await ctx.db.localizationItem.findUniqueOrThrow({
@@ -269,11 +310,18 @@ bot.action(/formStep\/(\d+)/, async ctx => {
 
     ctx.session.selectedFormStep = {
         formStep: formStep,
-        elements: (formStep.content as JsonObject | null)?.elements as FormElement[] ?? [],
+        elements: (formStep.content as FormElement[] | undefined) ?? [],
     };
 
     return ctx.reply(`Form Step\nId: ${formStep.id}`, {
-        reply_markup: await renderMarkup(ctx, 'formStepElement', formStepElementsGetter, 0),
+        reply_markup: {
+            inline_keyboard: [
+                ...(await renderMarkup(ctx, 'formStepElement', formStepElementsGetter, 0)).inline_keyboard,
+                [
+                    Markup.button.callback('Back', `form/${formStep.formId}`),
+                ],
+            ],
+        },
     });
 });
 
@@ -285,18 +333,21 @@ bot.action('formStepElementCreate', async ctx => {
 });
 
 const replyElementFields = async (ctx: BotContext, entries: [ string, number | undefined ][]) => {
-    const markup = Markup.inlineKeyboard(
-        entries.map(entry => Markup.button.callback(`Edit ${entry[0]}`, `localizationItem/${entry[1] ?? 0}`)));
+    const markup = Markup.inlineKeyboard([
+        ...entries.map(entry => Markup.button.callback(`Edit ${entry[0]}`, `localizationItem/${entry[1] ?? 0}`)),
+        Markup.button.callback('Back', `formStep/${ctx.session.selectedFormStep!.formStep.id}`),
+    ], { columns: 1 });
 
     const textEntries = await Promise.all(
-        entries.map(async entry => `${entry[0]}: ${entry[1] ? await ctx.db.localizationValue.findUnique({
+        entries.map(async entry => `${entry[0]}: ${(entry[1] ? (await ctx.db.localizationValue.findUnique({
             where: {
                 id_language: {
                     id: entry[1],
                     language: Language.En,
                 },
             },
-        }) : 'unset'}`));
+            select: { value: true },
+        }))?.value : undefined) || 'unset'}`));
 
     return ctx.reply(textEntries.join('\n'), markup);
 };
@@ -369,21 +420,51 @@ bot.action(/formStepElementCreate\/(\w+)/, async ctx => {
             id: ctx.session.selectedFormStep!.formStep.id,
         },
         data: {
-            content: {
-                set: ctx.session.selectedFormStep!.elements,
-            },
+            content: ctx.session.selectedFormStep!.elements,
         },
     });
 
     return formStepElementView(ctx, element);
 });
 
-bot.action(/formStepElementView\/(.+)$/, async ctx => {
+bot.action(/formStepElement\/(.+)$/, async ctx => {
     await answerCbRemoveKeyboard(ctx);
 
     const id = ctx.match[1];
 
     return formStepElementView(ctx, ctx.session.selectedFormStep!.elements.find(b => b.id === id)!);
+});
+
+bot.action('formCreate', async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const { id } = await ctx.db.form.create({
+        data: {
+            title: {
+                create: {
+                    values: {
+                        createMany: {
+                            data: [
+                                {
+                                    language: Language.En,
+                                    value: 'New Form',
+                                },
+                                {
+                                    language: Language.Ru,
+                                    value: 'Новая Форма',
+                                },
+                            ],
+                        },
+                    },
+                },
+            },
+        },
+        select: { id: true },
+    });
+
+    return ctx.reply(`Created form with id ${id}`, Markup.inlineKeyboard([
+        Markup.button.callback('View', `form/${id}`),
+    ]));
 });
 
 process.once('SIGINT', () => bot.stop('SIGINT'));

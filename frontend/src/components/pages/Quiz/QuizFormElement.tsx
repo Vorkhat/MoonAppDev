@@ -4,11 +4,14 @@ import { Inter } from 'next/font/google';
 import styles from '@/components/pages/Quiz/styles.module.scss';
 import React from 'react';
 import { prisma } from '@/prisma';
-import { Language } from '@prisma/client';
+import { useSession } from '@/components/session';
+import { getTranslations } from 'next-intl/server';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
 export default async function QuizForm({ elements }: { elements: FormElement[] }) {
+    const t = await getTranslations('Quiz');
+
     return (
         <ContainerContent>
             <div className={`${styles.quiz} ${inter.className}`}>
@@ -18,7 +21,7 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
 
                 <div className={styles.quizBorderBegin}>
                     <div className={styles.quizBegin}>
-                        <button className={styles.quizBeginText} type="submit">Продолжить</button>
+                        <button className={styles.quizBeginText} type="submit">{t('content.next-button')}</button>
                     </div>
                 </div>
             </div>
@@ -27,6 +30,8 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
 }
 
 async function QuizFormElementContent({ element }: { element: FormElement }) {
+    const { language } = await useSession();
+
     async function get(id?: number) {
         if (!id) return 'unset';
 
@@ -34,7 +39,7 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
             where: {
                 id_language: {
                     id: id,
-                    language: Language.Ru,
+                    language: language,
                 },
             },
             select: {
@@ -42,7 +47,7 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
             },
         });
 
-        return value || 'unset';
+        return value || undefined;
     }
 
     switch (element.type) {

@@ -13,7 +13,7 @@ export interface SessionData {
     firstName: string;
     lastName?: string;
     privileged?: boolean;
-    language?: Language;
+    language: Language;
 }
 
 export const sessionTtl = 3600 * 12; // 12 hours

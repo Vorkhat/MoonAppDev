@@ -43,7 +43,11 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
             include: {
                 form: {
                     include: {
-                        steps: true,
+                        steps: {
+                            orderBy: {
+                                order: 'asc',
+                            },
+                        },
                     },
                 },
             },

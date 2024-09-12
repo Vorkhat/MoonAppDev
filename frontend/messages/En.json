@@ -23,6 +23,9 @@
       "title": "New quizzes available",
       "content": "Boost for your points to ",
       "footer": "get to the top!"
+    },
+    "content": {
+      "next-button": "Next"
     }
   },
   "Tasks": {

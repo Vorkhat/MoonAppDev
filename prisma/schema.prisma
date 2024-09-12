@@ -134,6 +134,9 @@ model FormStep {
   defaultStepForm   Form?               @relation(fields: [defaultStepFormId], references: [id], name: "defaultStep")
   defaultStepFormId BigInt?             @unique
   completedSteps    FormCompletedStep[]
+  order             Int
+
+  @@unique([formId, order])
 }
 
 model FormCompletion {
