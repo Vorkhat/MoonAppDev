@@ -15,7 +15,8 @@
       "Game": "Game",
       "Task": "Task",
       "Invite": "Invite"
-    }
+    },
+    "footer": "Invite a friend"
   },
   "Quiz": {
     "header": {
@@ -45,5 +46,13 @@
         "app": "Download the app"
       }
     }
+  },
+  "Rating": {
+    "header": {
+      "title": "Top 200 users",
+      "content": "in the ranking will share",
+      "footer": "the prize pool of"
+    },
+    "content": "Final snapshot - "
   }
 }

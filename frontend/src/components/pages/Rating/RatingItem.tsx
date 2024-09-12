@@ -5,11 +5,13 @@ import Image from 'next/image';
 import {Inter} from 'next/font/google';
 import styles from './styles.module.scss';
 import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
+import { useTranslations } from 'next-intl';
 
 const inter = Inter({subsets: ['latin']});
 
 const RatingItem = () => {
 
+    const t = useTranslations('Rating');
     const userTemplate = {
         name: 'Евгений Дорофеев',
         avatar: '/images/avatar.png',
@@ -26,7 +28,7 @@ const RatingItem = () => {
     return (
         <div className={styles.ratingItem}>
             <div className={styles.ratingHeader}>
-                <span className={`${styles.ratingtext} ${inter.className}`}>Итоговый снепшот - 20.09.2024</span>
+                <span className={`${styles.ratingtext} ${inter.className}`}>{t('content')} 20.09.2024</span>
                 <button>
                     <Image src={'images/rating/update.svg'} width={22} height={22} alt={''} style={{
                         display: 'flex',
