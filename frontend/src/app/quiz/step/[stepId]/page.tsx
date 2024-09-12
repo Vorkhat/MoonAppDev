@@ -68,6 +68,14 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
                 },
             } : {
                 completedAt: 'now()',
+                user: completion.form.reward ?
+                    {
+                        update: {
+                            points: {
+                                increment: completion.form.reward,
+                            },
+                        },
+                    } : undefined,
             },
         });
 
