@@ -1,28 +1,28 @@
 {
   "Home": {
     "content": {
-      "title": "Join us earn points and exchange them for valuable prizes! \uD83C\uDF89\n",
-      "content": "Every month we summarize and reward the most active members of our community \uD83D\uDE80",
-      "reward": "Prize fund - ",
-      "invite": "Subscribe to channel"
+      "title": "Join us, earn points, and trade them for amazing prizes! 🎉",
+      "content": "Each month, we recognize and reward the most active members of our community 🚀",
+      "reward": "Prize pool - ",
+      "invite": "Subscribe to our channel"
     },
-    "footer": "Until the next prize drawing:"
+    "footer": "Countdown to the next prize draw:"
   },
   "Profile": {
     "title": "Profile",
     "content": {
-      "Comment": "Comment",
-      "Game": "Game",
-      "Task": "Task",
-      "Invite": "Invite"
+      "Comment": "Comments",
+      "Game": "Games",
+      "Task": "Tasks",
+      "Invite": "Invites"
     },
     "footer": "Invite a friend"
   },
   "Quiz": {
     "header": {
-      "title": "New quizzes available",
-      "content": "Boost for your points to ",
-      "footer": "get to the top!"
+      "title": "New quizzes are now available",
+      "content": "Boost your points and ",
+      "footer": "climb to the top!"
     },
     "content": {
       "next-button": "Next"
@@ -31,31 +31,31 @@
   "Tasks": {
     "header": {
       "title": "Complete tasks and",
-      "content": "get",
+      "content": "earn",
       "footer": "points!"
     },
     "content": {
       "friends": {
-        "invite": "Invite friends",
+        "invite": "Invite your friends",
         "count": "Total invited"
       },
       "partners": {
-        "title": "Our partners \uD83D\uDCBC",
-        "link": "Start it up"
+        "title": "Our partners 💼",
+        "link": "Get started"
       },
       "others": {
-        "web": "Go to website",
-        "instagram": "Go to instagram",
-        "app": "Download the app"
+        "web": "Visit our website",
+        "instagram": "Follow us on Instagram",
+        "app": "Download our app"
       }
     }
   },
   "Rating": {
     "header": {
       "title": "Top 200 users",
-      "content": "in the ranking will share",
-      "footer": "the prize pool of"
+      "content": "will share the prize pool",
+      "footer": "of"
     },
-    "content": "Final snapshot - "
+    "content": "Final leaderboard snapshot: "
   }
 }
