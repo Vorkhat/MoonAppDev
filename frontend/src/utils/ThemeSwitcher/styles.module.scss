@@ -2,6 +2,7 @@
   display: grid;
   grid-template-areas: "text"
                        "icon";
+  row-gap: 0.5vh;
   align-items: center;
   justify-items: center;
 
@@ -9,7 +10,7 @@
     background: var(--switcher-theme) no-repeat center center;
     background-size: contain;
     width: 8vw;
-    height: 4vh;
+    height: 2vh;
   }
 }
 

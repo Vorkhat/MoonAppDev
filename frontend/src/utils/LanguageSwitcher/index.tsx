@@ -38,8 +38,14 @@ export default async function LanguageSwitcher({ userId }: { userId: number }) {
 
     return (
         <>
-            <form action={saveLanguage}>
-                <button type="submit" value={language}>
+            <form style={{
+                margin: "0 auto"
+            }} action={saveLanguage}>
+                <button type="submit" style={{
+                    background: "rgba(46, 42, 49, 0.24)",
+                    border: "1px solid rgba(46, 42, 49, 0.24)",
+                    color: "#FFFFFF"
+                }} value={language}>
                     {language === 'Ru' ? 'EN' : 'RU'}
                 </button>
             </form>

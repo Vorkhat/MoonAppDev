@@ -5,14 +5,19 @@
 
 .home-page {
   display: grid;
-  grid-template-rows: repeat(3, min-content);
+  grid-template-rows: min-content auto 1fr;
+  row-gap: 1vh;
 
   .header-container {
-    display: flex;
+    display: grid;
+    grid-template-areas: "logo theme"
+                        "logo language";
     justify-content: space-between;
-    margin: 8vh 4vw 8vh 6vw;
+    row-gap: 1vh;
+    margin: 3vh 5vw 5vh;
 
     .header-content {
+      grid-area: logo;
       display: flex;
       align-items: center;
       width: min-content;
@@ -23,19 +28,18 @@
         width: 8vw;
         height: 4vh;
       }
-
-      .header-text {
-
-      }
     }
   }
 
   .main-container {
     display: grid;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "content image"
+                         "invite invite";
+    grid-template-columns: 75% 25%;
     background: linear-gradient(90deg, var(--background-home-content-gradient-color1) 45%, var(--background-home-content-gradient-color2) 120%);
     transition: --background-home-content-gradient-color1 0.5s ease-in-out, --background-home-content-gradient-color2 0.5s ease-in-out;
-    box-shadow: #0C0C0C 0 0 3vw;
+    box-shadow: #0c0c0c 0 0 3vw;
     border-radius: 2vw;
     position: relative;
     width: 90%;
@@ -43,25 +47,28 @@
     padding: 1vh 1vh;
 
     .main-content {
+      grid-area: content;
       display: grid;
+      grid-template-rows: repeat(3, min-content);
+      row-gap: 1vh;
       grid-template-areas: "text"
                            "text"
                            "text";
-      row-gap: 1vh;
     }
 
     .fox-image {
-      position: absolute;
+      position: relative;
+      grid-area: image;
       background: url(../../../public/images/home/fox.png) no-repeat;
       background-size: contain;
-      width: 38vw;
-      height: 20vh;
-      transform: translate(17%, -45%);
-      right: 0;
-      top: 0;
+      transform: translate(0, -45%);
+      left: -15px;
+      width: 35vw;
+      height: 18vh;
     }
 
     .invitation-container {
+      grid-area: invite;
       background: linear-gradient(180deg, var(--background-invitation-gradient-color1) 0, var(--background-invitation-gradient-color2) 100%) center center no-repeat;
       transition: --background-invitation-gradient-color1 0.5s ease-in-out, --background-invitation-gradient-color2 0.5s ease-in-out;
       border-radius: 4vw;
@@ -97,12 +104,16 @@
   }
 
   .footer-container {
+    position: relative;
     display: grid;
+    align-content: center;
+    grid-template-rows: repeat(3, min-content);
     grid-template-areas: "clock"
                          "text"
                          "timer";
+    row-gap: 2vh;
+    bottom: 1vh;
     justify-items: center;
-    grid-template-rows: auto;
 
     .clock-icon {
       background: url(../../../public/images/home/clock.png) no-repeat center center;
