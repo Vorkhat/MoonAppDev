@@ -44,7 +44,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         if (referal) {
             const referalId = Number(/^invitedBy(\d+)$/.exec(referal)?.[1]);
 
-            if (referalId !== session.userId) {
+            if (!isNaN(referalId) && referalId !== session.userId) {
                 await ReferalSystem(referalId);
             }
         }
