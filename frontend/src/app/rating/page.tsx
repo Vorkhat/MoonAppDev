@@ -17,11 +17,15 @@ export default async function Rating() {
                     textAlign: 'center',
                 }}>
                     <span style={{
-                        fontSize: '3.3vh',
+                        fontSize: '2em',
                         fontWeight: 'bold',
                     }}>{t('header.title')}<br/></span>
-                    {t('header.content')}
-                    <span style={{ color: 'var(--rating-text-color-header-theme)' }}> {t('header.footer')} 1000$ 🤑</span>
+                    <span style={{fontSize: '1.5em'}}>{t('header.content')}</span>
+                    <span style={{
+                        color: 'var(--rating-text-color-header-theme)',
+                        fontSize: '1.5em',
+                        fontWeight: 'bold'
+                    }}> {t('header.footer')} 1000$ 🤑</span>
                 </p>
             </header>
             <RatingItem/>

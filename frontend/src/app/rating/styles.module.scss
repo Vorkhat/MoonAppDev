@@ -2,15 +2,11 @@
   display: grid;
   grid-template-rows: min-content auto;
   overflow: hidden;
-  row-gap: 3vh;
 
   .header-conrainer {
     display: grid;
     justify-items: center;
-    margin-top: 3vh;
-
-    .header-text {
-      font-size: 2vh;
-    }
+    width: 90%;
+    margin: 3vh auto;
   }
 }

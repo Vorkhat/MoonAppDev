@@ -26,10 +26,13 @@ const RatingItem = () => {
     }));
 
     return (
-        <div className={styles.ratingItem}>
+        <div className={`${styles.ratingItem} ${inter.className}`}>
             <div className={styles.ratingHeader}>
-                <span className={`${styles.ratingtext} ${inter.className}`}>{t('content')} 20.09.2024</span>
-                <button>
+                <span className={styles.ratingtext} style={{fontSize: "0.9em"}}>{t('content')} 20.09.2024</span>
+                <button style={{
+                    background: "none",
+                    border: "none",
+                }}>
                     <Image src={'images/rating/update.svg'} width={22} height={22} alt={''} style={{
                         display: 'flex',
                         alignContent: 'center',
@@ -40,7 +43,7 @@ const RatingItem = () => {
             <div className={styles.ratingList}>
                 {users.map((user, index) => (
                     <div className={styles.userRatingBorder}>
-                        <div key={index} className={`${styles.ratingUser} ${inter.className}`}>
+                        <div key={index} className={styles.ratingUser}>
                             <div className={styles.userItem}>
                                 <Image src={'/images/avatar.png'} alt="Avatar" width={43} height={43}/>
                                 <div className={styles.userIndex}>{index}</div>
