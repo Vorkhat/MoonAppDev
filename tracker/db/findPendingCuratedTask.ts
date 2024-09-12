@@ -24,7 +24,7 @@ export default async function (
         selector.push(filter);
     }
 
-    return tx.curatedTask.findUnique({
+    return tx.curatedTask.findFirst({
                                          where: {
                                              startedAt: {},
                                              completedAt: null,

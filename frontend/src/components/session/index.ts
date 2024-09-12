@@ -1,6 +1,7 @@
 import { getIronSession, SessionOptions } from 'iron-session';
 import '@/envConfig.ts';
 import { cookies } from 'next/headers';
+import { Language } from '@prisma/client';
 
 if (!process.env.SESSION_KEY) {
     throw new Error('Missing SESSION_KEY environment variable');
@@ -12,6 +13,7 @@ export interface SessionData {
     firstName: string;
     lastName?: string;
     privileged?: boolean;
+    language?: Language;
 }
 
 export const sessionTtl = 3600 * 12; // 12 hours

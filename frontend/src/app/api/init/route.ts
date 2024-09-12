@@ -29,8 +29,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     session.firstName = initData.user!.firstName;
     session.lastName = initData.user!.lastName;
     session.privileged = process.env.NODE_ENV === 'development';
+    session.language = initData.user!.languageCode === 'ru' ? 'Ru' : 'En';
     const referal: string | undefined = initData.startParam;
-
 
     await session.save();
 
@@ -38,9 +38,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         await prisma.user.create({
             data: {
                 id: session.userId,
+                language: session.language,
             },
         });
-
         if (referal) {
             const referalId = Number(/^invitedBy(\d+)$/.exec(referal)?.[1]);
 

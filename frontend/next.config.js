@@ -1,4 +1,6 @@
 // @ts-check
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
 
 const path = require("node:path");
 require('dotenv').config({path: path.resolve(process.env.ROOT_DIR || process.cwd(), '.env')});
@@ -50,4 +52,4 @@ const nextConfig = {
     },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

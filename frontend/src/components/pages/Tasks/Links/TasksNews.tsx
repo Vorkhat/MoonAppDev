@@ -5,6 +5,7 @@ import Image from "next/image";
 import {Inter} from "next/font/google";
 import styles from './styles.module.scss'
 import {TasksIcon} from "../tasksIcon.ts";
+import { useTranslations } from 'next-intl';
 
 const inter = Inter({subsets: ['latin']})
 
@@ -12,9 +13,12 @@ interface ItemProps {
     award: number;
     link: string;
     icon: string;
+    text: string;
 }
 
-const CreateItem = ({award, link, icon}: ItemProps) => {
+const CreateItem = ({award, link, icon, text}: ItemProps) => {
+    const t = useTranslations('Tasks');
+
     return (
         <Link className={`${styles.taskLink} ${inter.className}`} href={link}>
             <div style={{
@@ -24,9 +28,9 @@ const CreateItem = ({award, link, icon}: ItemProps) => {
                 <Image src={icon} alt={'/'} width={20} height={20} style={{
                     marginLeft: "1.5vw"
                 }}/>
-                <text className={styles.linkText}>Перейти на сайт</text>
+                <span className={styles.linkText}>{t(`content.others.${text}`)}</span>
             </div>
-            <text className={styles.linkAward}>+ {award} points</text>
+            <span className={styles.linkAward}>+ {award} points</span>
         </Link>
     )
 }
@@ -34,9 +38,9 @@ const CreateItem = ({award, link, icon}: ItemProps) => {
 const TasksLinks = () => {
     return (
         <div className={styles.taskListLink}>
-            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.WEB}/>
-            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.INSTAGRAM}/>
-            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.DOWNLAND}/>
+            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.WEB} text={'web'}/>
+            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.INSTAGRAM} text={'web'}/>
+            <CreateItem award={155} link={'https://google.com'} icon={TasksIcon.DOWNLAND} text={'web'}/>
         </div>
     )
 }

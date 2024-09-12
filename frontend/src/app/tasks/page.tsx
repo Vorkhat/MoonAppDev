@@ -7,6 +7,7 @@ import TasksLinks from '@/components/pages/Tasks/Links/TasksNews.tsx';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
+import { getTranslations } from 'next-intl/server';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -34,17 +35,16 @@ export default async function Tasks() {
     const tasks = await getCuratedTasks();
 
     const newTasks = tasks.filter((t: { category: any; }) => t.category === CuratedTaskCategory.New);
+    const t = await getTranslations('Tasks');
 
     return (
         <div className={styles.tasks__page}>
-            <header className={styles.header__container}>
-                <div className={styles.header__text}>
-                    <p className={`${styles.text_normal} ${inter.className}`}>Выполняй задания и </p>
-                    <p className={`${styles.text_normal} ${inter.className}`}>
-                        получай
-                        <span className={`${styles.text__color} ${inter.className}`}> баллы!</span>
-                    </p>
-                </div>
+            <header className={`${styles.header__container}  ${inter.className}`}>
+                <p className={styles.header__text}>
+                    <span className={styles.text_normal}>{t('header.title')}</span>
+                    <span className={styles.text_normal}>{t('header.content')} <span
+                        className={styles.text__color}>{t('header.footer')}!</span></span>
+                </p>
             </header>
             <main className={styles.main__container}>
                 {newTasks && newTasks.length ?
@@ -55,11 +55,10 @@ export default async function Tasks() {
                                              : <></>
                 }
                 <div className={styles.tasks__daily}>
-                    <h3>Ежедневные 🎯</h3>
                     <TasksReferral/>
                 </div>
                 <div className={styles.partners}>
-                    <h3>Наши партнеры 💼</h3>
+                    <h3>{t('content.partners.title')}</h3>
                     <PartnersTasks/>
                 </div>
                 <TasksLinks/>

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import CreateQuizComponent from '@/components/pages/Quiz/CreateQuizComponent';
 import { prisma } from '@/prisma';
 import { useSession } from '@/components/session';
+import { getTranslations } from 'next-intl/server';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -29,6 +30,8 @@ export default async function Quiz() {
         },
     });
 
+    const t = await getTranslations('Quiz');
+
     return (
         <div className={styles.quiz_page}>
             <header className={`${styles.header__conrainer} ${inter.className}`}>
@@ -38,13 +41,13 @@ export default async function Quiz() {
                         <p style={{
                             fontSize: '3.6vh',
                             fontWeight: 'bold',
-                        }}>Доступны новые квизы</p>
-                        <p className={styles.header__text} style={{
                             marginTop: '1vh',
-                        }}>Буст для твои поинтов чтобы</p>
-                        <p className={`${styles.header__text} ${styles.text__color}`} style={{
-                            color: 'var(--quiz-text-color-header-theme)',
-                        }}> попасть в ТОП!</p>
+                            textAlign: 'center',
+                        }}>
+                            {t('header.title')}<br/>
+                            <span className={styles.header__text}>{t('header.content')}</span><br/>
+                            <span className={`${styles.header__text} ${styles.text__color}`}> {t('header.footer')}</span>
+                        </p>
                     </> :
                     <></>
                 }

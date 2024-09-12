@@ -1,0 +1,49 @@
+{
+  "Home": {
+    "content": {
+      "title": "Join us earn points and exchange them for valuable prizes! \uD83C\uDF89\n",
+      "content": "Every month we summarize and reward the most active members of our community \uD83D\uDE80",
+      "reward": "Prize fund - ",
+      "invite": "Subscribe to channel"
+    },
+    "footer": "Until the next prize drawing:"
+  },
+  "Profile": {
+    "title": "Profile",
+    "content": {
+      "Comment": "Comment",
+      "Game": "Game",
+      "Task": "Task",
+      "Invite": "Invite"
+    }
+  },
+  "Quiz": {
+    "header": {
+      "title": "New quizzes available",
+      "content": "Boost for your points to ",
+      "footer": "get to the top!"
+    }
+  },
+  "Tasks": {
+    "header": {
+      "title": "Complete tasks and",
+      "content": "get",
+      "footer": "points!"
+    },
+    "content": {
+      "friends": {
+        "invite": "Invite friends",
+        "count": "Total invited"
+      },
+      "partners": {
+        "title": "Our partners \uD83D\uDCBC",
+        "link": "Start it up"
+      },
+      "others": {
+        "web": "Go to website",
+        "instagram": "Go to instagram",
+        "app": "Download the app"
+      }
+    }
+  }
+}

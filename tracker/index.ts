@@ -20,6 +20,8 @@ await client.start({
 
 const self = await client.getEntity('me') as Api.User;
 console.log(`connected as ${self.firstName}`);
+//const stringSession = client.session.save();
+//console.log(`Your session string: ${stringSession}`);
 
 client.addEventHandler(async event => {
     const update = event as Api.UpdateChannelParticipant;
