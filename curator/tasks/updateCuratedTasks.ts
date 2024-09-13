@@ -1,5 +1,5 @@
 import { prisma } from '@/index';
-import { CuratedTaskCategory } from '@prisma/client';
+import { CuratedTaskCategory, TaskType } from '@prisma/client';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { TrackerType } from 'bot/trackerType';
 
@@ -7,6 +7,9 @@ export default async function () {
     await prisma.$transaction(async tx => {
         await tx.curatedTask.deleteMany({
             where: {
+                task: {
+                    type: { not: TaskType.Invite },
+                },
                 OR: [
                     {
                         startedAt: { equals: null },

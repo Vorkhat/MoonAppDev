@@ -7,22 +7,10 @@ import { TasksIcon } from '../tasksIcon.ts';
 import { getTranslations } from 'next-intl/server';
 import { useSession } from '@/components/session';
 import { prisma } from '@/prisma';
+import { TrackerType } from 'bot/trackerType';
+import { JsonObject } from '@prisma/client/runtime/library';
 
-const inter = Inter({ subsets: ['latin'] });
-
-type FriendAward = {
-    count_friends: number;
-    award: number;
-};
-
-const data: FriendAward[] = [
-    { count_friends: 1, award: 155 },
-    { count_friends: 5, award: 300 },
-    { count_friends: 20, award: 500 },
-    { count_friends: 30, award: 1000 },
-    { count_friends: 40, award: 2000 },
-    { count_friends: 50, award: 3000 },
-];
+const inter = Inter({ subsets: [ 'latin' ] });
 
 interface FriendItemProps {
     count_friends: number;
@@ -32,7 +20,10 @@ interface FriendItemProps {
 export async function getItem() {
     const session = await useSession();
 
-    return prisma.invitation.findMany({
+    return prisma.invitation.aggregate({
+        _sum: {
+            useCount: true,
+        },
         where: {
             userId: session.userId,
         },
@@ -42,7 +33,7 @@ export async function getItem() {
 const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
     <div className={styles.itemsBackground}>
         <div className={styles.friendsItem}>
-            <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} width={30} height={30} alt="/" />
+            <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} width={30} height={30} alt="/"/>
             <div className={`${styles.friendsCount}`}>+ {count_friends}</div>
             <div className={`${styles.friendsAward}`}>+ {award} points</div>
         </div>
@@ -50,16 +41,13 @@ const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
 );
 
 const InvitationsCount = async () => {
-    const invitationData = await getItem();
+    const { _sum: { useCount } } = await getItem();
     const t = await getTranslations('Tasks');
-    const count = invitationData.length > 0
-                  ? invitationData.map(item => item.useCount)
-                  : 0;
     return (
         <div className={styles.invitationsCount}>
             <div className={styles.invitationsCountText}>{t('content.friends.count')}</div>
             <div className={styles.invitationsCounterBackground}>
-                <div className={styles.invitationsCountCounter}>{count}</div>
+                <div className={styles.invitationsCountCounter}>{useCount}</div>
             </div>
         </div>
     );
@@ -68,17 +56,50 @@ const InvitationsCount = async () => {
 const TasksReferral = async () => {
     const t = await getTranslations('Tasks');
 
+    const tasks = await prisma.task.findMany({
+        where: {
+            AND: [
+                {
+                    tracker: {
+                        data: {
+                            path: [ 'type' ],
+                            equals: TrackerType.Invite,
+                        },
+                    },
+                },
+                {
+                    tracker: {
+                        data: {
+                            path: [ 'useCount' ],
+                            gt: 0,
+                        },
+                    },
+                },
+            ],
+        },
+        select: {
+            id: true,
+            reward: true,
+            tracker: {
+                select: {
+                    data: true,
+                },
+            },
+        },
+    });
+
     return (
         <div className={`${styles.friendsContainer} ${inter.className}`}>
             <div className={styles.backgroundContainer}>
                 <div className={styles.friendsInvitations}>
-                    <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} alt="/" width={30} height={30} />
+                    <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} alt="/" width={30} height={30}/>
                     <div className={styles.invitationsText}>{t('content.friends.invite')}</div>
                 </div>
-                <InvitationsCount />
+                <InvitationsCount/>
                 <div className={styles.friendsItems}>
-                    {data.map((item, index) => (
-                        <FriendsItem key={index} count_friends={item.count_friends} award={item.award} />
+                    {tasks.map(item => (
+                        <FriendsItem key={item.id} count_friends={Number((item.tracker.data as JsonObject).useCount)}
+                                     award={item.reward}/>
                     ))}
                 </div>
             </div>

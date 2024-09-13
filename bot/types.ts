@@ -2,7 +2,7 @@ import { FormStep, PrismaClient, TaskType } from '@prisma/client';
 import * as runtime from '@prisma/client/runtime/library';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { Context, Scenes } from 'telegraf';
-import { TrackerType } from 'tracker/trackerType';
+import { TrackerType } from '@/trackerType';
 import { FormElement } from 'frontend/src/utils/formElement';
 import { SceneSession } from 'telegraf/scenes';
 

@@ -4,7 +4,10 @@ import { sessionTtl, useSession } from '@/components/session';
 import { prisma } from '@/prisma.ts';
 import '@/envConfig.ts';
 import { parseInitData } from '@telegram-apps/sdk';
+import * as runtime from '@prisma/client/runtime/library';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { PrismaClient } from '@prisma/client';
+import { TrackerType } from 'bot/trackerType';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const initDataRaw = await req.text();
@@ -66,14 +69,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
                 const refId = /^ref(\d+)$/.exec(initData.startParam)?.at(1);
 
                 if (refId) {
-                    await prisma.invitation.update({
+                    const ref = await tx.invitation.update({
                         where: {
                             id: parseInt(refId),
                         },
                         data: {
                             useCount: { increment: 1 },
                         },
+                        select: {
+                            useCount: true,
+                            userId: true,
+                        },
                     });
+
+                    await dispatchRefTaskCompletion(tx, ref.userId, ref.useCount);
                 }
             }
         }
@@ -82,4 +91,66 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     await session.save();
 
     return new NextResponse(null, { status: 204 });
+}
+
+async function dispatchRefTaskCompletion(
+    tx: Omit<PrismaClient, runtime.ITXClientDenyList>, refUserId: bigint | number, useCount: number) {
+    const tasks = await tx.task.findMany({
+        where: {
+            tracker: {
+                data: {
+                    path: [ 'type' ],
+                    equals: TrackerType.Invite,
+                },
+            },
+            OR: [
+                {
+                    tracker: {
+                        data: {
+                            path: [ 'repeatable' ],
+                            equals: true,
+                        },
+                    },
+                },
+                {
+                    completions: {
+                        none: { userId: refUserId },
+                    },
+                    tracker: {
+                        data: {
+                            path: [ 'useCount' ],
+                            equals: useCount,
+                        },
+                    },
+                },
+            ],
+        },
+        select: {
+            id: true,
+            reward: true,
+            scaling: true,
+        },
+    });
+
+    await tx.user.update({
+        where: { id: refUserId },
+        data: {
+            points: {
+                increment: tasks.reduce((total, task) => total + task.reward, 0),
+            },
+        },
+    });
+
+    for (const task of tasks) {
+        await tx.task.update({
+            where: { id: task.id },
+            data: {
+                completions: {
+                    create: {
+                        user: { connect: { id: refUserId } },
+                    },
+                },
+            },
+        });
+    }
 }

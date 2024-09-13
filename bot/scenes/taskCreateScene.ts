@@ -59,6 +59,17 @@ const replyTrackerDetails = async (ctx: BotContext, type: TrackerType): Promise<
             });
 
             return true;
+
+        case TrackerType.External:
+            return false;
+
+        case TrackerType.Invite:
+            await ctx.reply('choose trigger type', Markup.inlineKeyboard([
+                Markup.button.callback('For Each', 'trackerRepeatable'),
+                Markup.button.callback('Specific', 'trackerInviteSpecific'),
+            ]));
+
+            return true;
     }
 };
 
@@ -193,6 +204,17 @@ export default new Scenes.WizardScene<BotContext>(
                 return ctx.reply('Invalid tracker type');
             }
 
+            if (ctx.scene.session.task!.tracker.type === TrackerType.Invite) {
+                const useCount = ctx.match.groups['id'];
+                if (!useCount) {
+                    return ctx.reply('Invalid input, try again');
+                }
+
+                ctx.scene.session.task!.tracker.useCount = parseInt(useCount);
+
+                return completeTaskCreation(ctx);
+            }
+
             const checkChat = async (chatId: string | number, expectedStatus: 'member' | 'administrator') => {
                 try {
                     const botMember = await ctx.telegram.getChatMember(chatId, ctx.botInfo.id);
@@ -210,7 +232,7 @@ export default new Scenes.WizardScene<BotContext>(
                 }
 
                 return true;
-            }
+            };
 
             const chatId = ctx.match.groups['username'] || ctx.match.groups['id'];
 
@@ -242,5 +264,21 @@ export default new Scenes.WizardScene<BotContext>(
             ctx.scene.session.task!.tracker.metaName = chat.title;
 
             return completeTaskCreation(ctx);
+        })
+        .action('trackerRepeatable', async ctx => {
+            await answerCbRemoveKeyboard(ctx);
+
+            if (!('type' in ctx.scene.session.task!.tracker!)) {
+                return ctx.reply('Invalid tracker type');
+            }
+
+            ctx.scene.session.task!.tracker!.repeatable = true;
+
+            return completeTaskCreation(ctx);
+        })
+        .action('trackerInviteSpecific', async ctx => {
+            await answerCbRemoveKeyboard(ctx);
+
+            return ctx.reply('Respond with required count of invited users to complete the task');
         }),
 );
