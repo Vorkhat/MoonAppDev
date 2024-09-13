@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "bot"
+    "bot",
+    "curator"
   ],
   "devDependencies": {
     "prisma": "^5.19.1"
