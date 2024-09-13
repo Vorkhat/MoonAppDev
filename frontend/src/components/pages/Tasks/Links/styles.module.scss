@@ -4,9 +4,14 @@
   display: grid;
   margin-top: 2vh;
   align-items: center;
+  row-gap: 1vh;
+  margin-bottom: 2vh;
 
   .task-link {
     display: flex;
+    background: var(--task-background-link);
+    border-radius: 3vw;
+    padding: 1.5vh;
     align-items: center;
     justify-content: space-between;
 

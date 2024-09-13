@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
 import { getTranslations } from 'next-intl/server';
+import { useSession } from '@/components/session';
+import { prisma } from '@/prisma';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +29,16 @@ interface FriendItemProps {
     award: number;
 }
 
+export async function getItem() {
+    const session = await useSession();
+
+    return prisma.invitation.findMany({
+        where: {
+            userId: session.userId,
+        },
+    });
+}
+
 const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
     <div className={styles.itemsBackground}>
         <div className={styles.friendsItem}>
@@ -38,13 +50,16 @@ const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
 );
 
 const InvitationsCount = async () => {
+    const invitationData = await getItem();
     const t = await getTranslations('Tasks');
-
+    const count = invitationData.length > 0
+                  ? invitationData.map(item => item.useCount)
+                  : 0;
     return (
         <div className={styles.invitationsCount}>
             <div className={styles.invitationsCountText}>{t('content.friends.count')}</div>
             <div className={styles.invitationsCounterBackground}>
-                <div className={styles.invitationsCountCounter}>7</div>
+                <div className={styles.invitationsCountCounter}>{count}</div>
             </div>
         </div>
     );

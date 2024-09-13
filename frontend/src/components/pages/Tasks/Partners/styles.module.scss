@@ -43,7 +43,7 @@
           padding: 1vh 2vw;
           border-radius: 3vw;
           opacity: 0.97;
-          @include create-container(var(--tasks-background-partners));
+          @include create-container(var(--tasks-background-partners-link));
 
           .partners__link {
             @include text-theme(2vh, var(--tasks-text-gradient))

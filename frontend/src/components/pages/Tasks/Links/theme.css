@@ -2,6 +2,7 @@
 @import "../style/light.css";
 
 html[data-theme='dark'] {
+    --task-background-link: #0C0C0C;
     --tasks-text-gradient: var(--tasks-text-gradient-dark);
     --tasks-text-award: var(--tasks-text-award-dark);
     --tasks-background-text-award: var(--tasks-background-text-award-dark);
@@ -10,6 +11,7 @@ html[data-theme='dark'] {
 }
 
 html[data-theme='light'] {
+    --task-background-link: linear-gradient(90deg, #86F1AD 0%, #8DBEFD 30%, #E0AAEE 100%);
     --tasks-text-gradient: var(--tasks-text-gradient-light);
     --tasks-text-award: var(--tasks-text-award-light);
     --tasks-background-text-award: var(--tasks-background-text-award-light);

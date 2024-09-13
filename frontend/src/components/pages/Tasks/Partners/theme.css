@@ -8,6 +8,7 @@ html[data-theme='dark'] {
     --tasks-background-text-award: var(--tasks-background-text-award-dark);
     --tasks-background-partners-gradient: var(--tasks-background-container-gradient-dark);
     --tasks-background-partners: var(--tasks-background-container-dark);
+    --tasks-background-partners-link: var(--tasks-background-partners-link-dark);
     --task-background-container-link-gradient: var(--task-background-container-link-gradient-dark);
     --task-background-container-link: var(--task-background-container-link-dark);
 
@@ -20,6 +21,7 @@ html[data-theme='light'] {
     --tasks-background-text-award: var(--tasks-background-text-award-light);
     --tasks-background-partners-gradient: var(--tasks-background-container-gradient-light);
     --tasks-background-partners: var(--tasks-background-container-light);
+    --tasks-background-partners-link: var(--tasks-background-partners-link-light);
     --task-background-container-link-gradient: var(--task-background-container-link-gradient-light);
     --task-background-container-link: var(--task-background-container-link-light);
 }

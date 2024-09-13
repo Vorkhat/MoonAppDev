@@ -6,5 +6,6 @@ html {
     --tasks-background-text-award-dark: rgba(255, 255, 255, 0.08);
     --tasks-background-container-gradient-dark: rgba(255, 255, 255, 0.03);
     --tasks-background-container-dark: #0C0C0C;
+    --tasks-background-partners-link-dark: #0C0C0C;
     --task-background-container-link-dark: #0C0C0C;
 }

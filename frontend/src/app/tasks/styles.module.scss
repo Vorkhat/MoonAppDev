@@ -48,6 +48,7 @@
     .partners {
       display: grid;
       grid-template-rows: min-content;
+      row-gap: 1vh;
     }
   }
 }

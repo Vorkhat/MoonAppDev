@@ -34,7 +34,10 @@ export async function getCuratedTasks() {
 export default async function Tasks() {
     const tasks = await getCuratedTasks();
 
-    const newTasks = tasks.filter((t: { category: any; }) => t.category === CuratedTaskCategory.New);
+    const newTasks = tasks.filter((t) => t.category === CuratedTaskCategory.New);
+    const sponsoredTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Sponsored);
+    const internalTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Internal);
+
     const t = await getTranslations('Tasks');
 
     return (
@@ -57,11 +60,13 @@ export default async function Tasks() {
                 <div className={styles.tasks__daily}>
                     <TasksReferral/>
                 </div>
-                <div className={styles.partners}>
-                    <h3>{t('content.partners.title')}</h3>
-                    <PartnersTasks/>
-                </div>
-                <TasksLinks/>
+                {sponsoredTasks.length === 0 && (
+                    <div className={styles.partners}>
+                        <h3>{t('content.partners.title')}</h3>
+                        <PartnersTasks/>
+                    </div>
+                )}
+                {internalTasks.length === 0 && (<TasksLinks/>)}
             </main>
         </div>
     );
