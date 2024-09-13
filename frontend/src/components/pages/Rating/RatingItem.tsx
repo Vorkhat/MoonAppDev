@@ -39,8 +39,8 @@ const RatingItem = async () => {
             </div>
             <div className={styles.ratingList}>
                 {users.map(user => (
-                    <div className={styles.userRatingBorder}>
-                        <div key={user.id} className={styles.ratingUser}>
+                    <div key={user.id} className={styles.userRatingBorder}>
+                        <div className={styles.ratingUser}>
                             <div className={styles.userItem}>
                                 <img src={`/api/userPhoto/${user.id}`}
                                      className={styles.userProfilePicture}
