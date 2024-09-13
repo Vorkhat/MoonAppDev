@@ -1,12 +1,11 @@
 import './theme.css';
 import React from 'react';
+import { prisma } from '@/prisma.ts';
 import styles from './styles.module.scss';
 import ProfileAward from '@/components/pages/Profile/award/ProfileAward.tsx';
 import ProfileFriends from '@/components/pages/Profile/friends/ProfileFriends.tsx';
 import { Inter, Montserrat } from 'next/font/google';
 import { SessionData, useSession } from '@/components/session';
-import { prisma } from '@/prisma.ts';
-import ContainerContent from "@/components/pages/common/components/ContainerContent/ContainerContent.tsx";
 
 const montserrat = Montserrat({ subsets: [ 'latin' ] });
 const inter = Inter({ subsets: [ 'latin' ] });

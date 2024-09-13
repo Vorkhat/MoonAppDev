@@ -2,13 +2,4 @@
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 16px;
-
-  .header__text {
-    display: inline-flex;
-    height: min-content;
-    align-items: center;
-    justify-content: center;
-    margin: 1.3vh 0;
-    color: var(--color-text)
-  }
 }

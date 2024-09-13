@@ -1,29 +1,27 @@
-'use client';
-
-import '@/components/pages/Profile/data/theme.css';
-import React from "react";
 import Image from "next/image";
-import styles from './styles.module.scss';
-import ImageInvitation from "../../../../../public/images/profile/invitations.svg"
-import ImageCopyLink from "../../../../../public/images/profile/copyLink.svg"
 import {Inter} from "next/font/google";
-import { useTranslations } from 'next-intl';
+import styles from './styles.module.scss';
+import {useSession } from '@/components/session';
+import '@/components/pages/Profile/data/theme.css';
+import ImageInvitation from "../../../../../public/images/profile/invitations.svg"
+import CopyButton from '@/components/pages/Profile/friends/copyButton';
+import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 
 const inter = Inter({subsets: ['latin']})
 
-const ProfileFriends = () => {
-    const t = useTranslations('Profile');
+const ProfileFriends = async () => {
+    const session = await useSession();
+    const t = await getTranslations('Profile');
 
     return (
         <div className={styles.friends__container}>
-            <div className={`${styles.container} ${styles.invitation}`}>
+            <Link className={`${styles.container} ${styles.invitation}`} href={`https://t.me/share/url?url=MoonAppTestBot/mapp/app?startapp=invitedBy${session.userId}`}>
                 <Image src={ImageInvitation} alt={'/'}/>
-                <div className={`${styles.invitation__text} ${inter.className}`}>{t('footer')}</div>
-            </div>
-            <div className={`${styles.container} ${styles.copy_link}`}>
-                <Image src={ImageCopyLink} alt={'/'}/>
-            </div>
+                <div className={`${styles.invitation__text} ${inter.className}`}> {t('footer')}</div>
+            </Link>
+            <CopyButton userId={session.userId}/>
         </div>
     );
 }
