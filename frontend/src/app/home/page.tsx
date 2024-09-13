@@ -28,7 +28,7 @@ export default async function Home() {
         <div className={`${styles.homePage} ${inter.className}`}>
             <header className={styles.headerContainer}>
                 <div className={styles.headerContent}>
-                    <div className={styles.headerLogo}></div>
+                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30" width="30"/>
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
@@ -47,13 +47,13 @@ export default async function Home() {
                 <Image className={styles.foxImage} src={'/images/home/fox.png'} alt="fox" height="120" width="137"/>
                 <div className={styles.invitationContainer}>
                     <a className={styles.invitationTelegram} href={'https://www.google.com/?hl=ru'}>
-                        <div className={styles.telegramLogo}></div>
+                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo" height="20" width="20"/>
                         <div className={styles.invitationText}>{t('content.invite')}</div>
                     </a>
                 </div>
             </main>
             <footer className={styles.footerContainer}>
-                <div className={styles.clockIcon}></div>
+                <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54" width="54"/>
                 <div className={styles.footerText}>{t('footer')}</div>
                 <div className={styles.footerTimer}>
                     <Timer number1="1" number2="2" title="д."/>

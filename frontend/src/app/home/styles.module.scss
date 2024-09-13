@@ -23,10 +23,9 @@
       width: min-content;
 
       .header-logo {
-        background: url(../../../public/images/home/header_image.png) no-repeat center center;
         background-size: contain;
-        width: 8vw;
-        height: 4vh;
+        width: 30px;
+        height: 30px;
       }
     }
   }
@@ -86,10 +85,9 @@
         border-radius: 4vw;
 
         .telegram-logo {
-          background: url(../../../public/images/home/telegram_logo.svg) no-repeat center center;
           background-size: contain;
-          width: 6vw;
-          height: 6vw;
+          width: 20px;
+          height: 20px;
         }
 
         .invitation-text {
@@ -115,10 +113,9 @@
     justify-items: center;
 
     .clock-icon {
-      background: url(../../../public/images/home/clock.png) no-repeat center center;
       background-size: contain;
-      width: 20vw;
-      height: 12vh;
+      width: 70px;
+      height: 70px;
     }
 
     .footer-text {
