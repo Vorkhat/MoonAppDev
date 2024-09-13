@@ -3,7 +3,6 @@ import * as runtime from '@prisma/client/runtime/library';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { Context, Scenes } from 'telegraf';
 import { TrackerType } from 'tracker/trackerType';
-import { TrackerClient } from '@proto/tracker';
 import { FormElement } from 'frontend/src/utils/formElement';
 import { SceneSession } from 'telegraf/scenes';
 
@@ -30,8 +29,6 @@ export interface BotSession extends SceneSession<BotSceneSession> {
 
 export interface BotContext extends Context {
     db: Omit<PrismaClient, runtime.ITXClientDenyList>;
-
-    tracker: TrackerClient;
 
     session: BotSession;
 

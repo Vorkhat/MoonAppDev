@@ -3,13 +3,10 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "tracker",
-    "bot",
-    "proto"
+    "bot"
   ],
   "devDependencies": {
-    "prisma": "^5.19.1",
-    "ts-proto": "^2.2.0"
+    "prisma": "^5.19.1"
   },
   "dependencies": {
     "@prisma/client": "^5.19.1"
