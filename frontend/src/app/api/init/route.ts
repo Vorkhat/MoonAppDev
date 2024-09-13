@@ -34,11 +34,22 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     await session.save();
 
-    if (!await prisma.user.findUnique({ where: { id: session.userId } })) {
+    const userName = session.lastName ? `${session.firstName} ${session.lastName}` : session.firstName;
+
+    if (await prisma.user.findUnique({ where: { id: session.userId } })) {
+        await prisma.user.update({
+            where: { id: session.userId },
+            data: {
+                name: userName,
+            },
+        });
+    }
+    else {
         await prisma.user.create({
             data: {
                 id: session.userId,
                 language: session.language,
+                name: userName,
             },
         });
         if (referal) {

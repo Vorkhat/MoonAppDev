@@ -2,11 +2,13 @@
   display: grid;
   grid-template-rows: min-content auto;
   overflow: hidden;
+  row-gap: 3vh;
+  padding: 0 8px;
 
   .header-conrainer {
     display: grid;
     justify-items: center;
+    justify-self: center;
     width: 90%;
-    margin: 3vh auto;
   }
 }

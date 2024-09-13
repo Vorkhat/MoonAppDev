@@ -17,6 +17,7 @@ model User {
   completedTasks TaskCompletion[]
   curatedTasks   CuratedTask[]
   completedForms FormCompletion[]
+  name           String
 }
 
 model Invitation {
@@ -28,6 +29,7 @@ model Invitation {
 
 view UsersTop {
   id     BigInt @id
+  name   String
   points Float
   rank   Int
 }

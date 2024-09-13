@@ -1,5 +1,5 @@
-import {NextRequest, NextResponse} from 'next/server';
-import {getUserAvatar} from "@/utils/UserPhoto/userPhoto.tsx";
+import { NextRequest, NextResponse } from 'next/server';
+import { getUserAvatar } from '@/utils/UserPhoto/userPhoto.tsx';
 
 export async function GET(req: NextRequest, { params }: { params: { userId: number } }) {
     const userId = Number(params.userId);
@@ -22,8 +22,8 @@ export async function GET(req: NextRequest, { params }: { params: { userId: numb
         return new NextResponse(imageBuffer, {
             headers: {
                 'Content-Type': response.headers.get('Content-Type') || 'image/jpeg',
-                'Cache-Control': 'public',
-                'ETag': etag
+                'Cache-Control': 'public, immutable, max-age=14400', // 4 hours
+                'ETag': etag,
             },
         });
 

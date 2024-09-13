@@ -4,17 +4,21 @@
   display: grid;
   height: 85%;
   overflow: hidden;
-  margin: 0 auto;
   row-gap: 1vh;
 
   .rating-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
   }
 
+  .rating-header:last-child {
+    justify-self: end;
+  }
+
   .rating-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: 80vh;
     overflow-y: auto;
     scrollbar-width: none;
@@ -22,6 +26,8 @@
 
     .user-rating-border {
       @include container-color(var(--rating-border-color-user), 3vw, 1px);
+
+      height: min-content;
 
       .rating-user {
         display: flex;
@@ -32,19 +38,23 @@
         .user-item {
           display: flex;
           align-items: center;
-          color: #FFFFFF;
+          color: #ffffff;
           width: 100%;
           white-space: nowrap;
+
+          .user-profile-picture {
+            border-radius: 13px;
+          }
 
           .user-index {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 2vw;
-            height: 4vh;
             width: 7.5vw;
-            background: #5E6065;
+            background: #5e6065;
             border-radius: 2vw;
+            padding: 4px 10px;
           }
         }
       }

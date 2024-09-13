@@ -1,52 +1,52 @@
-'use client';
-
 import './theme.css';
-import Image from 'next/image';
-import {Inter} from 'next/font/google';
+import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { prisma } from '@/prisma';
 
-const inter = Inter({subsets: ['latin']});
+const inter = Inter({ subsets: [ 'latin' ] });
 
-const RatingItem = () => {
+const RatingItem = async () => {
+    async function refreshLeaderboard() {
+        'use server';
+    }
 
-    const t = useTranslations('Rating');
-    const userTemplate = {
-        name: 'Евгений Дорофеев',
-        avatar: '/images/avatar.png',
-        points: 1000
-    };
+    const t = await getTranslations('Rating');
 
-    const users = Array.from({length: 200}, (_, index) => ({
-        ...userTemplate,
-        name: `${userTemplate.name}`,  // Уникальное имя
-        avatar: `${userTemplate.avatar}${index + 1}`, // Уникальный аватар (меняется по индексу)
-        points: userTemplate.points * (index + 1)    // Очки умножены на индекс
-    }));
+    const users = await prisma.usersTop.findMany({ take: 200 });
 
     return (
         <div className={`${styles.ratingItem} ${inter.className}`}>
             <div className={styles.ratingHeader}>
-                <span className={styles.ratingtext} style={{fontSize: "0.9em"}}>{t('content')} 20.09.2024</span>
-                <button style={{
-                    background: "none",
-                    border: "none",
-                }}>
-                    <Image src={'images/rating/update.svg'} width={22} height={22} alt={''} style={{
+                <span className={styles.ratingtext} style={{ fontSize: '0.9em' }}>{t('content')} 20.09.2024</span>
+                <form action={refreshLeaderboard}>
+                    <button type="submit" style={{
+                        background: 'none',
+                        border: 'none',
                         display: 'flex',
                         alignContent: 'center',
-                        justifyContent: 'center'
-                    }}/>
-                </button>
+                        justifyContent: 'center',
+                        mask: 'url(/images/rating/refresh.svg) no-repeat center',
+                        backgroundColor: 'var(--rating-text-color)',
+                        width: '25px',
+                        height: '25px',
+                        padding: '0',
+                        margin: '0',
+                    }}>
+                    </button>
+                </form>
             </div>
             <div className={styles.ratingList}>
-                {users.map((user, index) => (
+                {users.map(user => (
                     <div className={styles.userRatingBorder}>
-                        <div key={index} className={styles.ratingUser}>
+                        <div key={user.id} className={styles.ratingUser}>
                             <div className={styles.userItem}>
-                                <Image src={'/images/avatar.png'} alt="Avatar" width={43} height={43}/>
-                                <div className={styles.userIndex}>{index}</div>
+                                <img src={`/api/userPhoto/${user.id}`}
+                                     className={styles.userProfilePicture}
+                                     alt="Avatar" width={43} height={43}
+                                     decoding="async"/>
+                                <div className={styles.userIndex}>{user.rank}</div>
                                 <div style={{
                                     color: 'var(--rating-text-color)',
                                     fontSize: '1.8vh',
