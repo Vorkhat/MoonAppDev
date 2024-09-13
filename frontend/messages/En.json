@@ -14,7 +14,8 @@
       "Comment": "Comments",
       "Game": "Games",
       "Task": "Tasks",
-      "Invite": "Invites"
+      "Invite": "Invites",
+      "Rank": "#{rank} in the ranking"
     },
     "footer": "Invite a friend"
   },
