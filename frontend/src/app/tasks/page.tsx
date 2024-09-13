@@ -8,6 +8,7 @@ import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
 import { getTranslations } from 'next-intl/server';
+import { JsonObject } from '@prisma/client/runtime/library';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -38,6 +39,22 @@ export default async function Tasks() {
     const sponsoredTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Sponsored);
     const internalTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Internal);
 
+    const sponsoredTasksData = sponsoredTasks.map(t => {
+        return {
+            url: t.task.url,
+            data: t.task.data as JsonObject,
+            reward: t.task.reward,
+        }
+    });
+
+    const internalTasksData = internalTasks.map(t => {
+        return {
+            url: t.task.url,
+            data: t.task.data as JsonObject,
+            reward: t.task.reward,
+        }
+    });
+
     const t = await getTranslations('Tasks');
 
     return (
@@ -60,13 +77,13 @@ export default async function Tasks() {
                 <div className={styles.tasks__daily}>
                     <TasksReferral/>
                 </div>
-                {sponsoredTasks.length === 0 && (
+                {sponsoredTasks.length > 0 && (
                     <div className={styles.partners}>
                         <h3>{t('content.partners.title')}</h3>
-                        <PartnersTasks/>
+                        <PartnersTasks data={sponsoredTasksData} />
                     </div>
                 )}
-                {internalTasks.length === 0 && (<TasksLinks/>)}
+                {internalTasks.length > 0 && (<TasksLinks data={internalTasksData}/>)}
             </main>
         </div>
     );

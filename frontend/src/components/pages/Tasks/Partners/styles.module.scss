@@ -12,14 +12,15 @@
       grid-template-areas: "image text link"
                            "image award link";
       @include create-container(var(--tasks-background-partners));
-      padding: 1vh 0;
+      grid-template-columns: auto 1fr auto;
+      padding: 1vh 2vw;
       border-radius: 2vw;
       align-items: center;
       justify-items: start;
 
       .partners__image {
         grid-area: image;
-        margin: 0 auto;
+        margin-right: 2vw;
       }
 
       .partners__text {
