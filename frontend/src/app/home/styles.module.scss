@@ -59,12 +59,11 @@
     .fox-image {
       position: relative;
       grid-area: image;
-      background: url(../../../public/images/home/fox.png) no-repeat;
       background-size: contain;
       transform: translate(0, -45%);
       left: -15px;
-      width: 35vw;
-      height: 18vh;
+      width: 120px;
+      height: 137px;
     }
 
     .invitation-container {

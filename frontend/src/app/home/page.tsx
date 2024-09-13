@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google';
 import ThemeSwitcher from '@/utils/ThemeSwitcher/ThemeSwitcher';
 import { useSession } from '@/components/session';
 import LanguageSwitcher from '@/utils/LanguageSwitcher';
-import {getTranslations} from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -43,7 +44,7 @@ export default async function Home() {
                     </p>
                     <span className={`highlight`}>{t('content.reward')}1000 USDT</span>
                 </div>
-                <div className={styles.foxImage}></div>
+                <Image className={styles.foxImage} src={'/images/home/fox.png'} alt="fox" height="120" width="137"/>
                 <div className={styles.invitationContainer}>
                     <a className={styles.invitationTelegram} href={'https://www.google.com/?hl=ru'}>
                         <div className={styles.telegramLogo}></div>
