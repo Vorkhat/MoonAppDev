@@ -4,7 +4,7 @@ import { sessionTtl, useSession } from '@/components/session';
 import { prisma } from '@/prisma.ts';
 import '@/envConfig.ts';
 import { parseInitData } from '@telegram-apps/sdk';
-import ReferalSystem from '@/utils/referal';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const initDataRaw = await req.text();
@@ -30,36 +30,56 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     session.lastName = initData.user!.lastName;
     session.privileged = process.env.NODE_ENV === 'development';
     session.language = initData.user!.languageCode === 'ru' ? 'Ru' : 'En';
-    const referal: string | undefined = initData.startParam;
-
-    await session.save();
 
     const userName = session.lastName ? `${session.firstName} ${session.lastName}` : session.firstName;
 
-    if (await prisma.user.findUnique({ where: { id: session.userId } })) {
-        await prisma.user.update({
-            where: { id: session.userId },
-            data: {
-                name: userName,
-            },
-        });
-    }
-    else {
-        await prisma.user.create({
-            data: {
-                id: session.userId,
-                language: session.language,
-                name: userName,
-            },
-        });
-        if (referal) {
-            const referalId = Number(/^invitedBy(\d+)$/.exec(referal)?.[1]);
+    await prisma.$transaction(async tx => {
+        if (await tx.user.findUnique({ where: { id: session.userId } })) {
+            await tx.user.update({
+                where: { id: session.userId },
+                data: {
+                    name: userName,
+                },
+            });
+        }
+        else {
+            try {
+                await tx.user.create({
+                    data: {
+                        id: session.userId,
+                        language: session.language,
+                        name: userName,
+                        invitations: {
+                            create: {},
+                        },
+                    },
+                });
+            } catch (error) {
+                // in case we got multiple parallel requests
+                if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
+                    return;
+                }
+                throw error;
+            }
 
-            if (!isNaN(referalId) && referalId !== session.userId) {
-                await ReferalSystem(referalId);
+            if (initData.startParam) {
+                const refId = /^ref(\d+)$/.exec(initData.startParam)?.at(1);
+
+                if (refId) {
+                    await prisma.invitation.update({
+                        where: {
+                            id: parseInt(refId),
+                        },
+                        data: {
+                            useCount: { increment: 1 },
+                        },
+                    });
+                }
             }
         }
-    }
+    });
+
+    await session.save();
 
     return new NextResponse(null, { status: 204 });
 }
