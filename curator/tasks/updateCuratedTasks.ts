@@ -100,7 +100,7 @@ export default async function () {
                         userId: id,
                         taskId: task.id,
                         category: category,
-                        totalReward: task.reward + completionCount * task.scaling,
+                        totalReward: task.reward /*+ completionCount * task.scaling*/,
                     };
                 })),
             });
