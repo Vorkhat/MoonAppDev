@@ -1,10 +1,11 @@
 import { BotContext } from '@/types';
-import { TaskType } from '@prisma/client';
+import { Language, TaskType } from '@prisma/client';
 import { TrackerType } from '@/trackerType';
 import { Composer, Markup, Scenes } from 'telegraf';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
+import { TasksIcon } from 'frontend/src/components/pages/Tasks/tasksIcon';
 
 const completeTaskCreation = async (ctx: BotContext) => {
     await ctx.reply('Done');
@@ -13,11 +14,34 @@ const completeTaskCreation = async (ctx: BotContext) => {
         return;
     }
 
+    const description = await ctx.db.localizationItem.create({
+        data: {
+            values: {
+                createMany: {
+                    data: [
+                        {
+                            language: Language.En,
+                            value: `${ctx.scene.session.task.type} Task`,
+                        },
+                        {
+                            language: Language.Ru,
+                            value: `${ctx.scene.session.task.type} Задание`,
+                        },
+                    ],
+                },
+            },
+        },
+    });
+
     await ctx.db.task.create({
         data: {
             type: ctx.scene.session.task.type!,
             url: ctx.scene.session.task.url!,
             reward: ctx.scene.session.task.reward!,
+            data: {
+                description: description.id as unknown as number,
+                ...ctx.scene.session.task.data,
+            },
             tracker: 'id' in ctx.scene.session.task.tracker!
                      ? { connect: { id: ctx.scene.session.task.tracker.id as number } }
                      : { create: { data: ctx.scene.session.task.tracker } },
@@ -77,18 +101,17 @@ export default new Scenes.WizardScene<BotContext>(
     'task-create',
     async ctx => {
         await ctx.reply(
-            `Welcome to the task creation wizard\nPlease enter the task type (${Object.keys(TaskType).join(
-                ', ')})`);
+            `Welcome to the task creation wizard\nPlease select the task type`,
+            Markup.inlineKeyboard(Object.values(TaskType).map(t => Markup.button.callback(t, `taskType/${t}`)),
+                { columns: 2 }));
         return ctx.wizard.next();
     },
     new Composer<BotContext>()
-        .on('text', async ctx => {
-            if (!(ctx.message.text in TaskType)) {
-                return ctx.reply('Invalid task type');
-            }
+        .action(/taskType\/(\w+)/, async ctx => {
+            await answerCbRemoveKeyboard(ctx);
 
             ctx.scene.session.task = {
-                type: TaskType[ctx.message.text as keyof typeof TaskType],
+                type: TaskType[ctx.match[1] as keyof typeof TaskType],
             };
 
             await ctx.reply('Please enter the task url');
@@ -102,6 +125,24 @@ export default new Scenes.WizardScene<BotContext>(
             }
 
             ctx.scene.session.task.url = ctx.message.text;
+
+            await ctx.reply('Please select icon', Markup.inlineKeyboard(
+                Object.keys(TasksIcon).map(b => Markup.button.callback(b.toLowerCase(), `taskIconType/${b}`)),
+                { columns: 2 }));
+
+            return ctx.wizard.next();
+        }),
+    new Composer<BotContext>()
+        .action(/taskIconType\/(\w+)/, async ctx => {
+            if (!ctx.scene.session.task) {
+                return ctx.reply('Invalid task');
+            }
+
+            await answerCbRemoveKeyboard(ctx);
+
+            ctx.scene.session.task.data = {
+                iconType: ctx.match[1],
+            };
 
             await ctx.reply('Please enter reward');
 
@@ -149,6 +190,9 @@ export default new Scenes.WizardScene<BotContext>(
             if (!ctx.scene.session.task) {
                 return ctx.reply('Invalid tracker');
             }
+
+            await answerCbRemoveKeyboard(ctx);
+
             const trackerId = parseInt(ctx.match[1]);
             ctx.scene.session.task.tracker = await ctx.db.taskTracker.findUniqueOrThrow({ where: { id: trackerId } });
 

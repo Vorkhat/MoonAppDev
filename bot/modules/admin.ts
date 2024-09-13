@@ -153,10 +153,17 @@ bot.action(/task\/(\d+)/, async ctx => {
         return ctx.reply('Invalid task');
     }
 
+    const data = task.data as JsonObject;
+
     return ctx.reply(`Task\nId: ${task.id}\nType: ${task.type}\nUrl: ${task.url}\nReward: ${task.reward}`,
         Markup.inlineKeyboard([
-            Markup.button.callback('Delete', `taskDelete/${task.id}`),
-            Markup.button.callback('Edit', `taskEdit/${task.id}`),
+            [
+                Markup.button.callback('Delete', `taskDelete/${task.id}`),
+                Markup.button.callback('Edit', `taskEdit/${task.id}`),
+            ],
+            data.description ? [
+                Markup.button.callback('Edit Description', `localizationItem/${data.description}`),
+            ] : [],
         ]));
 });
 

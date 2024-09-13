@@ -5,6 +5,7 @@
   margin-top: 1vh;
   justify-content: start;
   column-gap: 3vw;
+  overflow-x: scroll;
 
   .task-gradient {
     @include create-gradient(var(--tasks-background-news-gradient));

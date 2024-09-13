@@ -11,6 +11,7 @@ export interface TaskBuilder {
     url?: string;
     reward?: number;
     tracker?: { type: TrackerType; } & JsonObject | { id: bigint };
+    data?: JsonObject;
 }
 
 export interface FormStepBuilder {
