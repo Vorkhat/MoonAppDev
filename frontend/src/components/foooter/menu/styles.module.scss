@@ -20,6 +20,9 @@
       display: grid;
       justify-items: center;
       row-gap: 0.5vh;
+      position: relative;
+      bottom: 0;
+      transition: bottom 0.2s ease-in-out;
 
       .item-icon {
         width: 7vw;
@@ -36,7 +39,6 @@
     }
 
     .active {
-      position: relative;
       bottom: 1.5vh;
     }
 

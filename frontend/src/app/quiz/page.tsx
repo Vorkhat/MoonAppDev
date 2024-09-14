@@ -34,7 +34,7 @@ export default async function Quiz() {
 
     return (
         <div className={styles.quiz_page}>
-            <header className={`${styles.header__conrainer} ${inter.className}`}>
+            <div className={`${styles.header__conrainer} ${inter.className}`}>
                 {
                     forms.length ?
                     <>
@@ -46,15 +46,16 @@ export default async function Quiz() {
                         }}>
                             {t('header.title')}<br/>
                             <span className={styles.header__text}>{t('header.content')}</span><br/>
-                            <span className={`${styles.header__text} ${styles.text__color}`}> {t('header.footer')}</span>
+                            <span className={`${styles.header__text} ${styles.text__color}`}> {t(
+                                'header.footer')}</span>
                         </p>
                     </> :
                     <></>
                 }
-            </header>
-            <main className={styles.quiz__list}>
+            </div>
+            <div className={styles.quiz__list}>
                 <CreateQuizComponent forms={forms}/>
-            </main>
+            </div>
         </div>
     );
 };

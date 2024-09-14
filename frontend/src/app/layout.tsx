@@ -9,6 +9,7 @@ import Root from '@/components/root/Root';
 import Theme from '@/components/theme/Theme';
 import Footer from '@/components/foooter/footer';
 import '../mockEnv.ts';
+import { ViewTransitions } from 'next-view-transitions';
 
 export const metadata: Metadata = {
     title: 'Moon App',
@@ -23,7 +24,8 @@ export default async function RootLayout({
 
     const messages = await getMessages();
     return (
-        <html lang={locale}>
+        <ViewTransitions>
+            <html lang={locale}>
             <NextIntlClientProvider messages={messages}>
                 <Theme>
                     <body>
@@ -31,7 +33,6 @@ export default async function RootLayout({
                         <div className={styles.background}>
                             <main className={styles.content}>
                                 {children}
-                                <div className={styles.menu}></div>
                             </main>
                             <footer className={styles.footer}><Footer/></footer>
                             <div className={`${styles.background__gradient} ${styles.gradient__top_right}`}></div>
@@ -41,6 +42,7 @@ export default async function RootLayout({
                     </body>
                 </Theme>
             </NextIntlClientProvider>
-        </html>
+            </html>
+        </ViewTransitions>
     );
 }

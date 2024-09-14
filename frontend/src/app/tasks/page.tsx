@@ -20,16 +20,16 @@ export async function getCuratedTasks() {
     const session = await useSession();
 
     return prisma.curatedTask.findMany({
-                                           where: {
-                                               userId: session.userId,
-                                           },
-                                           include: {
-                                               task: true,
-                                           },
-                                           orderBy: {
-                                               totalReward: 'desc',
-                                           },
-                                       });
+        where: {
+            userId: session.userId,
+        },
+        include: {
+            task: true,
+        },
+        orderBy: {
+            totalReward: 'desc',
+        },
+    });
 }
 
 export default async function Tasks() {
@@ -44,7 +44,7 @@ export default async function Tasks() {
             url: t.task.url,
             data: t.task.data as JsonObject,
             reward: t.task.reward,
-        }
+        };
     });
 
     const internalTasksData = internalTasks.map(t => {
@@ -52,21 +52,21 @@ export default async function Tasks() {
             url: t.task.url,
             data: t.task.data as JsonObject,
             reward: t.task.reward,
-        }
+        };
     });
 
     const t = await getTranslations('Tasks');
 
     return (
         <div className={styles.tasks__page}>
-            <header className={`${styles.header__container}  ${inter.className}`}>
+            <div className={`${styles.header__container}  ${inter.className}`}>
                 <p className={styles.header__text}>
                     <span className={styles.text_normal}>{t('header.title')}</span>
                     <span className={styles.text_normal}>{t('header.content')} <span
                         className={styles.text__color}>{t('header.footer')}!</span></span>
                 </p>
-            </header>
-            <main className={styles.main__container}>
+            </div>
+            <div className={styles.main__container}>
                 {newTasks && newTasks.length ?
                  <div className={styles.tasks__news}>
                      <h3>New 🔥</h3>
@@ -80,11 +80,11 @@ export default async function Tasks() {
                 {sponsoredTasks.length > 0 && (
                     <div className={styles.partners}>
                         <h3>{t('content.partners.title')}</h3>
-                        <PartnersTasks data={sponsoredTasksData} />
+                        <PartnersTasks data={sponsoredTasksData}/>
                     </div>
                 )}
                 {internalTasks.length > 0 && (<TasksLinks data={internalTasksData}/>)}
-            </main>
+            </div>
         </div>
     );
 };

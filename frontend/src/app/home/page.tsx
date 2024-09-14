@@ -26,15 +26,16 @@ export default async function Home() {
 
     return (
         <div className={`${styles.homePage} ${inter.className}`}>
-            <header className={styles.headerContainer}>
+            <div className={styles.headerContainer}>
                 <div className={styles.headerContent}>
-                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30" width="30"/>
+                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30"
+                           width="30"/>
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
                 <LanguageSwitcher userId={session.userId}/>
-            </header>
-            <main className={styles.mainContainer}>
+            </div>
+            <div className={styles.mainContainer}>
                 <div className={styles.mainContent}>
                     <h2>
                         {t('content.title')}
@@ -47,11 +48,12 @@ export default async function Home() {
                 <Image className={styles.foxImage} src={'/images/home/fox.png'} alt="fox" height="120" width="137"/>
                 <div className={styles.invitationContainer}>
                     <a className={styles.invitationTelegram} href={'https://www.google.com/?hl=ru'}>
-                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo" height="20" width="20"/>
+                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo"
+                               height="20" width="20"/>
                         <div className={styles.invitationText}>{t('content.invite')}</div>
                     </a>
                 </div>
-            </main>
+            </div>
             <footer className={styles.footerContainer}>
                 <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54" width="54"/>
                 <div className={styles.footerText}>{t('footer')}</div>

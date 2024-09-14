@@ -12,7 +12,7 @@ export default async function Rating() {
 
     return (
         <div className={styles.ratingPage}>
-            <header className={`${styles.headerConrainer} ${inter.className}`}>
+            <div className={`${styles.headerConrainer} ${inter.className}`}>
                 <p className={`${styles.headerText} ${styles.headerTitle}`} style={{
                     textAlign: 'center',
                 }}>
@@ -20,14 +20,14 @@ export default async function Rating() {
                         fontSize: '2em',
                         fontWeight: 'bold',
                     }}>{t('header.title')}<br/></span>
-                    <span style={{fontSize: '1.5em'}}>{t('header.content')}</span>
+                    <span style={{ fontSize: '1.5em' }}>{t('header.content')}</span>
                     <span style={{
                         color: 'var(--rating-text-color-header-theme)',
                         fontSize: '1.5em',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
                     }}> {t('header.footer')} 1000$ 🤑</span>
                 </p>
-            </header>
+            </div>
             <RatingItem/>
         </div>
     );
