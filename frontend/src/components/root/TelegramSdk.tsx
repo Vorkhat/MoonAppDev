@@ -10,6 +10,7 @@ export default function TelegramSdk() {
                 window.Telegram.WebApp.disableVerticalSwipes();
                 window.Telegram.WebApp.ready();
                 window.Telegram.WebApp.expand();
+                window.Telegram.WebApp.setHeaderColor("#000000")
             }}/>
         </>
     );
