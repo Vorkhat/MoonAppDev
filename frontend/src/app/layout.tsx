@@ -10,7 +10,7 @@ import Theme from '@/components/theme/Theme';
 import Footer from '@/components/foooter/footer';
 import '../mockEnv.ts';
 import { ViewTransitions } from 'next-view-transitions';
-import Script from 'next/script';
+import TelegramSdk from '@/components/root/TelegramSdk';
 
 export const metadata: Metadata = {
     title: 'Moon App',
@@ -44,7 +44,7 @@ export default async function RootLayout({
                     </body>
                 </Theme>
             </NextIntlClientProvider>
-            <Script src="https://telegram.org/js/telegram-web-app.js"/>
+            <TelegramSdk/>
             </html>
         </ViewTransitions>
     );
