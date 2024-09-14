@@ -1,4 +1,10 @@
-import { FormElement, FormElementCaption, FormElementTextInput, FormElementType } from '@/utils/formElement';
+import {
+    FormElement,
+    FormElementCaption,
+    FormElementRadio,
+    FormElementTextInput,
+    FormElementType,
+} from '@/utils/formElement';
 import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
 import { Inter } from 'next/font/google';
 import styles from '@/components/pages/Quiz/styles.module.scss';
@@ -73,6 +79,22 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                            defaultValue={await get(input.defaultValue)}
                            placeholder={await get(input.placeholder)}/>
                 </>
+            );
+        case FormElementType.Radio:
+            const radio = element as FormElementRadio;
+            return (
+                <div className={styles.radioGroup}>
+                    {
+                        await Promise.all(
+                            radio.options!.map(async ({ name, value }) => (
+                                <>
+                                    <label htmlFor={element.id}>{await get(value)}</label>
+                                    <input type="radio" name={element.id} value={`${element.id}-${name}`}/>
+                                </>
+                            )),
+                        )
+                    }
+                </div>
             );
     }
 }

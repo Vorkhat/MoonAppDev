@@ -9,10 +9,12 @@ import {
     FormElement,
     FormElementCaption,
     FormElementContent,
+    FormElementRadio,
     FormElementTextInput,
     FormElementType,
 } from 'frontend/src/utils/formElement';
 import { prisma } from '@/index';
+import { InlineKeyboardButton } from 'telegraf/src/core/types/typegram';
 
 const bot = new Composer<BotContext>();
 
@@ -333,9 +335,13 @@ bot.action('formStepElementCreate', async ctx => {
         value => Markup.button.callback(value, `formStepElementCreate/${value}`))));
 });
 
-const replyElementFields = async (ctx: BotContext, entries: [ string, number | undefined ][]) => {
+const replyElementFields = async (
+    ctx: BotContext, entries: [ string, number | undefined ][],
+    additionalButtons: InlineKeyboardButton.CallbackButton[] | undefined = undefined,
+) => {
     const markup = Markup.inlineKeyboard([
         ...entries.map(entry => Markup.button.callback(`Edit ${entry[0]}`, `localizationItem/${entry[1] ?? 0}`)),
+        ...additionalButtons || [],
         Markup.button.callback('Back', `formStep/${ctx.session.selectedFormStep!.formStep.id}`),
     ], { columns: 1 });
 
@@ -360,6 +366,8 @@ const formStepElementView = async (ctx: BotContext, element: FormElement) => {
 
             return replyElementFields(ctx, [
                 [ 'Text', caption.text ],
+            ], [
+                Markup.button.callback(caption.bold ? 'Unbold' : 'Bold', `formStepElementCaptionBold/${element.id}`),
             ]);
         case FormElementType.TextInput:
             const textInput = element as FormElementTextInput;
@@ -369,6 +377,15 @@ const formStepElementView = async (ctx: BotContext, element: FormElement) => {
                 [ 'Placeholder', textInput.placeholder ],
                 [ 'Default Value', textInput.defaultValue ],
             ]);
+
+        case FormElementType.Radio:
+            const radio = element as FormElementRadio;
+
+            return replyElementFields(ctx,
+                radio.options?.map(option => [ option.name, option.value ]) || [],
+                [
+                    Markup.button.callback('Add Option', `formStepElementRadioAddOption/${element.id}`),
+                ]);
     }
 };
 
@@ -402,6 +419,10 @@ const createElementFields = async (ctx: BotContext, type: FormElementType): Prom
                 placeholder: await create(),
                 defaultValue: await create(),
             };
+        case FormElementType.Radio:
+            return {
+                options: [],
+            };
     }
 };
 
@@ -434,6 +455,69 @@ bot.action(/formStepElement\/(.+)$/, async ctx => {
     const id = ctx.match[1];
 
     return formStepElementView(ctx, ctx.session.selectedFormStep!.elements.find(b => b.id === id)!);
+});
+
+bot.action(/formStepElementRadioAddOption\/(.+)$/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const id = ctx.match[1];
+    const element = ctx.session.selectedFormStep!.elements.find(b => b.id === id)!;
+
+    const optionIndex = (element as FormElementRadio).options!.length + 1;
+
+    (element as FormElementRadio).options!.push({
+        name: `option${optionIndex}`,
+        value: Number((await ctx.db.localizationItem.create({
+            data: {
+                values: {
+                    createMany: {
+                        data: [
+                            {
+                                language: Language.En,
+                                value: `Option ${optionIndex}`,
+                            },
+                            {
+                                language: Language.Ru,
+                                value: `Опция ${optionIndex}`,
+                            },
+                        ],
+                    },
+                },
+            },
+            select: { id: true },
+        })).id),
+    });
+
+    await ctx.db.formStep.update({
+        where: {
+            id: ctx.session.selectedFormStep!.formStep.id,
+        },
+        data: {
+            content: ctx.session.selectedFormStep!.elements,
+        },
+    });
+
+    return formStepElementView(ctx, element);
+});
+
+bot.action(/formStepElementCaptionBold\/(.+)$/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const id = ctx.match[1];
+    const element = ctx.session.selectedFormStep!.elements.find(b => b.id === id)!;
+
+    (element as FormElementCaption).bold = (element as FormElementCaption).bold ? undefined : true;
+
+    await ctx.db.formStep.update({
+        where: {
+            id: ctx.session.selectedFormStep!.formStep.id,
+        },
+        data: {
+            content: ctx.session.selectedFormStep!.elements,
+        },
+    });
+
+    return formStepElementView(ctx, element);
 });
 
 bot.action('formCreate', async ctx => {
