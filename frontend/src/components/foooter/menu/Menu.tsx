@@ -6,6 +6,7 @@ import { formatMenuIconPath, MenuIcon, MenuIconType } from '@/components/foooter
 import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
 import { useTransitionRouter } from 'next-view-transitions';
+import './theme.css';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -25,7 +26,7 @@ const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: 
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        
+
         if (active) return;
 
         router.push(href);
