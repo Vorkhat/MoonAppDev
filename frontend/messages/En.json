@@ -29,6 +29,10 @@
       "next-button": "Next"
     }
   },
+  "QuizComplete": {
+    "header": "Quiz complete!",
+    "content": "Your data has been accepted, please wait for processing and points to be awarded"
+  },
   "Tasks": {
     "header": {
       "title": "Complete tasks and",
