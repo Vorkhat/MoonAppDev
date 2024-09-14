@@ -1,6 +1,6 @@
 import { Composer, Markup, Scenes, session } from 'telegraf';
 import { BotContext } from '@/types';
-import { formRewardEditor, localizationValueEditor, taskCreateScene } from '@/scenes';
+import { formRewardEditor, localizationValueEditor, taskCreateScene, topSnapshotCreateScene } from '@/scenes';
 import { Language } from '@prisma/client';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
@@ -24,9 +24,10 @@ bot.settings(ctx => {
     ]);
 });
 
-const stage = new Scenes.Stage<BotContext>([ taskCreateScene, localizationValueEditor, formRewardEditor ], {
-    ttl: 360,
-});
+const stage = new Scenes.Stage<BotContext>(
+    [ taskCreateScene, localizationValueEditor, formRewardEditor, topSnapshotCreateScene ], {
+        ttl: 360,
+    });
 
 bot.use(async (ctx, next) => {
     return prisma.$transaction(async tx => {
@@ -125,6 +126,19 @@ const formStepElementsGetter: GetterDel = async (ctx) => {
     ];
 };
 
+const topSnapshotsGetter: GetterDel = (ctx, offset) => ctx.db.topSnapshot.findMany({
+    take: 10,
+    skip: offset > 0 ? offset : undefined,
+}).then(async s => [
+    s.map(b => ({
+        name: b.takenAt.toLocaleDateString(),
+        id: b.id.toString(),
+    })),
+    await ctx.db.topSnapshot.count(),
+]);
+
+bot.use(keyboardMenu('top', topSnapshotsGetter));
+
 bot.command('start', async ctx => {
     return ctx.reply('hello', Markup.keyboard([
         Markup.button.text('Menu'),
@@ -135,7 +149,24 @@ bot.hears('Menu', async ctx => {
     return ctx.reply('menu', Markup.inlineKeyboard([
         Markup.button.callback('Tasks', 'taskView'),
         Markup.button.callback('Forms', 'formView'),
+        Markup.button.callback('Top snapshots', 'topView'),
     ], { columns: 1 }));
+});
+
+bot.action('topCreate', async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    return ctx.scene.enter(topSnapshotCreateScene.id);
+});
+
+bot.action(/top\/(\d+)/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const top = await ctx.db.topSnapshot.findUniqueOrThrow({
+        where: { id: parseInt(ctx.match[1]) },
+    });
+
+    return ctx.reply(`Top snapshot\nId: ${top.id}\nDate: ${top.takenAt.toLocaleDateString()}`);
 });
 
 bot.action('taskCreate', async ctx => {

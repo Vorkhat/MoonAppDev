@@ -5,14 +5,19 @@ import { useSession } from '@/components/session';
 import LanguageSwitcher from '@/utils/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
+import { prisma } from '@/prisma';
+import { DateTime } from 'luxon';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
-const Timer = ({ number1, number2, title }: { number1: string, number2: string, title: string }) => (
+const Timer = ({ value, title }: { value: string, title: string }) => (
     <>
         <div className={styles.timerNumber}>
-            <div className={styles.number}>{number1}</div>
-            <div className={styles.number}>{number2}</div>
+            {
+                [ ...value ].map((char, i) => (
+                    <div key={i} className={styles.number}>{char}</div>
+                ))
+            }
         </div>
         <div className={styles.timertitle}>{title}</div>
     </>
@@ -20,7 +25,20 @@ const Timer = ({ number1, number2, title }: { number1: string, number2: string, 
 
 export default async function Home() {
 
-    const session = await useSession();
+    const { userId } = await useSession();
+
+    const timer = await prisma.topSnapshot.findFirst({
+        where: {
+            completed: false,
+        },
+        orderBy: {
+            takenAt: 'desc',
+        },
+        select: {
+            takenAt: true,
+        },
+    });
+    const time = timer && (DateTime.fromJSDate(timer.takenAt).diffNow([ 'days', 'hours', 'minutes' ]).toObject());
 
     const t = await getTranslations('Home');
 
@@ -33,7 +51,7 @@ export default async function Home() {
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
-                <LanguageSwitcher userId={session.userId}/>
+                <LanguageSwitcher userId={userId}/>
             </div>
             <div className={styles.mainContainer}>
                 <div className={styles.mainContent}>
@@ -54,20 +72,20 @@ export default async function Home() {
                     </a>
                 </div>
             </div>
-            <footer className={styles.footerContainer}>
-                <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54" width="54"/>
-                <div className={styles.footerText}>{t('footer')}</div>
-                <div className={styles.footerTimer}>
-                    <Timer number1="1" number2="2" title="д."/>
-                    <Timer number1="3" number2="4" title="ч."/>
-                    <Timer number1="5" number2="6" title="м."/>
-                </div>
-                {
-                    /*session?.privileged
-                    ? <Link href={'/admin'} className={'card'}>Админ панель</Link>
-                    : <></>*/
-                }
-            </footer>
+            {
+                time && (
+                    <footer className={styles.footerContainer}>
+                        <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54"
+                               width="54"/>
+                        <div className={styles.footerText}>{t('footer')}</div>
+                        <div className={styles.footerTimer}>
+                            {time.days ? <Timer value={Math.floor(time.days).toString()} title="д."/> : null}
+                            {time.hours ? <Timer value={Math.floor(time.hours).toString()} title="ч."/> : null}
+                            {time.minutes ? <Timer value={Math.floor(time.minutes).toString()} title="м."/> : null}
+                        </div>
+                    </footer>
+                )
+            }
         </div>
     );
 };

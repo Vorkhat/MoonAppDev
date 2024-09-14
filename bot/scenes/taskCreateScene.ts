@@ -129,7 +129,7 @@ export default new Scenes.WizardScene<BotContext>(
 
             await ctx.reply('Please select icon', Markup.inlineKeyboard(
                 Object.keys(TasksIcon).map(b => Markup.button.callback(b.toLowerCase(), `taskIconType/${b}`)),
-                { columns: 2 }));
+                { columns: 1 }));
 
             return ctx.wizard.next();
         }),

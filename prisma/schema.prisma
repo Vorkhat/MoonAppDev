@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id             BigInt           @id
-  points         Float            @default(0)
-  privileged     Boolean          @default(false)
+  id             BigInt            @id
+  points         Float             @default(0)
+  privileged     Boolean           @default(false)
   language       Language
   invitations    Invitation[]
   completedTasks TaskCompletion[]
   curatedTasks   CuratedTask[]
   completedForms FormCompletion[]
   name           String
+  topSnapshots   TopSnapshotUser[]
 }
 
 model Invitation {
@@ -163,4 +164,22 @@ model FormCompletedStep {
   data         Json           @default("{}") @db.JsonB
 
   @@id([completionId, stepId])
+}
+
+model TopSnapshot {
+  id        BigInt            @id @default(autoincrement())
+  takenAt   DateTime
+  completed Boolean           @default(false)
+  users     TopSnapshotUser[]
+}
+
+model TopSnapshotUser {
+  id     BigInt
+  userId BigInt
+  points Float
+
+  topSnapshot TopSnapshot @relation(fields: [id], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+
+  @@id([id, userId])
 }
