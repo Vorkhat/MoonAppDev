@@ -10,10 +10,11 @@ import Theme from '@/components/theme/Theme';
 import Footer from '@/components/foooter/footer';
 import '../mockEnv.ts';
 import { ViewTransitions } from 'next-view-transitions';
-import Head from 'next/head';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
     title: 'Moon App',
+
 };
 
 export default async function RootLayout({
@@ -27,9 +28,6 @@ export default async function RootLayout({
     return (
         <ViewTransitions>
             <html lang={locale}>
-            <Head>
-                <script src="https://telegram.org/js/telegram-web-app.js"></script>
-            </Head>
             <NextIntlClientProvider messages={messages}>
                 <Theme>
                     <body>
@@ -46,6 +44,7 @@ export default async function RootLayout({
                     </body>
                 </Theme>
             </NextIntlClientProvider>
+            <Script src="https://telegram.org/js/telegram-web-app.js"/>
             </html>
         </ViewTransitions>
     );
