@@ -1,7 +1,9 @@
 html[data-theme='dark'] {
+    --text-quiz: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
     --quiz-text-color-header-theme: #8DFAFA;
 }
 
 html[data-theme='light'] {
+    --text-quiz: #0E0C10;
     --quiz-text-color-header-theme: #083D8D;
 }

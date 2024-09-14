@@ -1,3 +1,4 @@
+@import "@/components/pages/common/components/styles/mixins.scss";
 
 .quiz_page {
   display: grid;
@@ -11,15 +12,38 @@
     height: fit-content;
     justify-items: center;
     margin: 0 3vw;
-    white-space: nowrap;
 
     .header__text {
       font-size: 2.6vh;
       font-weight: normal;
+      white-space: nowrap;
     }
 
     .text__color {
       color: var(--quiz-text-color-header-theme)
+    }
+
+    .QuizUndefined {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      width: 80%;
+      margin: 0 auto;
+      row-gap: 3.5vh;
+
+      .quizContent {
+        display: grid;
+        width: 80%;
+        margin: 0 auto;
+        justify-items: center;
+        text-align: center;
+        padding: 4.5vh 3vw;
+        row-gap: 2vh;
+
+        .textContent {
+          @include text-color(var(--text-quiz))
+        }
+      }
     }
   }
 
