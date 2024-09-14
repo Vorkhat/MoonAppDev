@@ -42,12 +42,14 @@ const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
 
 const InvitationsCount = async () => {
     const { _sum: { useCount } } = await getItem();
+    const count = useCount ?? 0;
+
     const t = await getTranslations('Tasks');
     return (
         <div className={styles.invitationsCount}>
             <div className={styles.invitationsCountText}>{t('content.friends.count')}</div>
             <div className={styles.invitationsCounterBackground}>
-                <div className={styles.invitationsCountCounter}>{useCount}</div>
+                <div className={styles.invitationsCountCounter}>{count}</div>
             </div>
         </div>
     );
