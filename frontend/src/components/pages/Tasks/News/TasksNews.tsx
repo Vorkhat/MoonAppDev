@@ -11,6 +11,7 @@ import AwardComponent from '@/components/pages/common/components/AwardComponent/
 import { JsonObject } from '@prisma/client/runtime/library';
 import { prisma } from '@/prisma';
 import { getUserLocale } from '@/locale/locale';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -38,8 +39,7 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
     });
 
     return (
-        <a className={styles.taskGradient} href={disabled ? undefined : `/api/task/${id}`}
-           target={disabled ? undefined : '_blank'}>
+        <Link className={styles.taskGradient} href={disabled ? '' : `/api/task/${id}`}>
             <div className={styles.taskItem}>
                 <Image className={styles.taskImage}
                        src={data.iconType ? TasksIcon[data.iconType as keyof typeof TasksIcon] : mapTaskIcon(task)}
@@ -48,7 +48,7 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
                      style={{}}>{description?.value || 'Undefined'}</div>
                 <AwardComponent>+{totalReward} {currencyName}</AwardComponent>
             </div>
-        </a>
+        </Link>
     );
 }
 

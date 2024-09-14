@@ -85,6 +85,7 @@ const replyTrackerDetails = async (ctx: BotContext, type: TrackerType): Promise<
             return true;
 
         case TrackerType.External:
+        case TrackerType.PublishStory:
             return false;
 
         case TrackerType.Invite:

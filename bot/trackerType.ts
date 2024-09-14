@@ -3,4 +3,5 @@ export enum TrackerType {
     Comment = 'comment',
     Invite = 'invite',
     External = 'external',
+    PublishStory = 'publishStory',
 }
