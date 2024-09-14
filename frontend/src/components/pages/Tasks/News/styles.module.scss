@@ -6,6 +6,7 @@
   justify-content: start;
   column-gap: 3vw;
   overflow-x: scroll;
+  scrollbar-width: none;
 
   .task-gradient {
     @include create-gradient(var(--tasks-background-news-gradient));
