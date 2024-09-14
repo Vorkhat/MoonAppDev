@@ -17,7 +17,7 @@ export default async function Rating() {
                     textAlign: 'center',
                 }}>
                     <span style={{
-                        fontSize: '2em',
+                        fontSize: '1.8em',
                         fontWeight: 'bold',
                     }}>{t('header.title')}<br/></span>
                     <span style={{ fontSize: '1.5em' }}>{t('header.content')}</span>
