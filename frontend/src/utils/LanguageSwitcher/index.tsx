@@ -1,6 +1,5 @@
 import { prisma } from '@/prisma.ts';
-import { redirect } from 'next/navigation';
-import { getCurrentLanguage, setCurrentSessionLanguage } from '@/locale/locale';
+import { getCurrentLanguage, getCurrentSessionLanguage, setCurrentSessionLanguage } from '@/locale/locale';
 import { useSession } from '@/components/session';
 
 export default async function LanguageSwitcher() {
@@ -12,7 +11,7 @@ export default async function LanguageSwitcher() {
 
         const { userId } = await useSession();
 
-        const newLanguage = language === 'Ru' ? 'En' : 'Ru';
+        const newLanguage = await getCurrentSessionLanguage() === 'Ru' ? 'En' : 'Ru';
 
         await setCurrentSessionLanguage(newLanguage);
 
@@ -20,8 +19,6 @@ export default async function LanguageSwitcher() {
             where: { id: userId },
             data: { language: newLanguage },
         });
-
-        redirect('/home');
     }
 
     return (
