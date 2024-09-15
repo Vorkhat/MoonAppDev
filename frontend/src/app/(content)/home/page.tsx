@@ -10,6 +10,8 @@ import { unstable_cache } from 'next/cache';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
+export const dynamic = 'force-dynamic';
+
 const getTime = unstable_cache(async () => {
         const timer = await prisma.topSnapshot.findFirst({
             where: {
