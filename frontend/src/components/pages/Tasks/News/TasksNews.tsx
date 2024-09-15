@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
-import { TaskProps } from '@/app/tasks/page.tsx';
+import { TaskProps } from '@/app/(content)/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
 import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
