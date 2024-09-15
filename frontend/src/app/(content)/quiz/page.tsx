@@ -5,7 +5,6 @@ import CreateQuizComponent from '@/components/pages/Quiz/CreateQuizComponent';
 import { prisma } from '@/prisma';
 import { useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
-import { redirect } from 'next/navigation';
 import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
 
 const inter = Inter({ subsets: [ 'latin' ] });
@@ -49,7 +48,8 @@ export default async function Quiz() {
                         }}>
                             {t('header.title')}<br/>
                             <span className={styles.header__text}>{t('header.content')}</span><br/>
-                            <span className={`${styles.header__text} ${styles.text__color}`}> {t('header.footer')}</span>
+                            <span className={`${styles.header__text} ${styles.text__color}`}> {t(
+                                'header.footer')}</span>
                         </p>
                     </> :
                     <>
@@ -65,8 +65,8 @@ export default async function Quiz() {
                                     <span className={styles.textContent}
                                           style={{
                                               fontSize: '1.3em',
-                                              fontWeight: 'bold'
-                                    }}>{s('content')}</span>
+                                              fontWeight: 'bold',
+                                          }}>{s('content')}</span>
                                 </div>
                             </ContainerContent>
                         </div>

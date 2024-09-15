@@ -5,7 +5,7 @@ import { Composer, Markup, Scenes } from 'telegraf';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
-import { TasksIcon } from 'frontend/src/components/pages/Tasks/tasksIcon';
+import { TasksIcon } from '@/components/pages/Tasks/tasksIcon';
 
 const completeTaskCreation = async (ctx: BotContext) => {
     await ctx.reply('Done');

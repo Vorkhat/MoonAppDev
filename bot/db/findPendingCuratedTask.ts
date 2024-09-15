@@ -25,15 +25,18 @@ export default async function (
     }
 
     return tx.curatedTask.findFirst({
-                                         where: {
-                                             startedAt: {},
-                                             completedAt: null,
-                                             userId: userId,
-                                             task: {
-                                                 tracker: {
-                                                     AND: selector,
-                                                 },
-                                             },
-                                         },
-                                     });
+        where: {
+            startedAt: {},
+            completedAt: null,
+            userId: userId,
+            task: {
+                tracker: {
+                    AND: selector,
+                },
+            },
+        },
+        include: {
+            task: true,
+        },
+    });
 }

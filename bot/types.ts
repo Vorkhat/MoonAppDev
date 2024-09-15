@@ -3,7 +3,7 @@ import * as runtime from '@prisma/client/runtime/library';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { Context, Scenes } from 'telegraf';
 import { TrackerType } from '@/trackerType';
-import { FormElement } from 'frontend/src/utils/formElement';
+import { FormElement } from '@/utils/formElement';
 import { SceneSession } from 'telegraf/scenes';
 
 export interface TaskBuilder {

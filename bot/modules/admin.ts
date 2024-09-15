@@ -12,7 +12,7 @@ import {
     FormElementRadio,
     FormElementTextInput,
     FormElementType,
-} from 'frontend/src/utils/formElement';
+} from '@/utils/formElement';
 import { prisma } from '@/index';
 import { InlineKeyboardButton } from 'telegraf/src/core/types/typegram';
 

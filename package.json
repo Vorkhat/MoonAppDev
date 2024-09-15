@@ -5,11 +5,5 @@
     "frontend",
     "bot",
     "curator"
-  ],
-  "devDependencies": {
-    "prisma": "^5.19.1"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.19.1"
-  }
+  ]
 }

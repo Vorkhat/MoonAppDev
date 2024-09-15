@@ -1,24 +1,24 @@
-'use server';
+import Cookies from 'js-cookie';
+import { Language } from '@prisma/client';
+import { cookies } from 'next/headers';
+import { sessionTtl } from '@/components/session';
 
-import {Locale, defaultLocale} from '@/i18n/config';
-import { useSession } from '@/components/session';
-
-export async function getUserLocale() {
-    const session = await useSession();
-    return session.language || defaultLocale;
+export function getCurrentLanguage() {
+    'use client';
+    return Cookies.get('lang')! as Language;
 }
 
-export async function setUserLocale(locale: Locale) {
-    const session = await useSession();
-    session.language = locale || defaultLocale;
-    await session.save();
+export async function getCurrentSessionLanguage() {
+    'use server';
+
+    return cookies().get('lang')!.value as Language;
 }
 
-//const COOKIE_NAME = 'NEXT_LOCALE'
-//export async function getUserLocale() {
-  //  return cookies().get(COOKIE_NAME)?.value || defaultLocale;
-//}
+export async function setCurrentSessionLanguage(language: Language) {
+    'use server';
 
-//export async function setUserLocale(locale: Locale) {
-//    cookies().set('NEXT_LOCALE', locale)
-//}
+    cookies().set('lang', language, {
+        maxAge: sessionTtl,
+        sameSite: 'lax',
+    });
+}

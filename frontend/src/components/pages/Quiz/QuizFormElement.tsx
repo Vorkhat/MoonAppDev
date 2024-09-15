@@ -10,8 +10,8 @@ import { Inter } from 'next/font/google';
 import styles from '@/components/pages/Quiz/styles.module.scss';
 import React from 'react';
 import { prisma } from '@/prisma';
-import { useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
+import { getCurrentSessionLanguage } from '@/locale/locale';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -36,7 +36,7 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
 }
 
 async function QuizFormElementContent({ element }: { element: FormElement }) {
-    const { language } = await useSession();
+    const language = await getCurrentSessionLanguage();
 
     async function get(id?: number) {
         if (!id) return 'unset';

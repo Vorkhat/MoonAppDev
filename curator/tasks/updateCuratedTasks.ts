@@ -1,7 +1,7 @@
 import { prisma } from '@/index';
 import { CuratedTaskCategory, TaskType } from '@prisma/client';
 import { JsonObject } from '@prisma/client/runtime/library';
-import { TrackerType } from 'bot/trackerType';
+import { TrackerType } from '@/trackerType';
 
 export default async function () {
     await prisma.$transaction(async tx => {

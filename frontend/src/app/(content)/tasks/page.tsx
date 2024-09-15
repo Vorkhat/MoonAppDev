@@ -16,12 +16,11 @@ export interface TaskProps {
     tasks: (CuratedTask & { task: Task })[];
 }
 
-export async function getCuratedTasks() {
-    const session = await useSession();
-
-    return prisma.curatedTask.findMany({
+export default async function Tasks() {
+    const { userId } = await useSession();
+    const tasks = await prisma.curatedTask.findMany({
         where: {
-            userId: session.userId,
+            userId: userId,
         },
         include: {
             task: true,
@@ -30,10 +29,6 @@ export async function getCuratedTasks() {
             totalReward: 'desc',
         },
     });
-}
-
-export default async function Tasks() {
-    const tasks = await getCuratedTasks();
 
     const newTasks = tasks.filter((t) => t.category === CuratedTaskCategory.New);
     const sponsoredTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Sponsored);

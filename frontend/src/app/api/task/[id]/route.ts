@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
 import { JsonObject } from '@prisma/client/runtime/library';
-import { TrackerType } from 'bot/trackerType';
+import { TrackerType } from '@/trackerType';
 
 export async function GET(req: NextRequest, { params }: { params: { id: number } }): Promise<NextResponse> {
     const session = await useSession();

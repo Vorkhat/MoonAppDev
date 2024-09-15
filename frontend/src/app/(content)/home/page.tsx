@@ -1,14 +1,34 @@
 import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
 import ThemeSwitcher from '@/utils/ThemeSwitcher/ThemeSwitcher';
-import { useSession } from '@/components/session';
 import LanguageSwitcher from '@/utils/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { prisma } from '@/prisma';
-import { DateTime } from 'luxon';
+import { DateTime, Settings } from 'luxon';
+import { unstable_cache } from 'next/cache';
 
 const inter = Inter({ subsets: [ 'latin' ] });
+
+const getTime = unstable_cache(async () => {
+        const timer = await prisma.topSnapshot.findFirst({
+            where: {
+                completed: false,
+            },
+            orderBy: {
+                takenAt: 'desc',
+            },
+            select: {
+                takenAt: true,
+            },
+        });
+
+        Settings.defaultZone = 'UTC';
+
+        return timer && (DateTime.fromJSDate(timer.takenAt).diffNow([ 'days', 'hours', 'minutes' ]).toObject());
+    },
+    [ 'timer' ],
+    { revalidate: 60, tags: [ 'timer' ] });
 
 const Timer = ({ value, title }: { value: string, title: string }) => (
     <>
@@ -24,22 +44,7 @@ const Timer = ({ value, title }: { value: string, title: string }) => (
 );
 
 export default async function Home() {
-
-    const { userId } = await useSession();
-
-    const timer = await prisma.topSnapshot.findFirst({
-        where: {
-            completed: false,
-        },
-        orderBy: {
-            takenAt: 'desc',
-        },
-        select: {
-            takenAt: true,
-        },
-    });
-    const time = timer && (DateTime.fromJSDate(timer.takenAt).diffNow([ 'days', 'hours', 'minutes' ]).toObject());
-
+    const time = await getTime();
     const t = await getTranslations('Home');
 
     return (
@@ -51,7 +56,7 @@ export default async function Home() {
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
-                <LanguageSwitcher userId={userId}/>
+                <LanguageSwitcher/>
             </div>
             <div className={styles.mainContainer}>
                 <div className={styles.mainContent}>

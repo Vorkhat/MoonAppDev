@@ -16,6 +16,7 @@ const nextConfig = {
             },
         ],
     },
+    output: 'standalone',
     webpack: (config, {nextRuntime}) => {
         if (nextRuntime === 'edge') {
             const plugin = require('next/dist/compiled/webpack/webpack').webpack.DefinePlugin;

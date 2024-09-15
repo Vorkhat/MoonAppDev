@@ -6,8 +6,9 @@ import '@/envConfig.ts';
 import { parseInitData } from '@telegram-apps/sdk';
 import * as runtime from '@prisma/client/runtime/library';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { PrismaClient } from '@prisma/client';
-import { TrackerType } from 'bot/trackerType';
+import { Language, PrismaClient } from '@prisma/client';
+import { TrackerType } from '@/trackerType';
+import { setCurrentSessionLanguage } from '@/locale/locale';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const initDataRaw = await req.text();
@@ -32,25 +33,31 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     session.firstName = initData.user!.firstName;
     session.lastName = initData.user!.lastName;
     session.privileged = process.env.NODE_ENV === 'development';
-    session.language = initData.user!.languageCode === 'ru' ? 'Ru' : 'En';
+
+    let language = initData.user!.languageCode === 'ru' ? Language.Ru : Language.En;
 
     const userName = session.lastName ? `${session.firstName} ${session.lastName}` : session.firstName;
 
     await prisma.$transaction(async tx => {
         if (await tx.user.findUnique({ where: { id: session.userId } })) {
-            await tx.user.update({
+            const user = await tx.user.update({
                 where: { id: session.userId },
                 data: {
                     name: userName,
                 },
+                select: {
+                    language: true,
+                },
             });
+
+            language = user.language;
         }
         else {
             try {
                 await tx.user.create({
                     data: {
                         id: session.userId,
-                        language: session.language,
+                        language: language,
                         name: userName,
                         invitations: {
                             create: {},
@@ -89,6 +96,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     });
 
     await session.save();
+
+    await setCurrentSessionLanguage(language);
 
     return new NextResponse(null, { status: 204 });
 }

@@ -7,7 +7,7 @@ export default async function Profile() {
 
     return (
         <div className={styles.profile__page}>
-            <h2 className={'center'} style={{marginTop: "1.5vh"}}>{t('title')}</h2>
+            <h2 className={'center'} style={{ marginTop: '1.5vh' }}>{t('title')}</h2>
             <UserProfile></UserProfile>
         </div>
     );

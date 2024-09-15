@@ -7,7 +7,7 @@ import { TasksIcon } from '../tasksIcon.ts';
 import { getTranslations } from 'next-intl/server';
 import { useSession } from '@/components/session';
 import { prisma } from '@/prisma';
-import { TrackerType } from 'bot/trackerType';
+import { TrackerType } from '@/trackerType';
 import { JsonObject } from '@prisma/client/runtime/library';
 
 const inter = Inter({ subsets: [ 'latin' ] });

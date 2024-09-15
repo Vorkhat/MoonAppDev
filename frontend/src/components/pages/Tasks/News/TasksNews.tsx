@@ -10,8 +10,8 @@ import { currencyName } from '@/utils/constants.ts';
 import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { prisma } from '@/prisma';
-import { getUserLocale } from '@/locale/locale';
 import Link from 'next/link';
+import { getCurrentSessionLanguage } from '@/locale/locale';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -30,7 +30,7 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
         where: {
             id_language: {
                 id: Number(data.description),
-                language: await getUserLocale(),
+                language: await getCurrentSessionLanguage(),
             },
         },
         select: {

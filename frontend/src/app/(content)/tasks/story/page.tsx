@@ -1,8 +1,8 @@
 import { prisma } from '@/prisma';
 import { useSession } from '@/components/session';
 import OpenStoryEditor from '@/components/pages/Tasks/Stories/OpenStoryEditor';
-import { completeCuratedTask, completeTask, findPendingCuratedTask, updateBalance } from 'bot/db';
-import { TrackerType } from 'bot/trackerType';
+import { completeCuratedTask, completeTask, findPendingCuratedTask, updateBalance } from '@/db';
+import { TrackerType } from '@/trackerType';
 import { redirect } from 'next/navigation';
 
 export default async function StoryTask() {
