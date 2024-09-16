@@ -5,10 +5,12 @@ import { prisma } from '@/prisma';
 import { useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
 import ContainerColor from '@/common/ContainerColor';
+import { getCurrentSessionLanguage } from '@/locale/locale';
 
 
 export default async function Quiz() {
     const { userId } = await useSession();
+    const language = await getCurrentSessionLanguage();
     const forms = await prisma.form.findMany({
         where: {
             completions: {
@@ -20,10 +22,18 @@ export default async function Quiz() {
                 },
             },
         },
-        include: {
+        select: {
+            id: true,
+            reward: true,
+            titleId: true,
             title: {
-                include: {
-                    values: true,
+                select: {
+                    id: true,
+                    values: {
+                        where: {
+                            language: language,
+                        },
+                    },
                 },
             },
         },
@@ -62,7 +72,8 @@ export default async function Quiz() {
                             }}>
                                 {translatorUndefined('header')}
                             </span>
-                            <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
+                            <ContainerColor classNameBorder={styles.quizBorder}
+                                            classNameBackground={styles.quizBackground}>
                                 <div className={styles.quizContent}>
                                     <span className={styles.textContent}
                                           style={{

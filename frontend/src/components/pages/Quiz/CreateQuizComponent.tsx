@@ -2,7 +2,7 @@ import '../../../app/(content)/quiz/theme.scss';
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import React from 'react';
-import { Form, Language, LocalizationItem, LocalizationValue } from '@prisma/client';
+import { Form, LocalizationItem, LocalizationValue } from '@prisma/client';
 import Link from 'next/link';
 import ContainerColor from '@/common/ContainerColor';
 
@@ -30,16 +30,16 @@ const CreateQuizItem = ({ form }: { form: QuizForm }) => {
                     </Image>
                 </div>
                 <div className={styles.quizDescription}>
-                    {form.title.values.find(b => b.language === Language.Ru)?.value}
+                    {form.title.values.at(0)?.value}
                 </div>
                 {
                     form.reward ?
                     <ContainerColor
-                        classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
-                        classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                        classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
+                        classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
                     >
                         + {form.reward} points
-                    </ContainerColor>:
+                    </ContainerColor> :
                     <></>
                 }
                 <div></div>
