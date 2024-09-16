@@ -1,5 +1,6 @@
 import { prisma } from '@/index';
-import { CuratedTaskCategory, TaskType } from '@prisma/client';
+import { CuratedTaskCategory, PrismaClient, TaskType } from '@prisma/client';
+import * as runtime from '@prisma/client/runtime/library';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { TrackerType } from '@/trackerType';
 
@@ -34,76 +35,80 @@ export default async function () {
         });
 
         for (const { id } of users) {
-            const tasks = await tx.task.findMany({
-                where: {
-                    AND: [
+            await createCuratedTasks(tx, id);
+        }
+    });
+}
+
+export async function createCuratedTasks(tx: Omit<PrismaClient, runtime.ITXClientDenyList>, id: number | bigint) {
+    const tasks = await tx.task.findMany({
+        where: {
+            AND: [
+                {
+                    OR: [
                         {
-                            OR: [
-                                {
-                                    completions: {
-                                        none: {
-                                            userId: id,
-                                        },
-                                    },
+                            completions: {
+                                none: {
+                                    userId: id,
                                 },
-                                {
-                                    data: {
-                                        path: [ 'repeatable' ],
-                                        equals: true,
-                                    },
-                                },
-                            ],
+                            },
                         },
                         {
-                            tracker: {
-                                data: {
-                                    path: [ 'type' ],
-                                    not: TrackerType.Invite,
-                                },
+                            data: {
+                                path: [ 'repeatable' ],
+                                equals: true,
                             },
                         },
                     ],
                 },
-                select: {
-                    id: true,
-                    reward: true,
-                    scaling: true,
+                {
                     tracker: {
-                        select: {
-                            data: true,
+                        data: {
+                            path: [ 'type' ],
+                            not: TrackerType.Invite,
                         },
                     },
                 },
-            });
+            ],
+        },
+        select: {
+            id: true,
+            reward: true,
+            scaling: true,
+            tracker: {
+                select: {
+                    data: true,
+                },
+            },
+        },
+    });
 
-            if (!tasks.length) continue;
+    if (!tasks.length) return;
 
-            await tx.curatedTask.createMany({
-                data: await Promise.all(tasks.map(async task => {
-                    const completionCount = await tx.taskCompletion.count(
-                        { where: { taskId: task.id, userId: id } });
+    await tx.curatedTask.createMany({
+        data: await Promise.all(tasks.map(async task => {
+            const completionCount = await tx.taskCompletion.count(
+                { where: { taskId: task.id, userId: id } });
 
-                    const trackerType = (task.tracker.data as JsonObject).type as TrackerType;
+            const trackerType = (task.tracker.data as JsonObject).type as TrackerType;
 
-                    let category: CuratedTaskCategory;
-                    if (trackerType === TrackerType.External) {
-                        category = CuratedTaskCategory.Sponsored;
-                    }
-                    else if (completionCount === 0) {
-                        category = CuratedTaskCategory.New;
-                    }
-                    else {
-                        category = CuratedTaskCategory.Daily;
-                    }
+            let category: CuratedTaskCategory;
+            if (trackerType === TrackerType.External) {
+                category = CuratedTaskCategory.Sponsored;
+            }
+            else if (completionCount === 0) {
+                category = CuratedTaskCategory.New;
+            }
+            else {
+                category = CuratedTaskCategory.Daily;
+            }
 
-                    return {
-                        userId: id,
-                        taskId: task.id,
-                        category: category,
-                        totalReward: task.reward /*+ completionCount * task.scaling*/,
-                    };
-                })),
-            });
-        }
+            return {
+                userId: id,
+                taskId: task.id,
+                category: category,
+                totalReward: task.reward /*+ completionCount * task.scaling*/,
+            };
+        })),
     });
 }

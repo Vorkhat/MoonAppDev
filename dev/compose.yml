@@ -33,6 +33,17 @@ services:
     depends_on:
       - postgres
 
+  mq:
+    image: rabbitmq:3-management-alpine
+    env_file:
+      - .env
+    volumes:
+      - mq-data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
 volumes:
   psql-data:
   pga-data:
+  mq-data:

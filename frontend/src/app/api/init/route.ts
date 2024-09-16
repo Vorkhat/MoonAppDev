@@ -9,6 +9,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Language, PrismaClient } from '@prisma/client';
 import { TrackerType } from '@/trackerType';
 import { setCurrentSessionLanguage } from '@/locale/locale';
+import { MessageQueue, publishMessage } from '@/mq';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     const initDataRaw = await req.text();
@@ -64,6 +65,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
                         },
                     },
                 });
+
+                await publishMessage(MessageQueue.NewUser, { userId: session.userId });
             } catch (error) {
                 // in case we got multiple parallel requests
                 if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
