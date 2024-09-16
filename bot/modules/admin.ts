@@ -387,7 +387,7 @@ const replyElementFields = async (
             select: { value: true },
         }))?.value : undefined) || 'unset'}`));
 
-    return ctx.reply(textEntries.join('\n'), markup);
+    return ctx.reply(`Form Step Element Fields\n${textEntries.join('\n')}`, markup);
 };
 
 const formStepElementView = async (ctx: BotContext, element: FormElement) => {
