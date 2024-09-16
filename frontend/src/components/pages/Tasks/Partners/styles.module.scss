@@ -1,53 +1,60 @@
-@import "../mixins";
+@import "@/common/mixins.scss";
 
-.partners__list {
+.partners-list {
   display: grid;
   row-gap: 1vh;
 
-  .background__partners_item {
-    @include create-gradient(var(--tasks-background-partners-gradient));
+  .partner-border {
+    @include container-color(var(--tasks-border), 2vw, 1px);
 
-    .partners__item {
-      display: grid;
-      grid-template-areas: "image text link"
-                           "image award link";
-      @include create-container(var(--tasks-background-partners));
-      grid-template-columns: auto 1fr auto;
-      padding: 1vh 2vw;
-      border-radius: 2vw;
-      align-items: center;
-      justify-items: start;
+    .partner-background {
+      @include container-color(var(--tasks-background), 2vw, 1px);
 
-      .partners__image {
-        grid-area: image;
-        margin-right: 2vw;
-      }
+      .partner-item {
+        display: grid;
+        grid-template-areas: "image description link"
+                             "image reward link";
+        grid-template-columns: auto 1fr auto;
+        padding: 1vh 2vw;
+        border-radius: 2vw;
+        align-items: center;
+        justify-items: start;
 
-      .partners__text {
-        grid-area: text;
-        @include text-theme(2vh, var(--tasks-text-gradient))
-      }
+        .partner-image {
+          grid-area: image;
+          margin-right: 2vw;
+        }
 
-      .partners__award {
-        grid-area: award;
-        @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
-      }
+        .partner-description {
+          grid-area: description;
+          color: var(--tasks-text-color);
+        }
 
-      .partners__link_background_one {
-        display: flex;
-        grid-area: link;
-        border-radius: 3vw;
-        margin: 0 auto;
-        @include create-gradient(var(--task-background-container-link-gradient));
+        .partner-reward {
+          grid-area: reward;
+          color: var(--tasks-text-color);
 
-        .partners__link_background_two {
-          padding: 1vh 2vw;
-          border-radius: 3vw;
-          opacity: 0.97;
-          @include create-container(var(--tasks-background-partners-link));
+          .reward-value-border {
+            @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
 
-          .partners__link {
-            @include text-theme(2vh, var(--tasks-text-gradient))
+            .reward-value-background {
+              white-space: nowrap;
+              @include text-color(var(--color-reward-value));
+            }
+          }
+        }
+
+        .partner-link {
+          grid-area: link;
+          font-weight: bold;
+          @include text-color(var(--tasks-partner-link));
+
+          .partner-link-border {
+            @include container-color(var(--tasks-partner-border-link), 2vw, 1px);
+
+            .partner-link-background {
+              @include container-color(var(--tasks-partner-background-link), 2vw, 1vh 2vw);
+            }
           }
         }
       }

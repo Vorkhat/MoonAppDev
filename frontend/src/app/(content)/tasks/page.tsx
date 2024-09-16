@@ -1,5 +1,5 @@
+import './theme.scss'
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
 import TasksNews from '@/components/pages/Tasks/News/TasksNews.tsx';
 import TasksReferral from '@/components/pages/Tasks/Referral/TasksReferral.tsx';
 import PartnersTasks from '@/components/pages/Tasks/Partners/PartnersTasks.tsx';
@@ -9,8 +9,6 @@ import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
 import { getTranslations } from 'next-intl/server';
 import { JsonObject } from '@prisma/client/runtime/library';
-
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export interface TaskProps {
     tasks: (CuratedTask & { task: Task })[];
@@ -50,31 +48,31 @@ export default async function Tasks() {
         };
     });
 
-    const t = await getTranslations('Tasks');
+    const translator = await getTranslations('Tasks');
 
     return (
-        <div className={styles.tasks__page}>
-            <div className={`${styles.header__container}  ${inter.className}`}>
-                <p className={styles.header__text}>
-                    <span className={styles.text_normal}>{t('header.title')}</span>
-                    <span className={styles.text_normal}>{t('header.content')} <span
-                        className={styles.text__color}>{t('header.footer')}!</span></span>
+        <div className={styles.tasksPage}>
+            <div className={styles.headerContainer}>
+                <p className={styles.headerText}>
+                    <span className={styles.textNormal}>{translator('header.title')}</span>
+                    <span className={styles.textNormal}>{translator('header.content')} <span className={styles.textColor}>{translator('header.footer')}!</span>
+                    </span>
                 </p>
             </div>
-            <div className={styles.main__container}>
+            <div className={styles.mainContainer}>
                 {newTasks && newTasks.length ?
-                 <div className={styles.tasks__news}>
+                 <div className={styles.tasksNews}>
                      <h3>New 🔥</h3>
                      <TasksNews tasks={newTasks}/>
                  </div>
                                              : <></>
                 }
-                <div className={styles.tasks__daily}>
+                <div className={styles.tasksDaily}>
                     <TasksReferral/>
                 </div>
                 {sponsoredTasks.length > 0 && (
-                    <div className={styles.partners}>
-                        <h3>{t('content.partners.title')}</h3>
+                    <div className={styles.tasksPartners}>
+                        <h3>{translator('content.partners.title')}</h3>
                         <PartnersTasks data={sponsoredTasksData}/>
                     </div>
                 )}

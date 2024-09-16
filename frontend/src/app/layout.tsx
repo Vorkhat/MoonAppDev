@@ -8,6 +8,10 @@ import Theme from '@/components/theme/Theme';
 import '../mockEnv.ts';
 import { ViewTransitions } from 'next-view-transitions';
 import TelegramSdk from '@/components/root/TelegramSdk';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: [ 'latin' ] });
+
 
 export const metadata: Metadata = {
     title: 'Moon App',
@@ -22,7 +26,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             <Theme>
                 <body>
                 <Root>
-                    <div className={styles.background}>
+                    <div className={`${styles.background} ${inter.className}`}>
                         {children}
                         <div className={`${styles.background__gradient} ${styles.gradient__top_right}`}></div>
                         <div className={`${styles.background__gradient} ${styles.gradient__bottom_left}`}></div>

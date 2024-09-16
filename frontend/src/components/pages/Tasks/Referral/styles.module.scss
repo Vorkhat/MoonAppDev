@@ -1,88 +1,100 @@
-@import "../mixins";
+@import "@/common/mixins.scss";
 
-.friends-container {
-  height: 26vh;
-  margin-top: 2vh;
-  overflow-x: hidden;
-  @include create-gradient(var(--tasks-background-refferal-gradient));
+.friends-border {
+  @include container-color(var(--tasks-border), 2vw, 1px);
 
-  .background-container {
-    display: grid;
-    @include create-container(var(--tasks-background-refferal));
+  .friends-background {
+    @include container-color(var(--tasks-background), 2vw, 1vh 2vw);
 
-    .friends-invitations {
-      display: flex;
-      align-items: center;
-      column-gap: 1vw;
-      margin: 0 2vw;
+    .friends-container {
+      display: grid;
+      row-gap: 2.5vh;
 
-      .invitations-text {
-        font-size: 1.8vh;
-        font-weight: bold;
-        @include text-theme(1.8vh, var(--tasks-text-gradient));
-      }
-    }
+      .friends-invitations {
+        display: flex;
+        align-items: center;
+        column-gap: 2vw;
 
-    .invitations-count {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 0 2vw;
-
-      .invitations-count_text {
-        font-size: 1.8vh;
-        color: var(--tasks-text);
+        .invitations-text {
+          font-size: 1.8vh;
+          font-weight: bold;
+          @include text-color(var(--tasks-text-color));
+        }
       }
 
-      .invitations-count_counter {
-        @include text-theme(1.8vh, var(--tasks-text-gradient));
-        opacity: 0.8;
-        font-weight: bold;
-        border: 1.3px solid #0C0C0C;
-        padding: 0 6vw;
-        border-radius: 4vw;
+      .invitations-count {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .invitations-count_text {
+          font-size: 1.8vh;
+          color: var(--tasks-text-color);
+        }
+
+        .friends-counter-border {
+          @include container-color(var(--tasks-friends-counter-border), 3vw, 1px);
+
+          .friends-counter-background {
+            @include container-color(var(--tasks-friends-counter-background), 3vw, 0.1vh 4vw);
+
+            .friends-count {
+              white-space: nowrap;
+              font-weight: bold;
+              opacity: 0.8;
+              @include text-color(var(--tasks-friends-counter-border));
+            }
+          }
+        }
       }
-    }
 
-    .friends-items {
-      display: flex;
-      overflow-x: auto;
-      scrollbar-width: none;
-      column-gap: 1.7vw;
-      margin: 2vh 2vw;
+      .friends-items {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        column-gap: 1.7vw;
 
-      .items-background {
-        @include create-gradient(var(--tasks-background-refferal-gradient));
+        .friends-item-border {
+          @include container-color(var(--tasks-border), 3vw, 1px);
 
-        .friends-item {
-          display: grid;
-          grid-template-areas:
-            "count image"
-            "award award";
-          justify-items: center;
-          align-items: center;
-          padding: 1vh 2.5vw;
-          column-gap: 1vw;
-          @include create-container(var(--tasks-background-refferal));
+          .friends-item-background {
+            @include container-color(var(--tasks-background), 3vw, 1vh 2vw);
 
-          .friends-image {
-            grid-area: image;
-          }
+            .friends-item {
+              display: grid;
+              grid-template-areas:
+              "count image"
+              "reward reward";
+              justify-items: center;
+              align-items: center;
+              column-gap: 1vw;
+              row-gap: 0.5vh;
 
-          .friends-count {
-            font-size: 2vh;
-            font-weight: bold;
-            white-space: nowrap;
-          }
+              .friends-image {
+                grid-area: image;
+              }
 
-          .friends-count {
-            grid-area: count;
-            color: var(--tasks-text);
-          }
+              .friends-count {
+                font-size: 2vh;
+                font-weight: bold;
+                white-space: nowrap;
+              }
 
-          .friends-award {
-            grid-area: award;
-            @include text-award(var(--tasks-text-award), var(--tasks-background-text-award));
+              .friends-count {
+                grid-area: count;
+                color: var(--tasks-text-color);
+              }
+
+              .reward-value-border {
+                grid-area: reward;
+                @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
+
+                .reward-value-background {
+                  white-space: nowrap;
+                  @include text-color(var(--color-reward-value));
+                }
+              }
+            }
           }
         }
       }

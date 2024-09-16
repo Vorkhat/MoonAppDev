@@ -1,0 +1,20 @@
+@import "@/common/mixins.scss";
+
+html {
+  --profile-color-text: #0c0c0c;
+  --profile-border-balance: linear-gradient(140deg, #86f1ad 0%, #b0e7ff 30%, #f5c4ff 100%);
+  --profile-background-balance: none;
+  --profile-text-color-balance-amount: #0c0c0c;
+  --profile-border-reward: linear-gradient(140deg, #86f1ad 0%, #b0e7ff 30%, #f5c4ff 100%);
+  --profile-background-reward: #ffffff;
+  --profile-text-color-reward: #0c0c0c;
+}
+
+html[data-theme="dark"] {
+  --profile-color-text: #ffffff;
+  --profile-background-balance: #0c0c0c;
+  --profile-text-color-balance-amount: linear-gradient(90deg, #b0e7ff 0%, #f5c4ff 100%);
+  --profile-border-reward: #1b1e23;
+  --profile-background-reward: #0c0c0c;
+  --profile-text-color-reward: linear-gradient(90deg, #b0e7ff 0%, #f5c4ff 100%);
+}

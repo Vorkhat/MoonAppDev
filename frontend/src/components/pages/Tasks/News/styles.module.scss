@@ -1,38 +1,45 @@
-@import "../mixins";
+@import "@/common/mixins.scss";
 
 .tasks-items {
   display: flex;
-  margin-top: 1vh;
   justify-content: start;
   column-gap: 3vw;
   overflow-x: scroll;
   scrollbar-width: none;
 
-  .task-gradient {
-    @include create-gradient(var(--tasks-background-news-gradient));
+  .task-border {
+    @include container-color(var(--tasks-border), 3vw, 1px);
 
-    cursor: pointer;
+    .task-background {
+      @include container-color(var(--tasks-background), 3vw, 1vh 2vw);
 
-    .task-item {
-      display: grid;
-      grid-template-areas: "image text"
-                           "image award";
-      grid-template-columns: repeat(2, min-content);
-      justify-items: start;
-      justify-content: center;
-      column-gap: 1.5vw;
-      row-gap: 0.8vh;
-      align-items: center;
-      padding: 2vh 2vw;
-      height: 100%;
-      @include create-container(var(--tasks-background-tasks-news));
+      .task-item {
+        display: grid;
+        grid-template-areas: "image text"
+                             "image reward";
+        grid-template-columns: repeat(2, min-content);
+        justify-items: start;
+        justify-content: center;
+        column-gap: 2vw;
+        row-gap: 0.8vh;
+        align-items: center;
 
-      .task-image {
-        grid-area: image;
-      }
+        .task-image {
+          grid-area: image;
+        }
 
-      .task-text {
-        @include text-theme(2vh, var(--tasks-text-gradient))
+        .task-text {
+          color: var(--tasks-text-color)
+        }
+
+        .reward-value-border {
+          @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
+
+          .reward-value-background {
+            white-space: nowrap;
+            @include text-color(var(--color-reward-value));
+          }
+        }
       }
     }
   }

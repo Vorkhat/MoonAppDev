@@ -1,4 +1,4 @@
-@import "@/components/pages/common/components/styles/mixins.scss";
+@import "@/common/mixins.scss";
 
 .quiz_page {
   display: grid;
@@ -29,19 +29,27 @@
       justify-items: center;
       width: 80%;
       margin: 0 auto;
-      row-gap: 3.5vh;
+      row-gap: 3vh;
 
-      .quizContent {
-        display: grid;
-        width: 80%;
-        margin: 0 auto;
-        justify-items: center;
-        text-align: center;
-        padding: 4.5vh 3vw;
-        row-gap: 2vh;
+      .quizBorder {
+        @include container-color(var(--quiz-border), 3vw, 1px);
 
-        .textContent {
-          @include text-color(var(--text-quiz))
+        .quizBackground {
+          @include container-color(var(--quiz-background), 3vw);
+
+          .quizContent {
+            display: grid;
+            width: 80%;
+            margin: 0 auto;
+            justify-items: center;
+            text-align: center;
+            padding: 4.5vh 3vw;
+            row-gap: 2vh;
+
+            .textContent {
+              @include text-color(var(--quiz-text))
+            }
+          }
         }
       }
     }

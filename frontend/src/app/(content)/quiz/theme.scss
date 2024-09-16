@@ -3,6 +3,8 @@ html{
 }
 
 html[data-theme='dark'] {
+    --quiz-text: #FFFFFF;
+    --quiz-border: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
     --quiz-background: #0E0C10;
     --quiz-description-color: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
     --quiz-background-color-begin: #0E0C10;
@@ -10,6 +12,8 @@ html[data-theme='dark'] {
 }
 
 html[data-theme='light'] {
+    --quiz-text: #0E0C10;
+    --quiz-border: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
     --quiz-background: #FFFFFF;
     --quiz-description-color: #181818;
     --quiz-background-background-color-begin: none;

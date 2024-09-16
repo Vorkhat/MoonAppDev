@@ -1,7 +1,0 @@
-html[data-theme="dark"] {
-    --text-color-award: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
-}
-
-html[data-theme="light"] {
-    --text-color-award: #0C0C0C;
-}

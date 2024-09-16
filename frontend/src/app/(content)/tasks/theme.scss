@@ -1,0 +1,29 @@
+html {
+  --tasks-text-color: #0C0C0C;
+  --tasks-header-text-color: #083D8D;
+  --tasks-border: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+  --tasks-background: #FFFFFF;
+  --tasks-link-border-reward: #0C0C0C;
+  --tasks-link-background-reward: linear-gradient(90deg, #8DBEFD -20%, #E0AAEE 60%);
+  --task-link-background: none;
+  --tasks-partner-link: #0C0C0C;
+  --tasks-partner-border-link: linear-gradient(90deg, #8DBEFD -20%, #E0AAEE 60%);
+  --tasks-friends-counter-border: #1B1E23;
+  --tasks-friends-counter-background: #FFFFFF;
+  --tasks-partner-background-link: none;
+}
+
+html[data-theme="dark"] {
+  --tasks-text-color: #FFFFFF;
+  --tasks-header-text-color: #8DFAFA;
+  --tasks-border: #1B1E23;
+  --tasks-background: #0C0C10;
+  --tasks-link-border-reward: #0C0C10;
+  --tasks-link-background-reward: #1B1E23;
+  --tasks-task-link-background: #0C0C10;
+  --tasks-friends-counter-border: linear-gradient(90deg, #86F1AD 0%, #8DBEFD 30%, #E0AAEE 100%);
+  --tasks-friends-counter-background: #0C0C0C;
+  --tasks-partner-link: linear-gradient(90deg, #8DBEFD -20%, #E0AAEE 60%);
+  --tasks-partner-border-link: linear-gradient(90deg, #8DBEFD -20%, #E0AAEE 60%);
+  --tasks-partner-background-link: #0C0C10;
+}

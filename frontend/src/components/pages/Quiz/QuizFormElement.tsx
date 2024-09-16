@@ -5,13 +5,13 @@ import {
     FormElementTextInput,
     FormElementType,
 } from '@/utils/formElement';
-import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
 import { Inter } from 'next/font/google';
 import styles from '@/components/pages/Quiz/styles.module.scss';
 import React from 'react';
 import { prisma } from '@/prisma';
 import { getTranslations } from 'next-intl/server';
 import { getCurrentSessionLanguage } from '@/locale/locale';
+import ContainerColor from '@/common/ContainerColor';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -19,7 +19,7 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
     const t = await getTranslations('Quiz');
 
     return (
-        <ContainerContent>
+        <ContainerColor>
             <div className={`${styles.quiz} ${inter.className}`}>
                 {elements.map(element => (
                     <QuizFormElementContent key={element.id} element={element}/>
@@ -31,7 +31,7 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
                     </div>
                 </div>
             </div>
-        </ContainerContent>
+        </ContainerColor>
     );
 }
 

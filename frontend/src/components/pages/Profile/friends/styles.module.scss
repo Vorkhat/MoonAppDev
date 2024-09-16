@@ -1,4 +1,4 @@
-.friends__container {
+.friends-container {
   display: flex;
   align-items: center;
   column-gap: 1vw;
@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     background: #2FACFF;
-    padding: 2vh 0 2vh 0;
+    padding: 2vh 0;
     border-radius: 3vw;
   }
 
@@ -18,11 +18,11 @@
     border: 1px solid #A1D9FF;
     justify-content: center;
     column-gap: 2.5vw;
-    font-size: var(--font-size-text-invitation);
-    color: var(--color-text-invitation);
+    font-size: 2.5vh;
+    color: #FFFFFF;
   }
 
-  .copy_link {
+  .copy-link {
     display: flex;
     width: 17%;
     justify-content: center;

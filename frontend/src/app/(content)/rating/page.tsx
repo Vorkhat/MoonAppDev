@@ -1,31 +1,34 @@
-import './theme.css';
+import './theme.scss';
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
 import RatingItem from '@/components/pages/Rating/RatingItem.tsx';
 import { getTranslations } from 'next-intl/server';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export default async function Rating() {
 
-    const t = await getTranslations('Rating');
+    const translator = await getTranslations('Rating');
 
     return (
         <div className={styles.ratingPage}>
-            <div className={`${styles.headerConrainer} ${inter.className}`}>
+            <div className={styles.headerConrainer}>
                 <p className={`${styles.headerText} ${styles.headerTitle}`} style={{
                     textAlign: 'center',
                 }}>
                     <span style={{
                         fontSize: '1.8em',
                         fontWeight: 'bold',
-                    }}>{t('header.title')}<br/></span>
-                    <span style={{ fontSize: '1.5em' }}>{t('header.content')}</span>
+                    }}>
+                        {translator('header.title')}
+                         <br/>
+                    </span>
+                    <span style={{ fontSize: '1.5em' }}>{translator('header.content')} </span>
                     <span style={{
-                        color: 'var(--rating-text-color-header-theme)',
+                        color: 'var(--rating-text-color-header)',
                         fontSize: '1.5em',
                         fontWeight: 'bold',
-                    }}> {t('header.footer')} 1000$ 🤑</span>
+                    }}>
+                        {translator('header.footer')} 1000$ 🤑
+                    </span>
                 </p>
             </div>
             <RatingItem/>

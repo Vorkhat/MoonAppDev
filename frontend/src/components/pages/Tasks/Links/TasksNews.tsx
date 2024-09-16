@@ -1,15 +1,12 @@
-import './theme.css'
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import {Inter} from "next/font/google";
-import styles from './styles.module.scss'
-import {TasksIcon} from "../tasksIcon.ts";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './styles.module.scss';
+import { TasksIcon } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
-import { Task } from '@prisma/client';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({subsets: ['latin']})
 
 export function mapTaskIcon(task: string) {
     return TasksIcon.WEB; // todo task icons mapping
@@ -21,32 +18,37 @@ type InternalProps = {
     reward: number
 };
 
-const CreateItem = ({url, data, reward}: InternalProps) => {
+const CreateItem = ({ url, data, reward }: InternalProps) => {
 
     const description = typeof data.description === 'string' ? data.description : 'Undefined';
-    const t = useTranslations('Tasks');
+    const translarot = useTranslations('Tasks');
     //todo text translation
     return (
-        <div style={{
-            padding: "1px",
-            background: "linear-gradient(90deg, #86F1AD 0%, #8DBEFD 30%, #E0AAEE 100%)",
-            borderRadius: "3vw",
-        }}>
-            <Link className={`${styles.taskLink} ${inter.className}`} href={url}>
+        <ContainerColor classNameBorder={styles.taskLinkBorder} classNameBackground={styles.taskLinkBackground}>
+            <Link className={styles.taskLink} href={url}>
                 <div style={{
-                    display: "flex",
-                    alignItems: "center"
+                    display: 'flex',
+                    alignItems: 'center',
                 }}>
-                    <Image src={mapTaskIcon(description)} alt={'/'} width={20} height={20} style={{
-                        marginLeft: "1.5vw"
-                    }}/>
-                    <span className={styles.linkText}>{t(`content.others.${'web'}`)}</span>
+                    <Image src={mapTaskIcon(description)}
+                           alt={'/'}
+                           width={20}
+                           height={20}
+                           style={{ marginLeft: '1.5vw' }}/>
+                    <span className={styles.linkText}>
+                        {translarot(`content.others.${'web'}`)}
+                    </span>
                 </div>
-                <span className={styles.linkAward}>+ {reward} points</span>
+                <ContainerColor
+                    classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
+                    classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
+                >
+                    <span className={styles.rewardValue}>{reward} points</span>
+                </ContainerColor>
             </Link>
-        </div>
-    )
-}
+        </ContainerColor>
+    );
+};
 
 const TasksLinks = ({ data }: { data: InternalProps[] }) => {
     return (
@@ -55,7 +57,7 @@ const TasksLinks = ({ data }: { data: InternalProps[] }) => {
                 <CreateItem key={index} {...item} />
             ))}
         </div>
-    )
-}
+    );
+};
 
 export default TasksLinks;

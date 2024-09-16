@@ -1,6 +1,6 @@
-@import "@/components/pages/common/components/styles/mixins.scss";
+@import "@/common/mixins.scss";
 
-.quizCompletePage {
+.quiz-complete-page {
   display: grid;
   align-content: center;
   justify-items: center;
@@ -8,17 +8,25 @@
   margin: 0 auto;
   row-gap: 3.5vh;
 
-  .quizContent {
-    display: grid;
-    width: 80%;
-    margin: 0 auto;
-    justify-items: center;
-    text-align: center;
-    padding: 4.5vh 3vw;
-    row-gap: 2vh;
+  .quiz-border {
+    @include container-color(var(--quiz-border), 3vw, 1px);
 
-    .textContent {
-      @include text-color(var(--text-quiz))
+    .quiz-background {
+      @include container-color(var(--quiz-background), 3vw, 1vh 2vw);
+
+      .quiz-content {
+        display: grid;
+        width: 80%;
+        margin: 0 auto;
+        justify-items: center;
+        text-align: center;
+        padding: 4.5vh 3vw;
+        row-gap: 2vh;
+
+        .text-content {
+          @include text-color(var(--quiz-text))
+        }
+      }
     }
   }
 }

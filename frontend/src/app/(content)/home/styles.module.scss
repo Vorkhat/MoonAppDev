@@ -1,6 +1,8 @@
+@import "../../../common/mixins.scss";
+
 @font-face {
   font-family: "logo font";
-  src: url("/fonts/LogoRegular.ttf") format("truetype");
+  src: url(../../../../public/fonts/logoRegular.ttf) format("truetype");
 }
 
 .home-page {
@@ -13,8 +15,8 @@
     grid-template-areas: "logo theme"
                         "logo language";
     justify-content: space-between;
+    margin: 3vh 5vw 7.5vh;
     row-gap: 1vh;
-    margin: 3vh 5vw 5vh;
 
     .header-content {
       grid-area: logo;
@@ -30,71 +32,65 @@
     }
   }
 
-  .main-container {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    grid-template-areas: "content image"
-                         "invite invite";
-    grid-template-columns: 75% 25%;
-    background: linear-gradient(90deg, var(--background-home-content-gradient-color1) 45%, var(--background-home-content-gradient-color2) 120%);
-    transition: --background-home-content-gradient-color1 0.5s ease-in-out, --background-home-content-gradient-color2 0.5s ease-in-out;
-    box-shadow: #0c0c0c 0 0 3vw;
-    border-radius: 2vw;
-    position: relative;
+  .main-container-border {
+    @include container-color(--border-container-content, 3vw, 1px);
     width: 90%;
-    margin: 1vh auto;
-    padding: 1vh 1vh;
+    margin: 0 auto;
 
-    .main-content {
-      grid-area: content;
+    .main-container-background {
       display: grid;
-      grid-template-rows: repeat(3, min-content);
-      row-gap: 1vh;
-      grid-template-areas: "text"
-                           "text"
-                           "text";
-    }
+      grid-template-rows: 1fr auto;
+      grid-template-areas: "content image"
+                           "invite invite";
+      grid-template-columns: 75% 25%;
+      box-shadow: #0c0c0c 0 0 3vw;
+      row-gap: 2vh;
 
-    .fox-image {
-      position: relative;
-      grid-area: image;
-      background-size: contain;
-      transform: translate(0, -45%);
-      left: -15px;
-      width: 120px;
-      height: 137px;
-    }
+      @include container-color(var(--background-container-content), 3vw, 0.8vh 2vw);
+      transition: var(--color-black) 0.5s ease-in-out, var(--color-blue) 0.5s ease-in-out;
 
-    .invitation-container {
-      grid-area: invite;
-      background: linear-gradient(180deg, var(--background-invitation-gradient-color1) 0, var(--background-invitation-gradient-color2) 100%) center center no-repeat;
-      transition: --background-invitation-gradient-color1 0.5s ease-in-out, --background-invitation-gradient-color2 0.5s ease-in-out;
-      border-radius: 4vw;
-      padding: 1.5px;
-      margin-top: 2vh;
-      margin-bottom: 1vh;
+      .main-content {
+        grid-area: content;
+        display: grid;
+        grid-template-rows: repeat(3, min-content);
+        grid-template-areas: "text"
+                             "text"
+                             "text";
+        row-gap: 1vh;
+      }
 
-      .invitation-telegram {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--background-invitation);
-        transition: --background-invitation 0.5s ease-in-out;
-        padding: 2vh 0;
-        column-gap: 2vw;
-        border-radius: 4vw;
+      .fox-image {
+        position: relative;
+        grid-area: image;
+        background-size: contain;
+        transform: translate(0, -45%);
+        left: -15px;
+        width: 120px;
+        height: 137px;
+      }
 
-        .telegram-logo {
-          background-size: contain;
-          width: 20px;
-          height: 20px;
-        }
+      .invitation-container-border {
+        grid-area: invite;
+        @include container-color(linear-gradient(180deg, var(--border-invitation-color1) 0, var(--border-invitation-color2) 100%), 4vw, 1px);
 
-        .invitation-text {
-          font-size: 2.3vh;
-          background: var(--color-text-invitation);
-          -webkit-text-fill-color: transparent;
-          -webkit-background-clip: text;
+        .invitation-telegram {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @include container-color(var(--background-invitation), 4vw, 2vh 0);
+          transition: var(--background-invitation) 0.5s ease-in-out;
+          column-gap: 2vw;
+
+          .telegram-logo {
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+          }
+
+          .invitation-text {
+            font-size: 1.2em;
+            @include text-color(var(--color-text-invitation));
+          }
         }
       }
     }
@@ -108,9 +104,9 @@
     grid-template-areas: "clock"
                          "text"
                          "timer";
-    row-gap: 2vh;
-    bottom: 1vh;
     justify-items: center;
+    bottom: 1vh;
+    row-gap: 2vh;
 
     .clock-icon {
       background-size: contain;
@@ -134,11 +130,10 @@
         display: flex;
 
         .number {
+          @include container-color(var(--background-timer), 2vw, 1vw 2vw);
           background: var(--background-timer);
           border: 1px solid rgba(255, 255, 255, 0.11);
           font-weight: bold;
-          border-radius: 2vw;
-          padding: 1vw 2vw 1vw 2vw;
         }
       }
 

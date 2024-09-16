@@ -1,3 +1,4 @@
+import './theme.scss'
 import styles from './styles.module.scss';
 import { Inter } from 'next/font/google';
 import ThemeSwitcher from '@/utils/ThemeSwitcher/ThemeSwitcher';
@@ -7,6 +8,7 @@ import Image from 'next/image';
 import { prisma } from '@/prisma';
 import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
+import ContainerColor from '@/common/ContainerColor';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
@@ -53,14 +55,13 @@ export default async function Home() {
         <div className={`${styles.homePage} ${inter.className}`}>
             <div className={styles.headerContainer}>
                 <div className={styles.headerContent}>
-                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30"
-                           width="30"/>
+                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30" width="30"/>
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
                 <LanguageSwitcher/>
             </div>
-            <div className={styles.mainContainer}>
+            <ContainerColor classNameBorder={styles.mainContainerBorder} classNameBackground={styles.mainContainerBackground}>
                 <div className={styles.mainContent}>
                     <h2>
                         {t('content.title')}
@@ -71,19 +72,17 @@ export default async function Home() {
                     <span className={`highlight`}>{t('content.reward')}1000 USDT</span>
                 </div>
                 <Image className={styles.foxImage} src={'/images/home/fox.png'} alt="fox" height="120" width="137"/>
-                <div className={styles.invitationContainer}>
+                <ContainerColor classNameBorder={styles.invitationContainerBorder} classNameBackground={styles.invitationContainerBackground}>
                     <a className={styles.invitationTelegram} href={'https://www.google.com/?hl=ru'}>
-                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo"
-                               height="20" width="20"/>
+                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo" height="20" width="20"/>
                         <div className={styles.invitationText}>{t('content.invite')}</div>
                     </a>
-                </div>
-            </div>
+                </ContainerColor>
+            </ContainerColor>
             {
                 time && (
                     <footer className={styles.footerContainer}>
-                        <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54"
-                               width="54"/>
+                        <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54" width="54"/>
                         <div className={styles.footerText}>{t('footer')}</div>
                         <div className={styles.footerTimer}>
                             {time.days ? <Timer value={Math.floor(time.days).toString()} title="д."/> : null}

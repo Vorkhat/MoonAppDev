@@ -1,15 +1,11 @@
-import './theme.css';
 import React from 'react';
 import { prisma } from '@/prisma.ts';
 import styles from './styles.module.scss';
-import ProfileAward from '@/components/pages/Profile/award/ProfileAward.tsx';
+import ProfileReward from '@/components/pages/Profile/reward/ProfileReward.tsx';
 import ProfileFriends from '@/components/pages/Profile/friends/ProfileFriends.tsx';
-import { Inter, Montserrat } from 'next/font/google';
 import { SessionData, useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
-
-const montserrat = Montserrat({ subsets: [ 'latin' ] });
-const inter = Inter({ subsets: [ 'latin' ] });
+import ContainerColor from '@/common/ContainerColor';
 
 export async function getUser(id: number) {
     return prisma.usersTop.findUniqueOrThrow({
@@ -27,32 +23,32 @@ const UserProfile = async () => {
     const t = await getTranslations('Profile');
 
     return (
-        <div className={styles.user__profile}>
-            <div className={styles.user__item}>
+        <div className={styles.userProfile}>
+            <div className={styles.userItem}>
                 <img
-                    className={styles.user__photo}
+                    className={styles.userPhoto}
                     src={`/api/userPhoto/${session.userId}`}
                     alt=""
                     width={160}
                     height={160}
                 />
-                <div className={styles.user__data}>
-                    <div
-                        className={`${styles.user__name} ${inter.className}`}>{session.firstName} {session.lastName}</div>
-                    {session.username ? <div
-                        className={`${styles.user__tag} ${inter.className}`}>@{session.username}</div> : <></>}
-                    <div className={`${styles.user__rating} ${inter.className}`}>{
-                        t('content.Rank', { rank: user.rank })
-                    }</div>
+                <div className={styles.userData}>
+                    <div className={styles.userName}>
+                        {session.firstName} {session.lastName}
+                    </div>
+                    {session.username ? <h2 className={styles.userTag} style={{ fontWeight: 'normal' }}>@{session.username}</h2> : <></>}
+                    <div className={`${styles.userRating} fit-conteiner text-litle-container`}>
+                        {t('content.Rank', { rank: user.rank })}
+                    </div>
                 </div>
             </div>
-            <div className={styles.user__balance_border}>
-                <div className={`${styles.user__balance} ${montserrat.className}`}>
-                    <div className={styles.user__balance_value}>{user.points}</div>
-                    <div className={styles.user__balance_currency}>points</div>
+            <ContainerColor classNameBorder={styles.userBalanceBorder} classNameBackground={styles.userBalanceBackground}>
+                <div className={styles.userBalance}>
+                    <h2 className={styles.userBalanceValue}>{user.points}</h2>
+                    <h2 className={styles.userBalanceCurrency}>points</h2>
                 </div>
-            </div>
-            <ProfileAward/>
+            </ContainerColor>
+            <ProfileReward/>
             <ProfileFriends/>
         </div>
     );

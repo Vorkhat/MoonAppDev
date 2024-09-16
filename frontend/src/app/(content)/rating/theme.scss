@@ -1,0 +1,14 @@
+html {
+    --rating-text-color: #0C0C0C;
+    --rating-container-border: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+    --rating-container-background: #FFFFFF;
+    --rating-text-color-header: #083D8D;
+}
+
+
+html[data-theme='dark'] {
+    --rating-text-color: #FFFFFF;
+    --rating-container-border: #1B1E23;
+    --rating-container-background: #0E0C10;
+    --rating-text-color-header: #8DFAFA;
+}

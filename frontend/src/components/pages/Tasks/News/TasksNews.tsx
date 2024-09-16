@@ -1,19 +1,17 @@
-import './theme.css';
 import React from 'react';
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
 import { TaskProps } from '@/app/(content)/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
-import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
+import RewardComponent from '@/components/pages/common/components/RewardComponent/RewardComponent';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { prisma } from '@/prisma';
 import Link from 'next/link';
 import { getCurrentSessionLanguage } from '@/locale/locale';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export function mapTaskIcon(task: Task) {
     return TasksIcon.REPOST; // todo task icons mapping
@@ -39,16 +37,22 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
     });
 
     return (
-        <Link className={styles.taskGradient} href={disabled ? '' : `/api/task/${id}`}>
-            <div className={styles.taskItem}>
+        <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']}
+                        classNameBackground={styles.taskBackground}>
+            <Link className={styles.taskItem} href={disabled ? '' : `/api/task/${id}`}>
                 <Image className={styles.taskImage}
                        src={data.iconType ? TasksIcon[data.iconType as keyof typeof TasksIcon] : mapTaskIcon(task)}
                        width={44} height={44} alt={'/'}/>
-                <div className={`${styles.taskText} ${inter.className}`}
+                <div className={styles.taskText}
                      style={{}}>{description?.value || 'Undefined'}</div>
-                <AwardComponent>+{totalReward} {currencyName}</AwardComponent>
-            </div>
-        </Link>
+                <ContainerColor
+                    classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
+                    classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                >
+                    +{totalReward} {currencyName}
+                </ContainerColor>
+            </Link>
+        </ContainerColor>
     );
 }
 

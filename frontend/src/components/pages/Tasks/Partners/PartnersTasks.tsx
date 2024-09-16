@@ -1,16 +1,14 @@
 'use client';
 
-import './theme.css';
 import React from 'react';
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 type PartnerProps = {
     url: string;
@@ -20,27 +18,38 @@ type PartnerProps = {
 
 
 const PartnerItem = ({ url, data, reward }: PartnerProps) => {
-    const t = useTranslations('Tasks');
+    const translator = useTranslations('Tasks');
     const description = typeof data.description === 'string' ? data.description : 'Undefined';
 
     return (
-        <div className={styles.background__partners_item}>
-            <div className={`${styles.partners__item} ${inter.className}`}>
-                <Image className={styles.partners__image} src={TasksIcon.PARTNERS} alt="/" width={43} height={44}/>
-                <div className={styles.partners__text}>{description}</div>
-                <div className={styles.partners__award}>+{reward} points</div>
-                <Link className={styles.partners__link_background_one} href={url}>
-                    <div className={styles.partners__link_background_two}>
-                        <span className={styles.partners__link}>{t('content.partners.link')}</span>
-                    </div>
+        <ContainerColor classNameBorder={styles.partnerBorder}
+                        classNameBackground={styles.partnerBackground}
+        >
+            <div className={styles.partnerItem}>
+                <Image className={styles.partnerImage} src={TasksIcon.PARTNERS} alt="/" width={43} height={44}/>
+                <span className={styles.partnerDescription}>{description}</span>
+                <div className={styles.partnerReward}>
+                    <ContainerColor
+                        classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
+                        classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                    >
+                        {reward} points
+                    </ContainerColor>
+                </div>
+                <Link href={url} className={styles.partnerLink}>
+                    <ContainerColor classNameBorder={[styles.partnerLinkBorder, 'fit-conteiner']}
+                                    classNameBackground={styles.partnerLinkBackground}
+                    >
+                        <span className={styles.partnerLink}>{translator('content.partners.link')}</span>
+                    </ContainerColor>
                 </Link>
             </div>
-        </div>
+        </ContainerColor>
     );
 };
 
 const PartnersTasks = ({ data }: { data: PartnerProps[] }) => (
-    <div className={styles.partners__list}>
+    <div className={styles.partnersList}>
         {data.map((item, index) => (
             <PartnerItem key={index} {...item} />
         ))}

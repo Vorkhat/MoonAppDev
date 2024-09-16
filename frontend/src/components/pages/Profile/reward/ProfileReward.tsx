@@ -1,13 +1,11 @@
 'use server';
 
-import './theme.css'
 import React from 'react';
 import styles from './styles.module.scss';
 import { prisma } from '@/prisma.ts';
-import '@/components/pages/Profile/data/theme.css';
 import { useSession } from '@/components/session';
-import { AwardItem } from '@/components/pages/Profile/award/AwardItem.tsx';
-import { mapToIcon } from '@/components/pages/Profile/award/iconMapper.tsx';
+import { RewardItem } from '@/components/pages/Profile/reward/RewardItem.tsx';
+import { mapToIcon } from '@/components/pages/Profile/reward/iconMapper.tsx';
 
 export async function getItems() {
     const session = await useSession();
@@ -19,15 +17,19 @@ export async function getItems() {
                                               });
 }
 
-export default async function ProfileAward() {
+export default async function ProfileReward() {
     const completedTaskTypes = await getItems();
 
     return (
-        <div className={styles.awardItems}>
+        <div className={styles.rewardItems}>
             {
                 completedTaskTypes.map(value => (
-                    <AwardItem image={mapToIcon(value.type)} key={value.type} type={value.type} count={value.count}
-                               number={value.reward ?? 0} currency={'points'}/>
+                    <RewardItem image={mapToIcon(value.type)}
+                               key={value.type}
+                               type={value.type}
+                               count={value.count}
+                               number={value.reward ?? 0}
+                               currency={'points'}/>
                 ))
             }
         </div>

@@ -1,25 +1,24 @@
-import './theme.css';
-import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
-import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 import { getTranslations } from 'next-intl/server';
 import { prisma } from '@/prisma';
-
-const inter = Inter({ subsets: [ 'latin' ] });
+import ContainerColor from '@/common/ContainerColor';
 
 const RatingItem = async () => {
     async function refreshLeaderboard() {
         'use server';
     }
 
-    const t = await getTranslations('Rating');
+    const translator = await getTranslations('Rating');
 
     const users = await prisma.usersTop.findMany({ take: 200 });
 
     return (
-        <div className={`${styles.ratingItem} ${inter.className}`}>
+        <div className={styles.ratingItem}>
             <div className={styles.ratingHeader}>
-                <span className={styles.ratingtext} style={{ fontSize: '0.9em' }}>{t('content')} 20.09.2024</span>
+                <span className={styles.ratingtext}
+                      style={{ fontSize: '0.9em' }}>
+                    {translator('content')} 20.09.2024
+                </span>
                 <form action={refreshLeaderboard}>
                     <button type="submit" style={{
                         background: 'none',
@@ -39,22 +38,28 @@ const RatingItem = async () => {
             </div>
             <div className={styles.ratingList}>
                 {users.map(user => (
-                    <div key={user.id} className={styles.userRatingBorder}>
+                    <ContainerColor key={user.id} classNameBorder={[styles.containerBorder]} classNameBackground={styles.containerBackground}>
                         <div className={styles.ratingUser}>
                             <div className={styles.userItem}>
                                 <img src={`/api/userPhoto/${user.id}`}
                                      className={styles.userProfilePicture}
                                      alt="Avatar" width={43} height={43}
                                      decoding="async"/>
-                                <div className={styles.userIndex}>{user.rank}</div>
+                                <div className="friends-counter">{user.rank}</div>
                                 <div style={{
-                                    color: 'var(--rating-text-color)',
+                                    color: 'var(--text-color)',
                                     fontSize: '1.8vh',
-                                }}>{user.name}</div>
+                                }}>
+                                    {user.name}
+                                </div>
                             </div>
-                            <AwardComponent>{user.points} points</AwardComponent>
+                            <ContainerColor classNameBorder={[styles.rewardValueBorder, "fit-conteiner"]}
+                                            classNameBackground={[styles.rewardValueBackground, "text-litle-container"]}
+                            >
+                                {user.points} points
+                            </ContainerColor>
                         </div>
-                    </div>
+                    </ContainerColor>
                 ))}
             </div>
         </div>

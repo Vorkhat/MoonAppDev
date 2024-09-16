@@ -1,7 +1,5 @@
-import './theme.css';
 import React from 'react';
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
 import { getTranslations } from 'next-intl/server';
@@ -9,12 +7,12 @@ import { useSession } from '@/components/session';
 import { prisma } from '@/prisma';
 import { TrackerType } from '@/trackerType';
 import { JsonObject } from '@prisma/client/runtime/library';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 interface FriendItemProps {
     count_friends: number;
-    award: number;
+    reward: number;
 }
 
 export async function getItem() {
@@ -30,27 +28,32 @@ export async function getItem() {
     });
 }
 
-const FriendsItem = ({ count_friends, award }: FriendItemProps) => (
-    <div className={styles.itemsBackground}>
+const FriendsItem = ({ count_friends, reward }: FriendItemProps) => (
+    <ContainerColor classNameBorder={styles.friendsItemBorder} classNameBackground={styles.friendsItemBackground}>
         <div className={styles.friendsItem}>
             <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} width={30} height={30} alt="/"/>
             <div className={`${styles.friendsCount}`}>+ {count_friends}</div>
-            <div className={`${styles.friendsAward}`}>+ {award} points</div>
+            <ContainerColor
+                classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
+                classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
+            >
+                {reward} points
+            </ContainerColor>
         </div>
-    </div>
+    </ContainerColor>
 );
 
 const InvitationsCount = async () => {
     const { _sum: { useCount } } = await getItem();
     const count = useCount ?? 0;
 
-    const t = await getTranslations('Tasks');
+    const translator = await getTranslations('Tasks');
     return (
         <div className={styles.invitationsCount}>
-            <div className={styles.invitationsCountText}>{t('content.friends.count')}</div>
-            <div className={styles.invitationsCounterBackground}>
-                <div className={styles.invitationsCountCounter}>{count}</div>
-            </div>
+            <div className={styles.invitationsCountText}>{translator('content.friends.count')}</div>
+            <ContainerColor classNameBorder={styles.friendsCounterBorder} classNameBackground={styles.friendsCounterBackground}>
+                <span className={styles.friendsCount}>{count}</span>
+            </ContainerColor>
         </div>
     );
 };
@@ -91,8 +94,8 @@ const TasksReferral = async () => {
     });
 
     return (
-        <div className={`${styles.friendsContainer} ${inter.className}`}>
-            <div className={styles.backgroundContainer}>
+        <ContainerColor classNameBorder={styles.friendsBorder} classNameBackground={styles.friendsBackground}>
+            <div className={styles.friendsContainer}>
                 <div className={styles.friendsInvitations}>
                     <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} alt="/" width={30} height={30}/>
                     <div className={styles.invitationsText}>{t('content.friends.invite')}</div>
@@ -100,12 +103,13 @@ const TasksReferral = async () => {
                 <InvitationsCount/>
                 <div className={styles.friendsItems}>
                     {tasks.map(item => (
-                        <FriendsItem key={item.id} count_friends={Number((item.tracker.data as JsonObject).useCount)}
-                                     award={item.reward}/>
+                        <FriendsItem key={item.id}
+                                     count_friends={Number((item.tracker.data as JsonObject).useCount)}
+                                     reward={item.reward}/>
                     ))}
                 </div>
             </div>
-        </div>
+        </ContainerColor>
     );
 };
 

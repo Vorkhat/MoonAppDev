@@ -1,28 +1,40 @@
-@import "../mixins";
+@import "@/common/mixins.scss";
 
 .task-list-link {
   display: grid;
-  margin-top: 2vh;
   align-items: center;
   row-gap: 1vh;
-  margin-bottom: 2vh;
 
-  .task-link {
-    display: flex;
-    background: var(--task-background-link);
-    border-radius: 3vw;
-    padding: 1.5vh;
-    align-items: center;
-    justify-content: space-between;
+  .task-link-border {
+    @include container-color(linear-gradient(90deg, #86F1AD 0%, #8DBEFD 30%, #E0AAEE 100%), 4vw, 1px);
 
-    .link-text {
-      font-size: 2.5vh;
-      margin-left: 2vw;
-      color: var(--tasks-text);
-    }
+    .task-link-background {
+      @include container-color(var(--task-link-background), 4vw, 2vh 2vw);
 
-    .link-award {
-      @include text-award(var(--tasks-text-award), var(--tasks-background-text-award))
+      .task-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .link-text {
+          font-size: 2.5vh;
+          margin-left: 2vw;
+          color: var(--tasks-text);
+        }
+
+        .reward-value-border {
+          @include container-color(var(--tasks-link-border-reward), 3vw, 1px);
+
+          .reward-value-background {
+            @include container-color(var(--tasks-link-background-reward), 3vw, 0.5vh 1.5vw);
+
+            .rewardValue {
+              white-space: nowrap;
+              @include text-color(var(--color-reward-value));
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-.tasks__page {
+.tasks-page {
   display: grid;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -7,47 +7,40 @@
   width: 90%;
   margin: 0 auto;
 
-  .header__container {
+  .header-container {
     display: flex;
     margin: 3vh 0;
     justify-content: center;
 
-    .header__text {
+    .header-text {
       display: grid;
       justify-items: center;
 
-      .text_normal {
+      .text-normal {
         font-size: 3vh;
         font-weight: bold;
-        color: var(--color-text);
+        color: var(--tasks-color-text);
       }
 
-      .text__color {
+      .text-color {
         font-size: 3vh;
         font-weight: bold;
-        color: var(--color-text-award);
+        color: var(--tasks-header-text-color);
       }
     }
   }
 
-  .main__container {
-    display: flex;
-    flex-direction: column;
-    gap: 3vh;
+  .main-container {
+    display: grid;
+    row-gap: 2vh;
 
-    .tasks__news {
+    .tasks-news {
       display: grid;
-      grid-template-rows: repeat(2, min-content);
+      row-gap: 1vh;
     }
 
-    .tasks__daily {
+    .tasks-partners {
       display: grid;
-      grid-template-rows: min-content;
-    }
-
-    .partners {
-      display: grid;
-      grid-template-rows: min-content;
       row-gap: 1vh;
     }
   }

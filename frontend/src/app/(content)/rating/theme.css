@@ -1,7 +1,0 @@
-html[data-theme='dark'] {
-    --rating-text-color-header-theme: #8DFAFA;
-}
-
-html[data-theme='light'] {
-    --rating-text-color-header-theme: #083D8D;
-}

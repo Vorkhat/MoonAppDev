@@ -1,34 +1,45 @@
-import './theme.css';
+import '../../../app/(content)/quiz/theme.scss';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
-import AwardComponent from '@/components/pages/common/components/AwardComponent/AwardComponent';
 import React from 'react';
-import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
 import { Form, Language, LocalizationItem, LocalizationValue } from '@prisma/client';
 import Link from 'next/link';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 declare type QuizForm = Form & { title: LocalizationItem & { values: LocalizationValue[] } };
 
 const CreateQuizItem = ({ form }: { form: QuizForm }) => {
     return (
-        <ContainerContent>
-            <div className={`${styles.quiz} ${inter.className}`}>
+        <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
+            <div className={styles.quiz}>
                 <div className={styles.qiuzContentHeader}>
                     <div className={styles.headerContentTitle}>Quiz</div>
-                    <Image className={styles.quizContentImage} src={'/images/quiz/fox.svg'} alt={''} width={104}
-                           height={103}></Image>
-                    <Image className={styles.quizContentImage} src={'/images/quiz/help.svg'} alt={''} width={12}
-                           height={24}></Image>
+                    <Image className={styles.quizContentImage}
+                           src={'/images/quiz/fox.svg'}
+                           alt={''}
+                           width={104}
+                           height={103}>
+                    </Image>
+                    <Image className={styles.quizContentImage}
+                           src={'/images/quiz/help.svg'}
+                           alt={''}
+                           width={12}
+                           height={24}>
+
+                    </Image>
                 </div>
                 <div className={styles.quizDescription}>
                     {form.title.values.find(b => b.language === Language.Ru)?.value}
                 </div>
                 {
                     form.reward ?
-                    <AwardComponent>+ {form.reward} points</AwardComponent> :
+                    <ContainerColor
+                        classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
+                        classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                    >
+                        + {form.reward} points
+                    </ContainerColor>:
                     <></>
                 }
                 <div></div>
@@ -38,7 +49,7 @@ const CreateQuizItem = ({ form }: { form: QuizForm }) => {
                     </div>
                 </Link>
             </div>
-        </ContainerContent>
+        </ContainerColor>
     );
 };
 

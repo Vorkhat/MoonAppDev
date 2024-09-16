@@ -1,13 +1,11 @@
-import './theme.css';
+import './theme.scss';
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
 import CreateQuizComponent from '@/components/pages/Quiz/CreateQuizComponent';
 import { prisma } from '@/prisma';
 import { useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
-import ContainerContent from '@/components/pages/common/components/ContainerContent/ContainerContent';
+import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export default async function Quiz() {
     const { userId } = await useSession();
@@ -31,12 +29,12 @@ export default async function Quiz() {
         },
     });
 
-    const t = await getTranslations('Quiz');
-    const s = await getTranslations('QuizUndefined');
+    const translator = await getTranslations('Quiz');
+    const translatorUndefined = await getTranslations('QuizUndefined');
 
     return (
         <div className={styles.quiz_page}>
-            <div className={`${styles.header__conrainer} ${inter.className}`}>
+            <div className={styles.header__conrainer}>
                 {
                     forms.length ?
                     <>
@@ -46,29 +44,35 @@ export default async function Quiz() {
                             marginTop: '1vh',
                             textAlign: 'center',
                         }}>
-                            {t('header.title')}<br/>
-                            <span className={styles.header__text}>{t('header.content')}</span><br/>
-                            <span className={`${styles.header__text} ${styles.text__color}`}> {t(
-                                'header.footer')}</span>
+                            {translator('header.title')}<br/>
+                            <span className={styles.header__text}>
+                                {translator('header.content')}
+                            </span><br/>
+                            <span className={`${styles.header__text} ${styles.text__color}`}>
+                                {translator('header.footer')}
+                            </span>
                         </p>
                     </> :
                     <>
-                        <div className={`${styles.QuizUndefined} ${inter.className}`}>
+                        <div className={styles.QuizUndefined}>
                             <span style={{
                                 color: 'var(--text-color)',
                                 fontSize: '1.5em',
                                 fontWeight: 'bold',
-                            }}>{s('header')}
+                            }}>
+                                {translatorUndefined('header')}
                             </span>
-                            <ContainerContent>
+                            <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
                                 <div className={styles.quizContent}>
                                     <span className={styles.textContent}
                                           style={{
                                               fontSize: '1.3em',
                                               fontWeight: 'bold',
-                                          }}>{s('content')}</span>
+                                          }}>
+                                        {translatorUndefined('content')}
+                                    </span>
                                 </div>
-                            </ContainerContent>
+                            </ContainerColor>
                         </div>
                     </>
                 }
