@@ -88,9 +88,11 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
 
     return (
         <>
-            <form action={submit}>
-                <QuizForm elements={elements}/>
-            </form>
+            <div style={{background: "#000000"}}>
+                <form action={submit}>
+                    <QuizForm elements={elements}/>
+                </form>
+            </div>
         </>
     );
 }

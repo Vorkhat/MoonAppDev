@@ -12,17 +12,18 @@
     @include container-color(var(--quiz-border), 3vw, 1px);
 
     .quiz-background {
+      height: 100%;
       @include container-color(var(--quiz-background), 3vw, 1vh 2vw);
 
       .quiz {
         display: grid;
-        grid-template-rows: min-content min-content min-content 1fr min-content;
+        grid-template-rows: min-content min-content 1fr min-content;
         height: 100%;
         min-width: 75vw;
         background: var(--quiz-background);
         border-radius: 2vw;
         justify-items: center;
-        padding: 2vh 0;
+        padding: 1vh 0;
         row-gap: 2vh;
 
         .qiuz-content-header {
@@ -66,6 +67,9 @@
         }
 
         .quiz-border-begin {
+          display: flex;
+          align-content: center;
+          justify-content: center;
           @include container-color(var(--quiz-border-color-begin), 3vw, 1px);
           width: 90%;
           margin: 0 auto;
