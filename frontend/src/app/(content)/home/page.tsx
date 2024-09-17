@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { prisma } from '@/prisma';
 import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
-
+import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 const getTime = unstable_cache(async () => {
@@ -83,7 +83,7 @@ export default async function Home() {
                        priority={true}
                 />
                 <a className={`${styles.invitationTelegram} ${styles.invitationTelegramBorder} gradient-border`}
-                   href={'https://www.google.com/?hl=ru'}>
+                   href={process.env.BOT_URL}>
                     <Image className={styles.telegramLogo}
                            src={'/images/home/telegramLogo.svg'}
                            alt="telegram logo"
