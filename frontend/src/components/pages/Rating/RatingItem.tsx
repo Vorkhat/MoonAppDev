@@ -24,9 +24,6 @@ const RatingItem = async () => {
 
     const users = await prisma.usersTop.findMany({
         take: 200,
-        orderBy: {
-            rank: 'desc',
-        },
     });
 
     return (

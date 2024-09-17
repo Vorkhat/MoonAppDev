@@ -33,6 +33,10 @@
         align-items: center;
         column-gap: 2vw;
         width: 100%;
+
+        .user-profile-picture {
+          border-radius: 2vw;
+        }
       }
 
       .reward {
