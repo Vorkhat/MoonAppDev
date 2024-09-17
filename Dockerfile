@@ -69,7 +69,9 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV WORKSPACE=${WORKSPACE}
 
-COPY --from=builder /app/${WORKSPACE}/dist .
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-CMD ["node", "index.js"]
+ENTRYPOINT npm run start -w ${WORKSPACE}
