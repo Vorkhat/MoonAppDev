@@ -1,29 +1,29 @@
 @font-face {
   font-family: "logo font";
-  src: url(../../../../public/fonts/logoRegular.ttf) format("truetype");
+  src: url(/fonts/logoRegular.ttf) format("truetype");
 }
 
 @property --home-main-background {
-  syntax: '<image>';
-  initial-value: #FFFFFF;
+  syntax: "<image>";
+  initial-value: #ffffff;
   inherits: true;
 }
 
 @property --home-border-invitation-color1 {
-  syntax: '<color>';
-  initial-value: #9ABFFF;
+  syntax: "<color>";
+  initial-value: #9abfff;
   inherits: true;
 }
 
 @property --home-border-invitation-color2 {
-  syntax: '<color>';
+  syntax: "<color>";
   initial-value: #133870;
   inherits: true;
 }
 
 @property --home-background-invitation-telegram {
-  syntax: '<color>';
-  initial-value: #2FACFF;
+  syntax: "<color>";
+  initial-value: #2facff;
   inherits: true;
 }
 
@@ -32,18 +32,18 @@
 }
 
 html {
-  --home-text-reward: #0057DB;
-  --home-text-invitation-telegram: #FFFFFF;
+  --home-text-reward: #0057db;
+  --home-text-invitation-telegram: #ffffff;
   --home-background-timer: rgba(0, 0, 0, 0.06);
   --home-border-invitation-telegram: linear-gradient(90deg, var(--border-invitation-color1), var(--border-invitation-color2));
 }
 
 
 html[data-theme="dark"] {
-  --home-text-reward: #8DFAFA;
+  --home-text-reward: #8dfafa;
   --home-background-timer: rgba(0, 0, 0, 0.34);
-  --home-text-invitation-telegram: linear-gradient(90deg, #B0E7FF, #F5C4FF);
-  --home-main-background: linear-gradient(90deg, #0E0C10, 75%, #085DE9 100%);
+  --home-text-invitation-telegram: linear-gradient(90deg, #b0e7ff, #f5c4ff);
+  --home-main-background: linear-gradient(90deg, #0e0c10, 75%, #085de9 100%);
   --home-background-invitation-telegram: rgba(0, 0, 0, 0.53);
-  --home-border-invitation-telegram: linear-gradient(90deg, #B0E7FF, #F5C4FF);
+  --home-border-invitation-telegram: linear-gradient(90deg, #b0e7ff, #f5c4ff);
 }
