@@ -2,11 +2,10 @@ import { PromiseType } from '@prisma/client/extension';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { connect } from 'amqplib';
 
-if (!process.env.AMQP_URL) {
-    throw new Error('Missing AMQP_URL environment variable');
-}
-
 const amqpSingleton = async () => {
+    if (!process.env.AMQP_URL) {
+        throw new Error('Missing AMQP_URL environment variable');
+    }
     const client = await connect(process.env.AMQP_URL!);
     return await client.createChannel();
 };
