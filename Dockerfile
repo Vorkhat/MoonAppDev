@@ -51,9 +51,11 @@ RUN chown nextjs:nodejs .next
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/standalone/${WORKSPACE} ./
 
-WORKDIR /app/${WORKSPACE}
+RUN rm -rf ${WORKSPACE}
+
+COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/static ./.next/static
 
 COPY prisma ./prisma
 
@@ -66,7 +68,7 @@ ENV PORT=3000
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
-ENTRYPOINT ["node", "server.js"]
+CMD ["node", "server.js"]
 
 # Production image, copy all the files and run nodejs
 FROM base AS runner
