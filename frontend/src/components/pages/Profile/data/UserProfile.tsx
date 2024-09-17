@@ -46,9 +46,9 @@ const UserProfile = async () => {
                         {translator('content.Rank', { rank: user.rank })}
                     </p>
                 </div>
-                <div className={`${styles.userBalance} ${styles.userBalanceBorder} gradient-border`}>
+                <div className={`${styles.userBalance} ${styles.userBalanceBorder} ${montserrat.className} gradient-border`}>
                     <h5 className={styles.userBalanceValue}>{user.points}</h5>
-                    <h3 className={`${styles.userBalanceCurrency} ${montserrat.className}`}>points</h3>
+                    <h3 className={styles.userBalanceCurrency}>points</h3>
                 </div>
             </div>
             <ProfileReward/>
