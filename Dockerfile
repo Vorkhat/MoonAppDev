@@ -53,6 +53,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/static ./.next/static
 
+WORKDIR /app/${WORKSPACE}
+
 USER nextjs
 
 EXPOSE 3000
@@ -62,8 +64,7 @@ ENV PORT=3000
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
-ENV NEXT_ENTRYPOINT="${WORKSPACE}/server.js"
-ENTRYPOINT node ${NEXT_ENTRYPOINT}
+ENTRYPOINT ["node", "server.js"]
 
 # Production image, copy all the files and run nodejs
 FROM base AS runner
