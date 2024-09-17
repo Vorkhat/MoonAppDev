@@ -6,11 +6,13 @@
       "reward": "Prize pool - ",
       "invite": "Subscribe to our channel"
     },
-    "footer": "Countdown to the next prize draw:",
-    "timer": {
-      "days": "d.",
-      "hours": "h.",
-      "minutes": "m."
+    "footer":  {
+      "text": "Countdown to the next prize draw:",
+      "timer": {
+        "days": "d.",
+        "hours": "h.",
+        "minutes": "m."
+      }
     }
   },
   "Profile": {

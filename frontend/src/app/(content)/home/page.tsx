@@ -105,12 +105,12 @@ export default async function Home() {
                                priority={true}
                         />
                         <h3 className={styles.footerText}>
-                            {translator('footer')}
+                            {translator('footer.text')}
                         </h3>
                         <div className={styles.footerTimer}>
-                            {time.days ? <Timer value={Math.floor(time.days).toString()} title={translator('timer.days')}/> : null}
-                            {time.hours ? <Timer value={Math.floor(time.hours).toString()} title={translator('timer.hours')}/> : null}
-                            {time.minutes ? <Timer value={Math.floor(time.minutes).toString()} title={translator('timer.minutes')}/> : null}
+                            {time.days ? <Timer value={Math.floor(time.days).toString()} title={translator('footer.timer.days')}/> : null}
+                            {time.hours ? <Timer value={Math.floor(time.hours).toString()} title={translator('footer.timer.hours')}/> : null}
+                            {time.minutes ? <Timer value={Math.floor(time.minutes).toString()} title={translator('footer.timer.minutes')}/> : null}
                         </div>
                     </footer>
                 )
