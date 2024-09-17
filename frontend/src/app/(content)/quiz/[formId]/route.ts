@@ -19,6 +19,9 @@ export async function GET(req: NextRequest, { params }: { params: { formId: numb
         },
         select: {
             completions: {
+                where: {
+                    userId: userId,
+                },
                 orderBy: {
                     startedAt: 'desc',
                 },

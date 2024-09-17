@@ -1,4 +1,4 @@
-import "../../theme.scss"
+import '../../theme.scss';
 import { prisma } from '@/prisma';
 import styles from './styles.module.scss';
 import { useSession } from '@/components/session';
@@ -56,17 +56,7 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
             },
         });
 
-        if (!step) {
-            await prisma.formCompletedStep.create({
-                data: {
-                    completion: { connect: { id: completion.id } },
-                    step: { connect: { id: params.stepId } },
-                    data: Object.fromEntries([ ...data.entries() ].map(item => [ item[0], item[1] as string ])),
-                },
-            });
-        }
-
-        const index = completion.form.steps.findIndex(b => b.id == step!.id);
+        const index = completion.form.steps.findIndex(b => b.id == step?.id);
         const nextStep = completion.form.steps.at(index + 1);
 
         await prisma.formCompletion.update({
