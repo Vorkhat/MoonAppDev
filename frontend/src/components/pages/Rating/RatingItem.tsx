@@ -1,12 +1,24 @@
 import styles from './styles.module.scss';
 import { getTranslations } from 'next-intl/server';
 import { prisma } from '@/prisma';
-import ContainerColor from '@/common/ContainerColor';
 
 const RatingItem = async () => {
     async function refreshLeaderboard() {
         'use server';
     }
+
+    const topSnapshot = await prisma.topSnapshot.findFirst({
+        orderBy: {
+                takenAt: 'desc',
+        },
+        select: {
+            takenAt: true
+        }
+    });
+
+    const topSnapshotDate = topSnapshot?.takenAt
+                            ? topSnapshot.takenAt.toLocaleDateString('en-CA').replace(/-/g, '.')
+                            : '00.00.00';
 
     const translator = await getTranslations('Rating');
 
@@ -17,7 +29,7 @@ const RatingItem = async () => {
             <div className={styles.ratingHeader}>
                 <span className={styles.ratingtext}
                       style={{ fontSize: '0.9em' }}>
-                    {translator('content')} 20.09.2024
+                    {translator('content')} {topSnapshotDate}
                 </span>
                 <form action={refreshLeaderboard}>
                     <button type="submit" style={{
