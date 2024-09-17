@@ -55,6 +55,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/${WORKSPACE}/.next/static ./.next
 
 WORKDIR /app/${WORKSPACE}
 
+COPY prisma ./prisma
+
 USER nextjs
 
 EXPOSE 3000
