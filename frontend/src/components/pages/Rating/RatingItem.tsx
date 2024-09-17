@@ -9,11 +9,11 @@ const RatingItem = async () => {
 
     const topSnapshot = await prisma.topSnapshot.findFirst({
         orderBy: {
-                takenAt: 'desc',
+            takenAt: 'desc',
         },
         select: {
-            takenAt: true
-        }
+            takenAt: true,
+        },
     });
 
     const topSnapshotDate = topSnapshot?.takenAt
@@ -22,7 +22,12 @@ const RatingItem = async () => {
 
     const translator = await getTranslations('Rating');
 
-    const users = await prisma.usersTop.findMany({ take: 200 });
+    const users = await prisma.usersTop.findMany({
+        take: 200,
+        orderBy: {
+            rank: 'desc',
+        },
+    });
 
     return (
         <div className={styles.ratingItem}>
