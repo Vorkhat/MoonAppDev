@@ -18,7 +18,7 @@ const nextConfig = {
     },
     output: 'standalone',
     webpack: (config, {nextRuntime}) => {
-        if (nextRuntime === 'edge') {
+        if (nextRuntime === 'edge' && process.env.NODE_ENV !== 'production') {
             const plugin = require('next/dist/compiled/webpack/webpack').webpack.DefinePlugin;
             config.plugins.push(
                 new plugin({
