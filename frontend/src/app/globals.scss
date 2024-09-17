@@ -9,17 +9,17 @@
 
   background-color: #ffffff;
   color: #000000;
-  --color-reward-value: #0C0C0C;
+  --color-reward-value: #0c0c0c;
 
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-  --background-reward-value: linear-gradient(90deg, #B0E7FF 0%, #F5C4FF 100%);
+  --background-reward-value: linear-gradient(90deg, #b0e7ff 0%, #f5c4ff 100%);
   view-transition-name: none;
 }
 
 html[data-theme="dark"] {
   background-color: #000000;
   color: #ffffff;
-  --color-reward-value: #FFF881;
+  --color-reward-value: #fff881;
   --background-reward-value: rgba(255, 255, 255, 0.08);
 }
 
@@ -61,7 +61,7 @@ main {
 }
 
 h1 {
-  font-family: "logo font", "Montserrat", serif;
+  font-family: "Montserrat", serif;
   font-size: 1.2em;
   font-weight: 250;
   white-space: nowrap;
@@ -117,12 +117,12 @@ h6 {
 
 .friends-counter {
   display: flex;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 30px;
   height: 30px;
   align-items: center;
   justify-content: center;
-  @include container-color(#5E6065, 2vw);
+  @include container-color(#5e6065, 2vw);
 }
 
 .text-litle-container {
@@ -130,7 +130,7 @@ h6 {
 }
 
 .gradient-border::before {
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   right: 0;
@@ -140,9 +140,8 @@ h6 {
   background: var(--border-gradient);
   border-radius: var(--border-radius);
   -webkit-mask: -webkit-linear-gradient(90deg, white 0, white 100%);
-  mask:
-          linear-gradient(90deg, white 0, white 100%) content-box,
-          linear-gradient(90deg, white 0, white 100%);
+  mask: linear-gradient(90deg, white 0, white 100%) content-box,
+  linear-gradient(90deg, white 0, white 100%);
   mask-composite: exclude;
   -webkit-mask-composite: destination-out;
 }

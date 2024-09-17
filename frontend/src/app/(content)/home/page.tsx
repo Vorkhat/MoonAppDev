@@ -7,7 +7,10 @@ import Image from 'next/image';
 import { prisma } from '@/prisma';
 import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
-import Link from 'next/link';
+import localFont from 'next/font/local';
+
+const logoFont = localFont({ src: './LogoRegular.ttf' });
+
 export const dynamic = 'force-dynamic';
 
 const getTime = unstable_cache(async () => {
@@ -58,7 +61,7 @@ export default async function Home() {
                            width="30"
                            priority={true}
                     />
-                    <h1>MOON APP</h1>
+                    <h1 className={logoFont.className}>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
                 <LanguageSwitcher/>
@@ -71,7 +74,7 @@ export default async function Home() {
                     <p>
                         {translator('content.content')}
                     </p>
-                    <h2 className='highlight-text'>
+                    <h2 className="highlight-text">
                         {translator('content.reward')} 1000 USDT
                     </h2>
                 </div>
@@ -108,9 +111,12 @@ export default async function Home() {
                             {translator('footer.text')}
                         </h3>
                         <div className={styles.footerTimer}>
-                            {time.days ? <Timer value={Math.floor(time.days).toString()} title={translator('footer.timer.days')}/> : null}
-                            {time.hours ? <Timer value={Math.floor(time.hours).toString()} title={translator('footer.timer.hours')}/> : null}
-                            {time.minutes ? <Timer value={Math.floor(time.minutes).toString()} title={translator('footer.timer.minutes')}/> : null}
+                            {time.days ? <Timer value={Math.floor(time.days).toString()}
+                                                title={translator('footer.timer.days')}/> : null}
+                            {time.hours ? <Timer value={Math.floor(time.hours).toString()}
+                                                 title={translator('footer.timer.hours')}/> : null}
+                            {time.minutes ? <Timer value={Math.floor(time.minutes).toString()}
+                                                   title={translator('footer.timer.minutes')}/> : null}
                         </div>
                     </footer>
                 )
