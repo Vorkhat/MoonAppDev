@@ -72,4 +72,4 @@ ENV NODE_ENV=production
 
 COPY --from=builder /app/${WORKSPACE}/dist .
 
-CMD ["node", "${WORKSPACE}/index.js"]
+CMD ["node", "index.js"]
