@@ -34,12 +34,7 @@ const CreateQuizItem = ({ form }: { form: QuizForm }) => {
                 </div>
                 {
                     form.reward ?
-                    <ContainerColor
-                        classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
-                        classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
-                    >
-                        + {form.reward} points
-                    </ContainerColor> :
+                        <h6 className={`${styles.reward} ${styles.rewardBorder} gradient-border`}>+ {form.reward} points</h6> :
                     <></>
                 }
                 <div></div>

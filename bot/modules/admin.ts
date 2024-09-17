@@ -297,6 +297,7 @@ bot.action(/formRewardEditor\/(\d+)/, async ctx => {
 bot.action(/formDelete\/(\d+)/, async ctx => {
     await answerCbRemoveKeyboard(ctx);
 
+    console.log(ctx)
     return ctx.db.form.delete({ where: { id: parseInt(ctx.match[1]) } });
 });
 

@@ -1,8 +1,11 @@
 @import "@/common/mixins.scss";
 
 .quiz {
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  height: 100%;
   row-gap: 2vh;
-  align-content: center;
 
   .quiz-description {
     display: flex;
@@ -31,8 +34,9 @@
       @include container-color(var(--quiz-background-color-begin), 3vw);
     }
   }
+
+  .container-next {
+    margin-top: auto;
+  }
 }
 
-.quiz:last-child {
-  align-self: end;
-}

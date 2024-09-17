@@ -22,14 +22,21 @@ export default async function QuizForm({ elements }: { elements: FormElement[] }
                 <QuizFormElementContent key={element.id} element={element}/>
             ))}
 
-            <ContainerColor classNameBorder={[styles.quizBorderBegin, 'fit-conteiner']}
-                            classNameBackground={styles.quizBackgroundBegin}
-            >
-                <button style={{
-                    width: '100%',
-                    height: '100%',
-                }} type="submit">{translator('content.next-button')}</button>
-            </ContainerColor>
+            <div className={styles.containerNext}>
+                <ContainerColor classNameBorder={[ styles.quizBorderBegin, 'fit-container' ]}
+                                classNameBackground={styles.quizBackgroundBegin}
+                >
+                    <button style={{
+                        width: '100%',
+                        height: '100%',
+                        padding: '1.5vh 0',
+                        background: "linear-gradient(90deg, #86F1AD 0, #8DBEFD 30%, #E0AAEE 100%)",
+                        borderRadius: "2vw",
+                        color: "#0C0C0C",
+                        fontWeight: "bold"
+                    }} type="submit">{translator('content.next-button')}</button>
+                </ContainerColor>
+            </div>
         </div>
     );
 }
@@ -81,6 +88,8 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                                style={{
                                    width: "100%",
                                    padding: "1vh 1vw",
+                                   background: "#C4C4C4",
+                                   borderRadius: "2vw",
                                }}
                         />
                     </div>

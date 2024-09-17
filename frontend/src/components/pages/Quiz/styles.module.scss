@@ -56,13 +56,17 @@
           @include text-color(var(--quiz-description-color));
         }
 
-        .reward-value-border {
-          @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
+        .reward {
+          background: var(--background-reward-value);
+          border-radius: 2vw;
+          padding: 0.5vh 2vw;
+        }
 
-          .reward-value-background {
-            white-space: nowrap;
-            @include text-color(var(--color-reward-value));
-          }
+        .reward-border {
+          position: relative;
+          --padding: 1px;
+          --border-radius: 2vw;
+          --border-gradient: var(--profile-border-reward);
         }
 
         .quiz-border-begin {
