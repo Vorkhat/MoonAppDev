@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { useSession } from '@/components/session';
 
-const publicRoutes = [ '/' ];
+const publicRoutes = [ '/', '/api/healthz' ];
 const privilegedPattern = /^\/admin.*$/;
 const localePattern = /^\/(ru|en).*$/;
 
