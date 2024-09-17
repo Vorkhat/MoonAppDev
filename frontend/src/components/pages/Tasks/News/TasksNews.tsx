@@ -5,7 +5,6 @@ import { TasksIcon } from '../tasksIcon.ts';
 import { TaskProps } from '@/app/(content)/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
-import RewardComponent from '@/components/pages/common/components/RewardComponent/RewardComponent';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { prisma } from '@/prisma';
 import Link from 'next/link';

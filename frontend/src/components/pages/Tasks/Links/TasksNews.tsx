@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './styles.module.scss';
 import { TasksIcon } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
@@ -30,11 +29,13 @@ const CreateItem = ({ url, data, reward }: InternalProps) => {
                     display: 'flex',
                     alignItems: 'center',
                 }}>
-                    <Image src={mapTaskIcon(description)}
-                           alt={'/'}
-                           width={20}
-                           height={20}
-                           style={{ marginLeft: '1.5vw' }}/>
+                    <div style={{
+                        marginLeft: '1.5vw',
+                        mask: `url(${mapTaskIcon(description)}) no-repeat center`,
+                        backgroundColor: 'var(--tasks-text-color)',
+                        width: 20,
+                        height: 20,
+                    }}/>
                     <span className={styles.linkText}>
                         {translarot(`content.others.${'web'}`)}
                     </span>

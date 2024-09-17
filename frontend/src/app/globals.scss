@@ -119,6 +119,10 @@ h6 {
   @include container-color(#5E6065, 2vw);
 }
 
+.text-litle-container {
+  font-size: 10px;
+}
+
 .gradient-border::before {
   content: '';
   top: 0;

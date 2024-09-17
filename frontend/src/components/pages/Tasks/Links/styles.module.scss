@@ -9,7 +9,7 @@
     @include container-color(linear-gradient(90deg, #86F1AD 0%, #8DBEFD 30%, #E0AAEE 100%), 4vw, 1px);
 
     .task-link-background {
-      @include container-color(var(--task-link-background), 4vw, 2vh 2vw);
+      @include container-color(var(--tasks-link-background), 4vw, 2vh 2vw);
 
       .task-link {
         display: flex;
@@ -19,7 +19,7 @@
         .link-text {
           font-size: 2.5vh;
           margin-left: 2vw;
-          color: var(--tasks-text);
+          @include text-color(var(--tasks-friends-counter-border));
         }
 
         .reward-value-border {

@@ -23,6 +23,8 @@
         column-gap: 2vw;
         row-gap: 0.8vh;
         align-items: center;
+        height: 100%;
+        width: 100%;
 
         .task-image {
           grid-area: image;
