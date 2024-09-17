@@ -99,14 +99,30 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                 <div className={styles.radioGroup}>
                 {
                         await Promise.all(
-                            radio.options!.map(async ({ name, value }) => (
-                                <>
-                                    <label htmlFor={element.id}>{await get(value)}</label>
-                                    <input type="radio" name={element.id} value={`${element.id}-${name}`}/>
-                                </>
-                            )),
+                            radio.options!.map(async ({ name, value }, index) => (
+                                <div key={`${element.id}-${index}`}
+                                     style={{
+                                         position: "relative",
+                                         display: "inline-block",
+                                         width: "100%",
+                                         background: "var(--quiz-border)",
+                                         borderRadius: "2vw"
+                                }}>
+                                    <input
+                                        type="radio"
+                                        id={`${element.id}-${index}`}
+                                        name={element.id}
+                                        value={`${element.id}-${name}`}
+                                        className={styles.radioElement}
+                                        style={{ display: "none" }}
+                                    />
+                                    <label htmlFor={`${element.id}-${index}`} className={styles.customRadioLabel} style={{color: "#0C0C0C"}}>
+                                        {await get(value)}
+                                    </label>
+                                </div>
+                            ))
                         )
-                    }
+                }
                 </div>
             );
     }

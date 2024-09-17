@@ -56,37 +56,50 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
             },
         });
 
-        await prisma.formCompletedStep.create({
-            data: {
-                completion: { connect: { id: completion.id } },
-                step: { connect: { id: params.stepId } },
-                data: Object.fromEntries([ ...data.entries() ].map(item => [ item[0], item[1] as string ])),
-            },
-        });
+        if (!step) {
+            await prisma.formCompletedStep.create({
+                data: {
+                    completion: { connect: { id: completion.id } },
+                    step: { connect: { id: params.stepId } },
+                    data: Object.fromEntries([ ...data.entries() ].map(item => [ item[0], item[1] as string ])),
+                },
+            });
+        }
 
         const index = completion.form.steps.findIndex(b => b.id == step!.id);
         const nextStep = completion.form.steps.at(index + 1);
 
         await prisma.formCompletion.update({
             where: { id: completion.id },
-            data: nextStep ? {
-                currentStep: {
-                    connect: { id: nextStep.id },
-                },
-            } : {
-                completedAt: 'now()',
-                user: completion.form.reward ?
-                    {
-                        update: {
-                            points: {
-                                increment: completion.form.reward,
-                            },
+            data: {
+                ...(
+                    nextStep ? {
+                        currentStep: {
+                            connect: { id: nextStep.id },
                         },
-                    } : undefined,
+                    } : {
+                        completedAt: new Date(),
+                        user: completion.form.reward ?
+                            {
+                                update: {
+                                    points: {
+                                        increment: completion.form.reward,
+                                    },
+                                },
+                            } : undefined,
+                    }
+                ),
+                completedSteps: {
+                    create: {
+                        step: { connect: { id: params.stepId } },
+                        data: Object.fromEntries([ ...data.entries() ].map(item => [ item[0], item[1] as string ])),
+                    },
+                },
             },
         });
 
-        redirect(nextStep ? `/quiz/step/${nextStep.id}` : '/quiz');
+
+        redirect(nextStep ? `/quiz/step/${nextStep.id}` : '/quiz/complete');
     }
 
     return (

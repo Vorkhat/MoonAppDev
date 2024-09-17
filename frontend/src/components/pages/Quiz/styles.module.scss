@@ -17,19 +17,19 @@
 
       .quiz {
         display: grid;
-        grid-template-rows: min-content min-content 1fr min-content;
+        grid-template-rows: min-content 1fr min-content;
         height: 100%;
         min-width: 75vw;
         background: var(--quiz-background);
         border-radius: 2vw;
         justify-items: center;
-        row-gap: 2vh;
+        row-gap: 1vh;
 
         .qiuz-content-header {
           display: flex;
           background: #181818;
           border-radius: 2vw;
-          padding: 3vh 2vw 1vh 2vw;
+          padding: 2vh 2vw 1vh 1.5vw;
           justify-content: space-between;
           width: 90%;
           margin: 0 auto;
@@ -47,10 +47,11 @@
         .quiz-description {
           display: flex;
           font-weight: bold;
-          font-size: 3vh;
+          font-size: 2.5vh;
           text-align: center;
           justify-content: center;
           vertical-align: middle;
+          line-height: 1.2;
           width: 80%;
           margin: 0 auto;
           @include text-color(var(--quiz-description-color));
@@ -73,15 +74,15 @@
           @include container-color(var(--quiz-border-color-begin), 3vw, 1px);
           width: 90%;
           margin: 0 auto;
-          min-height: 5vh;
 
           .quiz-begin {
+            margin-top: auto;
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            @include container-color(var(--quiz-background-color-begin), 3vw);
+            @include container-color(var(--quiz-background-color-begin), 3vw, 1vh 0);
 
             .quiz-begin-text {
               @include text-color(var(--quiz-text-color-begin));

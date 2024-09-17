@@ -89,6 +89,12 @@ p {
   font-size: 12px;
 }
 
+input[type="radio"]:checked + label::before {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
 h6 {
   white-space: nowrap;
   font-size: 10px;
@@ -139,10 +145,4 @@ h6 {
           linear-gradient(90deg, white 0, white 100%);
   mask-composite: exclude;
   -webkit-mask-composite: destination-out;
-}
-
-@media only screen and (orientation: landscape) {
-  body {
-    transform: rotate(90deg);
-  }
 }

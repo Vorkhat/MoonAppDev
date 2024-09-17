@@ -27,6 +27,33 @@
     row-gap: 1vh;
   }
 
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+
+    .radio-element {
+      &:checked + .custom-radio-label {
+        background-color: #BABABB;
+        border-radius: 2vw;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+    }
+
+    .custom-radio-label {
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      background: transparent;
+      border-radius: 2vw;
+      padding: 10px 20px;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  }
+
   .quiz-border-begin {
     width: 100%;
     @include container-color(var(--quiz-border-color-begin), 3vw, 1px);
