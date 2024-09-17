@@ -6,7 +6,12 @@
       "reward": "Призовой фонд - ",
       "invite": "Подписаться на канал"
     },
-    "footer": "До следующего розыгрыша призов:"
+    "footer": "До следующего розыгрыша призов:",
+    "timer": {
+      "days": "д.",
+      "hours": "ч.",
+      "minutes": "м."
+    }
   },
   "Profile": {
     "title": "Профиль",
@@ -26,7 +31,8 @@
       "footer": "попасть в ТОП!"
     },
     "content": {
-      "next-button": "Далее"
+      "next-button": "Далее",
+      "begin-button": "Начать"
     }
   },
   "QuizComplete": {

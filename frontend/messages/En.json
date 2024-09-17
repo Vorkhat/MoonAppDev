@@ -6,7 +6,12 @@
       "reward": "Prize pool - ",
       "invite": "Subscribe to our channel"
     },
-    "footer": "Countdown to the next prize draw:"
+    "footer": "Countdown to the next prize draw:",
+    "timer": {
+      "days": "d.",
+      "hours": "h.",
+      "minutes": "m."
+    }
   },
   "Profile": {
     "title": "Profile",
@@ -26,7 +31,8 @@
       "footer": "climb to the top!"
     },
     "content": {
-      "next-button": "Next"
+      "next-button": "Next",
+      "begin-button": "Start"
     }
   },
   "QuizComplete": {
