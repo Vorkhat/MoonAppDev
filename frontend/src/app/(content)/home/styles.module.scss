@@ -1,112 +1,82 @@
-@import "../../../common/mixins.scss";
+@import "@/common/mixins.scss";
 
-@font-face {
-  font-family: "logo font";
-  src: url(../../../../public/fonts/logoRegular.ttf) format("truetype");
-}
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3vh;
+  width: 90%;
+  margin: 0 auto;
 
-.home-page {
-  display: grid;
-  grid-template-rows: min-content auto 1fr;
-  row-gap: 1vh;
-
-  .header-container {
+  .header {
     display: grid;
     grid-template-areas: "logo theme"
                         "logo language";
-    justify-content: space-between;
-    margin: 3vh 5vw 7.5vh;
+    margin: 4vh 0 5vh;
     row-gap: 1vh;
 
     .header-content {
       grid-area: logo;
       display: flex;
       align-items: center;
-      width: min-content;
-
-      .header-logo {
-        background-size: contain;
-        width: 30px;
-        height: 30px;
-      }
     }
   }
 
-  .main-container-border {
-    @include container-color(--border-container-content, 3vw, 1px);
-    width: 90%;
-    margin: 0 auto;
-
-    .main-container-background {
-      display: grid;
-      grid-template-rows: 1fr auto;
-      grid-template-areas: "content image"
-                           "invite invite";
-      grid-template-columns: 75% 25%;
-      box-shadow: #0c0c0c 0 0 3vw;
-      row-gap: 2vh;
-
-      @include container-color(var(--background-container-content), 3vw, 0.8vh 2vw);
-      transition: var(--color-black) 0.5s ease-in-out, var(--color-blue) 0.5s ease-in-out;
-
-      .main-content {
-        grid-area: content;
-        display: grid;
-        grid-template-rows: repeat(3, min-content);
-        grid-template-areas: "text"
-                             "text"
-                             "text";
-        row-gap: 1vh;
-      }
-
-      .fox-image {
-        position: relative;
-        grid-area: image;
-        background-size: contain;
-        transform: translate(0, -45%);
-        left: -15px;
-        width: 120px;
-        height: 137px;
-      }
-
-      .invitation-container-border {
-        grid-area: invite;
-        @include container-color(linear-gradient(180deg, var(--border-invitation-color1) 0, var(--border-invitation-color2) 100%), 4vw, 1px);
-
-        .invitation-telegram {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          @include container-color(var(--background-invitation), 4vw, 2vh 0);
-          transition: var(--background-invitation) 0.5s ease-in-out;
-          column-gap: 2vw;
-
-          .telegram-logo {
-            background-size: contain;
-            width: 20px;
-            height: 20px;
-          }
-
-          .invitation-text {
-            font-size: 1.2em;
-            @include text-color(var(--color-text-invitation));
-          }
-        }
-      }
-    }
-  }
-
-  .footer-container {
-    position: relative;
+  .main {
     display: grid;
-    align-content: center;
-    grid-template-rows: repeat(3, min-content);
-    grid-template-areas: "clock"
-                         "text"
-                         "timer";
-    justify-items: center;
-    bottom: 1vh;
-    row-gap: 2vh;
+    grid-template-areas: "content image"
+                         "invite invite";
+    grid-template-columns: 75% 25%;
+    background: var(--home-main-background);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 2vw;
+    padding: 1vh 2vw;
+    row-gap: 1vh;
+
+    .main-content {
+      grid-area: content;
+      display: flex;
+      flex-direction: column;
+      row-gap: 1vh;
+    }
+
+    .fox-image {
+      grid-area: image;
+      position: relative;
+      background-size: contain;
+      transform: translate(0, -45%);
+      left: -15px;
+      width: 120px;
+      height: 137px;
+    }
+
+    .invitation-telegram {
+      grid-area: invite;
+      display: flex;
+      padding: 2vh 0;
+      justify-content: center;
+      column-gap: 1vw;
+      background: var(--home-background-invitation-telegram);
+      border-radius: 3vw;
+
+      .invitation-telegram-text {
+        font-weight: 500;
+        @include text-color(var(--home-text-invitation-telegram));
+      }
+    }
+
+    .invitation-telegram-border {
+      position: relative;
+      --padding: 1px;
+      --border-radius: 3vw;
+      --border-gradient: var(--home-border-invitation-telegram)
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1vh;
 
     .clock-icon {
       background-size: contain;
@@ -114,32 +84,37 @@
       height: 70px;
     }
 
-    .footer-text {
-      color: var(--color-text)
-    }
-
     .footer-timer {
       display: flex;
       column-gap: 2%;
       justify-content: center;
       align-items: center;
-      height: 7vh;
-      width: 70vw;
 
-      .timer-number {
+      .timer-data {
         display: flex;
 
-        .number {
-          @include container-color(var(--background-timer), 2vw, 1vw 2vw);
-          background: var(--background-timer);
-          border: 1px solid rgba(255, 255, 255, 0.11);
-          font-weight: bold;
+        .data {
+          display: flex;
+          flex-wrap: wrap;
+          align-content: center;
+          justify-content: center;
+          background: var(--home-background-timer);
+          height: 35px;
+          width: 30px;
+          border-radius: 2vw;
+          margin: 0 2px;
+        }
+
+        .data-border {
+          position: relative;
+          --padding: 1px;
+          --border-radius: 2.5vw;
+          --border-gradient: linear-gradient(0deg, rgba(255, 255, 255, 0.11) 0, rgba(255, 255, 255, 0.03) 100%);
         }
       }
 
       .timer-title {
-        font-size: 80%;
-        color: var(--color-text-home-timer);
+        font-weight: normal;
       }
     }
   }

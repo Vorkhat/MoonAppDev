@@ -5,33 +5,32 @@ import {
     FormElementTextInput,
     FormElementType,
 } from '@/utils/formElement';
-import { Inter } from 'next/font/google';
-import styles from '@/components/pages/Quiz/styles.module.scss';
+import styles from './styles.module.scss';
 import React from 'react';
 import { prisma } from '@/prisma';
 import { getTranslations } from 'next-intl/server';
 import { getCurrentSessionLanguage } from '@/locale/locale';
 import ContainerColor from '@/common/ContainerColor';
 
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export default async function QuizForm({ elements }: { elements: FormElement[] }) {
-    const t = await getTranslations('Quiz');
+    const translator = await getTranslations('Quiz');
 
     return (
-        <ContainerColor>
-            <div className={`${styles.quiz} ${inter.className}`}>
-                {elements.map(element => (
-                    <QuizFormElementContent key={element.id} element={element}/>
-                ))}
+        <div className={styles.quiz}>
+            {elements.map(element => (
+                <QuizFormElementContent key={element.id} element={element}/>
+            ))}
 
-                <div className={styles.quizBorderBegin}>
-                    <div className={styles.quizBegin}>
-                        <button className={styles.quizBeginText} type="submit">{t('content.next-button')}</button>
-                    </div>
-                </div>
-            </div>
-        </ContainerColor>
+            <ContainerColor classNameBorder={[styles.quizBorderBegin, 'fit-conteiner']}
+                            classNameBackground={styles.quizBackgroundBegin}
+            >
+                <button style={{
+                    width: '100%',
+                    height: '100%',
+                }} type="submit">{translator('content.next-button')}</button>
+            </ContainerColor>
+        </div>
     );
 }
 
@@ -70,21 +69,28 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
             const input = element as FormElementTextInput;
             return (
                 <>
-                    {
+                    <div className={styles.quizInput}>
+                        {
                         input.label
                         ? <label htmlFor={element.id}>{await get(input.label)}</label>
                         : <></>
                     }
-                    <input type="text" name={element.id}
-                           defaultValue={await get(input.defaultValue)}
-                           placeholder={await get(input.placeholder)}/>
+                        <input type="text" name={element.id}
+                               defaultValue={await get(input.defaultValue)}
+                               placeholder={await get(input.placeholder)}
+                               style={{
+                                   width: "100%",
+                                   padding: "1vh 1vw",
+                               }}
+                        />
+                    </div>
                 </>
             );
         case FormElementType.Radio:
             const radio = element as FormElementRadio;
             return (
                 <div className={styles.radioGroup}>
-                    {
+                {
                         await Promise.all(
                             radio.options!.map(async ({ name, value }) => (
                                 <>

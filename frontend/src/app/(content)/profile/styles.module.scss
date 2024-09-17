@@ -1,5 +1,6 @@
-.profile__page {
+.profile-page-container {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 16px;
+  width: 90%;
+  margin: 0 auto;
 }

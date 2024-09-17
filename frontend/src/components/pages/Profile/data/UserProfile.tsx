@@ -5,7 +5,9 @@ import ProfileReward from '@/components/pages/Profile/reward/ProfileReward.tsx';
 import ProfileFriends from '@/components/pages/Profile/friends/ProfileFriends.tsx';
 import { SessionData, useSession } from '@/components/session';
 import { getTranslations } from 'next-intl/server';
-import ContainerColor from '@/common/ContainerColor';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: [ 'latin' ] });
 
 export async function getUser(id: number) {
     return prisma.usersTop.findUniqueOrThrow({
@@ -20,11 +22,11 @@ const UserProfile = async () => {
 
     const user = await getUser(session.userId);
 
-    const t = await getTranslations('Profile');
+    const translator = await getTranslations('Profile');
 
     return (
-        <div className={styles.userProfile}>
-            <div className={styles.userItem}>
+        <div className={styles.userItem}>
+            <div className={styles.userData}>
                 <img
                     className={styles.userPhoto}
                     src={`/api/userPhoto/${session.userId}`}
@@ -32,22 +34,23 @@ const UserProfile = async () => {
                     width={160}
                     height={160}
                 />
-                <div className={styles.userData}>
-                    <div className={styles.userName}>
+                <div className={styles.userContacts}>
+                    <h4>
                         {session.firstName} {session.lastName}
-                    </div>
-                    {session.username ? <h2 className={styles.userTag} style={{ fontWeight: 'normal' }}>@{session.username}</h2> : <></>}
-                    <div className={`${styles.userRating} fit-conteiner text-litle-container`}>
-                        {t('content.Rank', { rank: user.rank })}
-                    </div>
+                    </h4>
+                    {session.username ?
+                     <h2 className={styles.userTag}>
+                         @{session.username}
+                     </h2> : <></>}
+                    <p className={`${styles.userRank} fit-content`}>
+                        {translator('content.Rank', { rank: user.rank })}
+                    </p>
+                </div>
+                <div className={`${styles.userBalance} ${styles.userBalanceBorder} gradient-border`}>
+                    <h5 className={styles.userBalanceValue}>{user.points}</h5>
+                    <h3 className={`${styles.userBalanceCurrency} ${montserrat.className}`}>points</h3>
                 </div>
             </div>
-            <ContainerColor classNameBorder={styles.userBalanceBorder} classNameBackground={styles.userBalanceBackground}>
-                <div className={styles.userBalance}>
-                    <h2 className={styles.userBalanceValue}>{user.points}</h2>
-                    <h2 className={styles.userBalanceCurrency}>points</h2>
-                </div>
-            </ContainerColor>
             <ProfileReward/>
             <ProfileFriends/>
         </div>

@@ -1,6 +1,5 @@
-import './theme.scss'
+import './common.scss';
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
 import ThemeSwitcher from '@/utils/ThemeSwitcher/ThemeSwitcher';
 import LanguageSwitcher from '@/utils/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
@@ -8,9 +7,6 @@ import Image from 'next/image';
 import { prisma } from '@/prisma';
 import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
-import ContainerColor from '@/common/ContainerColor';
-
-const inter = Inter({ subsets: [ 'latin' ] });
 
 export const dynamic = 'force-dynamic';
 
@@ -36,54 +32,81 @@ const getTime = unstable_cache(async () => {
 
 const Timer = ({ value, title }: { value: string, title: string }) => (
     <>
-        <div className={styles.timerNumber}>
+        <div className={styles.timerData}>
             {
                 [ ...value ].map((char, i) => (
-                    <div key={i} className={styles.number}>{char}</div>
+                    <h2 key={i} className={`${styles.data} ${styles.dataBorder} gradient-border`}>{char}</h2>
                 ))
             }
         </div>
-        <div className={styles.timertitle}>{title}</div>
+        <h2 className={styles.timerTitle}>{title}</h2>
     </>
 );
 
 export default async function Home() {
     const time = await getTime();
-    const t = await getTranslations('Home');
+    const translator = await getTranslations('Home');
 
     return (
-        <div className={`${styles.homePage} ${inter.className}`}>
-            <div className={styles.headerContainer}>
+        <div className={styles.homePageContainer}>
+            <header className={styles.header}>
                 <div className={styles.headerContent}>
-                    <Image className={styles.headerLogo} src={'/images/home/headerImage.png'} alt="logo" height="30" width="30"/>
+                    <Image className={styles.logo}
+                           src={'/images/home/headerImage.png'}
+                           alt="logo"
+                           height="30"
+                           width="30"
+                           priority={true}
+                    />
                     <h1>MOON APP</h1>
                 </div>
                 <ThemeSwitcher/>
                 <LanguageSwitcher/>
-            </div>
-            <ContainerColor classNameBorder={styles.mainContainerBorder} classNameBackground={styles.mainContainerBackground}>
+            </header>
+            <main className={styles.main}>
                 <div className={styles.mainContent}>
                     <h2>
-                        {t('content.title')}
+                        {translator('content.title')}
                     </h2>
                     <p>
-                        {t('content.content')}
+                        {translator('content.content')}
                     </p>
-                    <span className={`highlight`}>{t('content.reward')}1000 USDT</span>
+                    <h2 className='highlight-text'>
+                        {translator('content.reward')} 1000 USDT
+                    </h2>
                 </div>
-                <Image className={styles.foxImage} src={'/images/home/fox.png'} alt="fox" height="120" width="137"/>
-                <ContainerColor classNameBorder={styles.invitationContainerBorder} classNameBackground={styles.invitationContainerBackground}>
-                    <a className={styles.invitationTelegram} href={'https://www.google.com/?hl=ru'}>
-                        <Image className={styles.telegramLogo} src={'/images/home/telegramLogo.svg'} alt="telegram logo" height="20" width="20"/>
-                        <div className={styles.invitationText}>{t('content.invite')}</div>
-                    </a>
-                </ContainerColor>
-            </ContainerColor>
+                <Image className={styles.foxImage}
+                       src={'/images/home/fox.png'}
+                       alt="fox"
+                       height="120"
+                       width="137"
+                       priority={true}
+                />
+                <a className={`${styles.invitationTelegram} ${styles.invitationTelegramBorder} gradient-border`}
+                   href={'https://www.google.com/?hl=ru'}>
+                    <Image className={styles.telegramLogo}
+                           src={'/images/home/telegramLogo.svg'}
+                           alt="telegram logo"
+                           height="20" width="20"
+                    />
+                    <h3 className={styles.invitationTelegramText}>
+                        {translator('content.invite')}
+                    </h3>
+                </a>
+            </main>
             {
                 time && (
-                    <footer className={styles.footerContainer}>
-                        <Image className={styles.clockIcon} src={'/images/home/clock.png'} alt="clock" height="54" width="54"/>
-                        <div className={styles.footerText}>{t('footer')}</div>
+                    <footer className={styles.footer}>
+                        <Image className={styles.clockIcon}
+                               src={'/images/home/clock.png'}
+                               alt="clock"
+                               height="54"
+                               width="54"
+                               priority={true}
+                        />
+                        <h3 className={styles.footerText}>
+                            {translator('footer')}
+                        </h3>
                         <div className={styles.footerTimer}>
                             {time.days ? <Timer value={Math.floor(time.days).toString()} title="д."/> : null}
                             {time.hours ? <Timer value={Math.floor(time.hours).toString()} title="ч."/> : null}
@@ -94,4 +117,4 @@ export default async function Home() {
             }
         </div>
     );
-};
+}

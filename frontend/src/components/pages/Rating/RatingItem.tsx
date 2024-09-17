@@ -38,28 +38,17 @@ const RatingItem = async () => {
             </div>
             <div className={styles.ratingList}>
                 {users.map(user => (
-                    <ContainerColor key={user.id} classNameBorder={[styles.containerBorder]} classNameBackground={styles.containerBackground}>
-                        <div className={styles.ratingUser}>
-                            <div className={styles.userItem}>
-                                <img src={`/api/userPhoto/${user.id}`}
-                                     className={styles.userProfilePicture}
-                                     alt="Avatar" width={43} height={43}
-                                     decoding="async"/>
-                                <div className="friends-counter">{user.rank}</div>
-                                <div style={{
-                                    color: 'var(--text-color)',
-                                    fontSize: '1.8vh',
-                                }}>
-                                    {user.name}
-                                </div>
-                            </div>
-                            <ContainerColor classNameBorder={[styles.rewardValueBorder, "fit-conteiner"]}
-                                            classNameBackground={[styles.rewardValueBackground, "text-litle-container"]}
-                            >
-                                {user.points} points
-                            </ContainerColor>
+                    <div key={user.id} className={`${styles.ratingUser} ${styles.ratingUserBorder} gradient-border`}>
+                        <div className={styles.userItem}>
+                            <img src={`/api/userPhoto/${user.id}`}
+                                 className={styles.userProfilePicture}
+                                 alt="Avatar" width={43} height={43}
+                                 decoding="async"/>
+                            <h3 className="friends-counter">{user.rank}</h3>
+                            <h3>{user.name}</h3>
                         </div>
-                    </ContainerColor>
+                        <h6 className={`${styles.reward} ${styles.rewardBorder} gradient-border`}>{user.points} points</h6>
+                    </div>
                 ))}
             </div>
         </div>

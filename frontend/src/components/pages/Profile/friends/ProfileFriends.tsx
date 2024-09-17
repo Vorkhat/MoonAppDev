@@ -26,7 +26,11 @@ const ProfileFriends = async () => {
         <div className={styles.friendsContainer}>
             <Link className={`${styles.container} ${styles.invitation}`} href={`https://t.me/share/url?url=${refLink}`}>
                 <Image src={ImageInvitation} alt={'/'}/>
-                <div className={styles.invitationText}> {translator('footer')}</div>
+                <h3 className={styles.invitationText}
+                    style={{fontWeight: '500'}}
+                >
+                    {translator('footer')}
+                </h3>
             </Link>
             <CopyButton str={refLink}/>
         </div>

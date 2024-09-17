@@ -13,7 +13,7 @@
 
     .quiz-background {
       height: 100%;
-      @include container-color(var(--quiz-background), 3vw, 1vh 2vw);
+      @include container-color(var(--quiz-background), 3vw, 2vh 2vw);
 
       .quiz {
         display: grid;
@@ -23,7 +23,6 @@
         background: var(--quiz-background);
         border-radius: 2vw;
         justify-items: center;
-        padding: 1vh 0;
         row-gap: 2vh;
 
         .qiuz-content-header {

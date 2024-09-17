@@ -21,34 +21,39 @@
     height: 55vh;
     row-gap: 1.2vh;
 
-    .container-border {
-      @include container-color(var(--rating-container-border), 3vw, 1px);
+    .rating-user {
+      display: flex;
+      align-items: center;
+      padding: 1vh 3vw;
+      border-radius: 2vw;
+      background: var(--rating-container-background);
 
-      .container-background {
-        @include container-color(var(--rating-container-background), 3vw, 1vh);
-
-        .rating-user {
-          display: flex;
-          align-items: center;
-          @include container-color(var(--rating-border-color-user), 3vw, 1px);
-
-          .user-item {
-            display: flex;
-            align-items: center;
-            column-gap: 2vw;
-            width: 100%;
-          }
-
-          .reward-value-border {
-            @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
-
-            .reward-value-background {
-              white-space: nowrap;
-              @include text-color(var(--color-reward-value));
-            }
-          }
-        }
+      .user-item {
+        display: flex;
+        align-items: center;
+        column-gap: 2vw;
+        width: 100%;
       }
+
+      .reward {
+        background: var(--background-reward-value);
+        border-radius: 2vw;
+        padding: 0.5vh 2vw;
+      }
+
+      .reward-border {
+        position: relative;
+        --padding: 1px;
+        --border-radius: 2vw;
+        --border-gradient: var(--profile-border-reward);
+      }
+    }
+
+    .rating-user-border {
+      position: relative;
+      --padding: 1px;
+      --border-radius: 2vw;
+      --border-gradient: var(--rating-container-border)
     }
   }
 }

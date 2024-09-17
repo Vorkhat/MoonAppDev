@@ -1,8 +1,11 @@
+import "../../theme.scss"
 import { prisma } from '@/prisma';
+import styles from './styles.module.scss';
 import { useSession } from '@/components/session';
 import { FormElement } from '@/utils/formElement';
-import QuizForm from '@/components/pages/Quiz/QuizFormElement';
+import QuizForm from '@/components/pages/Quiz/QuizForm/QuizFormElement';
 import { redirect } from 'next/navigation';
+import ContainerColor from '@/common/ContainerColor';
 
 export default async function QuizStep({ params }: { params: { stepId: number } }) {
     const { userId } = await useSession();
@@ -88,10 +91,12 @@ export default async function QuizStep({ params }: { params: { stepId: number } 
 
     return (
         <>
-            <div style={{background: "#000000"}}>
-                <form action={submit}>
-                    <QuizForm elements={elements}/>
-                </form>
+            <div className={styles.quiz}>
+                <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
+                    <form action={submit} className={styles.quizContent}>
+                        <QuizForm elements={elements}/>
+                    </form>
+                </ContainerColor>
             </div>
         </>
     );
