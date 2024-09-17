@@ -66,11 +66,9 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
         case FormElementType.Caption:
             const caption = element as FormElementCaption;
             return (
-                <>
                     <div className={styles.quizDescription}>
                         {await get(caption.text)}
                     </div>
-                </>
             );
         case FormElementType.TextInput:
             const input = element as FormElementTextInput;

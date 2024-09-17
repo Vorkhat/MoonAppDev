@@ -5,11 +5,14 @@ import React from 'react';
 import { Form, LocalizationItem, LocalizationValue } from '@prisma/client';
 import Link from 'next/link';
 import ContainerColor from '@/common/ContainerColor';
+import { getTranslations } from 'next-intl/server';
 
 
 declare type QuizForm = Form & { title: LocalizationItem & { values: LocalizationValue[] } };
 
-const CreateQuizItem = ({ form }: { form: QuizForm }) => {
+const CreateQuizItem = async ({ form }: { form: QuizForm }) => {
+
+    const translator = await getTranslations('Quiz');
     return (
         <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
             <div className={styles.quiz}>
@@ -40,7 +43,7 @@ const CreateQuizItem = ({ form }: { form: QuizForm }) => {
                 <div></div>
                 <Link className={styles.quizBorderBegin} href={`/quiz/${form.id}`}>
                     <div className={styles.quizBegin}>
-                        <span className={styles.quizBeginText}>Начать</span>
+                        <span className={styles.quizBeginText}>{translator('content.begin-button')}</span>
                     </div>
                 </Link>
             </div>
