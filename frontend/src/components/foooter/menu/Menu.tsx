@@ -20,14 +20,14 @@ const menuItems = [
 
 const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: string }) => {
     const pathname = usePathname();
-    const active = pathname === href;
+    const active = pathname.startsWith(href);
 
     const router = useTransitionRouter();
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
 
-        if (active) return;
+        if (pathname === href) return;
 
         router.push(href);
     };
