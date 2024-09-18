@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { formatMenuIconPath, MenuIcon, MenuIconType } from '@/components/foooter/menu/menuIcons.ts';
 import styles from './styles.module.scss';
@@ -22,7 +22,7 @@ const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: 
     const pathname = usePathname();
     const active = pathname.startsWith(href);
 
-    const router = useTransitionRouter();
+    const router = 'startViewTransition' in document ? useTransitionRouter() : useRouter();
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
