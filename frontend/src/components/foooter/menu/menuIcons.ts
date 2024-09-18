@@ -1,18 +1,22 @@
-const basePath = '/images/theme/menu/{type}/';
+import HomeIcon from '../images/home.svg';
+import ProfileIcon from '../images/profile.svg';
+import RatingIcon from '../images/rating.svg';
+import QuizIcon from '../images/quiz.svg';
+import TasksIcon from '../images/tasks.svg';
 
-export enum MenuIcon {
-    HOME = `${basePath}home.svg`,
-    QUIZ = `${basePath}quiz.svg`,
-    TASKS = `${basePath}tasks.svg`,
-    RATING = `${basePath}rating.svg`,
-    PROFILE = `${basePath}profile.svg`
-}
+export type Icons = {
+    Home: object;
+    Profile: object;
+    Rating: object;
+    Quiz: object;
+    Tasks: object;
+};
 
-export enum MenuIconType {
-    DEFAULT = 'light',
-    ACTIVE = 'dark'
-}
 
-export function formatMenuIconPath(icon: MenuIcon, type: MenuIconType) {
-    return icon.replace('{type}', type);
-}
+export const MenuIconMapper: Icons = {
+    Home: HomeIcon,
+    Profile: ProfileIcon,
+    Rating: RatingIcon,
+    Quiz: QuizIcon,
+    Tasks: TasksIcon,
+};

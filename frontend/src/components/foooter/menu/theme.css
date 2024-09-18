@@ -1,10 +1,10 @@
 html[data-theme="dark"] {
   --color-text-menu: #2FACFF;
-  --background-menu: url(../../../../public/images/theme/menu/dark/backgroundMenu.svg);
+  --background-menu: url(../images/dark/backgroundMenu.svg);
 }
 
 html {
   --color-text-menu: #0C0C0C;
-  --condition-menu-active: url(../../../../public/images/theme/menu/active.svg);
-  --background-menu: url(../../../../public/images/theme/menu/light/backgroundMenu.svg);
+  --condition-menu-active: url(../images/active.svg);
+  --background-menu: url(../images/light/backgroundMenu.svg);
 }

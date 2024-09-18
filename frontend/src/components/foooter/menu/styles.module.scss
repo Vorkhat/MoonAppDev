@@ -24,15 +24,6 @@
       bottom: 0;
       transition: bottom 0.2s ease-in-out;
 
-      .item-icon {
-        width: 7vw;
-        height: 3.5vh;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-        transition: background-color 0.5s ease-in-out;
-      }
-
       .item-text {
         color: var(--color-text-menu);
       }

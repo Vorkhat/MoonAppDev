@@ -2,26 +2,29 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
-import { formatMenuIconPath, MenuIcon, MenuIconType } from '@/components/foooter/menu/menuIcons.ts';
+import { motion } from 'framer-motion';
+import { MenuIconMapper } from '@/components/foooter/menu/menuIcons.ts';
 import styles from './styles.module.scss';
-import { Inter } from 'next/font/google';
 import { useTransitionRouter } from 'next-view-transitions';
 import './theme.css';
 
-const inter = Inter({ subsets: [ 'latin' ] });
+type menuProps = {
+    href: string;
+    label: keyof typeof MenuIconMapper;
+};
 
-const menuItems = [
-    { href: '/quiz', label: 'Quiz', icon: MenuIcon.QUIZ },
-    { href: '/tasks', label: 'Tasks', icon: MenuIcon.TASKS },
-    { href: '/home', label: 'Home', icon: MenuIcon.HOME },
-    { href: '/rating', label: 'Rating', icon: MenuIcon.RATING },
-    { href: '/profile', label: 'Profile', icon: MenuIcon.PROFILE },
+const menuItems: menuProps[] = [
+    { href: '/quiz', label: 'Quiz' },
+    { href: '/tasks', label: 'Tasks' },
+    { href: '/home', label: 'Home' },
+    { href: '/rating', label: 'Rating' },
+    { href: '/profile', label: 'Profile' },
 ];
 
-const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: string }) => {
+const MenuItem = ({ href, label }: { href: string, label: keyof typeof MenuIconMapper }) => {
     const pathname = usePathname();
     const active = pathname.startsWith(href);
-
+    const theme = localStorage.getItem('theme');
     const router = 'startViewTransition' in document ? useTransitionRouter() : useRouter();
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -29,8 +32,11 @@ const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: 
 
         if (pathname === href) return;
 
+        router.prefetch(['quiz', 'tasks', 'home', 'rating', 'profile'].includes(href) ? href : '/');
         router.push(href);
     };
+
+    const emptySvg = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 0 0"></svg>';
 
     return (
         <div className={styles.menuItem} style={active ? {
@@ -39,14 +45,20 @@ const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: 
             borderRight: '4px solid transparent',
         } : {}}>
             <a className={`${styles.menuContainer} ${active ? styles.active : ''}`} onClick={handleNavigation}>
-                <i className={styles.itemIcon}
-                   style={{
-                       backgroundColor: active ? '#2FACFF' : 'var(--color-text-menu)',
-                       mask: `url(${formatMenuIconPath(icon,
-                           active ? MenuIconType.ACTIVE : MenuIconType.DEFAULT)}) no-repeat center`,
-                   }}
+                <motion.img
+                    src={emptySvg}
+                    alt="/"
+                    width={20}
+                    height={20}
+                    initial={{ opacity: active ? 1 : 0.6 }}
+                    animate={{  opacity: active ? 1 : 0.6 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                        mask: `url(${MenuIconMapper[label].src}) no-repeat center center`,
+                        backgroundColor: active ? '#2FACFF' : (theme === 'dark' ? '#2FACFF' : '#0C0C0C'),
+                    }}
                 />
-                <span className={styles.itemText}>{label}</span>
+                <p className={styles.itemText}>{label}</p>
             </a>
         </div>
     );
@@ -54,7 +66,7 @@ const MenuItem = ({ icon, href, label }: { icon: MenuIcon, href: string, label: 
 
 export default function MenuComponent() {
     return (
-        <div className={`${styles.menuItems} ${inter.className}`}>
+        <div className={styles.menuItems}>
             {menuItems.map(item => (
                 <MenuItem key={item.href} {...item} />
             ))}
