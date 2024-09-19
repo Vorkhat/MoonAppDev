@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styles from '@/components/pages/Profile/friends/styles.module.scss';
 import Image from 'next/image';
-import ImageCopyLink from '../../../../../public/images/profile/copyLink.svg';
+import ImageCopyLink from '@/app/(content)/profile/images/copyLink.svg';
 
 const CopyButton = ({ str }: { str: string }) => {
     const [ copied, setCopied ] = useState(false);

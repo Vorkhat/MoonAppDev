@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import { getTranslations } from 'next-intl/server';
 import { prisma } from '@/prisma';
+import refrehIcon from '@/app/(content)/rating/images/refresh.svg';
 
 const RatingItem = async () => {
     async function refreshLeaderboard() {
@@ -43,7 +44,7 @@ const RatingItem = async () => {
                         display: 'flex',
                         alignContent: 'center',
                         justifyContent: 'center',
-                        mask: 'url(/images/rating/refresh.svg) no-repeat center',
+                        mask: `url(${refrehIcon.src}) no-repeat center`,
                         backgroundColor: 'var(--rating-text-color)',
                         width: '25px',
                         height: '25px',

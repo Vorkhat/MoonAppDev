@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { TasksIcon } from '../tasksIcon.ts';
+import { TasksIconMapper } from '../tasksIcon.ts';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
@@ -26,7 +26,7 @@ const PartnerItem = ({ url, data, reward }: PartnerProps) => {
                         classNameBackground={styles.partnerBackground}
         >
             <div className={styles.partnerItem}>
-                <Image className={styles.partnerImage} src={TasksIcon.PARTNERS} alt="/" width={43} height={44}/>
+                <Image className={styles.partnerImage} src={TasksIconMapper.Partners} alt="/" width={43} height={44}/>
                 <span className={styles.partnerDescription}>{description}</span>
                 <div className={styles.partnerReward}>
                     <ContainerColor

@@ -8,6 +8,7 @@ import { prisma } from '@/prisma';
 import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
 import localFont from 'next/font/local';
+import telegramLogo from '@/app/(content)/home/images/telegramLogo.svg';
 
 const logoFont = localFont({ src: './LogoRegular.ttf' });
 
@@ -88,7 +89,7 @@ export default async function Home() {
                 <a className={`${styles.invitationTelegram} ${styles.invitationTelegramBorder} gradient-border`}
                    href={process.env.BOT_URL}>
                     <Image className={styles.telegramLogo}
-                           src={'/images/home/telegramLogo.svg'}
+                           src={telegramLogo}
                            alt="telegram logo"
                            height="20" width="20"
                     />

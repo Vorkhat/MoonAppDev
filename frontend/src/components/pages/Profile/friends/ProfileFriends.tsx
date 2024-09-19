@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import { useSession } from '@/components/session';
-import ImageInvitation from '../../../../../public/images/profile/invitations.svg';
+import ImageInvitation from '@/app/(content)/profile/images/invitations.svg';
 import CopyButton from '@/components/pages/Profile/friends/copyButton';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';

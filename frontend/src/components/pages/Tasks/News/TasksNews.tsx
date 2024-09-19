@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { TasksIcon } from '../tasksIcon.ts';
+import { TasksIconMapper } from '../tasksIcon.ts';
 import { TaskProps } from '@/app/(content)/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
@@ -13,7 +13,7 @@ import ContainerColor from '@/common/ContainerColor';
 
 
 export function mapTaskIcon(task: Task) {
-    return TasksIcon.REPOST; // todo task icons mapping
+    return TasksIconMapper.Repost; // todo task icons mapping
 }
 
 export async function TaskItem({ id, task, totalReward, disabled }: {
@@ -40,7 +40,7 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
                         classNameBackground={styles.taskBackground}>
             <Link className={styles.taskItem} href={disabled ? '' : `/api/task/${id}`}>
                 <Image className={styles.taskImage}
-                       src={data.iconType ? TasksIcon[data.iconType as keyof typeof TasksIcon] : mapTaskIcon(task)}
+                       src={mapTaskIcon(task)}
                        width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}
                      style={{}}>{description?.value || 'Undefined'}</div>

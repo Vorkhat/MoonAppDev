@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 import { getTranslations } from 'next-intl/server';
 import ContainerColor from '@/common/ContainerColor';
-
+import completeQuizIcon from '@/app/(content)/quiz/images/complete.svg';
 
 export default async function QuizComplete() {
 
@@ -20,7 +20,7 @@ export default async function QuizComplete() {
             </span>
             <ContainerColor classNameBorder={styles.quizBorder} classNameBackground={styles.quizBackground}>
                 <div className={styles.quizContent}>
-                    <Image src={'/images/tasks/complete.svg'}
+                    <Image src={completeQuizIcon}
                            style={{
                                background: '#1B1E23',
                                padding: '1vh 1vw 1vh 1.3vw',

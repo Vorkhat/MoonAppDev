@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
-import { TasksIcon } from '../tasksIcon.ts';
+import { TasksIconMapper } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
 import ContainerColor from '@/common/ContainerColor';
 
 
 export function mapTaskIcon(task: string) {
-    return TasksIcon.WEB; // todo task icons mapping
+    return TasksIconMapper.Web; // todo task icons mapping
 }
 
 type InternalProps = {

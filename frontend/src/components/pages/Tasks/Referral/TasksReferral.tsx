@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { TasksIcon } from '../tasksIcon.ts';
+import { TasksIconMapper } from '../tasksIcon.ts';
 import { getTranslations } from 'next-intl/server';
 import { useSession } from '@/components/session';
 import { prisma } from '@/prisma';
@@ -31,7 +31,7 @@ export async function getItem() {
 const FriendsItem = ({ count_friends, reward }: FriendItemProps) => (
     <ContainerColor classNameBorder={styles.friendsItemBorder} classNameBackground={styles.friendsItemBackground}>
         <div className={styles.friendsItem}>
-            <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} width={30} height={30} alt="/"/>
+            <Image className={styles.friendsImage} src={TasksIconMapper.Friends} width={30} height={30} alt="/"/>
             <div className={`${styles.friendsCount}`}>+ {count_friends}</div>
             <ContainerColor
                 classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
@@ -97,7 +97,7 @@ const TasksReferral = async () => {
         <ContainerColor classNameBorder={styles.friendsBorder} classNameBackground={styles.friendsBackground}>
             <div className={styles.friendsContainer}>
                 <div className={styles.friendsInvitations}>
-                    <Image className={styles.friendsImage} src={TasksIcon.FRIENDS} alt="/" width={30} height={30}/>
+                    <Image className={styles.friendsImage} src={TasksIconMapper.Friends} alt="/" width={30} height={30}/>
                     <div className={styles.invitationsText}>{t('content.friends.invite')}</div>
                 </div>
                 <InvitationsCount/>

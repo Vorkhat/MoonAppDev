@@ -4,6 +4,8 @@ import styles from './styles.module.scss';
 import React from 'react';
 import { Form, LocalizationItem, LocalizationValue } from '@prisma/client';
 import Link from 'next/link';
+import foxIcon from '@/app/(content)/quiz/images/fox.svg';
+import helpIcon from '@/app/(content)/quiz/images/help.svg';
 import ContainerColor from '@/common/ContainerColor';
 import { getTranslations } from 'next-intl/server';
 
@@ -19,17 +21,17 @@ const CreateQuizItem = async ({ form }: { form: QuizForm }) => {
                 <div className={styles.qiuzContentHeader}>
                     <div className={styles.headerContentTitle}>Quiz</div>
                     <Image className={styles.quizContentImage}
-                           src={'/images/quiz/fox.svg'}
+                           src={foxIcon}
                            alt={''}
                            width={104}
                            height={103}>
                     </Image>
                     <Image className={styles.quizContentImage}
-                           src={'/images/quiz/help.svg'}
+                           src={helpIcon}
                            alt={''}
                            width={12}
-                           height={24}>
-
+                           height={24}
+                    >
                     </Image>
                 </div>
                 <div className={styles.quizDescription}>
