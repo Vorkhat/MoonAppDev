@@ -40,33 +40,44 @@ export default async function () {
     });
 }
 
-export async function createCuratedTasks(tx: Omit<PrismaClient, runtime.ITXClientDenyList>, id: number | bigint) {
+export async function createCuratedTasksForTask(
+    tx: Omit<PrismaClient, runtime.ITXClientDenyList>, taskId: number | bigint) {
+    const users = await tx.user.findMany({
+        select: {
+            id: true,
+        },
+    });
+
+    for (const { id } of users) {
+        await createCuratedTasks(tx, id, taskId);
+    }
+}
+
+export async function createCuratedTasks(
+    tx: Omit<PrismaClient, runtime.ITXClientDenyList>, id: number | bigint,
+    taskId: number | bigint | undefined = undefined,
+) {
     const tasks = await tx.task.findMany({
         where: {
-            AND: [
+            id: taskId,
+            tracker: {
+                data: {
+                    path: [ 'type' ],
+                    not: TrackerType.Invite,
+                },
+            },
+            OR: [
                 {
-                    OR: [
-                        {
-                            completions: {
-                                none: {
-                                    userId: id,
-                                },
-                            },
+                    completions: {
+                        none: {
+                            userId: id,
                         },
-                        {
-                            data: {
-                                path: [ 'repeatable' ],
-                                equals: true,
-                            },
-                        },
-                    ],
+                    },
                 },
                 {
-                    tracker: {
-                        data: {
-                            path: [ 'type' ],
-                            not: TrackerType.Invite,
-                        },
+                    data: {
+                        path: [ 'repeatable' ],
+                        equals: true,
                     },
                 },
             ],

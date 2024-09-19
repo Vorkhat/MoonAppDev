@@ -12,6 +12,7 @@ const amqpSingleton = async () => {
 
 export enum MessageQueue {
     NewUser = 'newUser',
+    NewTask = 'newTask',
 }
 
 declare const globalThis: {

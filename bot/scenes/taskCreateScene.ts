@@ -5,6 +5,7 @@ import { Composer, Markup, Scenes } from 'telegraf';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
+import { MessageQueue, publishMessage } from '@/mq.js';
 
 export enum TasksIcon {
     FRIENDS = `friends.svg`,
@@ -42,7 +43,7 @@ const completeTaskCreation = async (ctx: BotContext) => {
         },
     });
 
-    await ctx.db.task.create({
+    const { id } = await ctx.db.task.create({
         data: {
             type: ctx.scene.session.task.type!,
             url: ctx.scene.session.task.url!,
@@ -55,7 +56,12 @@ const completeTaskCreation = async (ctx: BotContext) => {
                      ? { connect: { id: ctx.scene.session.task.tracker.id as number } }
                      : { create: { data: ctx.scene.session.task.tracker } },
         },
+        select: {
+            id: true,
+        },
     });
+
+    await publishMessage<{ taskId: number }>(MessageQueue.NewTask, { taskId: Number(id) });
 
     return await ctx.scene.leave();
 };
