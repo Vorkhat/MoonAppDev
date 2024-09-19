@@ -1,6 +1,6 @@
 import { Composer, Markup, Scenes, session } from 'telegraf';
 import { BotContext } from '@/types';
-import { formRewardEditor, localizationValueEditor, taskCreateScene, topSnapshotCreateScene } from '@/scenes';
+import { formRewardEditor, localizationValueEditor, taskCreateScene, topSnapshotCreateScene, rolesScene } from '@/scenes';
 import { Language } from '@prisma/client';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
@@ -25,7 +25,7 @@ bot.settings(ctx => {
 });
 
 const stage = new Scenes.Stage<BotContext>(
-    [ taskCreateScene, localizationValueEditor, formRewardEditor, topSnapshotCreateScene ], {
+    [ taskCreateScene, localizationValueEditor, formRewardEditor, topSnapshotCreateScene, rolesScene ], {
         ttl: 360,
     });
 
@@ -100,6 +100,7 @@ const formsGetter: GetterDel = (ctx, offset) => ctx.db.form.findMany({
     await ctx.db.form.count(),
 ]);
 
+
 bot.use(keyboardMenu('form', formsGetter));
 
 const formStepsGetter: (formId: bigint | number) => GetterDel = (formId) =>
@@ -149,6 +150,7 @@ bot.hears('Menu', async ctx => {
     return ctx.reply('menu', Markup.inlineKeyboard([
         Markup.button.callback('Tasks', 'taskView'),
         Markup.button.callback('Forms', 'formView'),
+        Markup.button.callback('Roles', 'rolesView'),
         Markup.button.callback('Top snapshots', 'topView'),
     ], { columns: 1 }));
 });
@@ -157,6 +159,12 @@ bot.action('topCreate', async ctx => {
     await answerCbRemoveKeyboard(ctx);
 
     return ctx.scene.enter(topSnapshotCreateScene.id);
+});
+
+bot.action('rolesView', async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    return ctx.scene.enter(rolesScene.id);
 });
 
 bot.action(/top\/(\d+)/, async ctx => {
