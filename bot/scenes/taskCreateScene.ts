@@ -49,7 +49,7 @@ const completeTaskCreation = async (ctx: BotContext) => {
             url: ctx.scene.session.task.url!,
             reward: ctx.scene.session.task.reward!,
             data: {
-                description: description.id as unknown as number,
+                description: Number(description.id),
                 ...ctx.scene.session.task.data,
             },
             tracker: 'id' in ctx.scene.session.task.tracker!
