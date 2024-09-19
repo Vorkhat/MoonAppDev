@@ -6,7 +6,8 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
         await ctx.reply('Choose to command', Markup.inlineKeyboard([
             Markup.button.callback('View', 'view'),
             Markup.button.callback('Change', 'change'),
-        ]));
+            Markup.button.callback('Show admins', 'admins'),
+        ], { columns: 2 }));
         return ctx.wizard.next();
     },
 
@@ -18,6 +19,11 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
         .action('change', async ctx => {
             await ctx.reply(`Send user id and status (1 - admin, 0 - user)`);
             ctx.wizard.selectStep(3);
+        })
+        .action('admins', async ctx => {
+            const users = await ctx.db.user.findMany({ where: { privileged: true } });
+            await ctx.reply(`Admin list:\n\n ${users.map(user => user.name + ': ' + user.id).join('\n')}`);
+            return ctx.scene.leave()
         }),
 
     new Composer<BotContext>()
@@ -25,8 +31,8 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
             const message = ctx.message.text;
 
             if (message == 'Menu') {
-                await ctx.reply("Done")
-                return ctx.scene.leave()
+                await ctx.reply('Done');
+                return ctx.scene.leave();
             }
 
             if (!isNaN(Number(message))) {
@@ -39,7 +45,8 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
                     await ctx.reply(`User roles: ${user.privileged ? 'admin' : 'user'}`);
                 }
                 return ctx.scene.leave();
-            } else {
+            }
+            else {
                 await ctx.reply('Invalid user id');
             }
         }),
@@ -51,19 +58,19 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
             const data = message.split(' ');
 
             if (message == 'Menu') {
-                await ctx.reply("Done")
-                return ctx.scene.leave()
+                await ctx.reply('Done');
+                return ctx.scene.leave();
             }
 
             if (data.every(data => !isNaN(Number(data)))) {
-                const [userId, privileged] = message.split(' ').map(part => Number(part));
+                const [ userId, privileged ] = message.split(' ').map(part => Number(part));
                 const isPrivileged = privileged === 1;
 
                 const user = await ctx.db.user.update(
                     {
                         where: { id: userId },
                         data: { privileged: isPrivileged },
-                    }
+                    },
                 );
 
                 if (!user) {
@@ -73,7 +80,8 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
                     await ctx.reply(`User roles changed: ${privileged ? 'admin' : 'user'}`);
                 }
                 return ctx.scene.leave();
-            } else {
+            }
+            else {
                 await ctx.reply('Invalid command');
             }
         }),
