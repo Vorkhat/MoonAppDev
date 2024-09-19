@@ -9,6 +9,9 @@ import { DateTime, Settings } from 'luxon';
 import { unstable_cache } from 'next/cache';
 import localFont from 'next/font/local';
 import telegramLogo from '@/app/(content)/home/images/telegramLogo.svg';
+import foxIcon from '@/app/(content)/home/images/fox.png';
+import headerIcon from '@/app/(content)/home/images/headerImage.png';
+import clockIcon from '@/app/(content)/home/images/clock.png';
 
 const logoFont = localFont({ src: './LogoRegular.ttf' });
 
@@ -56,7 +59,7 @@ export default async function Home() {
             <header className={styles.header}>
                 <div className={styles.headerContent}>
                     <Image className={styles.logo}
-                           src={'/images/home/headerImage.png'}
+                           src={headerIcon}
                            alt="logo"
                            height="30"
                            width="30"
@@ -80,7 +83,7 @@ export default async function Home() {
                     </h2>
                 </div>
                 <Image className={styles.foxImage}
-                       src={'/images/home/fox.png'}
+                       src={foxIcon}
                        alt="fox"
                        height="120"
                        width="137"
@@ -102,7 +105,7 @@ export default async function Home() {
                 time && (
                     <footer className={styles.footer}>
                         <Image className={styles.clockIcon}
-                               src={'/images/home/clock.png'}
+                               src={clockIcon}
                                alt="clock"
                                height="54"
                                width="54"
