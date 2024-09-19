@@ -1,7 +1,8 @@
 import { Composer, Markup, Scenes } from 'telegraf';
 import { BotContext } from '@/types.js';
+import { formatNumber } from '@/utils/utils.js';
 
-export default new Scenes.WizardScene<BotContext>('rolesScene',
+export default new Scenes.WizardScene<BotContext>('balaneScene',
     async ctx => {
         await ctx.reply('Choose to command', Markup.inlineKeyboard([
             Markup.button.callback('View', 'view'),
@@ -16,7 +17,7 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
             ctx.wizard.selectStep(2);
         })
         .action('change', async ctx => {
-            await ctx.reply(`Send user id and status (1 - admin, 0 - user)`);
+            await ctx.reply(`Send user id and balance`);
             ctx.wizard.selectStep(3);
         }),
 
@@ -36,7 +37,7 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
                     await ctx.reply('User not found');
                 }
                 else {
-                    await ctx.reply(`User roles: ${user.privileged ? 'admin' : 'user'}`);
+                    await ctx.reply(`User balance: ${formatNumber(user.points)}`);
                 }
                 return ctx.scene.leave();
             } else {
@@ -56,21 +57,25 @@ export default new Scenes.WizardScene<BotContext>('rolesScene',
             }
 
             if (data.every(data => !isNaN(Number(data)))) {
-                const [userId, privileged] = message.split(' ').map(part => Number(part));
-                const isPrivileged = privileged === 1;
+                const [userId, points] = message.split(' ').map(part => Number(part));
 
-                const user = await ctx.db.user.update(
-                    {
-                        where: { id: userId },
-                        data: { privileged: isPrivileged },
-                    }
-                );
+                const user = await ctx.db.user.findUnique({ where: { id: userId } });
+
+                console.log()
 
                 if (!user) {
                     await ctx.reply('User not found');
                 }
                 else {
-                    await ctx.reply(`User roles changed: ${privileged ? 'admin' : 'user'}`);
+                    await ctx.reply(`User balance changed: ${formatNumber(points)}`);
+                    await ctx.db.user.update(
+                        {
+                            where: { id: userId },
+                            data: {
+                                points: points
+                            },
+                        }
+                    );
                 }
                 return ctx.scene.leave();
             } else {
