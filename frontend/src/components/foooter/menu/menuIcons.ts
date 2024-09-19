@@ -4,12 +4,14 @@ import RatingIcon from '../images/rating.svg';
 import QuizIcon from '../images/quiz.svg';
 import TasksIcon from '../images/tasks.svg';
 
+export type Icon = { src: unknown } & any;
+
 export type Icons = {
-    Home: object;
-    Profile: object;
-    Rating: object;
-    Quiz: object;
-    Tasks: object;
+    Home: Icon;
+    Profile: Icon;
+    Rating: Icon;
+    Quiz: Icon;
+    Tasks: Icon;
 };
 
 

@@ -5,8 +5,5 @@
     "frontend",
     "bot",
     "curator"
-  ],
-  "dependencies": {
-    "framer-motion": "^11.5.4"
-  }
+  ]
 }

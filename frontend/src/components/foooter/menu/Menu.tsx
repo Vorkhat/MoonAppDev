@@ -2,18 +2,18 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
-import { motion } from 'framer-motion';
 import { MenuIconMapper } from '@/components/foooter/menu/menuIcons.ts';
 import styles from './styles.module.scss';
 import { useTransitionRouter } from 'next-view-transitions';
 import './theme.css';
+import Link from 'next/link';
 
-type menuProps = {
+type MenuItem = {
     href: string;
     label: keyof typeof MenuIconMapper;
 };
 
-const menuItems: menuProps[] = [
+const menuItems: MenuItem[] = [
     { href: '/quiz', label: 'Quiz' },
     { href: '/tasks', label: 'Tasks' },
     { href: '/home', label: 'Home' },
@@ -24,7 +24,6 @@ const menuItems: menuProps[] = [
 const MenuItem = ({ href, label }: { href: string, label: keyof typeof MenuIconMapper }) => {
     const pathname = usePathname();
     const active = pathname.startsWith(href);
-    const theme = localStorage.getItem('theme');
     const router = 'startViewTransition' in document ? useTransitionRouter() : useRouter();
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -32,11 +31,8 @@ const MenuItem = ({ href, label }: { href: string, label: keyof typeof MenuIconM
 
         if (pathname === href) return;
 
-        router.prefetch(['quiz', 'tasks', 'home', 'rating', 'profile'].includes(href) ? href : '/');
         router.push(href);
     };
-
-    const emptySvg = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 0 0"></svg>';
 
     return (
         <div className={styles.menuItem} style={active ? {
@@ -44,22 +40,17 @@ const MenuItem = ({ href, label }: { href: string, label: keyof typeof MenuIconM
             borderLeft: '4px solid transparent',
             borderRight: '4px solid transparent',
         } : {}}>
-            <a className={`${styles.menuContainer} ${active ? styles.active : ''}`} onClick={handleNavigation}>
-                <motion.img
-                    src={emptySvg}
-                    alt="/"
-                    width={20}
-                    height={20}
-                    initial={{ opacity: active ? 1 : 0.6 }}
-                    animate={{  opacity: active ? 1 : 0.6 }}
-                    transition={{ duration: 0.3 }}
+            <Link className={`${styles.menuContainer} ${active ? styles.active : ''}`} onClick={handleNavigation}
+                  href={href}>
+                <i
+                    className={`${styles.itemIcon} ${active ? styles.itemIconActive : ''}`}
                     style={{
                         mask: `url(${MenuIconMapper[label].src}) no-repeat center center`,
-                        backgroundColor: active ? '#2FACFF' : (theme === 'dark' ? '#2FACFF' : '#0C0C0C'),
+                        backgroundColor: active ? '#2FACFF' : 'var(--color-text-menu)',
                     }}
                 />
                 <p className={styles.itemText}>{label}</p>
-            </a>
+            </Link>
         </div>
     );
 };
