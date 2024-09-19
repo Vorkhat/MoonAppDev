@@ -8,6 +8,8 @@ import foxIcon from '@/app/(content)/quiz/images/fox.svg';
 import helpIcon from '@/app/(content)/quiz/images/help.svg';
 import ContainerColor from '@/common/ContainerColor';
 import { getTranslations } from 'next-intl/server';
+import { router } from 'next/client';
+import { redirect } from 'next/navigation';
 
 
 declare type QuizForm = Form & { title: LocalizationItem & { values: LocalizationValue[] } };
@@ -56,9 +58,11 @@ const CreateQuizItem = async ({ form }: { form: QuizForm }) => {
 export async function CreateQuizComponent({ forms }: { forms: QuizForm[] }) {
     return (
         <div className={styles.quizList}>
-            {forms.map((form) => (
-                <CreateQuizItem key={form.id} form={form}/>
-            ))}
+            {forms.map((form) =>
+                form.isVisible ? (
+                    <CreateQuizItem key={form.id.toString()} form={form} />
+                ) : '',
+            )}
         </div>
     );
 }

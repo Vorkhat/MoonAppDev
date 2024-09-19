@@ -26,6 +26,7 @@ export default async function Quiz() {
             id: true,
             reward: true,
             titleId: true,
+            isVisible: true,
             title: {
                 select: {
                     id: true,
@@ -39,14 +40,15 @@ export default async function Quiz() {
         },
     });
 
+    const visibleForms = forms.filter(form => form.isVisible);
     const translator = await getTranslations('Quiz');
     const translatorUndefined = await getTranslations('QuizUndefined');
-
+    console.log(visibleForms)
     return (
         <div className={styles.quiz_page}>
             <div className={styles.header__conrainer}>
                 {
-                    forms.length ?
+                    visibleForms.length > 0 ?
                     <>
                         <p style={{
                             fontSize: '3.6vh',

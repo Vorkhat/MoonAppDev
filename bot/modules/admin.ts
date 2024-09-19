@@ -7,6 +7,7 @@ import {
     topSnapshotCreateScene,
     rolesScene,
     balanceScene,
+    formVisibleEditor
 } from '@/scenes';
 import { Language } from '@prisma/client';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
@@ -34,7 +35,7 @@ bot.settings(ctx => {
 const stage = new Scenes.Stage<BotContext>(
     [ taskCreateScene, localizationValueEditor,
              formRewardEditor, topSnapshotCreateScene,
-             balanceScene, rolesScene ], {
+             balanceScene, rolesScene, formVisibleEditor ], {
         ttl: 360,
     });
 
@@ -270,6 +271,9 @@ bot.action(/form\/(\d+)/, async ctx => {
                 Markup.button.callback('Edit Reward', `formRewardEditor/${form.id}`),
             ],
             [
+                Markup.button.callback('isVisible', `formVisibleEditor/${form.id}`),
+            ],
+            [
                 Markup.button.callback('Delete', `formDelete/${form.id}`),
                 Markup.button.callback('Back', 'formView'),
             ],
@@ -316,6 +320,17 @@ bot.action(/formRewardEditor\/(\d+)/, async ctx => {
     });
 
     return ctx.scene.enter(formRewardEditor.id, { id, reward });
+});
+
+bot.action(/formVisibleEditor\/(\d+)/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+
+    const { id, isVisible } = await ctx.db.form.findUniqueOrThrow({
+        where: { id: parseInt(ctx.match[1]) },
+        select: { id: true, isVisible: true },
+    });
+
+    return ctx.scene.enter(formVisibleEditor.id, { id, isVisible });
 });
 
 bot.action(/formDelete\/(\d+)/, async ctx => {

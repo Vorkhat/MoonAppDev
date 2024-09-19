@@ -126,6 +126,7 @@ model Form {
   steps       FormStep[]       @relation(name: "stepOwnerForm")
   completions FormCompletion[]
   reward      Float?
+  isVisible   Boolean          @default(false)
 }
 
 model FormStep {
