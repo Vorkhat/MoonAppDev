@@ -6,6 +6,16 @@ import WebIcon from '@/app/(content)/tasks/images/web.svg';
 import InstagramIcon from '@/app/(content)/tasks/images/instagram.svg';
 import DownloadIcon from '@/app/(content)/tasks/images/download.svg';
 
+export enum TasksIcon {
+    FRIENDS = 'FriendsIcon',
+    PARTNERS = 'PartnersIcon',
+    REPOST = 'RepostIcon',
+    PHONE = 'PhoneIcon',
+    WEB = 'WebIcon',
+    INSTAGRAM = 'InstagramIcon',
+    DOWNLOAD = 'DownloadIcon',
+}
+
 export type Icon = { src: unknown } & any;
 
 export type Icons = {
