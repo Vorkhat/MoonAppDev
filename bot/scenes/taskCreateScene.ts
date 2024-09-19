@@ -5,7 +5,16 @@ import { Composer, Markup, Scenes } from 'telegraf';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
-import { TasksIcon } from '@/components/pages/Tasks/tasksIcon';
+
+export enum TasksIcon {
+    FRIENDS = `friends.svg`,
+    PARTNERS = `partners.svg`,
+    REPOST = `repost.svg`,
+    PHONE = `$phone.svg`,
+    WEB = `$web.svg`,
+    INSTAGRAM = `instagram.svg`,
+    DOWNLAND = `download.svg`
+}
 
 const completeTaskCreation = async (ctx: BotContext) => {
     await ctx.reply('Done');
