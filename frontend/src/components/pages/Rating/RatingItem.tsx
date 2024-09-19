@@ -18,8 +18,12 @@ const RatingItem = async () => {
     });
 
     const topSnapshotDate = topSnapshot?.takenAt
-                            ? topSnapshot.takenAt.toLocaleDateString('en-CA').replace(/-/g, '.')
-                            : '00.00.00';
+                            ? topSnapshot.takenAt.toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        }).replace(/\//g, '.')
+                            : '00.00.0000';
 
     const translator = await getTranslations('Rating');
 
