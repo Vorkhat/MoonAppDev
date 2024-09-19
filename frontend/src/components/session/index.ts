@@ -24,7 +24,7 @@ function getSessionOptions(): SessionOptions {
         cookieOptions: {
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             path: '/',
         },
     };

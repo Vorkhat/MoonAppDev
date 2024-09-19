@@ -19,6 +19,6 @@ export async function setCurrentSessionLanguage(language: Language) {
 
     cookies().set('lang', language, {
         maxAge: sessionTtl,
-        sameSite: 'lax',
+        sameSite: 'none',
     });
 }
