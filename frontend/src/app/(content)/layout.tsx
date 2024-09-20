@@ -11,7 +11,9 @@ export default async function ContentLayout({ children }: PropsWithChildren) {
     return (
         <>
             <NextIntlClientProvider messages={messages}>
-                <main className={styles.content}>
+                <main className={styles.content} style={{
+                    viewTransitionName: 'content',
+                }}>
                     <Suspense fallback={<Loading/>}>
                         {children}
                     </Suspense>

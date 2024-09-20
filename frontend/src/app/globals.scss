@@ -28,10 +28,6 @@ body {
   height: 100%;
 }
 
-main {
-  view-transition-name: root;
-}
-
 @keyframes move-out {
   from {
     transform: translateX(0%);
@@ -52,11 +48,11 @@ main {
   }
 }
 
-::view-transition-old {
+html::view-transition-old(content) {
   animation: 0.4s ease-in both move-out;
 }
 
-::view-transition-new {
+html::view-transition-new(content) {
   animation: 0.4s ease-in both move-in;
 }
 
