@@ -22,7 +22,7 @@ function getSessionOptions(): SessionOptions {
         cookieName: 'moon-session',
         ttl: sessionTtl,
         cookieOptions: {
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             httpOnly: true,
             sameSite: 'none',
             path: '/',
