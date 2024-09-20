@@ -42,7 +42,7 @@ const Timer = ({ value, title }: { value: string, title: string }) => (
         <div className={styles.timerData}>
             {
                 [ ...value ].map((char, i) => (
-                    <h2 key={i} className={`${styles.data} ${styles.dataBorder} gradient-border`}>{char}</h2>
+                    <h2 key={i} className={styles.data}>{char}</h2>
                 ))
             }
         </div>
@@ -57,18 +57,23 @@ export default async function Home() {
     return (
         <div className={styles.homePageContainer}>
             <header className={styles.header}>
-                <div className={styles.headerContent}>
-                    <Image className={styles.logo}
-                           src={headerIcon}
-                           alt="logo"
-                           height="30"
-                           width="30"
-                           priority={true}
-                    />
-                    <h1 className={logoFont.className}>MOON APP</h1>
-                </div>
                 <ThemeSwitcher/>
-                <LanguageSwitcher/>
+                <div className={styles.headerMain}>
+                    <div className={styles.headerContent}>
+                        <div className={styles.logo}>
+                            <Image src={headerIcon}
+                                   alt="logo"
+                                   height="30"
+                                   width="30"
+                                   priority
+                            />
+                        </div>
+                        <h1 className={logoFont.className} style={{
+                            margin: '0 0 -4px 0',
+                        }}>MOON APP</h1>
+                    </div>
+                    <LanguageSwitcher/>
+                </div>
             </header>
             <main className={styles.main}>
                 <div className={styles.mainContent}>

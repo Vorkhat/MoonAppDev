@@ -23,12 +23,12 @@ export default async function LanguageSwitcher() {
 
     return (
         <>
-            <form style={{ margin: '0 auto' }} action={saveLanguage}>
+            <form style={{ height: '48px', display: 'grid', alignItems: 'center' }} action={saveLanguage}>
                 <button type="submit" style={{
                     background: 'rgba(46, 42, 49, 0.24)',
                     border: '1px solid rgba(46, 42, 49, 0.24)',
-                    borderRadius: '1.5vw',
-                    padding: '0.5vh 1vw',
+                    borderRadius: '8px',
+                    padding: '4px',
                     color: '#FFFFFF',
                 }} value={language}>
                     {language === 'Ru' ? 'EN' : 'RU'}

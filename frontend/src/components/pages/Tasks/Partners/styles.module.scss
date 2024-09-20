@@ -16,7 +16,7 @@
                              "image reward link";
         grid-template-columns: auto 1fr auto;
         padding: 1vh 2vw;
-        border-radius: 2vw;
+        border-radius: var(--border-radius-regular);
         align-items: center;
         justify-items: start;
 

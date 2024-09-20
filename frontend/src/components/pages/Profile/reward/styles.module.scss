@@ -8,39 +8,33 @@
   .reward-container {
     display: flex;
     align-items: center;
-    padding: 1.5vh 4vw;
+    padding: 10px;
     background: var(--profile-background-reward);
-    border-radius: 2vw;
+    border-radius: var(--border-radius-regular);
     justify-content: space-between;
 
     .reward-content {
       display: flex;
       align-items: center;
-      column-gap: 1vw;
+      gap: 10px;
 
       .reward-text {
         @include text-color(var(--profile-text-color-reward));
+        font-weight: 600;
       }
     }
 
     .reward {
       background: var(--background-reward-value);
-      border-radius: 2vw;
-      padding: 0.5vh 2vw;
-    }
-
-    .reward-border {
-      position: relative;
-      --padding: 1px;
-      --border-radius: 2vw;
-      --border-gradient: var(--profile-border-reward);
+      border-radius: 46px;
+      padding: 4px 6px;
     }
   }
 
   .reward-container-border {
     position: relative;
     --padding: 1px;
-    --border-radius: 2vw;
+    --border-radius: var(--border-radius-regular);
     --border-gradient: var(--profile-border-reward)
   }
 }

@@ -6,7 +6,7 @@
   height: 85%;
   width: 90%;
   margin: 0 auto;
-  row-gap: 1vh;
+  row-gap: 20px;
 
   .rating-header {
     display: flex;
@@ -19,13 +19,13 @@
     overflow-y: auto;
     scrollbar-width: none;
     height: 55vh;
-    row-gap: 1.2vh;
+    row-gap: 10px;
 
     .rating-user {
       display: flex;
       align-items: center;
-      padding: 1vh 3vw;
-      border-radius: 2vw;
+      padding: 10px;
+      border-radius: var(--border-radius-regular);
       background: var(--rating-container-background);
 
       .user-item {
@@ -35,28 +35,21 @@
         width: 100%;
 
         .user-profile-picture {
-          border-radius: 2vw;
+          border-radius: var(--border-radius-regular);
         }
       }
 
       .reward {
         background: var(--background-reward-value);
-        border-radius: 2vw;
-        padding: 0.5vh 2vw;
-      }
-
-      .reward-border {
-        position: relative;
-        --padding: 1px;
-        --border-radius: 2vw;
-        --border-gradient: var(--profile-border-reward);
+        border-radius: 46px;
+        padding: 4px 6px;
       }
     }
 
     .rating-user-border {
       position: relative;
       --padding: 1px;
-      --border-radius: 2vw;
+      --border-radius: var(--border-radius-regular);
       --border-gradient: var(--rating-container-border)
     }
   }

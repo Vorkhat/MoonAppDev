@@ -27,21 +27,20 @@
         align-items: center;
         justify-content: space-between;
 
-        .invitations-count_text {
-          font-size: 1.8vh;
+        .invitations-count-text {
+          font-size: 14px;
           color: var(--tasks-text-color);
         }
 
         .friends-counter-border {
-          @include container-color(var(--tasks-friends-counter-border), 3vw, 1px);
+          @include container-color(var(--tasks-friends-counter-border), var(--border-radius-regular), 1px);
 
           .friends-counter-background {
-            @include container-color(var(--tasks-friends-counter-background), 3vw, 0.1vh 4vw);
+            @include container-color(var(--tasks-friends-counter-background), var(--border-radius-regular), 0.1vh 4vw);
 
             .friends-count {
               white-space: nowrap;
               font-weight: bold;
-              opacity: 0.8;
               @include text-color(var(--tasks-friends-counter-border));
             }
           }
@@ -55,10 +54,10 @@
         column-gap: 1.7vw;
 
         .friends-item-border {
-          @include container-color(var(--tasks-border), 3vw, 1px);
+          @include container-color(var(--tasks-refferal-item-border), 10px, 1px);
 
           .friends-item-background {
-            @include container-color(var(--tasks-background), 3vw, 1vh 2vw);
+            @include container-color(var(--tasks-background), 10px, 1vh 2vw);
 
             .friends-item {
               display: grid;
@@ -67,15 +66,14 @@
               "reward reward";
               justify-items: center;
               align-items: center;
-              column-gap: 1vw;
-              row-gap: 0.5vh;
+              gap: 10px;
 
               .friends-image {
                 grid-area: image;
               }
 
               .friends-count {
-                font-size: 2vh;
+                font-size: 12px;
                 font-weight: bold;
                 white-space: nowrap;
               }
@@ -87,7 +85,7 @@
 
               .reward-value-border {
                 grid-area: reward;
-                @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
+                @include container-color(var(--background-reward-value), 46px, 4px 6px);
 
                 .reward-value-background {
                   white-space: nowrap;

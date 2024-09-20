@@ -69,7 +69,7 @@ const RatingItem = async () => {
                             <h3 className="friends-counter">{user.rank}</h3>
                             <h3>{user.name}</h3>
                         </div>
-                        <h6 className={`${styles.reward} ${styles.rewardBorder} gradient-border`}>{user.points} points</h6>
+                        <h6 className={styles.reward}>{user.points} points</h6>
                     </div>
                 ))}
             </div>

@@ -114,11 +114,12 @@ h6 {
 .friends-counter {
   display: flex;
   color: #ffffff;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   align-items: center;
   justify-content: center;
-  @include container-color(#5e6065, 2vw);
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+  @include container-color(#5e6065, 10px);
 }
 
 .text-litle-container {

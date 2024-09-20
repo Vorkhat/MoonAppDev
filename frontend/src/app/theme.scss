@@ -1,8 +1,9 @@
 
 html {
-  --background-input: rgba(14, 12, 16, 0.24)
+  --background-input: rgba(14, 12, 16, 0.24);
+  --border-radius-regular: 13px;
 }
 
 html[data-theme="dark"] {
-  --background-input: #1B1E23;
+  --background-input: #1b1e23;
 }

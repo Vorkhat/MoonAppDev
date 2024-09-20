@@ -35,8 +35,8 @@
 
     .radio-element {
       &:checked + .custom-radio-label {
-        background-color: #BABABB;
-        border-radius: 2vw;
+        background-color: #bababb;
+        border-radius: var(--border-radius-regular);
         transition: background-color 0.3s ease, color 0.3s ease;
       }
     }
@@ -46,7 +46,7 @@
       text-align: center;
       cursor: pointer;
       background: transparent;
-      border-radius: 2vw;
+      border-radius: var(--border-radius-regular);
       padding: 10px 20px;
       width: 100%;
       font-size: 16px;

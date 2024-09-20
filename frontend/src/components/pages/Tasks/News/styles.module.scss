@@ -11,7 +11,7 @@
     @include container-color(var(--tasks-border), 3vw, 1px);
 
     .task-background {
-      @include container-color(var(--tasks-background), 3vw, 1vh 2vw);
+      @include container-color(var(--tasks-background), 3vw, 10px);
 
       .task-item {
         display: grid;
@@ -20,7 +20,7 @@
         grid-template-columns: repeat(2, min-content);
         justify-items: start;
         justify-content: center;
-        column-gap: 2vw;
+        column-gap: 10px;
         row-gap: 0.8vh;
         align-items: center;
         height: 100%;
@@ -35,7 +35,7 @@
         }
 
         .reward-value-border {
-          @include container-color(var(--background-reward-value), 3vw, 0.5vh 1.5vw);
+          @include container-color(var(--background-reward-value), 46px, 4px 6px);
 
           .reward-value-background {
             white-space: nowrap;

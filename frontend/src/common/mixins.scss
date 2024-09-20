@@ -1,11 +1,10 @@
-
 @mixin text-color($text-color) {
   background: $text-color;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
 
-@mixin container-color($background, $border-radius, $padding: 0) {
+@mixin container-color($background, $border-radius, $padding: 10px) {
   background: $background;
   border-radius: $border-radius;
   padding: $padding;

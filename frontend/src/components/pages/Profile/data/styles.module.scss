@@ -16,7 +16,7 @@
       grid-area: photo;
       height: 80px;
       width: 80px;
-      border-radius: 2vw;
+      border-radius: var(--border-radius-regular);
     }
 
     .user-contacts {
@@ -33,10 +33,10 @@
 
       .user-rank {
         white-space: nowrap;
-        color: #FFFFFF;
+        color: #ffffff;
         padding: 4px 10px;
-        border-radius: 2vw;
-        background: linear-gradient(90deg, #007AFF -20%, #72C8C8 100%);
+        border-radius: var(--border-radius-regular);
+        background: linear-gradient(90deg, #007aff -20%, #72c8c8 100%);
       }
     }
 
@@ -47,7 +47,7 @@
       justify-content: space-evenly;
       padding: 1vh 2vw;
       background: var(--profile-background-balance);
-      border-radius: 2.5vw;
+      border-radius: 13px;
 
       .user-balance-value {
         @include text-color(var(--profile-text-color-balance-amount));

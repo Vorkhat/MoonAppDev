@@ -7,25 +7,25 @@
   .container {
     display: flex;
     align-items: center;
-    background: #2FACFF;
+    background: #2facff;
+    border: 1px solid;
+    border-image-source: linear-gradient(180deg, #005dff 0%, rgba(11, 58, 140, 0.4) 100%);
     padding: 2vh 0;
-    border-radius: 3vw;
+    border-radius: 13px;
   }
 
   .invitation {
     display: flex;
     width: 83%;
-    border: 1px solid #A1D9FF;
     justify-content: center;
     column-gap: 2.5vw;
     font-size: 2.5vh;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .copy-link {
     display: flex;
     width: 17%;
     justify-content: center;
-    border: 1px solid #A1D9FF;
   }
 }
