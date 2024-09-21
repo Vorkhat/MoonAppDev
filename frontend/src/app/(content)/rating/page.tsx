@@ -2,12 +2,22 @@ import './theme.scss';
 import styles from './styles.module.scss';
 import RatingItem from '@/components/pages/Rating/RatingItem.tsx';
 import { getTranslations } from 'next-intl/server';
+import { prisma } from '@/prisma';
 
 
 export default async function Rating() {
 
     const translator = await getTranslations('Rating');
 
+
+    const topSnapshotReward = await prisma.topSnapshot.findFirst({
+                                                               orderBy: {
+                                                                   id: 'desc',
+                                                               },
+                                                               select: {
+                                                                   reward: true,
+                                                               },
+                                                           });
     return (
         <div className={styles.ratingPage}>
             <div className={styles.headerConrainer}>
@@ -27,7 +37,7 @@ export default async function Rating() {
                         fontSize: '1.5em',
                         fontWeight: 'bold',
                     }}>
-                        {translator('header.footer')} 1000$ 🤑
+                        {translator('header.footer')} {topSnapshotReward?.reward.toString() || '0'}$ 🤑
                     </span>
                 </p>
             </div>
