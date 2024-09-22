@@ -8,7 +8,11 @@ html[data-theme='dark'] {
     --quiz-background: #0E0C10;
     --quiz-description-color: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
     --quiz-background-color-begin: #0E0C10;
-    --quiz-text-color-begin: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%)
+    --quiz-text-color-begin: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
+    --quiz-background-input: #0E0C10;
+    --quiz-radio-border-gradient: linear-gradient(140deg, #86f1ad 0%, #b0e7ff 30%, #f5c4ff 100%);
+    --quiz-radio-background-gradient: #0E0C10;
+    --quiz-text-color-radio :linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
 }
 
 html[data-theme='light'] {
@@ -17,5 +21,9 @@ html[data-theme='light'] {
     --quiz-background: #FFFFFF;
     --quiz-description-color: #181818;
     --quiz-background-background-color-begin: none;
+    --quiz-background-input: rgba(14, 12, 16, 0.24);
     --quiz-text-color-begin: #0E0C10;
+    --quiz-radio-border-gradient: none;
+    --quiz-radio-background-gradient: linear-gradient(90deg, #B0E7FF 0, #F5C4FF 100%);
+    --quiz-text-color-radio: #0C0C0C;
 }

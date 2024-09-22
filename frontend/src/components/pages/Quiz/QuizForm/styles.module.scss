@@ -41,6 +41,12 @@
       }
     }
 
+    .radio-border {
+      --padding: 1px;
+      --border-radius: 2.5vw;
+      --border-gradient: var(--quiz-radio-border-gradient);
+    }
+
     .custom-radio-label {
       display: inline-block;
       text-align: center;
@@ -51,16 +57,17 @@
       width: 100%;
       font-size: 16px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      font-weight: 600;
+      @include text-color(var(--quiz-text-color-radio));
     }
   }
 
   .quiz-border-begin {
     width: 100%;
-    @include container-color(var(--quiz-border-color-begin), 3vw, 1px);
 
     .quiz-background-begin {
       width: 100%;
-      @include container-color(var(--quiz-background-color-begin), 3vw);
+      @include container-color(var(--quiz-background-color-begin), 2vw, 0);
     }
   }
 

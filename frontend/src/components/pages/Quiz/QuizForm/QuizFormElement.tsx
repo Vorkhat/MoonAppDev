@@ -86,7 +86,8 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                                style={{
                                    width: "100%",
                                    padding: "1vh 1vw",
-                                   background: "#C4C4C4",
+                                   border: '1px solid #C4C4C4',
+                                   background: "var(--quiz-background-input)",
                                    borderRadius: "2vw",
                                }}
                         />
@@ -100,13 +101,13 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                 {
                         await Promise.all(
                             radio.options!.map(async ({ name, value }, index) => (
-                                <div key={`${element.id}-${index}`}
+                                <div key={`${element.id}-${index}`} className={`${styles.radioBorder} gradient-border`}
                                      style={{
                                          position: "relative",
                                          display: "inline-block",
                                          width: "100%",
-                                         background: "var(--quiz-border)",
-                                         borderRadius: "2vw"
+                                         background: "var(--quiz-radio-background-gradient)",
+                                         borderRadius: "2vw",
                                 }}>
                                     <input
                                         type="radio"
@@ -116,7 +117,7 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                                         className={styles.radioElement}
                                         style={{ display: "none" }}
                                     />
-                                    <label htmlFor={`${element.id}-${index}`} className={styles.customRadioLabel} style={{color: "#0C0C0C"}}>
+                                    <label htmlFor={`${element.id}-${index}`} className={styles.customRadioLabel}>
                                         {await get(value)}
                                     </label>
                                 </div>
