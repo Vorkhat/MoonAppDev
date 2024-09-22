@@ -45,5 +45,5 @@ export async function GET(req: NextRequest, { params }: { params: { id: number }
         return NextResponse.redirect(`https://${req.headers.get('host')}/tasks/story`);
     }
 
-    return NextResponse.redirect(task.task.url);
+    return NextResponse.redirect(`https://${req.headers.get('host')}/api/openUrl?url=${task.task.url}`);
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
 import styles from './styles.module.scss';
 import { TasksIconMapper } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
 import ContainerColor from '@/common/ContainerColor';
+import OpenUrlButton from '@/components/pages/Tasks/OpenUrlButton.tsx';
 
 
 export function mapTaskIcon(task: string) {
@@ -24,7 +24,7 @@ const CreateItem = ({ url, data, reward }: InternalProps) => {
     //todo text translation
     return (
         <ContainerColor classNameBorder={styles.taskLinkBorder} classNameBackground={styles.taskLinkBackground}>
-            <Link className={styles.taskLink} href={url}>
+            <OpenUrlButton className={styles.taskLink} href={url}>
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -46,7 +46,7 @@ const CreateItem = ({ url, data, reward }: InternalProps) => {
                 >
                     <span className={styles.rewardValue}>{reward} points</span>
                 </ContainerColor>
-            </Link>
+            </OpenUrlButton>
         </ContainerColor>
     );
 };

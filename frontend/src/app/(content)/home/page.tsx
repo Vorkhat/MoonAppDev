@@ -12,6 +12,7 @@ import telegramLogo from '@/app/(content)/home/images/telegramLogo.svg';
 import foxIcon from '@/app/(content)/home/images/fox.png';
 import headerIcon from '@/app/(content)/home/images/headerImage.png';
 import clockIcon from '@/app/(content)/home/images/clock.png';
+import OpenInTelegramButton from '@/components/input/openInTelegramButton.tsx';
 
 const logoFont = localFont({ src: './LogoRegular.ttf' });
 
@@ -94,8 +95,9 @@ export default async function Home() {
                        width="137"
                        priority={true}
                 />
-                <a className={`${styles.invitationTelegram} ${styles.invitationTelegramBorder} gradient-border`}
-                   href={process.env.BOT_URL}>
+                <OpenInTelegramButton
+                    className={`${styles.invitationTelegram} ${styles.invitationTelegramBorder} gradient-border`}
+                    href={process.env.BOT_URL}>
                     <Image className={styles.telegramLogo}
                            src={telegramLogo}
                            alt="telegram logo"
@@ -104,7 +106,7 @@ export default async function Home() {
                     <h3 className={styles.invitationTelegramText}>
                         {translator('content.invite')}
                     </h3>
-                </a>
+                </OpenInTelegramButton>
             </main>
             {
                 time && (
