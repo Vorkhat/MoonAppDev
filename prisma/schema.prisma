@@ -171,7 +171,7 @@ model TopSnapshot {
   id        BigInt            @id @default(autoincrement())
   takenAt   DateTime
   completed Boolean           @default(false)
-  reward    BigInt
+  reward    BigInt            @default(0)
   users     TopSnapshotUser[]
 }
 
