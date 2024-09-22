@@ -24,7 +24,7 @@ const ProfileFriends = async () => {
 
     return (
         <div className={styles.friendsContainer}>
-            <OpenInTelegramButton className={`${styles.container} ${styles.invitation}`}
+            <OpenInTelegramButton className={`${styles.container} ${styles.invitation} ${styles.containerBorder} gradient-border`}
                                   href={`https://t.me/share/url?url=${refLink}`}>
                 <Image src={ImageInvitation} alt={'/'}/>
                 <h3 className={styles.invitationText}

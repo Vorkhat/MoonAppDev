@@ -8,10 +8,15 @@
     display: flex;
     align-items: center;
     background: #2facff;
-    border: 1px solid;
-    border-image-source: linear-gradient(180deg, #005dff 0%, rgba(11, 58, 140, 0.4) 100%);
+    border-radius: var(--border-radius-regular);
     padding: 2vh 0;
-    border-radius: 13px;
+  }
+
+  .container-border {
+    position: relative;
+    --padding: 1px;
+    --border-radius: var(--border-radius-regular);
+    --border-gradient: linear-gradient(180deg, #005dff 0%, rgba(11, 58, 140, 0.4) 100%);
   }
 
   .invitation {

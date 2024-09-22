@@ -27,6 +27,7 @@
 }
 
 html {
+  --home-background-logo: none;
   --home-logo-border: none;
   --home-text-reward: #0057db;
   --home-text-invitation-telegram: #ffffff;
@@ -36,6 +37,7 @@ html {
 
 
 html[data-theme="dark"] {
+  --home-background-logo: rgba(0, 0, 0, 0.34);
   --home-logo-border: #535252;
   --home-text-reward: #8dfafa;
   --home-background-timer: rgba(0, 0, 0, 0.34);

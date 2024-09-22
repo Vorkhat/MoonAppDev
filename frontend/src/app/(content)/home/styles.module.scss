@@ -30,11 +30,17 @@
           flex-direction: row;
           justify-content: center;
           align-items: center;
-
+          background: var(--home-background-logo);
           width: 48px;
           height: 48px;
           border-radius: 15px;
-          border: 1px solid var(--home-logo-border);
+        }
+
+        .logo-border {
+          position: relative;
+          --padding: 1px;
+          --border-radius: 15px;
+          --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
         }
       }
     }
@@ -121,10 +127,15 @@
           background: var(--home-background-timer);
           height: 35px;
           width: 30px;
-          border: 1px solid;
-          border-image-source: linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
           border-radius: 8px;
           padding: 10px;
+        }
+
+        .data-border {
+          position: relative;
+          --padding: 1px;
+          --border-radius: 8px;
+          --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
         }
       }
 

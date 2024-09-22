@@ -18,7 +18,7 @@ const CopyButton = ({ str }: { str: string }) => {
     };
 
     return (
-        <button className={`${styles.container} ${styles.copyLink}`} onClick={copyToClipboard}>
+        <button className={`${styles.container} ${styles.copyLink} ${styles.containerBorder} gradient-border`} onClick={copyToClipboard}>
             <Image src={ImageCopyLink} alt={'/'}/>
         </button>
     );

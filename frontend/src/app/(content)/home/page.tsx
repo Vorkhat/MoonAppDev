@@ -43,7 +43,7 @@ const Timer = ({ value, title }: { value: string, title: string }) => (
         <div className={styles.timerData}>
             {
                 [ ...value ].map((char, i) => (
-                    <h2 key={i} className={styles.data}>{char}</h2>
+                    <h2 key={i} className={`${styles.data} ${styles.dataBorder} gradient-border`}>{char}</h2>
                 ))
             }
         </div>
@@ -61,7 +61,7 @@ export default async function Home() {
                 <ThemeSwitcher/>
                 <div className={styles.headerMain}>
                     <div className={styles.headerContent}>
-                        <div className={`${styles.logo}`}>
+                        <div className={`${styles.logo} ${styles.logoBorder} gradient-border`}>
                             <Image src={headerIcon}
                                    alt="logo"
                                    height="30"
