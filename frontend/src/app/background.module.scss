@@ -11,9 +11,10 @@
     grid-template-rows: 1fr;
     z-index: 1;
     flex-grow: 1;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     overflow-y: scroll;
     scrollbar-width: none;
+    height: 70vh;
   }
 
   .footer {
@@ -21,6 +22,7 @@
     bottom: 0;
     position: relative;
     z-index: 1;
+    height: auto;
   }
 
   .background__gradient {
