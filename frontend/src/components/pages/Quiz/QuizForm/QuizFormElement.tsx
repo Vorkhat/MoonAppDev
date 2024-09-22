@@ -101,25 +101,30 @@ async function QuizFormElementContent({ element }: { element: FormElement }) {
                 {
                         await Promise.all(
                             radio.options!.map(async ({ name, value }, index) => (
-                                <div key={`${element.id}-${index}`} className={`${styles.radioBorder} gradient-border`}
-                                     style={{
-                                         position: "relative",
-                                         display: "inline-block",
-                                         width: "100%",
-                                         background: "var(--quiz-radio-background-gradient)",
-                                         borderRadius: "2vw",
+                                <div key={`${element.id}-${index} ${styles.radioBorder}`} style={{
+                                    background: "var(--quiz-radio-border-gradient)",
+                                    padding: "1px",
+                                    borderRadius: "2vw",
                                 }}>
-                                    <input
-                                        type="radio"
-                                        id={`${element.id}-${index}`}
-                                        name={element.id}
-                                        value={`${element.id}-${name}`}
-                                        className={styles.radioElement}
-                                        style={{ display: "none" }}
-                                    />
-                                    <label htmlFor={`${element.id}-${index}`} className={styles.customRadioLabel}>
-                                        {await get(value)}
-                                    </label>
+                                    <div style={{
+                                        position: "relative",
+                                        display: "inline-block",
+                                        width: "100%",
+                                        background: "var(--quiz-radio-background-gradient)",
+                                        borderRadius: "2vw",
+                                    }}>
+                                        <input
+                                            type="radio"
+                                            id={`${element.id}-${index}`}
+                                            name={element.id}
+                                            value={`${element.id}-${name}`}
+                                            className={styles.radioElement}
+                                            style={{ display: "none" }}
+                                        />
+                                        <label htmlFor={`${element.id}-${index}`} className={styles.customRadioLabel}>
+                                            {await get(value)}
+                                        </label>
+                                    </div>
                                 </div>
                             ))
                         )

@@ -85,10 +85,12 @@ p {
   font-size: 12px;
 }
 
-input[type="radio"]:checked + label::before {
-  visibility: hidden;
-  height: 0;
-  width: 0;
+input[type="radio"]:checked + label {
+  background-color: #bababb;
+  border-radius: var(--border-radius-regular);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #0c0c0c;
+  padding: 10px 20px;
 }
 
 h6 {

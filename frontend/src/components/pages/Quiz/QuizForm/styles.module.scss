@@ -35,16 +35,8 @@
 
     .radio-element {
       &:checked + .custom-radio-label {
-        background-color: #bababb;
-        border-radius: var(--border-radius-regular);
-        transition: background-color 0.3s ease, color 0.3s ease;
+        opacity: 0.6;
       }
-    }
-
-    .radio-border {
-      --padding: 1px;
-      --border-radius: 2.5vw;
-      --border-gradient: var(--quiz-radio-border-gradient);
     }
 
     .custom-radio-label {
