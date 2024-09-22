@@ -4,8 +4,8 @@ import { useSession } from '@/components/session';
 import ImageInvitation from '@/app/(content)/profile/images/invitations.svg';
 import CopyButton from '@/components/pages/Profile/friends/copyButton';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { prisma } from '@/prisma';
+import OpenInTelegramButton from '@/components/pages/Profile/friends/openInTelegramButton.tsx';
 
 const ProfileFriends = async () => {
     const { userId } = await useSession();
@@ -24,14 +24,15 @@ const ProfileFriends = async () => {
 
     return (
         <div className={styles.friendsContainer}>
-            <Link className={`${styles.container} ${styles.invitation}`} href={`https://t.me/share/url?url=${refLink}`}>
+            <OpenInTelegramButton className={`${styles.container} ${styles.invitation}`}
+                                  href={`https://t.me/share/url?url=${refLink}`}>
                 <Image src={ImageInvitation} alt={'/'}/>
                 <h3 className={styles.invitationText}
-                    style={{fontWeight: '500'}}
+                    style={{ fontWeight: '500' }}
                 >
                     {translator('footer')}
                 </h3>
-            </Link>
+            </OpenInTelegramButton>
             <CopyButton str={refLink}/>
         </div>
     );
