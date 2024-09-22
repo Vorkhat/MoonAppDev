@@ -9,6 +9,7 @@ html {
   --profile-border-reward: linear-gradient(140deg, #86f1ad 0%, #b0e7ff 30%, #f5c4ff 100%);
   --profile-background-reward: #ffffff;
   --profile-text-color-reward: #0c0c0c;
+  --profile-invitions-border: linear-gradient(180deg, #A1D9FF 0%, rgba(11, 58, 140, 0.4) 100%);
 }
 
 html[data-theme="dark"] {
@@ -19,4 +20,5 @@ html[data-theme="dark"] {
   --profile-border-reward: #ffffff08;
   --profile-background-reward: #0e0c10;
   --profile-text-color-reward: linear-gradient(90deg, #b0e7ff 0%, #f5c4ff 100%);
+  --profile-invitions-border: linear-gradient(180deg, #2d68c5 0%, rgba(11, 58, 140, 0.4) 100%);
 }
