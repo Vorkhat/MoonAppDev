@@ -1,11 +1,13 @@
 .menu-items {
   display: flex;
-  width: 90%;
+  height: 72px;
+  width: 342px;
   background: var(--background-menu) no-repeat center bottom;
   background-size: contain;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-bottom: 1.5vh;
-  column-gap: 4%;
+  padding: 0 15px;
+  column-gap: 10px;
 
   .menu-item {
     display: grid;
@@ -25,8 +27,8 @@
       transition: bottom 0.2s ease-in-out;
 
       .item-icon {
-        width: 7vw;
-        height: 3.5vh;
+        width: 20px;
+        height: 20px;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;

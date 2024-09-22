@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   width: 90%;
+  gap: 40px;
   margin: 24px auto 0;
 
   .header {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 70px;
 
     .header-main {
       display: grid;
@@ -101,7 +101,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 40px;
     row-gap: 1vh;
 
     .clock-icon {
