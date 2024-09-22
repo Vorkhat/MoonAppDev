@@ -4,9 +4,6 @@
 :root {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  position: fixed;
-
   background-color: #ffffff;
   color: #000000;
   --color-reward-value: #0c0c0c;
@@ -14,6 +11,7 @@
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
   --background-reward-value: linear-gradient(90deg, #b0e7ff 0%, #f5c4ff 100%);
   view-transition-name: none;
+  scrollbar-width: none;
 }
 
 html[data-theme="dark"] {
@@ -21,11 +19,6 @@ html[data-theme="dark"] {
   color: #ffffff;
   --color-reward-value: #fff881;
   --background-reward-value: rgba(255, 255, 255, 0.08);
-}
-
-body {
-  width: 100%;
-  height: 100%;
 }
 
 @keyframes move-out {
