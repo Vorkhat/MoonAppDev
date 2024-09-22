@@ -2,18 +2,17 @@
   display: grid;
   grid-template-areas: "text"
                        "icon";
-  row-gap: 0.5vh;
   align-items: center;
   justify-items: center;
   align-self: end;
 
   .theme-icon {
-    width: 8vw;
-    height: 2vh;
+    width: 32px;
+    height: 32px;
   }
 }
 
 p.theme-text {
   white-space: nowrap;
-  font-size: 1.3vh;
+  font-size: 6px;
 }

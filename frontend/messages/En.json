@@ -6,7 +6,7 @@
       "reward": "Prize pool - ",
       "invite": "Subscribe to our channel"
     },
-    "footer":  {
+    "footer": {
       "text": "Countdown to the next prize draw:",
       "timer": {
         "days": "d.",
@@ -74,5 +74,8 @@
       "footer": "of"
     },
     "content": "Final leaderboard snapshot: "
+  },
+  "Error": {
+    "header": "An error has occurred"
   }
 }
