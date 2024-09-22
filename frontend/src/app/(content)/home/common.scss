@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "logo font";
-  src: url(/fonts/logoRegular.ttf) format("truetype");
-}
-
 @property --home-main-background {
   syntax: "<image>";
   initial-value: #ffffff;
@@ -32,6 +27,7 @@
 }
 
 html {
+  --home-logo-border: none;
   --home-text-reward: #0057db;
   --home-text-invitation-telegram: #ffffff;
   --home-background-timer: rgba(0, 0, 0, 0.06);
@@ -40,6 +36,7 @@ html {
 
 
 html[data-theme="dark"] {
+  --home-logo-border: #535252;
   --home-text-reward: #8dfafa;
   --home-background-timer: rgba(0, 0, 0, 0.34);
   --home-text-invitation-telegram: linear-gradient(90deg, #b0e7ff, #f5c4ff);

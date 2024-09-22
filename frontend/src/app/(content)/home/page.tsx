@@ -61,7 +61,7 @@ export default async function Home() {
                 <ThemeSwitcher/>
                 <div className={styles.headerMain}>
                     <div className={styles.headerContent}>
-                        <div className={styles.logo}>
+                        <div className={`${styles.logo}`}>
                             <Image src={headerIcon}
                                    alt="logo"
                                    height="30"
