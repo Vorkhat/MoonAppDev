@@ -31,7 +31,8 @@
         }
 
         .task-text {
-          color: var(--tasks-text-color)
+          font-weight: 600;
+          @include text-color(var(--tasks-partner-link));
         }
 
         .reward-value-border {
