@@ -8,7 +8,7 @@ export default async function (tx: Omit<PrismaClient, runtime.ITXClientDenyList>
                                      },
                                      data: {
                                          completedAt: {
-                                             set: 'now()',
+                                             set: new Date(),
                                          },
                                      },
                                      select: {
