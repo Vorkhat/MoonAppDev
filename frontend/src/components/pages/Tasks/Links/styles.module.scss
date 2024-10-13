@@ -22,17 +22,10 @@
           @include text-color(var(--tasks-friends-counter-border));
         }
 
-        .reward-value-border {
-          @include container-color(var(--tasks-link-border-reward), 3vw, 1px);
-
-          .reward-value-background {
-            @include container-color(var(--tasks-link-background-reward), 3vw, 0.5vh 1.5vw);
-
-            .rewardValue {
-              white-space: nowrap;
-              @include text-color(var(--color-reward-value));
-            }
-          }
+        .rewardValue {
+          padding: 3px;
+          border: 1px solid #0c0c0c;
+          border-radius: var(--border-radius-regular);
         }
       }
     }

@@ -14,7 +14,7 @@ export enum TasksIcon {
     PHONE = `$phone.svg`,
     WEB = `$web.svg`,
     INSTAGRAM = `instagram.svg`,
-    DOWNLAND = `download.svg`
+    DOWNLOAD = `download.svg`
 }
 
 const completeTaskCreation = async (ctx: BotContext) => {
@@ -100,6 +100,9 @@ const replyTrackerDetails = async (ctx: BotContext, type: TrackerType): Promise<
             return true;
 
         case TrackerType.External:
+
+        case TrackerType.Sponsored:
+
         case TrackerType.PublishStory:
             return false;
 
@@ -136,7 +139,11 @@ export default new Scenes.WizardScene<BotContext>(
         }),
     new Composer<BotContext>()
         .on('text', async ctx => {
-            if (!ctx.scene.session.task || !URL.canParse(ctx.message.text)) {
+
+            if (ctx.message.text.toLowerCase() === 'menu') {
+                await ctx.reply(`Done`);
+                return ctx.scene.leave()
+            } else if (!ctx.scene.session.task || !URL.canParse(ctx.message.text)) {
                 return ctx.reply('Invalid url');
             }
 
@@ -144,7 +151,7 @@ export default new Scenes.WizardScene<BotContext>(
 
             await ctx.reply('Please select icon', Markup.inlineKeyboard(
                 Object.keys(TasksIcon).map(b => Markup.button.callback(b.toLowerCase(), `taskIconType/${b}`)),
-                { columns: 1 }));
+                { columns: 2 }));
 
             return ctx.wizard.next();
         }),
@@ -199,6 +206,7 @@ export default new Scenes.WizardScene<BotContext>(
             return ctx.reply('Select tracker type',
                 Markup.inlineKeyboard(
                     Object.entries(TrackerType).map(type => Markup.button.callback(type[1], `trackerType/${type[0]}`)),
+                    { columns: 2 }
                 ),
             );
         })

@@ -3,5 +3,6 @@ export enum TrackerType {
     Comment = 'comment',
     Invite = 'invite',
     External = 'external',
+    Sponsored = 'sponsored',
     PublishStory = 'publishStory',
 }

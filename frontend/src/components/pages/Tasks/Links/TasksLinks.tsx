@@ -1,14 +1,20 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { TasksIconMapper } from '../tasksIcon.ts';
+import { Icon, taskIconMapping, TasksIconMapper } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
 import ContainerColor from '@/common/ContainerColor';
 import OpenUrlButton from '@/components/pages/Tasks/OpenUrlButton.tsx';
+import { currencyName } from '@/utils/constants.ts';
+import Image from 'next/image';
 
 
-export function mapTaskIcon(task: string) {
-    return TasksIconMapper.Web; // todo task icons mapping
+export function mapTaskIcon(task: string): Icon | undefined {
+    const icon = taskIconMapping[task.toUpperCase()];
+    if (!icon) {
+        console.warn(`Icon for task '${task}' is not defined.`);
+    }
+    return icon;
 }
 
 type InternalProps = {
@@ -19,9 +25,9 @@ type InternalProps = {
 
 const CreateItem = ({ url, data, reward }: InternalProps) => {
 
-    const description = typeof data.description === 'string' ? data.description : 'Undefined';
+    const iconType = typeof data.iconType === 'string' ? data.iconType : 'Undefined';
     const translarot = useTranslations('Tasks');
-    //todo text translation
+
     return (
         <ContainerColor classNameBorder={styles.taskLinkBorder} classNameBackground={styles.taskLinkBackground}>
             <OpenUrlButton className={styles.taskLink} href={url}>
@@ -29,23 +35,12 @@ const CreateItem = ({ url, data, reward }: InternalProps) => {
                     display: 'flex',
                     alignItems: 'center',
                 }}>
-                    <div style={{
-                        marginLeft: '1.5vw',
-                        mask: `url(${mapTaskIcon(description)}) no-repeat center`,
-                        backgroundColor: 'var(--tasks-text-color)',
-                        width: 20,
-                        height: 20,
-                    }}/>
+                    <Image src={mapTaskIcon(iconType)} width={23} height={23} alt="/"/>
                     <span className={styles.linkText}>
                         {translarot(`content.others.${'web'}`)}
                     </span>
                 </div>
-                <ContainerColor
-                    classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
-                    classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
-                >
-                    <span className={styles.rewardValue}>{reward} points</span>
-                </ContainerColor>
+                <h6 className={styles.rewardValue}>{reward} {currencyName}</h6>
             </OpenUrlButton>
         </ContainerColor>
     );

@@ -28,3 +28,13 @@ export const TasksIconMapper: Icons = {
     Instagram: InstagramIcon,
     Download: DownloadIcon,
 };
+
+export const taskIconMapping: Record<string, Icon> = {
+    FRIENDS: TasksIconMapper.Friends,
+    PARTNERS: TasksIconMapper.Partners,
+    REPOST: TasksIconMapper.Repost,
+    PHONE: TasksIconMapper.Phone,
+    WEB: TasksIconMapper.Web,
+    INSTAGRAM: TasksIconMapper.Instagram,
+    DOWNLOAD: TasksIconMapper.Download,
+};

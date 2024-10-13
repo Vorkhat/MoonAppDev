@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { TasksIconMapper } from '../tasksIcon.ts';
+import { Icon, taskIconMapping, TasksIconMapper } from '../tasksIcon.ts';
 import { TaskProps } from '@/app/(content)/tasks/page.tsx';
 import { Task } from '@prisma/client/';
 import { currencyName } from '@/utils/constants.ts';
@@ -12,8 +12,12 @@ import { getCurrentSessionLanguage } from '@/locale/locale';
 import ContainerColor from '@/common/ContainerColor';
 
 
-export function mapTaskIcon(task: Task) {
-    return TasksIconMapper.Repost; // todo task icons mapping
+export function mapTaskIcon(task: string): Icon | undefined {
+    const icon = taskIconMapping[task.toUpperCase()];
+    if (!icon) {
+        console.warn(`Icon for task '${task}' is not defined.`);
+    }
+    return icon;
 }
 
 export async function TaskItem({ id, task, totalReward, disabled }: {
@@ -22,6 +26,7 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
     totalReward: number,
     disabled?: true
 }) {
+
     const data = task.data as JsonObject;
     const description = await prisma.localizationValue.findUnique({
         where: {
@@ -35,12 +40,13 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
         },
     });
 
+
     return (
         <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']}
                         classNameBackground={styles.taskBackground}>
             <Link className={styles.taskItem} href={disabled ? '' : `/api/task/${id}`}>
                 <Image className={styles.taskImage}
-                       src={mapTaskIcon(task)}
+                       src={mapTaskIcon(String(data?.iconType))}
                        width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}
                      style={{}}>{description?.value || 'Undefined'}</div>
@@ -56,12 +62,20 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
 }
 
 export function TasksNews({ tasks }: TaskProps) {
+
     return (
         <>
             <div className={styles.tasksItems}>
-                {tasks.map(task => (
-                    <TaskItem key={task.id} id={task.id} task={task.task} totalReward={task.totalReward}/>
-                ))}
+                {tasks.
+                      filter(task => task.isVisible)
+                      .map(task => (
+                        <TaskItem
+                            key={task.id}
+                            id={task.id}
+                            task={task.task}
+                            totalReward={task.totalReward}
+                        />
+                    ))}
             </div>
         </>
     );

@@ -6,8 +6,7 @@ import {
     taskCreateScene,
     topSnapshotCreateScene,
     rolesScene,
-    balanceScene,
-    formVisibleEditor
+    balanceScene, taskEditorScene,
 } from '@/scenes';
 import { Language } from '@prisma/client';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
@@ -23,6 +22,7 @@ import {
 } from '@/utils/formElement';
 import { prisma } from '@/index';
 import { InlineKeyboardButton } from 'telegraf/src/core/types/typegram';
+import { formatNumber } from '@/utils/utils.js';
 
 const bot = new Composer<BotContext>();
 
@@ -35,7 +35,7 @@ bot.settings(ctx => {
 const stage = new Scenes.Stage<BotContext>(
     [ taskCreateScene, localizationValueEditor,
              formRewardEditor, topSnapshotCreateScene,
-             balanceScene, rolesScene, formVisibleEditor ], {
+             balanceScene, rolesScene, taskEditorScene ], {
         ttl: 360,
     });
 
@@ -191,7 +191,7 @@ bot.action(/top\/(\d+)/, async ctx => {
         where: { id: parseInt(ctx.match[1]) },
     });
 
-    return ctx.reply(`Top snapshot\nId: ${top.id}\nDate: ${top.takenAt.toLocaleDateString()}`);
+    return ctx.reply(`Top snapshot\nId: ${top.id}\nReward: ${formatNumber(Number(top.reward))}\nDate: ${top.takenAt.toLocaleDateString()}`);
 });
 
 bot.action('taskCreate', async ctx => {
@@ -219,6 +219,9 @@ bot.action(/task\/(\d+)/, async ctx => {
                 Markup.button.callback('Delete', `taskDelete/${task.id}`),
                 Markup.button.callback('Edit', `taskEdit/${task.id}`),
             ],
+            [
+                Markup.button.callback('Edit isVisible', `isVisible/${task.id}`),
+            ],
             data.description ? [
                 Markup.button.callback('Edit Description', `localizationItem/${data.description}`),
             ] : [],
@@ -227,8 +230,30 @@ bot.action(/task\/(\d+)/, async ctx => {
 
 bot.action(/taskDelete\/(\d+)/, async ctx => {
     await ctx.db.task.delete({ where: { id: parseInt(ctx.match[1]) } });
-
+    await ctx.reply(`Complete`);
     return answerCbRemoveKeyboard(ctx);
+});
+
+bot.action(/taskEdit\/(\d+)/, async ctx => {
+    await answerCbRemoveKeyboard(ctx);
+    const taskId = ctx.match[1]
+
+    return ctx.scene.enter(taskEditorScene.id, { taskId } );
+});
+
+bot.action(/isVisible\/(\d+)/, async ctx => {
+
+    const curated_tasks = await ctx.db.curatedTask.findMany({
+        where: { taskId: parseInt(ctx.match[1]) },
+        select: { taskId: true, isVisible: true },
+    });
+
+    await ctx.db.curatedTask.updateMany({
+        where: { taskId: curated_tasks[0].taskId },
+        data: { isVisible: !curated_tasks[0].isVisible },
+    });
+
+    return await ctx.reply(`Task ${!curated_tasks[0].isVisible ? 'isVisible' : 'unVisible'}`);
 });
 
 bot.action(/form\/(\d+)/, async ctx => {
@@ -323,20 +348,22 @@ bot.action(/formRewardEditor\/(\d+)/, async ctx => {
 });
 
 bot.action(/formVisibleEditor\/(\d+)/, async ctx => {
-    await answerCbRemoveKeyboard(ctx);
-
     const { id, isVisible } = await ctx.db.form.findUniqueOrThrow({
         where: { id: parseInt(ctx.match[1]) },
         select: { id: true, isVisible: true },
     });
 
-    return ctx.scene.enter(formVisibleEditor.id, { id, isVisible });
+    await ctx.db.form.update({
+        where: { id },
+        data: { isVisible: !isVisible },
+    });
+
+    return await ctx.reply(`Form ${!isVisible ? 'isVisible' : 'unVisible'}`);
 });
 
 bot.action(/formDelete\/(\d+)/, async ctx => {
     await answerCbRemoveKeyboard(ctx);
-
-    console.log(ctx)
+    await ctx.reply(`Complete`);
     return ctx.db.form.delete({ where: { id: parseInt(ctx.match[1]) } });
 });
 
@@ -440,14 +467,6 @@ const formStepElementView = async (ctx: BotContext, element: FormElement) => {
             ], [
                 Markup.button.callback(caption.bold ? 'Unbold' : 'Bold', `formStepElementCaptionBold/${element.id}`),
             ]);
-        case FormElementType.TextInput:
-            const textInput = element as FormElementTextInput;
-
-            return replyElementFields(ctx, [
-                [ 'Label', textInput.label ],
-                [ 'Placeholder', textInput.placeholder ],
-                [ 'Default Value', textInput.defaultValue ],
-            ]);
 
         case FormElementType.Radio:
             const radio = element as FormElementRadio;
@@ -457,6 +476,16 @@ const formStepElementView = async (ctx: BotContext, element: FormElement) => {
                 [
                     Markup.button.callback('Add Option', `formStepElementRadioAddOption/${element.id}`),
                 ]);
+
+        default: {
+            const textInput = element as FormElementTextInput;
+
+            return replyElementFields(ctx, [
+                [ 'Label', textInput.label ],
+                [ 'Placeholder', textInput.placeholder ],
+                [ 'Default Value', textInput.defaultValue ],
+            ]);
+        }
     }
 };
 
@@ -484,16 +513,17 @@ const createElementFields = async (ctx: BotContext, type: FormElementType): Prom
             return {
                 text: await create(),
             };
-        case FormElementType.TextInput:
+        case FormElementType.Radio:
+            return {
+                options: [],
+            };
+        default: {
             return {
                 label: await create(),
                 placeholder: await create(),
                 defaultValue: await create(),
             };
-        case FormElementType.Radio:
-            return {
-                options: [],
-            };
+        }
     }
 };
 

@@ -54,15 +54,6 @@
     }
   }
 
-  .quiz-border-begin {
-    width: 100%;
-
-    .quiz-background-begin {
-      width: 100%;
-      @include container-color(var(--quiz-background-color-begin), 2vw, 0);
-    }
-  }
-
   .container-next {
     margin-top: auto;
   }

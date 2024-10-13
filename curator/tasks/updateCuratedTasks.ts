@@ -105,6 +105,9 @@ export async function createCuratedTasks(
 
             let category: CuratedTaskCategory;
             if (trackerType === TrackerType.External) {
+                category = CuratedTaskCategory.Internal;
+            }
+            else if (trackerType === TrackerType.Sponsored) {
                 category = CuratedTaskCategory.Sponsored;
             }
             else if (completionCount === 0) {

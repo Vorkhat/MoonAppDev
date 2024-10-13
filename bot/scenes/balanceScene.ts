@@ -61,8 +61,6 @@ export default new Scenes.WizardScene<BotContext>('balaneScene',
 
                 const user = await ctx.db.user.findUnique({ where: { id: userId } });
 
-                console.log()
-
                 if (!user) {
                     await ctx.reply('User not found');
                 }

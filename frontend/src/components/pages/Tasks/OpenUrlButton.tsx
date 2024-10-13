@@ -1,3 +1,5 @@
+'use client'
+
 import { ComponentProps, PropsWithChildren } from 'react';
 import OpenInTelegramButton from '@/components/input/openInTelegramButton.tsx';
 import OpenInExternalBrowserButton from '@/components/input/openInExternalBrowserButton.tsx';

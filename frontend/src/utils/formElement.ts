@@ -2,6 +2,7 @@ export enum FormElementType {
     Caption = 'caption',
     TextInput = 'textInput',
     Radio = 'radio',
+    Mail = 'email'
 }
 
 export type FormElementCaption = {

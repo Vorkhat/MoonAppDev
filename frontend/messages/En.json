@@ -34,6 +34,8 @@
     },
     "content": {
       "next-button": "Next",
+      "check-button": "Check",
+      "email-required": "You need to verify your email to proceed.",
       "begin-button": "Start"
     }
   },

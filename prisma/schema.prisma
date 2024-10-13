@@ -13,6 +13,7 @@ model User {
   points         Float             @default(0)
   privileged     Boolean           @default(false)
   language       Language
+  email          Boolean           @default(false)
   invitations    Invitation[]
   completedTasks TaskCompletion[]
   curatedTasks   CuratedTask[]
@@ -40,7 +41,7 @@ model Task {
   type        TaskType
   url         String
   data        Json             @default("{}") @db.JsonB
-  tracker     TaskTracker      @relation(fields: [trackerId], references: [id])
+  tracker     TaskTracker      @relation(fields: [trackerId], references: [id], onDelete: Cascade)
   trackerId   BigInt
   reward      Float
   scaling     Float            @default(1)
@@ -57,7 +58,7 @@ enum TaskType {
 
 model TaskCompletion {
   id          BigInt   @id @default(autoincrement())
-  task        Task     @relation(fields: [taskId], references: [id])
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId      BigInt
   user        User     @relation(fields: [userId], references: [id])
   userId      BigInt
@@ -85,9 +86,10 @@ model CuratedTask {
   startedAt   DateTime?
   completedAt DateTime?
   totalReward Float
+  isVisible   Boolean             @default(false)
   user        User                @relation(fields: [userId], references: [id])
   userId      BigInt
-  task        Task                @relation(fields: [taskId], references: [id])
+  task        Task                @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId      BigInt
 }
 

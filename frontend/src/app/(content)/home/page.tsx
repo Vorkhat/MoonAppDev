@@ -58,7 +58,9 @@ export default async function Home() {
     return (
         <div className={styles.homePageContainer}>
             <header className={styles.header}>
+                {/*
                 <ThemeSwitcher/>
+                */}
                 <div className={styles.headerMain}>
                     <div className={styles.headerContent}>
                         <div className={`${styles.logo} ${styles.logoBorder} gradient-border`}>

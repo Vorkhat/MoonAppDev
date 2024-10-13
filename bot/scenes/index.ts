@@ -4,9 +4,9 @@ import formRewardEditor from './formRewardEditor';
 import topSnapshotCreateScene from './topSnapshotCreateScene';
 import rolesScene from './rolesScene';
 import balanceScene from './balanceScene';
-import formVisibleEditor from './formVisibleEditor.js';
+import taskEditorScene from './taskEditorScene'
 
 export {
-    taskCreateScene, localizationValueEditor, balanceScene, formVisibleEditor,
-    formRewardEditor, topSnapshotCreateScene, rolesScene
+    taskCreateScene, localizationValueEditor, balanceScene,
+    formRewardEditor, topSnapshotCreateScene, rolesScene, taskEditorScene
 };

@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import TasksNews from '@/components/pages/Tasks/News/TasksNews.tsx';
 import TasksReferral from '@/components/pages/Tasks/Referral/TasksReferral.tsx';
 import PartnersTasks from '@/components/pages/Tasks/Partners/PartnersTasks.tsx';
-import TasksLinks from '@/components/pages/Tasks/Links/TasksNews.tsx';
+import TasksLinks from '@/components/pages/Tasks/Links/TasksLinks.tsx';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
@@ -62,7 +62,7 @@ export default async function Tasks() {
             <div className={styles.mainContainer}>
                 {newTasks && newTasks.length ?
                  <div className={styles.tasksNews}>
-                     <h3>New 🔥</h3>
+                     <h3 style={{ fontWeight: 'bold' }}>New 🔥</h3>
                      <TasksNews tasks={newTasks}/>
                  </div>
                                              : <></>
@@ -72,7 +72,7 @@ export default async function Tasks() {
                 </div>
                 {sponsoredTasks.length > 0 && (
                     <div className={styles.tasksPartners}>
-                        <h3>{translator('content.partners.title')}</h3>
+                        <h3 style={{ fontWeight: 'bold' }}>{translator('content.partners.title')}</h3>
                         <PartnersTasks data={sponsoredTasksData}/>
                     </div>
                 )}
