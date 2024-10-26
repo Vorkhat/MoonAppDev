@@ -44,17 +44,19 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
     return (
         <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']}
                         classNameBackground={styles.taskBackground}>
+            <div className={styles.taskItem}>
                 <Image className={styles.taskImage}
-                       src={mapTaskIcon(String(data?.iconType))}
-                       width={44} height={44} alt={'/'}/>
-                <div className={styles.taskText}
-                     style={{}}>{description?.value || 'Undefined'}</div>
-                <ContainerColor
-                    classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
-                    classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
-                >
-                    +{totalReward} {currencyName}
-                </ContainerColor>
+                           src={mapTaskIcon(String(data?.iconType))}
+                           width={44} height={44} alt={'/'}/>
+                    <div className={styles.taskText}
+                         style={{}}>{description?.value || 'Undefined'}</div>
+                    <ContainerColor
+                        classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
+                        classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                    >
+                        +{totalReward} {currencyName}
+                    </ContainerColor>
+            </div>
         </ContainerColor>
     );
 }
