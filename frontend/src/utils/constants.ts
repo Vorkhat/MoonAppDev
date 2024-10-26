@@ -1,1 +1,1 @@
-export const currencyName = 'points';
+export const currencyName = 'баллов';
