@@ -44,7 +44,6 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
     return (
         <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']}
                         classNameBackground={styles.taskBackground}>
-            <Link className={styles.taskItem} href={disabled ? '' : `/api/task/${id}`}>
                 <Image className={styles.taskImage}
                        src={mapTaskIcon(String(data?.iconType))}
                        width={44} height={44} alt={'/'}/>
@@ -56,7 +55,6 @@ export async function TaskItem({ id, task, totalReward, disabled }: {
                 >
                     +{totalReward} {currencyName}
                 </ContainerColor>
-            </Link>
         </ContainerColor>
     );
 }

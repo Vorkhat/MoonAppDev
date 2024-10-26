@@ -43,7 +43,7 @@ const PartnerItem = async ({ url, data, reward }: PartnerProps) => {
                         classNameBorder={[ styles.rewardValueBorder, 'fit-conteiner' ]}
                         classNameBackground={[ styles.rewardValueBackground, 'text-litle-container' ]}
                     >
-                        {reward} points
+                        {reward} баллов
                     </ContainerColor>
                 </div>
                 <Link href={url} className={styles.partnerLink}>

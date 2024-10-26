@@ -41,7 +41,7 @@ const CreateQuizItem = async ({ form }: { form: QuizForm }) => {
                 </div>
                 {
                     form.reward ?
-                        <h6 className={`${styles.reward} ${styles.rewardBorder} gradient-border`}>+ {form.reward} points</h6> :
+                        <h6 className={`${styles.reward} ${styles.rewardBorder} gradient-border`}>+ {form.reward} баллов</h6> :
                     <></>
                 }
                 <div></div>

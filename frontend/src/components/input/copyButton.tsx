@@ -9,7 +9,7 @@ const CopyButton = ({ str }: { str: string }) => {
     const [ copied, setCopied ] = useState(false);
     const copyToClipboard = async () => {
         try {
-            await navigator.clipboard.writeText(str);
+            await navigator.clipboard.writeText(` Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте \n\n${str}`);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (error) {
