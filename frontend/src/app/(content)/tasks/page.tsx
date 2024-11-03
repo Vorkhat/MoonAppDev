@@ -9,7 +9,6 @@ import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
 import { getTranslations } from 'next-intl/server';
 import { JsonObject } from '@prisma/client/runtime/library';
-import StoryPublish from '@/app/(content)/tasks/StoryPublish/page.tsx';
 
 export interface TaskProps {
     tasks: (CuratedTask & { task: Task })[];
@@ -29,9 +28,25 @@ export default async function Tasks() {
         },
     });
 
-    const newTasks = tasks.filter((t) => t.category === CuratedTaskCategory.New);
-    const sponsoredTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Sponsored);
-    const internalTasks = tasks.filter((t) => t.category === CuratedTaskCategory.Internal);
+    const completeTasks = await prisma.taskCompletion.findMany({
+        where: {
+            userId: userId,
+        },
+    });
+
+    console.log(completeTasks);
+
+    const completedTaskIds = new Set(completeTasks.map(completion => completion.taskId.toString()));
+
+    const newTasks = tasks.filter(t =>
+        t.category === CuratedTaskCategory.New && !completedTaskIds.has(t.taskId.toString())
+    );
+    const sponsoredTasks = tasks.filter(t =>
+        t.category === CuratedTaskCategory.Sponsored && !completedTaskIds.has(t.taskId.toString())
+    );
+    const internalTasks = tasks.filter(t =>
+        t.category === CuratedTaskCategory.Internal && !completedTaskIds.has(t.taskId.toString())
+    );
 
     const sponsoredTasksData = sponsoredTasks.map(t => {
         return {
@@ -61,7 +76,6 @@ export default async function Tasks() {
                 </p>
             </div>
             <div className={styles.mainContainer}>
-                <StoryPublish/>
                 {newTasks && newTasks.length ?
                  <div className={styles.tasksNews}>
                      <h3 style={{ fontWeight: 'bold' }}>New 🔥</h3>

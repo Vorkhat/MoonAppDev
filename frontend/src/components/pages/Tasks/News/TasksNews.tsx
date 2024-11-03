@@ -1,83 +1,52 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from './styles.module.scss';
-import { Icon, taskIconMapping, TasksIconMapper } from '../tasksIcon.ts';
-import { TaskProps } from '@/app/(content)/tasks/page.tsx';
-import { Task } from '@prisma/client/';
-import { currencyName } from '@/utils/constants.ts';
-import { JsonObject } from '@prisma/client/runtime/library';
+import { TaskProps } from '@/app/(content)/tasks/page';
 import { prisma } from '@/prisma';
-import Link from 'next/link';
 import { getCurrentSessionLanguage } from '@/locale/locale';
-import ContainerColor from '@/common/ContainerColor';
+import { JsonObject } from '@prisma/client/runtime/library';
+import TaskItem from '@/components/pages/Tasks/News/TaskItem.tsx';
 
+export async function TasksNews({ tasks }: TaskProps) {
+    const language = await getCurrentSessionLanguage();
 
-export function mapTaskIcon(task: string): Icon | undefined {
-    const icon = taskIconMapping[task.toUpperCase()];
-    if (!icon) {
-        console.warn(`Icon for task '${task}' is not defined.`);
-    }
-    return icon;
-}
-
-export async function TaskItem({ id, task, totalReward, disabled }: {
-    id: bigint,
-    task: Task,
-    totalReward: number,
-    disabled?: true
-}) {
-
-    const data = task.data as JsonObject;
-    const description = await prisma.localizationValue.findUnique({
-        where: {
-            id_language: {
-                id: Number(data.description),
-                language: await getCurrentSessionLanguage(),
+    const visibleTasks = tasks.filter(task => task.isVisible);
+    const taskItems = await Promise.all(visibleTasks.map(async (task) => {
+        const data = task.task.data as JsonObject;
+        const description = await prisma.localizationValue.findUnique({
+            where: {
+                id_language: {
+                    id: Number(data.description),
+                    language,
+                },
             },
-        },
-        select: {
-            value: true,
-        },
-    });
-
-
-    return (
-        <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']}
-                        classNameBackground={styles.taskBackground}>
-            <div className={styles.taskItem}>
-                <Image className={styles.taskImage}
-                           src={mapTaskIcon(String(data?.iconType))}
-                           width={44} height={44} alt={'/'}/>
-                    <div className={styles.taskText}
-                         style={{}}>{description?.value || 'Undefined'}</div>
-                    <ContainerColor
-                        classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
-                        classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
-                    >
-                        +{totalReward} {currencyName}
-                    </ContainerColor>
-            </div>
-        </ContainerColor>
-    );
-}
-
-export function TasksNews({ tasks }: TaskProps) {
+            select: {
+                value: true,
+            },
+        });
+        return {
+            id: task.id,
+            iconType: String(data.iconType),
+            description: description?.value || 'Undefined',
+            totalReward: task.totalReward,
+            url: task.task.url,
+            amount: task.totalReward
+        };
+    }));
 
     return (
-        <>
-            <div className={styles.tasksItems}>
-                {tasks.
-                      filter(task => task.isVisible)
-                      .map(task => (
-                        <TaskItem
-                            key={task.id}
-                            id={task.id}
-                            task={task.task}
-                            totalReward={task.totalReward}
-                        />
-                    ))}
-            </div>
-        </>
+        <div className={styles.tasksItems}>
+            {taskItems.map(task => (
+                <TaskItem
+                    key={task.id}
+                    id={task.id}
+                    iconType={task.iconType}
+                    description={task.description}
+                    totalReward={task.totalReward}
+                    url={task.url}
+                    amount={task.amount}
+                />
+            ))}
+        </div>
     );
 }
 

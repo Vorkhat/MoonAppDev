@@ -26,6 +26,12 @@
         height: 100%;
         width: 100%;
 
+        .reward {
+          background: var(--background-reward-value);
+          border-radius: 46px;
+          padding: 4px 6px;
+        }
+
         .task-image {
           grid-area: image;
         }
@@ -37,6 +43,7 @@
 
         .reward-value-border {
           @include container-color(var(--background-reward-value), 46px, 4px 6px);
+
 
           .reward-value-background {
             white-space: nowrap;
