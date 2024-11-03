@@ -9,6 +9,7 @@ import { useSession } from '@/components/session';
 import { CuratedTask, CuratedTaskCategory, Task } from '@prisma/client';
 import { getTranslations } from 'next-intl/server';
 import { JsonObject } from '@prisma/client/runtime/library';
+import StoryPublish from '@/app/(content)/tasks/StoryPublish/page.tsx';
 
 export interface TaskProps {
     tasks: (CuratedTask & { task: Task })[];
@@ -60,6 +61,7 @@ export default async function Tasks() {
                 </p>
             </div>
             <div className={styles.mainContainer}>
+                <StoryPublish/>
                 {newTasks && newTasks.length ?
                  <div className={styles.tasksNews}>
                      <h3 style={{ fontWeight: 'bold' }}>New 🔥</h3>
