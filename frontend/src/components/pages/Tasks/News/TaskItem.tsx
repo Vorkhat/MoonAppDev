@@ -54,7 +54,7 @@ export default function TaskItem({
 
     return (
         <ContainerColor classNameBorder={[ styles.taskBorder, 'fit-conteiner' ]} classNameBackground={styles.taskBackground}>
-            <Link className={styles.taskItem} href={url}  onClick={checkStroty}>
+            <Link className={styles.taskItem} href={iconType == 'REPOST' ? '' : `/api/task/${id}`}  onClick={checkStroty}>
                 <Image className={styles.taskImage} src={mapTaskIcon(iconType)} width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}>{description || 'Undefined'}</div>
                 <h6 className={`${styles.reward} gradient-border`}>+{totalReward} {currencyName}</h6>

@@ -42,8 +42,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: number }
     });
 
     if ((task.task.tracker.data as JsonObject).type as TrackerType === TrackerType.PublishStory) {
-
+        return NextResponse.json({status: 200})
     }
 
-    return NextResponse.redirect(`https://${req.headers.get('host')}/api/openUrl?url=${task.task.url}`);
+    return NextResponse.redirect(`https://${req.headers.get('host')}/tasks`)
 }
