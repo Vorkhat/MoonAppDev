@@ -23,7 +23,26 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         validate(initDataRaw, process.env.BOT_TOKEN, { expiresIn: sessionTtl });
     } catch (validationError: any) {
         if (process.env.NODE_ENV === 'production') {
-            return new NextResponse(null, { status: 400, statusText: validationError });
+            console.error("err", validationError.message || validationError);
+            console.error("err:", validationError.stack);
+            console.error("err", initDataRaw);
+
+            return new NextResponse(null, {
+                status: 400,
+                statusText: "err" + (validationError.message || "r"),
+            });
+        } else {
+            console.error("er", validationError);
+            return new NextResponse(JSON.stringify({
+                error: "Ошибка валидации",
+                message: validationError.message,
+                stack: validationError.stack,
+                initDataRaw: initDataRaw,
+                sessionTtl: sessionTtl
+            }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' },
+            });
         }
     }
 
