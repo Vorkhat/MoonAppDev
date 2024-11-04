@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { schedule } from 'node-cron';
 import updateCuratedTasks, { createCuratedTasks, createCuratedTasksForTask } from './tasks/updateCuratedTasks';
 import collectTopSnapshot from '@/tasks/collectTopSnapshot';
-import { consumeMessages, MessageQueue } from '@/mq';
+import { consumeMessages, MessageQueue } from '@/mq.js';
 
 export const prisma = new PrismaClient();
 
