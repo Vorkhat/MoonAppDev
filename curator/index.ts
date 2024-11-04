@@ -2,14 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import { schedule } from 'node-cron';
 import updateCuratedTasks, { createCuratedTasks, createCuratedTasksForTask } from './tasks/updateCuratedTasks';
 import collectTopSnapshot from '@/tasks/collectTopSnapshot';
-import { consumeMessages } from 'frontend/src/mq.js';
+import { consumeMessages, MessageQueue } from '../frontend/src/mq.js';
 
 export const prisma = new PrismaClient();
-
-export enum MessageQueue {
-    NewUser = 'newUser',
-    NewTask = 'newTask',
-}
 
 if (process.env.NODE_ENV === 'production') {
     schedule('0 0 * * *', async () => {
