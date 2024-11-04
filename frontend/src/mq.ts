@@ -1,6 +1,6 @@
+import { connect } from 'amqplib';
 import { PromiseType } from '@prisma/client/extension';
 import { JsonObject } from '@prisma/client/runtime/library';
-import { connect } from 'amqplib';
 
 const amqpSingleton = async () => {
     if (!process.env.AMQP_URL) {
