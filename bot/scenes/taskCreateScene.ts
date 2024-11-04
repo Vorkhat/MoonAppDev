@@ -5,7 +5,12 @@ import { Composer, Markup, Scenes } from 'telegraf';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
 import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
-import { MessageQueue, publishMessage } from '@/mq.js';
+import { publishMessage } from '@/mq.js';
+
+export enum MessageQueue {
+    NewUser = 'newUser',
+    NewTask = 'newTask',
+}
 
 export enum TasksIcon {
     FRIENDS = `friends.svg`,
