@@ -21,7 +21,7 @@ import {
     FormElementRadio,
     FormElementTextInput,
     FormElementType,
-} from 'frontend/src/utils/formElement.js';
+} from '../frontend/src/utils/formElement.js';
 
 const bot = new Composer<BotContext>();
 
