@@ -11,18 +11,17 @@ import {
 import { Language } from '@prisma/client';
 import keyboardMenu, { GetterDel, renderMarkup } from '@/utils/keyboardMenu';
 import { JsonObject } from '@prisma/client/runtime/library';
-import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard';
-import {
-    FormElement,
-    FormElementCaption,
-    FormElementContent,
-    FormElementRadio,
-    FormElementTextInput,
-    FormElementType,
-} from '@/utils/formElement';
 import { prisma } from '@/index';
 import { InlineKeyboardButton } from 'telegraf/src/core/types/typegram';
 import { formatNumber } from '@/utils/utils.js';
+import answerCbRemoveKeyboard from '@/utils/answerCbRemoveKeyboard.js';
+import {
+    FormElement,
+    FormElementCaption, FormElementContent,
+    FormElementRadio,
+    FormElementTextInput,
+    FormElementType,
+} from 'frontend/src/utils/formElement.js';
 
 const bot = new Composer<BotContext>();
 
