@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { currencyName } from '@/utils/constants.ts';
 import { Icon, taskIconMapping } from '@/components/pages/Tasks/tasksIcon.ts';
-import { postEvent, retrieveLaunchParams, string } from '@telegram-apps/sdk-react';
+import { postEvent, retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import ContainerColor from '@/common/ContainerColor.tsx';
 
 export function mapTaskIcon(task: string): Icon | undefined {
@@ -33,7 +33,7 @@ export default function TaskItem({
     url: string
 }) {
 
-    const checkStroty = () => {
+    const checkStroty = async () => {
         if (iconType == 'REPOST') {
             postEvent('web_app_share_to_story' as any, {
                 media_url: String(url),
@@ -54,15 +54,28 @@ export default function TaskItem({
             });
 
         }
+        else {
+            await fetch(`/api/task/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
     };
 
     return (
         <ContainerColor classNameBorder={[ styles.taskBorder, 'fit-conteiner' ]} classNameBackground={styles.taskBackground}>
-            <div className={styles.taskItem} onClick={checkStroty}>
+            <Link className={styles.taskItem} href={iconType == "REPOST" ? '' : url} onClick={checkStroty}>
                 <Image className={styles.taskImage} src={mapTaskIcon(iconType)} width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}>{description || 'Undefined'}</div>
-                <h6 className={`${styles.reward} gradient-border`}>+{totalReward} {currencyName}</h6>
-            </div>
+                <ContainerColor
+                    classNameBorder={[styles.rewardValueBorder, 'fit-conteiner']}
+                    classNameBackground={[styles.rewardValueBackground, 'text-litle-container']}
+                >
+                    +{totalReward} {currencyName}
+                </ContainerColor>
+            </Link>
         </ContainerColor>
     );
 }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
     const { email } = await req.json();
 
     const response = await fetch(
@@ -15,5 +15,6 @@ export async function POST(req: NextRequest) {
         },
     );
 
-    return NextResponse.json({ message: response.statusText, status: response.status });
+    const responseJson = await response.json();
+    return NextResponse.json({ message: responseJson, status: response.status });
 }

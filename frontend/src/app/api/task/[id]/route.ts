@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/prisma.ts';
 import { useSession } from '@/components/session';
-import { JsonObject } from '@prisma/client/runtime/library';
-import { TrackerType } from '@/trackerType';
 
 export async function GET(req: NextRequest, { params }: { params: { id: number } }): Promise<NextResponse> {
     const session = await useSession();
@@ -40,10 +38,5 @@ export async function GET(req: NextRequest, { params }: { params: { id: number }
             startedAt: new Date(),
         },
     });
-
-    if ((task.task.tracker.data as JsonObject).type as TrackerType === TrackerType.PublishStory) {
-        return NextResponse.json({status: 200})
-    }
-
-    return NextResponse.redirect(`https://${req.headers.get('host')}/tasks`)
+    return new NextResponse(null, { status: 204, statusText: 'Successfully' });
 }

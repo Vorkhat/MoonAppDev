@@ -18,7 +18,7 @@ export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps
     const translator = useTranslations('Quiz');
 
     const handleSubmit = async () => {
-        const response = await fetch(`/api/check_email`, {
+        const response = await fetch(`/api/checkEmail`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email }),
