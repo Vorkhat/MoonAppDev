@@ -14,6 +14,11 @@ const nextConfig = {
                 hostname: 'api.telegram.org',
                 pathname: '/file/bot**/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'api.motionfan.ru',
+                pathname: '/api/v1/**',
+            },
         ],
     },
     output: 'standalone',
