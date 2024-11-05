@@ -24,7 +24,7 @@ export async function TasksNews({ tasks }: TaskProps) {
             },
         });
         return {
-            id: task.id,
+            id: task.task.id,
             iconType: String(data.iconType),
             description: description?.value || 'Undefined',
             totalReward: task.totalReward,

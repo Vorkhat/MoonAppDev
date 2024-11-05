@@ -24,9 +24,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     } catch (error) {
         if (error instanceof Error) {
             console.error("Error in fetch:", error.message);
-            return NextResponse.json({ error: error.message }, { status: 500 });
+            return NextResponse.json({ error: error.message }, { status: 404 });
         } else {
-            return NextResponse.json({ error: 'Unknown error occurred' }, { status: 500 });
+            return NextResponse.json({ error: 'Unknown error occurred' }, { status: 234 });
         }
     }
 }

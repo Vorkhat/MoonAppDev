@@ -31,7 +31,6 @@ export default function TaskItem({
     amount: number,
     url: string
 }) {
-
     const checkStroty = async () => {
         if (iconType === 'REPOST' && window.Telegram?.WebApp?.shareToStory) {
             const lp = retrieveLaunchParams();
