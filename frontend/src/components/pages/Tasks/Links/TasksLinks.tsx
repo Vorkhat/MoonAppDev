@@ -1,13 +1,14 @@
+'use client'
+
 import React from 'react';
 import styles from './styles.module.scss';
-import { Icon, taskIconMapping, TasksIconMapper } from '../tasksIcon.ts';
+import { Icon, taskIconMapping } from '../tasksIcon.ts';
 import { useTranslations } from 'next-intl';
 import { JsonObject } from '@prisma/client/runtime/library';
 import ContainerColor from '@/common/ContainerColor';
-import OpenUrlButton from '@/components/pages/Tasks/OpenUrlButton.tsx';
 import { currencyName } from '@/utils/constants.ts';
 import Image from 'next/image';
-
+import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 export function mapTaskIcon(task: string): Icon | undefined {
     const icon = taskIconMapping[task.toUpperCase()];
@@ -18,30 +19,47 @@ export function mapTaskIcon(task: string): Icon | undefined {
 }
 
 type InternalProps = {
+    id: number,
     url: string;
     data: JsonObject;
-    reward: number
+    reward: number;
 };
 
-const CreateItem = ({ url, data, reward }: InternalProps) => {
-
+const CreateItem = ({id, url, data, reward }: InternalProps) => {
     const iconType = typeof data.iconType === 'string' ? data.iconType : 'Undefined';
-    const translarot = useTranslations('Tasks');
+    const translate = useTranslations('Tasks');
+    let text = translate(`content.others.web`)
+
+    const check = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        const lp = retrieveLaunchParams();
+        await fetch('/api/updateBalance', {
+            method: 'POST',
+            body: JSON.stringify({
+                initDataRaw: lp.initDataRaw,
+                amount: Number(reward),
+                taskId: Number(id)
+            }),
+        });
+
+        window.open(url, '_blank');
+    };
+
+    if (data.iconType == 'INSTAGRAM') {
+        text = translate(`content.others.instagram`)
+    }
 
     return (
         <ContainerColor classNameBorder={styles.taskLinkBorder} classNameBackground={styles.taskLinkBackground}>
-            <OpenUrlButton className={styles.taskLink} href={url}>
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                }}>
-                    <Image src={mapTaskIcon(iconType)} width={23} height={23} alt="/"/>
+            <a className={styles.taskLink} href={url} onClick={check}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Image src={mapTaskIcon(iconType)} width={23} height={23} alt="/" />
                     <span className={styles.linkText}>
-                        {translarot(`content.others.${'web'}`)}
+                        {text}
                     </span>
                 </div>
                 <h6 className={styles.rewardValue}>{reward} {currencyName}</h6>
-            </OpenUrlButton>
+            </a>
         </ContainerColor>
     );
 };

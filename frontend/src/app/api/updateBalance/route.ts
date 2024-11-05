@@ -36,7 +36,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         return new NextResponse(null, { status: 409, statusText: 'Task already completed' });
     }
 
-    console.log(taskId, session.userId)
     await prisma.taskCompletion.create({
         data: {
             taskId: Number(taskId),

@@ -57,6 +57,7 @@ export default async function Tasks() {
 
     const internalTasksData = internalTasks.map(t => {
         return {
+            id: t.task.id,
             url: t.task.url,
             data: t.task.data as JsonObject,
             reward: t.task.reward,

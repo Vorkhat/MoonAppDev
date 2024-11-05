@@ -5,19 +5,23 @@ import { useTranslations } from 'next-intl';
 import { useEmailContext } from './EmailContext';
 
 interface CheckEmailProps {
-    label?: string | null,
-    placeholder?: string | null,
-    defaultValue?: string | null
+    label?: string | null;
+    placeholder?: string | null;
+    defaultValue?: string | null;
 }
 
 export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps) {
-    const [ email, setEmail ] = useState('');
-    const [ result, setResult ] = useState<string | null>(null);
-    const [ isEmailValid, setIsEmailValid ] = useState<boolean | null>(null);
+    const [email, setEmail] = useState('');
+    const [result, setResult] = useState<string | null>(null);
+    const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null);
+    const [isLoading, setIsLoading] = useState(false); // состояние загрузки
     const { setEmailExists } = useEmailContext();
     const translator = useTranslations('Quiz');
 
     const handleSubmit = async () => {
+        setIsLoading(true);
+        setResult(null);
+
         try {
             const response = await fetch(`/api/checkEmail`, {
                 method: 'POST',
@@ -39,8 +43,7 @@ export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps
                     body: JSON.stringify({ email: true }),
                 });
                 setEmailExists(true);
-            }
-            else {
+            } else {
                 setEmailExists(false);
             }
 
@@ -49,13 +52,15 @@ export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps
         } catch (error) {
             console.error("Error during handleSubmit:", error);
             setResult("Произошла ошибка. Попробуйте снова.");
+        } finally {
+            setIsLoading(false);
         }
 
         setTimeout(() => {
             setResult(null);
             setIsEmailValid(null);
         }, 800);
-    }
+    };
 
     return (
         <>
@@ -88,7 +93,7 @@ export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps
                         fontWeight: 'bold',
                     }}
                 >
-                    {translator('content.check-button')}
+                    {isLoading ? 'Поиск...' : translator('content.check-button')}
                 </button>
             </div>
 
