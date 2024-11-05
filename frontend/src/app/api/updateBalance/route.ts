@@ -36,16 +36,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         return new NextResponse(null, { status: 409, statusText: 'Task already completed' });
     }
 
-    await prisma.user.updateMany({
-        where: { id: Number(session.userId) },
-        data: { points: { increment: Number(amount) } },
-    });
-
     await prisma.taskCompletion.create({
         data: {
             taskId: Number(taskId),
             userId: Number(session.userId),
         },
+    });
+
+    await prisma.user.updateMany({
+        where: { id: Number(session.userId) },
+        data: { points: { increment: Number(amount) } },
     });
 
     return new NextResponse(null, { status: 204 });

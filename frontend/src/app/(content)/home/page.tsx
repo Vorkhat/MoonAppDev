@@ -84,7 +84,7 @@ export default async function Home() {
                         {translator('content.content')}
                     </p>
                     <h2 className="highlight-text">
-                        {translator('content.reward')} 50 Баллов
+                        Подписка на канал 50 Баллов
                     </h2>
                 </div>
                 <Image className={styles.foxImage}
