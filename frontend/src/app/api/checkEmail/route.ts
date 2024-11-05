@@ -14,15 +14,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             body: JSON.stringify({ email: email }),
         });
 
+        console.log(response)
+
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Fetch failed with status: ${response.status}, message: ${errorText}`);
         }
 
         const responseJson = await response.json();
+        console.log(responseJson)
         return NextResponse.json({ message: responseJson, status: response.status });
     } catch (error) {
         if (error instanceof Error) {
+            console.log(error)
             console.error("Error in fetch:", error.message);
             return NextResponse.json({ error: error.message }, { status: 404 });
         } else {

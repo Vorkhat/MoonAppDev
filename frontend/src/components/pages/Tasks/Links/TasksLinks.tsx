@@ -42,7 +42,7 @@ const CreateItem = ({id, url, data, reward }: InternalProps) => {
             }),
         });
 
-        window.open(url, '_blank');
+        window.Telegram.WebApp.openLink(url)
     };
 
     if (data.iconType == 'INSTAGRAM') {

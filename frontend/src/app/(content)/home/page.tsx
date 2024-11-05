@@ -80,7 +80,7 @@ export default async function Home() {
                     <h2>
                         {translator('content.title')}
                     </h2>
-                    <p>
+                    <p style={{fontSize: '13px'}}>
                         {translator('content.content')}
                     </p>
                     <h2 className="highlight-text text-nowrap">
