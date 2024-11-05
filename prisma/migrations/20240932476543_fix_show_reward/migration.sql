@@ -1,4 +1,4 @@
-CREATE VIEW "CompletedTaskTypes" AS
+CREATE OR REPLACE VIEW "CompletedTaskTypes" AS
 WITH types AS (
     SELECT unnest(enum_range(NULL::"TaskType")) AS tt
 ),
