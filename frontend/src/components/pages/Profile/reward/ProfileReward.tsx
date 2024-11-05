@@ -42,7 +42,7 @@ export default async function ProfileReward() {
                                 type={value.type}
                                 count={friendsCount[0]?.useCount ?? 0}
                                 number={value.reward ?? 0}
-                                currency={'points'}/>
+                                currency={'баллов'}/>
                 ))
             }
         </div>

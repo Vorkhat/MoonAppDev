@@ -54,7 +54,7 @@ export default async function Home() {
     const translator = await getTranslations('Home');
 
     return (
-        <div className={styles.homePageContainer}>
+        <div className={`${styles.homePageContainer} mt-4`}>
             <header className={styles.header}>
                 {/*
                 <ThemeSwitcher/>
@@ -83,8 +83,8 @@ export default async function Home() {
                     <p>
                         {translator('content.content')}
                     </p>
-                    <h2 className="highlight-text">
-                        Подписка на канал 50 Баллов
+                    <h2 className="highlight-text text-nowrap">
+                        Подписка на канал 50 баллов
                     </h2>
                 </div>
                 <Image className={styles.foxImage}

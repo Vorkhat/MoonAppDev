@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles.module.scss';
@@ -34,12 +33,12 @@ export default function TaskItem({
 }) {
 
     const checkStroty = async () => {
-        if (iconType == 'REPOST') {
+        if (iconType === 'REPOST' && window.Telegram?.WebApp?.shareToStory) {
             window.Telegram.WebApp.shareToStory(url, {
                 text: `Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте + ссылка t.me/motionfan`,
                 widget_link: {
                     url: `https://t.me/motionfan`,
-                    name: 'Moon App',
+                    name: 'MotionFan App',
                 },
             });
             const lp = retrieveLaunchParams();
@@ -51,9 +50,7 @@ export default function TaskItem({
                     taskId: Number(id)
                 }),
             });
-
-        }
-        else {
+        } else {
             await fetch(`/api/task/${id}`, {
                 method: 'POST',
                 headers: {
@@ -64,8 +61,8 @@ export default function TaskItem({
     };
 
     return (
-        <ContainerColor classNameBorder={[ styles.taskBorder, 'fit-conteiner' ]} classNameBackground={styles.taskBackground}>
-            <Link className={styles.taskItem} href={iconType == "REPOST" ? '' : url} onClick={checkStroty}>
+        <ContainerColor classNameBorder={[styles.taskBorder, 'fit-conteiner']} classNameBackground={styles.taskBackground}>
+            <Link className={styles.taskItem} href={iconType === "REPOST" ? '' : url} onClick={checkStroty}>
                 <Image className={styles.taskImage} src={mapTaskIcon(iconType)} width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}>{description || 'Undefined'}</div>
                 <ContainerColor

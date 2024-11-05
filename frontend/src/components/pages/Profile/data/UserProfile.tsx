@@ -48,7 +48,7 @@ const UserProfile = async () => {
                 </div>
                 <div className={`${styles.userBalance} ${styles.userBalanceBorder} ${montserrat.className} gradient-border`}>
                     <h5 className={styles.userBalanceValue}>{user.points}</h5>
-                    <h3 className={styles.userBalanceCurrency}>points</h3>
+                    <h3 className={styles.userBalanceCurrency}>баллов</h3>
                 </div>
             </div>
             <ProfileReward/>

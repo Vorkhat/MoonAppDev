@@ -51,7 +51,7 @@
         display: flex;
         overflow-x: auto;
         scrollbar-width: none;
-        column-gap: 1.7vw;
+        column-gap: 2vw;
 
         .friends-item-border {
           @include container-color(var(--tasks-refferal-item-border), 10px, 1px);
