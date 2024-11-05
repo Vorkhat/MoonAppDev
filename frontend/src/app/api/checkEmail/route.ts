@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest): Promise<NextResponse> {
     try {
         const { email } = await req.json();
-
+        console.log(email)
+        console.log(process.env.ACCESS_TOKEN)
         const response = await fetch('https://api.motionfan.ru/api/v1/user/check_exists_user/', {
             method: 'POST',
             headers: {
