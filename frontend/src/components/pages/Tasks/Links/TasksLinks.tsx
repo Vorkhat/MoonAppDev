@@ -19,7 +19,7 @@ export function mapTaskIcon(task: string): Icon | undefined {
 }
 
 type InternalProps = {
-    id: number,
+    id: bigint,
     url: string;
     data: JsonObject;
     reward: number;
