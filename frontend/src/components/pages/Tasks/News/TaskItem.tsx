@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { currencyName } from '@/utils/constants.ts';
 import { Icon, taskIconMapping } from '@/components/pages/Tasks/tasksIcon.ts';
-import { postEvent, retrieveLaunchParams } from '@telegram-apps/sdk-react';
+import { postEvent, retrieveLaunchParams, string } from '@telegram-apps/sdk-react';
 import ContainerColor from '@/common/ContainerColor.tsx';
 
 export function mapTaskIcon(task: string): Icon | undefined {
@@ -36,9 +36,13 @@ export default function TaskItem({
     const checkStroty = () => {
         if (iconType == 'REPOST') {
             postEvent('web_app_share_to_story' as any, {
-                media_url: url,
+                media_url: String(url),
                 text: `Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте + ссылка t.me/motionfan`,
-            });
+                widget_link: {
+                    url: `t.me/motionfan`,
+                    name: 'Moon App',
+                },
+            })
             const lp = retrieveLaunchParams();
             fetch('/api/updateBalance', {
                 method: 'POST',
@@ -54,11 +58,11 @@ export default function TaskItem({
 
     return (
         <ContainerColor classNameBorder={[ styles.taskBorder, 'fit-conteiner' ]} classNameBackground={styles.taskBackground}>
-            <Link className={styles.taskItem} href={iconType == 'REPOST' ? '' : `/api/task/${id}`}  onClick={checkStroty}>
+            <div className={styles.taskItem} onClick={checkStroty}>
                 <Image className={styles.taskImage} src={mapTaskIcon(iconType)} width={44} height={44} alt={'/'}/>
                 <div className={styles.taskText}>{description || 'Undefined'}</div>
                 <h6 className={`${styles.reward} gradient-border`}>+{totalReward} {currencyName}</h6>
-            </Link>
+            </div>
         </ContainerColor>
     );
 }
