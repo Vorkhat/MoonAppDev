@@ -34,7 +34,6 @@ export default async function Tasks() {
         },
     });
 
-    console.log(completeTasks);
 
     const completedTaskIds = new Set(completeTasks.map(completion => completion.taskId.toString()));
 

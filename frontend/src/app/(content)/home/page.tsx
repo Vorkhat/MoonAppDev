@@ -1,7 +1,5 @@
 import './common.scss';
 import styles from './styles.module.scss';
-import ThemeSwitcher from '@/utils/ThemeSwitcher/ThemeSwitcher';
-import LanguageSwitcher from '@/utils/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { prisma } from '@/prisma';
@@ -75,7 +73,6 @@ export default async function Home() {
                             margin: '0 0 -4px 0',
                         }}>MOON APP</h1>
                     </div>
-                    <LanguageSwitcher/>
                 </div>
             </header>
             <main className={styles.main}>
@@ -87,7 +84,7 @@ export default async function Home() {
                         {translator('content.content')}
                     </p>
                     <h2 className="highlight-text">
-                        {translator('content.reward')} 1000 USDT
+                        {translator('content.reward')} 50 Баллов
                     </h2>
                 </div>
                 <Image className={styles.foxImage}

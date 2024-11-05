@@ -37,7 +37,7 @@ export default async function Rating() {
                         fontSize: '1.5em',
                         fontWeight: 'bold',
                     }}>
-                        {translator('header.footer')} {topSnapshotReward?.reward.toString() || '0'}$ 🤑
+                        {translator('header.footer')} {topSnapshotReward?.reward.toString() || '0'} USDT 🤑
                     </span>
                 </p>
             </div>

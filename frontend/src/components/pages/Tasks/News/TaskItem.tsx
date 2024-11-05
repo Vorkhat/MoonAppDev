@@ -6,8 +6,8 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { currencyName } from '@/utils/constants.ts';
 import { Icon, taskIconMapping } from '@/components/pages/Tasks/tasksIcon.ts';
-import { postEvent, retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import ContainerColor from '@/common/ContainerColor.tsx';
+import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 export function mapTaskIcon(task: string): Icon | undefined {
     const icon = taskIconMapping[task.toUpperCase()];
@@ -35,16 +35,19 @@ export default function TaskItem({
 
     const checkStroty = async () => {
         if (iconType == 'REPOST') {
-            postEvent('web_app_share_to_story' as any, {
+            const data = JSON.stringify({
                 media_url: String(url),
                 text: `Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте + ссылка t.me/motionfan`,
                 widget_link: {
-                    url: `t.me/motionfan`,
+                    url: `https://t.me/motionfan`,
                     name: 'Moon App',
                 },
-            })
+            });
+
+            window.parent.postMessage(data, 'https://web.telegram.org');
+
             const lp = retrieveLaunchParams();
-            fetch('/api/updateBalance', {
+            await fetch('/api/updateBalance', {
                 method: 'POST',
                 body: JSON.stringify({
                     initDataRaw: lp.initDataRaw,
