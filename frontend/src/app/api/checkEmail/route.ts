@@ -15,13 +15,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         });
 
         if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            const errorText = await response.text();
+            throw new Error(`Fetch failed with status: ${response.status}, message: ${errorText}`);
         }
 
         const responseJson = await response.json();
         return NextResponse.json({ message: responseJson, status: response.status });
-    } catch (error: unknown) {
+    } catch (error) {
         if (error instanceof Error) {
+            console.error("Error in fetch:", error.message);
             return NextResponse.json({ error: error.message }, { status: 500 });
         } else {
             return NextResponse.json({ error: 'Unknown error occurred' }, { status: 500 });

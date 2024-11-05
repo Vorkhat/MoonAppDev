@@ -18,36 +18,44 @@ export function CheckEmail({ label, placeholder, defaultValue }: CheckEmailProps
     const translator = useTranslations('Quiz');
 
     const handleSubmit = async () => {
-        const response = await fetch(`/api/checkEmail`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email }),
-        });
-
-        const data = await response.json();
-
-        const status = data.status == 200
-
-        if (status) {
-            await fetch(`/api/set_email`, {
+        try {
+            const response = await fetch(`/api/checkEmail`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: true }),
+                body: JSON.stringify({ email }),
             });
-            setEmailExists(true);
-        }
-        else {
-            setEmailExists(false);
-        }
 
-        setIsEmailValid(status);
-        setResult(status ? `Email ${email} существует.` : `Email ${email} не найден.`);
+            if (!response.ok) {
+                throw new Error(`Failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const status = data.status === 200;
+
+            if (status) {
+                await fetch(`/api/set_email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: true }),
+                });
+                setEmailExists(true);
+            }
+            else {
+                setEmailExists(false);
+            }
+
+            setIsEmailValid(status);
+            setResult(status ? `Email ${email} существует.` : `Email ${email} не найден.`);
+        } catch (error) {
+            console.error("Error during handleSubmit:", error);
+            setResult("Произошла ошибка. Попробуйте снова.");
+        }
 
         setTimeout(() => {
             setResult(null);
             setIsEmailValid(null);
         }, 800);
-    };
+    }
 
     return (
         <>

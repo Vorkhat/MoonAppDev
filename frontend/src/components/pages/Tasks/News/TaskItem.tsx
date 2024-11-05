@@ -34,13 +34,6 @@ export default function TaskItem({
 
     const checkStroty = async () => {
         if (iconType === 'REPOST' && window.Telegram?.WebApp?.shareToStory) {
-            window.Telegram.WebApp.shareToStory(url, {
-                text: `Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте + ссылка t.me/motionfan`,
-                widget_link: {
-                    url: `https://t.me/motionfan`,
-                    name: 'MotionFan App',
-                },
-            });
             const lp = retrieveLaunchParams();
             await fetch('/api/updateBalance', {
                 method: 'POST',
@@ -49,6 +42,13 @@ export default function TaskItem({
                     amount: Number(amount),
                     taskId: Number(id)
                 }),
+            });
+            window.Telegram.WebApp.shareToStory(url, {
+                text: `Друг, подпишись на бота фитнес приложения MotionFan если хочешь получать USDT и подарки на шаги, участие в челленджах и выполнение заданий в боте + ссылка t.me/motionfan`,
+                widget_link: {
+                    url: `https://t.me/motionfan`,
+                    name: 'MotionFan App',
+                },
             });
         } else {
             await fetch(`/api/task/${id}`, {
