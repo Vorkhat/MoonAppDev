@@ -57,6 +57,7 @@ select id, points,
        row_number() over (order by points desc) as rank
 from "User";
 
+
 CREATE VIEW "CompletedTaskTypes" AS
 WITH types AS (
     SELECT unnest(enum_range(NULL::"TaskType")) AS tt
