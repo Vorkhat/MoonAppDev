@@ -80,8 +80,8 @@ export default async function Home() {
                     <h2>
                         {translator('content.title')}
                     </h2>
-                    <p style={{fontSize: '13px'}}>
-                        {translator('content.content')}
+                    <p style={{ fontSize: '13px' }}
+                       dangerouslySetInnerHTML={{ __html: translator('content.content').replace(/\n/g, '<br />') }}>
                     </p>
                     <h2 className="highlight-text text-nowrap">
                         Подписка на канал 50 баллов
