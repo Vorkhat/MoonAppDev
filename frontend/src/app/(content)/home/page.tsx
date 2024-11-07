@@ -61,28 +61,28 @@ export default async function Home() {
                 */}
                 <div className={styles.headerMain}>
                     <div className={styles.headerContent}>
-                        <div className={`${styles.logo} ${styles.logoBorder} gradient-border`}>
+                        <div>
                             <Image src={headerIcon}
+                                   style={{
+                                       position: 'absolute',
+                                       transform: 'translateY(-40px)'
+                                    }}
                                    alt="logo"
-                                   height="30"
-                                   width="30"
+                                   height="200"
+                                   width="200"
                                    priority
                             />
                         </div>
-                        <h1 className={logoFont.className} style={{
-                            margin: '0 0 -4px 0',
-                        }}>MOON APP</h1>
                     </div>
                 </div>
             </header>
             <main className={styles.main}>
                 <div className={styles.mainContent}>
-                    <h2>
-                        {translator('content.title')}
-                    </h2>
-                    <p style={{ fontSize: '13px' }}
-                       dangerouslySetInnerHTML={{ __html: translator('content.content').replace(/\n/g, '<br />') }}>
-                    </p>
+                    <strong>
+                        <p style={{ fontSize: '13px' }}
+                           dangerouslySetInnerHTML={{ __html: translator('content.content').replace(/\n/g, '<br />') }}>
+                        </p>
+                    </strong>
                     <h2 className="highlight-text text-nowrap">
                         Подписка на канал 50 баллов
                     </h2>

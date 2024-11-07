@@ -23,24 +23,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-
-        .logo {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          background: var(--home-background-logo);
-          width: 48px;
-          height: 48px;
-          border-radius: 15px;
-        }
-
-        .logo-border {
-          position: relative;
-          --padding: 1px;
-          --border-radius: 15px;
-          --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
-        }
       }
     }
   }
@@ -54,6 +36,7 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     border-radius: var(--border-radius-regular);
     padding: 1vh 2vw;
+    margin-top: 100px;
     row-gap: 1vh;
 
     .main-content {
