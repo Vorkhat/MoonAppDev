@@ -10,6 +10,7 @@
 
   .quiz-border {
     @include container-color(var(--quiz-border), 3vw, 1px);
+    max-width: 300px;
 
     .quiz-background {
       height: 100%;

@@ -41,7 +41,6 @@ export default async function Quiz() {
     });
 
     const visibleForms = forms.filter(form => form.isVisible);
-    const translator = await getTranslations('Quiz');
     const translatorUndefined = await getTranslations('QuizUndefined');
 
     return (
@@ -50,20 +49,15 @@ export default async function Quiz() {
                 {
                     visibleForms.length > 0 ?
                     <>
-                        <p style={{
-                            fontSize: '3.6vh',
-                            fontWeight: 'bold',
-                            marginTop: '1vh',
-                            textAlign: 'center',
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyItems: 'center'
                         }}>
-                            {translator('header.title')}<br/>
-                            <span className={styles.header__text}>
-                                {translator('header.content')}
-                            </span><br/>
-                            <span className={`${styles.header__text} ${styles.text__color}`}>
-                                {translator('header.footer')}
-                            </span>
-                        </p>
+                            <strong style={{margin: 'auto', marginBottom: '10px'}}>Доступны новые квизы</strong>
+                            <div>Получи 300 бонусов за регистрацию</div>
+                            <div>в мобильном приложении MotionFan</div>
+                        </div>
                     </> :
                     <>
                         <div className={styles.QuizUndefined}>
