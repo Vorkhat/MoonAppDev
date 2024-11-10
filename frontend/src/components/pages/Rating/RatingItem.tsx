@@ -21,9 +21,8 @@ const RatingItem = async () => {
                             ? topSnapshot.takenAt.toLocaleDateString('ru-RU', {
             day: '2-digit',
             month: '2-digit',
-            year: 'numeric',
         }).replace(/\//g, '.')
-                            : '00.00.0000';
+                            : '00.00';
 
     const translator = await getTranslations('Rating');
 
